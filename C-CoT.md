@@ -308,3 +308,18 @@ $$
 
 ## 目前标准cot的准确度
 ![alt text](1755056637847.png)
+
+## 当前实验进度
+跑了三个结果，对应阶段在特征提取  
+结果存储在下图地址
+![alt text](1755139240075(1).png)
+
+其中/home2/zzl/C-CoT/repr_cache_qwen7b参数为POOL_LAST_N_LAYERS = 4
+结果如下
+![alt text](repr_cache_qwen7b/viz/tsne_is_correct.png)
+/home2/zzl/C-CoT/repr_cache_qwen7b_8b参数为POOL_LAST_N_LAYERS = 8
+![alt text](image-1.png)
+/home2/zzl/C-CoT/repr_cache_qwen7b_clear
+参数为POOL_LAST_N_LAYERS = 8
+使用数据集为/home2/zzl/C-CoT/test_C-CoT/first10_flat_labeled_onlysaveclearly.jsonl，这个数据集是只保留了有明确思维链或是yes or no的回答
+![alt text](repr_cache_qwen7b_clear/viz/tsne_is_correct.png)

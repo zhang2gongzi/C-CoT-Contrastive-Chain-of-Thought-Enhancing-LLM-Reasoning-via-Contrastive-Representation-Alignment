@@ -11,7 +11,7 @@ try:
 except Exception:
     HAS_UMAP = False
 
-REPR_DIR = "/home2/zzl/C-CoT/repr_cache_qwen7b"     # 与上一步一致
+REPR_DIR = "/home2/zzl/C-CoT/repr_cache_qwen7b_clear"     # 与上一步一致
 SEQ_PATH = os.path.join(REPR_DIR, "seq_vecs.npy")
 META_PATH = os.path.join(REPR_DIR, "meta.jsonl")
 OUT_DIR = os.path.join(REPR_DIR, "viz")
@@ -41,7 +41,8 @@ def scatter_plot_2d(Z, labels, title, filename):
     plt.close()
 
 # ===== t-SNE =====
-tsne = TSNE(n_components=2, init="pca", learning_rate="auto", perplexity=30, n_iter=1000, verbose=1)
+tsne = TSNE(n_components=2, init="pca", learning_rate="auto", perplexity=10, n_iter=1000, verbose=1)
+# perplexity原本30，perplexity的值需要调整为小于你的样本数量
 Z_tsne = tsne.fit_transform(X)
 
 scatter_plot_2d(Z_tsne, is_correct, "t-SNE colored by is_correct (1=correct,0=wrong,-1=unknown)", "tsne_is_correct.png")

@@ -13,7 +13,7 @@ os.makedirs(OUT_DIR, exist_ok=True)
 # ====== 超参 ======
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 MAX_LEN = 1024                 # 够用即可，防止溢出
-POOL_LAST_N_LAYERS = 8         # 常用 trick：取最后4层平均
+POOL_LAST_N_LAYERS = 4         # 常用 trick：取最后4层平均
 INCLUDE_PROMPT = False         # True 表示用 prompt+cot 作为输入；False 只编码 cot
 SAVE_TOKEN_LEVEL = False       # 如需token级保存，改 True（很占空间）
 

@@ -205,7 +205,7 @@ In contrast, our proposed Contrastive Chain-of-Thought (C-CoT) framework general
 
 **C-CoT = Chain-of-Thought + 对比表征对齐**
 
-你不仅在推理时生成多条推理链，还把它们的**内部语义表示**（representations）拿出来，在训练（或微调）阶段用\*\*对比学习（contrastive learning）\*\*来“拉近正确推理，推远错误推理”。
+不仅在推理时生成多条推理链，还把它们的**内部语义表示**（representations）拿出来，在训练（或微调）阶段用\*\*对比学习（contrastive learning）\*\*来“拉近正确推理，推远错误推理”。
 
 简单理解：
 

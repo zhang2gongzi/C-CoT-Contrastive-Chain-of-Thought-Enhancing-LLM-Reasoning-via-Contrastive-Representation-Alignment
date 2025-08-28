@@ -7,9 +7,9 @@ from tqdm import tqdm
 # ===== 配置 =====
 MODEL_PATH = "/home2/zzl/model_eval/modelscope_models/Qwen/Qwen-7B-Chat"
 VAL_PATH = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth2/PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl"
-SAVE_PATH = "cot_generated_first10_flat_labeled.jsonl"
+SAVE_PATH = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled.jsonl"
 
-NUM_EXAMPLES = 10       # 读取前 10 条
+NUM_EXAMPLES = 100       # 读取前 100 条
 N_SAMPLES = 4           # 每题生成 N 条 CoT
 MAX_NEW_TOKENS = 256
 TEMPERATURE = 0.7
@@ -32,7 +32,7 @@ with open(VAL_PATH, "r", encoding="utf-8") as f:
 def extract_label_from_cot(cot_text):
     text = cot_text.strip().lower()
 
-    match = re.search(r"answer[:：]?\s*(yes|no)", text)
+    match = re.search(r"cot_text[:：]?\s*(yes|no)", text)
     if match:
         return 1 if match.group(1) == "yes" else 0
 
@@ -55,7 +55,10 @@ total_count = 0
 
 with open(SAVE_PATH, "w", encoding="utf-8") as fout:
     for example in tqdm(dataset, desc="Generating CoTs"):
-        prompt = f"Q: {example['question']}\nLet's think step by step, and then answer yes or no."
+        prompt = f"""Context: {example['context']}
+        Q: {example['question']}
+        Let's reason step by step using the facts and rules in the context, then answer "yes" or "no".
+        """
         gold_label = example["label"]
 
         for _ in range(N_SAMPLES):

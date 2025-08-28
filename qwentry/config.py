@@ -5,13 +5,12 @@ import torch
 # 路径配置
 QWEN_DIR = "/home2/zzl/model_eval/modelscope_models/Qwen/Qwen-7B-Chat"
 RAW_DEV_JSONL = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth2/PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl"
-PREGEN_JSONL = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first10_flat_labeled.jsonl"
-PYDATALOG_PATH = "/home2/zzl/ChatLogic/pyDatalog_processing.py"
-BERT_MODEL = "/home2/zzl/model/bert-base-uncased"
+PREGEN_JSONL = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled.jsonl"  # 预生成CoT路径
 OUTPUT_DIR = "/home2/zzl/C-CoT/results"
+BERT_MODEL = "/home2/zzl/model/bert-base-uncased"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# 生成参数
+# 生成参数（复用预生成时无需调整，仅实时生成用）
 NUM_EXAMPLES = 50       # 处理样本数
 N_SAMPLES = 4           # 每题生成的CoT路径数
 MAX_NEW_TOKENS = 256

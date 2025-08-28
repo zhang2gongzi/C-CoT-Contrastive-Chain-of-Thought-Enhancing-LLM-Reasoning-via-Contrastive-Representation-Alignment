@@ -1,0 +1,17 @@
+best_cot_model.pth
+*.pth
+# 忽略PyTorch模型文件
+*.pt# 移除已跟踪的模型文件
+git rm --cached results/c_cot_model.pt
+git rm --cached results/c_cot_model_no_logic.pt
+
+# 提交.gitignore和移除操作
+git commit -m "添加.gitignore忽略模型文件，并移除已跟踪的模型"
+*.pth
+
+# 忽略结果文件夹中的所有内容（如果需要）
+results/
+
+# 也可以忽略特定路径的模型文件
+# results/c_cot_model.pt
+# results/c_cot_model_no_logic.pt

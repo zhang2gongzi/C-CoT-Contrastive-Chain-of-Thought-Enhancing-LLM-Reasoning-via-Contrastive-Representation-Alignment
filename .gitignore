@@ -3,6 +3,7 @@ best_cot_model.pth
 # 忽略PyTorch模型文件
 *.pt
 *.pth
+*.jsonl
 
 # 忽略结果文件夹中的所有内容（如果需要）
 results/

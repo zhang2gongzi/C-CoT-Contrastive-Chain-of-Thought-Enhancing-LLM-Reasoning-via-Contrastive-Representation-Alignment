@@ -405,3 +405,79 @@ Epoch 3/3, Loss=0.6444
 Baseline准确率：模型对 “输入 - 推理” 匹配的预测能力（越高越好）；
 逻辑验证通过率：当前数据集cot的逻辑有效性（若为 0，需优化pyDatalog_processing.py或cot格式）；
 推理过程本身正确率：数据集标注的is_correct比例（反映数据集质量）。
+
+
+
+# 2025.08.29
+
+使用参考论文跑baseline
+准确率50%
+![alt text](2a3a0d9fa38310daacd2426cc90aaa72.png)
+![alt text](image.png)
+ python3 /home2/zzl/C-CoT/baseline/ccotPrompting/ccotparaule.py
+Loading model from /home2/zzl/model/Qwen2.5-7B-Instruct...
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:05<00:00,  1.46s/it]
+Generating valid demonstrations...
+=== Generating Valid Demonstrations (T₊) ===
+Warning: Reached maximum recursion depth for question 'Harry is quiet.'. Using fallback rationale.
+Generated Valid Demo 1:
+Example 1:
+Given:
+  Context: Harry is strong. Harry is big. Harry is high. Anne is thin. Anne is little. Gary is smart. Gary is quiet. Gary is kind. Fiona is poor. Fiona is rough. Fiona is sad. Strong people are smart. If someone is thin and little then they are short. If someone is poor and rough then they are bad. If someone is smart and quiet then they are nice. All short people are small. All smart people are quiet. All nice people are wealthy. All bad people are dull.
+  Question: Is "Harry is quiet." true?
+Explanation (Correct):
+  Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement 'Harry is quiet.' is yes.
+Answer (Correct): Yes
+
+Warning: Reached maximum recursion depth for question 'Harry is not quiet.'. Using fallback rationale.
+Generated Valid Demo 2:
+Example 2:
+Given:
+  Context: Harry is strong. Harry is big. Harry is high. Anne is thin. Anne is little. Gary is smart. Gary is quiet. Gary is kind. Fiona is poor. Fiona is rough. Fiona is sad. Strong people are smart. If someone is thin and little then they are short. If someone is poor and rough then they are bad. If someone is smart and quiet then they are nice. All short people are small. All smart people are quiet. All nice people are wealthy. All bad people are dull.
+  Question: Is "Harry is not quiet." true?
+Explanation (Correct):
+  Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement 'Harry is not quiet.' is no.
+Answer (Correct): No
+
+Warning: Reached maximum recursion depth for question 'Anne is small.'. Using fallback rationale.
+Generated Valid Demo 3:
+Example 3:
+Given:
+  Context: Harry is strong. Harry is big. Harry is high. Anne is thin. Anne is little. Gary is smart. Gary is quiet. Gary is kind. Fiona is poor. Fiona is rough. Fiona is sad. Strong people are smart. If someone is thin and little then they are short. If someone is poor and rough then they are bad. If someone is smart and quiet then they are nice. All short people are small. All smart people are quiet. All nice people are wealthy. All bad people are dull.
+  Question: Is "Anne is small." true?
+Explanation (Correct):
+  Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement 'Anne is small.' is yes.
+Answer (Correct): Yes
+
+Warning: Reached maximum recursion depth for question 'Anne is not small.'. Using fallback rationale.
+Generated Valid Demo 4:
+Example 4:
+Given:
+  Context: Harry is strong. Harry is big. Harry is high. Anne is thin. Anne is little. Gary is smart. Gary is quiet. Gary is kind. Fiona is poor. Fiona is rough. Fiona is sad. Strong people are smart. If someone is thin and little then they are short. If someone is poor and rough then they are bad. If someone is smart and quiet then they are nice. All short people are small. All smart people are quiet. All nice people are wealthy. All bad people are dull.
+  Question: Is "Anne is not small." true?
+Explanation (Correct):
+  Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement 'Anne is not small.' is no.
+Answer (Correct): No
+
+Building contrastive demonstrations...
+Generated Invalid Rationale:
+  Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement 'Harry is quiet.' is yes.
+
+Generated Invalid Rationale:
+  Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement 'Harry is not quiet.' is no.
+
+Generated Invalid Rationale:
+  Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement 'Anne is small.' is yes.
+
+Generated Invalid Rationale:
+  Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement 'Anne is not small.' is no.
+
+Loading test samples...
+Starting inference on 50 samples...
+Processed 0/50 samples
+Processed 10/50 samples
+Processed 20/50 samples
+Processed 30/50 samples
+Processed 40/50 samples
+Inference completed! Accuracy: 0.5000
+Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_results.jsonl

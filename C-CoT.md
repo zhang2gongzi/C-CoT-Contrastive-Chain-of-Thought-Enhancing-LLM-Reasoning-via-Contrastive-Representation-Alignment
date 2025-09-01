@@ -184,8 +184,6 @@ In contrast, our proposed Contrastive Chain-of-Thought (C-CoT) framework general
 ---
 ## 具体论文方法
 
-好的，我帮你把 **C-CoT（Contrastive Chain-of-Thought）** 这个方法梳理清楚，让你自己讲起来的时候既有逻辑，又能让别人一听就懂。
-
 ---
 
 ## 1. 背景问题
@@ -304,7 +302,6 @@ $$
 | Contrastive CoT Prompting | 是      | 提示级     | 示例                       | 否          |
 | **C-CoT（你的）**             | 是      | 是（表示空间） | 多粒度（token/step/sequence） | 是（逻辑感知相似度） |
 
-![alt text](image.png)
 
 ## 目前标准cot的准确度
 ![alt text](1755056637847.png)
@@ -363,8 +360,7 @@ fulltry.py和includeacc.py
 ### 6. 整体目的
 通过对比学习训练模型，使其能够学习原始文本（`input`）与其逻辑推理（`reasoning`）之间的语义关联，且更偏好逻辑有效的推理。可能用于自然语言推理、逻辑结论生成等需要文本与逻辑关联的任务。
 
-运行结果不是很好
-![alt text](image-3.png)
+
 
 
 # 2. 训练损失变化
@@ -481,3 +477,16 @@ Processed 30/50 samples
 Processed 40/50 samples
 Inference completed! Accuracy: 0.5000
 Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_results.jsonl
+
+
+
+
+
+## 现在的实验结果
+
+
+| 方法                        | PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl |  Depth3|
+| ------------------------- |  ---------- |  ---------- |
+| `Standard CoT              | 37.5      | 32.5|
+| Contrastive CoT Prompting |   50.51   |
+| **C-CoT（你的）**             |   66    | 0.63|

@@ -14,11 +14,11 @@ from typing import List, Dict, Tuple
 # --------------------------
 # 配置参数（根据实际路径修改）
 # --------------------------
-DATASET_PATH = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth2/PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl"
+DATASET_PATH = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth3/PARARULE_Plus_Depth3_shuffled_dev_huggingface.jsonl"
 MODEL_PATH = "/home2/zzl/model/Qwen2.5-7B-Instruct"
 NUM_DEMOS = 4  # 4-shot演示（论文标准）
 MAX_TEST_SAMPLES = 99  # 先小批量测试
-OUTPUT_FILE = "/home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_results.jsonl"
+OUTPUT_FILE = "/home2/zzl/C-CoT/baseline/ccotPrompting/depth3contrastive_cot_fixed_results.jsonl"
 # Qwen模型推荐配置
 MAX_NEW_TOKENS = 300  # 足够容纳多步骤推理
 TEMPERATURE = 0.1     # 低随机性+非零，平衡严谨性与生成多样性

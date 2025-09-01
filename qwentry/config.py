@@ -4,8 +4,8 @@ import torch
 
 # 路径配置
 QWEN_DIR = "/home2/zzl/model_eval/modelscope_models/Qwen/Qwen-7B-Chat"
-RAW_DEV_JSONL = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth3/PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl"
-PREGEN_JSONL = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled_depth3.jsonl"  # 预生成CoT路径
+RAW_DEV_JSONL = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth3/PARARULE_Plus_Depth5_shuffled_dev_huggingface.jsonl"
+PREGEN_JSONL = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled_depth5.jsonl"  # 预生成CoT路径
 OUTPUT_DIR = "/home2/zzl/C-CoT/results"
 BERT_MODEL = "/home2/zzl/model/bert-base-uncased"
 os.makedirs(OUTPUT_DIR, exist_ok=True)

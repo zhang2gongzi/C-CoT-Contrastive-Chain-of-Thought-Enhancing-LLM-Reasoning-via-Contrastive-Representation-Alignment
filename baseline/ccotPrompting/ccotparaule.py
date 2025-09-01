@@ -64,7 +64,7 @@ def split_context_into_facts_rules(context: str) -> Tuple[List[str], List[str]]:
         "short people are", "smart people are",
         "nice people are", "bad people are"
     ]
-    
+
     for sent in sentences:
         lower_sent = sent.lower()
         # 规则：包含条件/全称量词
@@ -94,17 +94,17 @@ def generate_valid_rationale(
         # 返回保底推理（手动构造符合格式的推理）
         correct_answer = "Yes" if label == 1 else "No"
         return f"Step 1: Analyze the given context. Step 2: Apply relevant rules. Step 3: Thus, the statement '{question}' is {correct_answer.lower()}."
-    
+
     facts, rules = split_context_into_facts_rules(context)
     facts_str = "\n  - " + "\n  - ".join(facts) if facts else "  - No facts"
     rules_str = "\n  - " + "\n  - ".join(rules) if rules else "  - No rules"
     correct_answer = "Yes" if label == 1 else "No"
-    
+
     # Qwen指令格式：系统提示+用户输入，明确要求3+推理步骤
     prompt = f"""<|system|>
 You are a logical reasoning expert. For the given facts, rules, and question, you must:
-1. Write a step-by-step explanation with AT LEAST 3 steps (each step starts with "Step X: ").
-2. Each step must clearly connect facts to rules or intermediate conclusions.
+1. Write a step-by-step explanation with AT LEAST 3 steps (each step starts with "Step X: "). 
+2. Each step must clearly connect facts to rules or intermediate conclusions. 
 3. The final step must state whether the question is true or false.
 <|user|>
 Given:
@@ -114,28 +114,29 @@ Question: Is the statement "{question}" true?
 Correct Answer: {correct_answer}
 Please provide the step-by-step explanation:
 Explanation: <|endoftext|>"""
-    
+
     inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
     # 停止标准：最小生成长度50，避免短文本截断
-    stopping_criteria = StoppingCriteriaList([
+    stopping_criteria = StoppingCriteriaList([ 
         StopStringsCriteria(stop_strings=["<|endoftext|>", "Question:"], 
-                          tokenizer=tokenizer, min_gen_length=50)
+                            tokenizer=tokenizer, min_gen_length=50)
     ])
-    
+
+    # 调整生成参数，提高多样性
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
             generation_config=GenerationConfig(
                 max_new_tokens=MAX_NEW_TOKENS,
-                do_sample=True,  # 非零temperature需开启采样
-                temperature=TEMPERATURE,
-                top_p=TOP_P,
+                do_sample=True,  # 开启采样以提高多样性
+                temperature=0.7,  # 增加温度，生成更多样化的推理
+                top_p=0.95,  # 控制生成的多样性
                 pad_token_id=tokenizer.pad_token_id,
                 eos_token_id=tokenizer.eos_token_id
             ),
             stopping_criteria=stopping_criteria
         )
-    
+
     # 解析并清理推理结果
     rationale = tokenizer.decode(outputs[0], skip_special_tokens=True)
     # 提取<|user|>后的Explanation部分
@@ -143,6 +144,7 @@ Explanation: <|endoftext|>"""
     # 移除可能的停止符
     for stop in ["<|endoftext|>", "Question:", "Answer:"]:
         rationale = rationale.replace(stop, "").strip()
+
     # 验证推理质量：至少3个步骤
     if len(re.findall(r"Step \d+:", rationale)) < 3:
         # 递归重试，增加深度计数
@@ -167,7 +169,7 @@ def generate_valid_demos(
             question = line["question"]
             label = line["label"]
             correct_answer = "Yes" if label == 1 else "No"
-            
+
             # 生成有效推理（不传递递归深度，使用默认值0）
             valid_rationale = generate_valid_rationale(context, question, label, tokenizer, model)
             # 格式化演示（清晰易读）
@@ -192,29 +194,29 @@ def extract_logic_bridges(context: str, valid_rationale: str) -> List[str]:
     """提取推理中的关键逻辑桥接（步骤-事实-规则关联）"""
     facts, rules = split_context_into_facts_rules(context)
     logic_bridges = []
-    
+
     # 提取步骤中的事实关联（如"Step 1: Use fact 'Harry is strong'"）
     fact_mentions = re.findall(r"Step \d+: .*?'(.+? is .+?)'", valid_rationale)
     for fact in fact_mentions:
         if fact in facts:
             logic_bridges.append(f"Fact: '{fact}'")
-    
+
     # 提取步骤中的规则关联（如"Step 2: Apply rule 'Strong people are smart'"）
     rule_mentions = re.findall(r"Step \d+: .*?'(.+?are .+?)'", valid_rationale)
     for rule in rule_mentions:
         for full_rule in rules:
             if rule in full_rule:
                 logic_bridges.append(f"Rule: '{full_rule}'")
-    
+
     # 提取步骤中的中间结论（如"Step 3: Thus, Harry is smart"）
     intermediate_conclusions = re.findall(r"Step \d+: .*?Thus, (.+? is .+?)(\.|$)", valid_rationale)
     logic_bridges.extend([f"Conclusion: '{conc.strip()}'" for conc, _ in intermediate_conclusions])
-    
+
     # 保底：确保至少2个桥接对象
     if len(logic_bridges) < 2:
         step_fragments = re.findall(r"Step \d+: (.+?)(Step \d+:|$)", valid_rationale, re.DOTALL)
         logic_bridges.extend([f"Step: '{frag.strip()}'" for frag, _ in step_fragments if frag.strip()])
-    
+
     return list(set(logic_bridges))[:6]  # 限制最大6个，避免过度混乱
 
 
@@ -228,24 +230,23 @@ def generate_invalid_rationale(
     logic_bridges = extract_logic_bridges(context, valid_rationale)
     correct_answer = "Yes" if label == 1 else "No"
     wrong_answer = "No" if label == 1 else "Yes"
-    
+
     # 1. 打乱逻辑桥接对象
     shuffled_bridges = logic_bridges.copy()
     random.shuffle(shuffled_bridges)
-    
+
     # 2. 替换有效推理中的桥接对象，生成逻辑错误
     invalid_rationale = valid_rationale
     for orig, shuf in zip(logic_bridges, shuffled_bridges):
         if orig in invalid_rationale:
             invalid_rationale = invalid_rationale.replace(orig, shuf)
-    
+
     # 3. 修改最终结论为错误答案（修复f-string反斜杠问题）
-    # 将正则表达式模式定义在f-string外部
     step_pattern = r"Step \d+: .*?the statement .*? is (true|false)"
     step_count = len(re.findall(r'Step \d+:', invalid_rationale))
     replacement = f"Step {step_count}: Thus, the statement '{question}' is {wrong_answer.lower()}"
     invalid_rationale = re.sub(step_pattern, replacement, invalid_rationale)
-    
+
     # 打印验证：确保无效推理逻辑错误但格式正确
     print(f"Generated Invalid Rationale:\n  {invalid_rationale}\n")
     return invalid_rationale
@@ -325,49 +326,49 @@ def run_contrastive_cot_inference():
     # 确保分词器有pad_token（部分模型默认没有）
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    
+
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_PATH,
         device_map="auto",
         torch_dtype="auto",
         trust_remote_code=True
     ).eval()  # 推理模式
-    
+
     # 生成有效演示和对比演示
     print("Generating valid demonstrations...")
     valid_demos = generate_valid_demos(DATASET_PATH, tokenizer, model, NUM_DEMOS)
-    
+
     print("Building contrastive demonstrations...")
     contrastive_demos = build_contrastive_demos(
         valid_demos, DATASET_PATH, tokenizer, model, NUM_DEMOS
     )
-    
+
     # 读取测试样本（跳过演示样本）
     print("Loading test samples...")
     test_samples = []
     with jsonlines.open(DATASET_PATH, "r") as f:
         all_samples = [line for line in f]
         test_samples = all_samples[NUM_DEMOS:NUM_DEMOS+MAX_TEST_SAMPLES]
-    
+
     # 批量推理
     print(f"Starting inference on {len(test_samples)} samples...")
     results = []
     for idx, test_sample in enumerate(test_samples):
         if idx % 10 == 0:
             print(f"Processed {idx}/{len(test_samples)} samples")
-        
+
         # 构建提示词
         prompt = build_contrastive_prompt(contrastive_demos, test_sample)
-        
+
         # 模型生成
         inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-        
+
         # 定义停止字符串并创建停止标准
         stopping_criteria = StoppingCriteriaList([
             StopStringsCriteria(stop_strings=["<|endoftext|>", "Example:", "Given:"], 
-                              tokenizer=tokenizer, min_gen_length=80)  # 推理至少80个token
+                                tokenizer=tokenizer, min_gen_length=80)  # 推理至少80个token
         ])
-        
+
         with torch.no_grad():
             outputs = model.generate(
                 **inputs,
@@ -380,11 +381,11 @@ def run_contrastive_cot_inference():
                 ),
                 stopping_criteria=stopping_criteria
             )
-        
+
         # 解析结果
         generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
         generated_expl, generated_ans = parse_generated_result(generated_text, test_sample["question"])
-        
+
         # 保存结果
         results.append({
             "id": test_sample["id"],
@@ -396,11 +397,11 @@ def run_contrastive_cot_inference():
             "is_correct": (generated_ans == "Yes" and test_sample["label"] == 1) or 
                           (generated_ans == "No" and test_sample["label"] == 0)
         })
-    
+
     # 保存结果到文件
     with jsonlines.open(OUTPUT_FILE, "w") as f:
         f.write_all(results)
-    
+
     # 计算准确率
     accuracy = sum(1 for res in results if res["is_correct"]) / len(results)
     print(f"Inference completed! Accuracy: {accuracy:.4f}")
@@ -464,4 +465,3 @@ if __name__ == "__main__":
     import sys
     sys.setrecursionlimit(10000)  # 设置为10000，足够应对正常场景
     run_contrastive_cot_inference()
-    

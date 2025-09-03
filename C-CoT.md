@@ -488,6 +488,9 @@ Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_r
 | 方法                        | PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl |  Depth3|depth4|depth 5|
 | ------------------------- |  ---------- |  ---------- | ---------- | ---------- |
 | `Standard CoT              | 37.5      | 32.5|29|26.75|
-| Contrastive CoT Prompting |   50.51   | |
+| Contrastive CoT Prompting |   49  |55 |44|50|
 | **C-CoT（你的）**             |   66    | 0.63| 0.56|0.55|
 |self | 0.63|0.66|0.49| 0.48|
+
+
+

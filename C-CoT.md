@@ -494,7 +494,7 @@ Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_r
 
 | 方法                        |gsm8k|
 | ------------------------- |  ---------- |  
-| `Standard CoT              | |
+| `Standard CoT              |71.67 |
 | Contrastive CoT Prompting |   60 |
 | **C-CoT（我的）**            |      |
 |self | |

@@ -1,189 +1,148 @@
 import json
-import re
-from collections import defaultdict
-from tqdm import tqdm
 import torch
+from torch.utils.data import Dataset, DataLoader
 from transformers import BertTokenizer
-
 from config import *
 
-# # 读取原始数据（实时生成CoT时用，复用预生成时可忽略）
-# def read_raw_data(path, k=NUM_EXAMPLES):
-#     data = []
-#     with open(path, "r", encoding="utf-8") as f:
-#         for i, line in enumerate(f):
-#             if i >= k: break
-#             data.append(json.loads(line))
-#     return data
+# 初始化BERT分词器（与模型保持一致）
+tokenizer = BertTokenizer.from_pretrained(BERT_MODEL_NAME)
 
-# # 实时生成多路径CoT（复用预生成时无需调用）
-# def generate_cots(raw_data):
-#     print("生成多路径CoT...")
-#     from modelscope import AutoModelForCausalLM, AutoTokenizer
-#     tokenizer = AutoTokenizer.from_pretrained(QWEN_DIR, trust_remote_code=True)
-#     model = AutoModelForCausalLM.from_pretrained(
-#         QWEN_DIR, device_map="auto", trust_remote_code=True
-#     ).eval()
-
-#     results = []
-#     for ex in tqdm(raw_data):
-#         context = ex["context"]
-#         question = ex["question"]
-#         prompt = f"""Context: {context}
-# Q: {question}
-# Let's reason step by step using the facts and rules, then answer "yes" or "no".
-# Reasoning:
-# """
-#         cots = []
-#         inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-#         with torch.no_grad():
-#             for _ in range(N_SAMPLES):
-#                 outputs = model.generate(
-#                     **inputs,
-#                     max_new_tokens=MAX_NEW_TOKENS,
-#                     do_sample=True,
-#                     temperature=TEMPERATURE,
-#                     top_p=TOP_P
-#                 )
-#                 cot = tokenizer.decode(outputs[0], skip_special_tokens=True)
-#                 cot = cot[len(prompt):].strip()
-#                 cots.append(cot)
-#         results.append({
-#             "raw_example": ex,
-#             "paths": cots
-#         })
-#     return results
-
-# 读取预生成CoT（核心：读取is_correct标签）
-def read_pregen_cots():
-    cot_dict = defaultdict(list)
-    with open(PREGEN_JSONL, "r", encoding="utf-8") as f:
-        for line in f:
-            item = json.loads(line)
-            qid = item["raw_example"]["id"]  # 按问题ID聚合多路径
-            cot_dict[qid].append({
-                "raw_example": item["raw_example"],
-                "cot_text": item["cot"],
-                "is_correct": item.get("is_correct", 0),  # 读取is_correct，缺失默认0
-                "pred_label": item.get("pred_label", -1)  # pred_label缺失默认-1
-            })
-    
-    # 转换为与generate_cots一致的输出格式
+def read_pregen_cots(file_path=DATA_PATH):
+    """读取JSON Lines格式数据，过滤无效推理链"""
     cot_data = []
-    for qid, items in cot_dict.items():
-        raw_example = items[0]["raw_example"]
-        paths = [
-            {
-                "text": item["cot_text"],
-                "is_correct": item["is_correct"],
-                "pred_label": item["pred_label"]
-            } 
-            for item in items
-        ]
-        cot_data.append({
-            "raw_example": raw_example,
-            "paths": paths
-        })
-    return cot_data
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            line_num = 0
+            for line in f:
+                line_num += 1
+                line = line.strip()
+                if not line:  # 跳过空行
+                    continue
+                # 解析单行JSON，捕获格式错误
+                try:
+                    item = json.loads(line)
+                    # 验证核心字段（匹配你数据的结构）
+                    required = ["raw_example", "cot", "gold_label", "is_correct"]
+                    if not all(k in item for k in required):
+                        print(f"警告：第{line_num}行缺少核心字段（如raw_example/cot），跳过")
+                        continue
+                    # 提取关键信息，简化数据结构
+                    processed = {
+                        "qid": item["raw_example"]["id"],  # 问题唯一ID（如NonNegationRule-D2-20521）
+                        "question": item["raw_example"]["question"],  # 问题文本（如Harry is quiet.）
+                        "context": item["raw_example"]["context"],  # 推理上下文
+                        "cot_text": item["cot"],  # 推理链文本
+                        "gold_label": item["gold_label"],  # 问题真实标签（1/0）
+                        "cot_correct": item["is_correct"]  # 该推理链是否正确（1/0）
+                    }
+                    cot_data.append(processed)
+                except json.JSONDecodeError as e:
+                    print(f"错误：第{line_num}行JSON格式错误 -> {str(e)}，跳过")
+        print(f"成功加载 {len(cot_data)} 条有效推理链（共处理{line_num}行）")
+        return cot_data
+    except FileNotFoundError:
+        raise FileNotFoundError(f"数据文件不存在：{file_path}，请检查路径")
+    except Exception as e:
+        raise RuntimeError(f"读取数据失败：{str(e)}")
 
-# 解析CoT中的预测标签（实时生成时用，复用预生成时可忽略）
-YES_PAT = re.compile(r"\b(answer[:：]?\s*)?(yes|true)\b", re.I)
-NO_PAT = re.compile(r"\b(answer[:：]?\s*)?(no|false)\b", re.I)
-def parse_pred_label(cot_text):
-    cot_text = cot_text.lower()
-    if YES_PAT.search(cot_text):
-        return 1
-    if NO_PAT.search(cot_text):
-        return 0
-    return -1
-
-# 构建题级数据集（聚合多路径+保留is_correct）
-def build_question_level_data(cot_data):
-    print("构建题级数据集...")
-    data = []
+def group_by_question(cot_data):
+    """按问题ID分组（InfoNCE需同问题的不同推理链做对比）"""
+    q_group = {}
     for item in cot_data:
-        ex = item["raw_example"]
-        qid = ex["id"]
-        paths = []
-        for cot in item["paths"]:
-            paths.append({
-                "text": cot["text"],
-                "is_correct": cot["is_correct"],  # 保留is_correct
-                "pred_label": cot["pred_label"]   # 保留pred_label
-            })
-        data.append({
-            "qid": qid,
-            "context": ex["context"],
-            "question": ex["question"],
-            "gold_label": ex["label"],
-            "paths": paths
+        qid = item["qid"]
+        if qid not in q_group:
+            q_group[qid] = {
+                "question": item["question"],
+                "gold_label": item["gold_label"],
+                "cots": []  # 存储该问题的所有推理链
+            }
+        q_group[qid]["cots"].append({
+            "cot_text": item["cot_text"],
+            "cot_correct": item["cot_correct"]
         })
-    return data
+    # 过滤：仅保留至少2条推理链的问题（对比学习需要正负样本）
+    valid_q = {k: v for k, v in q_group.items() if len(v["cots"]) >= 2}
+    print(f"按问题分组后：有效问题{len(valid_q)}个（每个问题≥2条推理链）")
+    return list(valid_q.values())  # 转为列表，便于后续处理
 
-# 数据集类（完全修复版，确保所有方法正确缩进）
-class CCotDataset(torch.utils.data.Dataset):
-    def __init__(self, data):
-        super().__init__()  # 显式调用父类初始化
-        self.data = data
-        self.tokenizer = BertTokenizer.from_pretrained(BERT_MODEL)
-        # 确保分词器加载成功
-        assert self.tokenizer is not None, "BERT分词器加载失败，请检查BERT_MODEL路径"
+class InfoNCEDataset(Dataset):
+    """适配仅InfoNCE损失的数据集，输出token化结果+标签"""
+    def __init__(self, grouped_data):
+        self.data = grouped_data
+        self.flattened = self._flatten_data()  # 展平为单推理链样本
+
+    def _flatten_data(self):
+        """将“问题-多推理链”结构展平为“单推理链-标签”结构"""
+        flattened = []
+        for q in self.data:
+            q_label = q["gold_label"]
+            for cot in q["cots"]:
+                flattened.append({
+                    "cot_text": cot["cot_text"],
+                    "q_label": q_label,
+                    "cot_correct": cot["cot_correct"]
+                })
+        return flattened
 
     def __len__(self):
-        return len(self.data)
-
-    def encode(self, text):
-        return self.tokenizer(
-            text,
-            truncation=True,
-            padding="max_length",
-            max_length=MAX_LEN,
-            return_tensors="pt"
-        )
+        return len(self.flattened)
 
     def __getitem__(self, idx):
-        try:
-            item = self.data[idx]
-            
-            # 编码问题
-            inp_text = f"Context: {item['context']}\nQuestion: {item['question']}"
-            inp_enc = self.encode(inp_text)
-            
-            # 编码CoT路径
-            path_texts = [p["text"] for p in item["paths"]]
-            path_encs = [self.encode(t) for t in path_texts]
-            
-            # 处理is_correct（确保无None值）
-            path_is_correct = []
-            for p in item["paths"]:
-                val = p.get("is_correct")
-                if val is None or not isinstance(val, (int, float)):
-                    path_is_correct.append(0.0)
-                else:
-                    path_is_correct.append(float(val))
-            path_is_correct = torch.tensor(path_is_correct, dtype=torch.float)
-            
-            # 处理pred_label（确保无None值）
-            path_preds = []
-            for p in item["paths"]:
-                val = p.get("pred_label")
-                if val is None or not isinstance(val, (int, float)):
-                    path_preds.append(-1)
-                else:
-                    path_preds.append(int(val))
-            path_preds = torch.tensor(path_preds, dtype=torch.long)
-            
-            # 构建返回字典
-            return {
-                "input_ids": inp_enc["input_ids"].squeeze(0),
-                "attention_mask": inp_enc["attention_mask"].squeeze(0),
-                "gold_label": torch.tensor(item["gold_label"], dtype=torch.long),
-                "path_input_ids": torch.stack([e["input_ids"].squeeze(0) for e in path_encs]),
-                "path_attn_mask": torch.stack([e["attention_mask"].squeeze(0) for e in path_encs]),
-                "path_is_correct": path_is_correct,
-                "path_preds": path_preds
-            }
-        except Exception as e:
-            # 打印错误信息和当前索引，便于调试
-            print(f"处理样本索引 {idx} 时出错: {str(e)}")
-            raise  # 重新抛出异常，终止程序
+        item = self.flattened[idx]
+        # 推理链文本token化（适配BERT输入格式）
+        tokenized = tokenizer(
+            item["cot_text"],
+            max_length=MAX_SEQ_LEN,
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt"
+        )
+        # 移除batch维度（DataLoader会自动加），转为tensor
+        return {
+            "input_ids": tokenized["input_ids"].squeeze(0),  # [MAX_SEQ_LEN]
+            "attention_mask": tokenized["attention_mask"].squeeze(0),  # [MAX_SEQ_LEN]
+            "q_label": torch.tensor(item["q_label"], dtype=torch.long),  # 问题标签（对比用）
+            "cot_correct": torch.tensor(item["cot_correct"], dtype=torch.long)  # 推理链正确性（评估用）
+        }
+
+def get_dataloaders():
+    """构建训练/验证/测试加载器（8:1:1划分）"""
+    # 1. 读取并处理数据
+    raw_data = read_pregen_cots()
+    grouped_data = group_by_question(raw_data)
+    total_q = len(grouped_data)
+    
+    # 2. 划分数据集（按问题划分，避免数据泄露）
+    train_q = int(total_q * 0.8)
+    val_q = int(total_q * 0.1)
+    test_q = total_q - train_q - val_q
+
+    train_data = grouped_data[:train_q]
+    val_data = grouped_data[train_q:train_q+val_q]
+    test_data = grouped_data[train_q+val_q:]
+
+    # 3. 构建数据集和加载器
+    train_set = InfoNCEDataset(train_data)
+    val_set = InfoNCEDataset(val_data)
+    test_set = InfoNCEDataset(test_data)
+
+    # 4. 生成DataLoader
+    def _build_loader(dataset, shuffle):
+        return DataLoader(
+            dataset,
+            batch_size=BATCH_SIZE,
+            shuffle=shuffle,
+            num_workers=NUM_WORKERS,
+            pin_memory=True  # 加速GPU数据传输
+        )
+
+    train_loader = _build_loader(train_set, shuffle=True)
+    val_loader = _build_loader(val_set, shuffle=False)
+    test_loader = _build_loader(test_set, shuffle=False)
+
+    # 打印数据统计
+    print(f"\n数据加载器统计：")
+    print(f"- 训练集：{len(train_set)}条推理链 | {len(train_loader)}个batch")
+    print(f"- 验证集：{len(val_set)}条推理链 | {len(val_loader)}个batch")
+    print(f"- 测试集：{len(test_set)}条推理链 | {len(test_loader)}个batch")
+    return train_loader, val_loader, test_loader

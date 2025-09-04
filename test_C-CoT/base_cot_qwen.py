@@ -7,7 +7,7 @@ from tqdm import tqdm
 # ===== 配置 =====
 MODEL_PATH = "/home2/zzl/model_eval/modelscope_models/Qwen/Qwen-7B-Chat"
 VAL_PATH = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth2/PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl"
-SAVE_PATH = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_all_flat_labeled_depth2.jsonl"
+SAVE_PATH = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_1000_flat_labeled_depth2.jsonl"
 
 NUM_EXAMPLES = 1000      
 N_SAMPLES = 4           # 每题生成 N 条 CoT

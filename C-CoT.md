@@ -491,6 +491,78 @@ Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_r
 | Contrastive CoT Prompting |   49  |55 |44|50|
 | **C-CoT（我的）**             |   66    | 0.63| 0.58|0.56|
 |self | 0.63|0.66|0.49| 0.48|
-|onlyinfonec||0.63|0.56
+|onlyinfonce||0.4250|0.3750|0.35|0.25|
 
 
+python3 /home2/zzl/C-CoT/baseline/onlyInfoNCE/main.py
+准备数据...
+成功加载 400 条有效推理链（共处理400行）
+按问题分组后：有效问题100个（每个问题≥2条推理链）
+
+数据加载器统计：
+- 训练集：320条推理链 | 20个batch
+- 验证集：40条推理链 | 3个batch
+- 测试集：40条推理链 | 3个batch
+初始化模型...
+开始训练...
+
+=== Epoch 1/10 ===
+Epoch  1 | Batch  10/20 | Loss: 0.8158
+Epoch  1 | Batch  20/20 | Loss: 0.7719
+Val Loss: 0.8337 | Cot Correct Rate: 0.4250
+✅ 保存最佳模型到 /home2/zzl/C-CoT/baseline/onlyInfoNCE/saved_model/infonce_best.pt（Val Loss: 0.8337）
+
+=== Epoch 2/10 ===
+Epoch  2 | Batch  10/20 | Loss: 0.7449
+Epoch  2 | Batch  20/20 | Loss: 0.7342
+Val Loss: 0.8409 | Cot Correct Rate: 0.4250
+
+=== Epoch 3/10 ===
+Epoch  3 | Batch  10/20 | Loss: 0.7575
+Epoch  3 | Batch  20/20 | Loss: 0.7433
+Val Loss: 0.7507 | Cot Correct Rate: 0.4250
+✅ 保存最佳模型到 /home2/zzl/C-CoT/baseline/onlyInfoNCE/saved_model/infonce_best.pt（Val Loss: 0.7507）
+
+=== Epoch 4/10 ===
+Epoch  4 | Batch  10/20 | Loss: 0.6625
+Epoch  4 | Batch  20/20 | Loss: 0.6094
+Val Loss: 0.4765 | Cot Correct Rate: 0.4250
+✅ 保存最佳模型到 /home2/zzl/C-CoT/baseline/onlyInfoNCE/saved_model/infonce_best.pt（Val Loss: 0.4765）
+
+=== Epoch 5/10 ===
+Epoch  5 | Batch  10/20 | Loss: 0.4428
+Epoch  5 | Batch  20/20 | Loss: 0.4433
+Val Loss: 0.3812 | Cot Correct Rate: 0.4250
+✅ 保存最佳模型到 /home2/zzl/C-CoT/baseline/onlyInfoNCE/saved_model/infonce_best.pt（Val Loss: 0.3812）
+
+=== Epoch 6/10 ===
+Epoch  6 | Batch  10/20 | Loss: 0.3175
+Epoch  6 | Batch  20/20 | Loss: 0.3028
+Val Loss: 0.4244 | Cot Correct Rate: 0.4250
+
+=== Epoch 7/10 ===
+Epoch  7 | Batch  10/20 | Loss: 0.1813
+Epoch  7 | Batch  20/20 | Loss: 0.2109
+Val Loss: 0.4655 | Cot Correct Rate: 0.4250
+
+=== Epoch 8/10 ===
+Epoch  8 | Batch  10/20 | Loss: 0.2028
+Epoch  8 | Batch  20/20 | Loss: 0.2178
+Val Loss: 0.4303 | Cot Correct Rate: 0.4250
+
+=== Epoch 9/10 ===
+Epoch  9 | Batch  10/20 | Loss: 0.1406
+Epoch  9 | Batch  20/20 | Loss: 0.1878
+Val Loss: 0.4716 | Cot Correct Rate: 0.4250
+
+=== Epoch 10/10 ===
+Epoch 10 | Batch  10/20 | Loss: 0.1555
+Epoch 10 | Batch  20/20 | Loss: 0.1827
+Val Loss: 0.4742 | Cot Correct Rate: 0.4250
+
+训练完成！最佳验证损失：0.3812
+进行最终测试...
+Val Loss: 0.6097 | Cot Correct Rate: 0.4250
+
+测试结果：损失=0.6097，推理链正确率=0.4250
+(ccot) zzl@ubuntu:~/C-CoT$ 

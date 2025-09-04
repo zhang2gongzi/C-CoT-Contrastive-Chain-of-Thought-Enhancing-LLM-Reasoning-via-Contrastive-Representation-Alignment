@@ -1,34 +1,28 @@
-import os
-import random
 import torch
 
-# 路径配置
-QWEN_DIR = "/home2/zzl/model_eval/modelscope_models/Qwen/Qwen-7B-Chat"
-RAW_DEV_JSONL = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth2/PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl"
-PREGEN_JSONL = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled_depth4.jsonl"  # 预生成CoT路径
-OUTPUT_DIR = "/home2/zzl/C-CoT/baseline/onlyInfoNCE"
-BERT_MODEL = "/home2/zzl/model/bert-base-uncased"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+# 1. 设备配置（自动检测GPU）
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+NUM_WORKERS = 4  # 数据加载线程数（建议设为CPU核心数的1/2）
 
-# 生成参数（复用预生成时无需调整，仅实时生成用）
-NUM_EXAMPLES = 50       # 处理样本数
-N_SAMPLES = 4           # 每题生成的CoT路径数
-MAX_NEW_TOKENS = 256
-TEMPERATURE = 0.7
-TOP_P = 0.9
+# 2. 数据路径（替换为你的数据实际路径）
+DATA_PATH = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled_depth5.jsonl"  # 你的JSON Lines文件
 
-# 模型与训练参数
-BATCH_SIZE = 8
-EPOCHS = 5
-LR = 2e-5
-MAX_LEN = 256
-PROJ_DIM = 256
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-SEED = 42
+# 3. 模型配置
+BERT_MODEL_NAME = "/home2/zzl/model/bert-base-uncased"  # 预训练模型（可换bert-large-uncased）
+MAX_SEQ_LEN = 512  # 推理链最大长度（你的数据中推理链较长，设512足够）
+PROJECT_DIM = 128  # InfoNCE投影层输出维度（BERT 768维→128维）
 
-# 固定随机种子
-def set_seed(seed=SEED):
-    random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-set_seed()
+# 4. 训练配置
+BATCH_SIZE = 16  # 根据GPU显存调整（16G显存建议16，24G建议32）
+EPOCHS = 10  # 训练轮数
+LR = 2e-5  # BERT类模型最优学习率（2e-5~5e-5）
+WEIGHT_DECAY = 1e-4  # 权重衰减（防止过拟合）
+WARMUP_RATIO = 0.1  # 学习率预热比例（前10%轮次线性升温）
+
+# 5. InfoNCE损失配置
+INFONCE_TEMP = 0.07  # 温度参数（控制相似度分布，默认0.07）
+
+# 6. 保存与日志配置
+SAVE_MODEL = True
+MODEL_SAVE_PATH = "/home2/zzl/C-CoT/baseline/onlyInfoNCE/saved_model/infonce_best.pt"  # 模型保存路径
+LOG_INTERVAL = 20  # 每10个batch打印一次训练日志

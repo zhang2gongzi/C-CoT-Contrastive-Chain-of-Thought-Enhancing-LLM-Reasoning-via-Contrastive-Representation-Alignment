@@ -8,7 +8,7 @@ import torch
 # ---------------------
 QWEN_DIR = "/home2/zzl/model_eval/modelscope_models/Qwen/Qwen-7B-Chat"
 RAW_DEV_JSONL = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth3/PARARULE_Plus_Depth5_shuffled_dev_huggingface.jsonl"
-PREGEN_JSONL = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled.jsonl"
+PREGEN_JSONL = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_1000_flat_labeled_depth2.jsonl"
 OUTPUT_DIR = "/home2/zzl/C-CoT/results"
 BERT_MODEL = "/home2/zzl/model/bert-base-uncased"
 

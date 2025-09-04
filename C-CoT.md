@@ -111,8 +111,6 @@ In contrast, our proposed Contrastive Chain-of-Thought (C-CoT) framework general
 2. **鲁棒性测试**：对输入/Prompt 添加噪声或注入误导性句子（例如给出矛盾背景），测量准确率下降。比较各方法的下降幅度。
    期望结果：C-CoT 的下降最小，体现鲁棒性。
 
-3. **逻辑一致性检测**：用你设计的逻辑验证器（或 pyDatalog）统计 CoT 路径的逻辑错误率（错误路径比例）。
-   期望结果：C-CoT 产生的 CoT 有更低的逻辑错误率。
 
 4. **表示空间可视化 + 聚类评估**：对多路径生成的表示进行 t-SNE/UMAP 可视化，计算聚类质量指标，展示正类（正确链）簇紧密、负类分散的现象。
    期望结果：C-CoT 的表示更分明（高 Silhouette 分数）。
@@ -367,7 +365,7 @@ fulltry.py和includeacc.py
 Epoch 1/3, Loss=0.6675
 Epoch 2/3, Loss=0.6563
 Epoch 3/3, Loss=0.6444
-```
+
 - 损失函数（结合逻辑掩码的InfoNCE损失）呈**持续下降趋势**，从0.6675降至0.6444，说明：
   1. 模型在训练中确实在学习“输入文本”与“推理文本”的嵌入匹配关系（符合对比学习的训练目标）；
   2. 3个epoch的训练量较少，损失下降幅度平缓，若增加epoch数，损失可能进一步降低
@@ -485,13 +483,24 @@ Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_r
 ## 现在的实验结果
 
 
-| 方法                        | PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl |  Depth3|depth4|depth 5|
+| 方法                        | PARARULE_Plus_Depth2|  Depth3|depth4|depth 5|
 | ------------------------- |  ---------- |  ---------- | ---------- | ---------- |
 | `Standard CoT              | 37.5      | 32.5|29|26.75|
 | Contrastive CoT Prompting |   49  |55 |44|50|
 | **C-CoT（我的）**             |   66    | 0.63| 0.58|0.56|
 |self | 0.63|0.66|0.49| 0.48|
 |onlyinfonce||0.4250|0.3750|0.35|0.25|
+|sequence-level|0.5870|0.53|
+
+| 方法                        |gsm8k|
+| ------------------------- |  ---------- |  
+| `Standard CoT              | |
+| Contrastive CoT Prompting |   60 |
+| **C-CoT（我的）**            |      |
+|self | |
+|onlyinfonce||
+
+
 
 
 python3 /home2/zzl/C-CoT/baseline/onlyInfoNCE/main.py
@@ -566,3 +575,8 @@ Val Loss: 0.6097 | Cot Correct Rate: 0.4250
 
 测试结果：损失=0.6097，推理链正确率=0.4250
 (ccot) zzl@ubuntu:~/C-CoT$ 
+
+
+## 摘要部分
+
+## introduction

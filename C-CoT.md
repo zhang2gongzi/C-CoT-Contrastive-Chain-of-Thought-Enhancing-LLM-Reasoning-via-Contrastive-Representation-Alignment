@@ -489,8 +489,8 @@ Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_r
 | ------------------------- |  ---------- |  ---------- | ---------- | ---------- |
 | `Standard CoT              | 37.5      | 32.5|29|26.75|
 | Contrastive CoT Prompting |   49  |55 |44|50|
-| **C-CoT（你的）**             |   66    | 0.63| 0.56|0.55|
+| **C-CoT（我的）**             |   66    | 0.63| 0.58|0.56|
 |self | 0.63|0.66|0.49| 0.48|
-
+|onlyinfonec||0.63|0.56
 
 

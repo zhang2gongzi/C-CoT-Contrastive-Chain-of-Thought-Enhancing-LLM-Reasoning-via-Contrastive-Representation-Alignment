@@ -6,10 +6,10 @@ from tqdm import tqdm
 
 # ===== 配置 =====
 MODEL_PATH = "/home2/zzl/model_eval/modelscope_models/Qwen/Qwen-7B-Chat"
-VAL_PATH = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth5/PARARULE_Plus_Depth5_shuffled_dev_huggingface.jsonl"
-SAVE_PATH = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled_depth5.jsonl"
+VAL_PATH = "/home2/zzl/ChatLogic/PARARULE-Plus/Depth2/PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl"
+SAVE_PATH = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_all_flat_labeled_depth2.jsonl"
 
-NUM_EXAMPLES = 100       # 读取前 100 条
+NUM_EXAMPLES = 1000      
 N_SAMPLES = 4           # 每题生成 N 条 CoT
 MAX_NEW_TOKENS = 256
 TEMPERATURE = 0.7
@@ -20,11 +20,19 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, device_map="auto", trust_remote_code=True)
 model = AutoModelForCausalLM.from_pretrained(MODEL_PATH, device_map="auto", trust_remote_code=True).eval()
 
-# ===== 读取前 NUM_EXAMPLES 条验证集 =====
+# # ===== 读取前 NUM_EXAMPLES 条验证集 =====
+# dataset = []
+# with open(VAL_PATH, "r", encoding="utf-8") as f:
+#     for i, line in enumerate(f):
+#         if i >= NUM_EXAMPLES:
+#             break
+#         dataset.append(json.loads(line))
+        # ===== 读取数据（修改部分） =====
 dataset = []
 with open(VAL_PATH, "r", encoding="utf-8") as f:
     for i, line in enumerate(f):
-        if i >= NUM_EXAMPLES:
+        # 若 NUM_EXAMPLES 为 None，则读取全部；否则读取前 NUM_EXAMPLES 条
+        if NUM_EXAMPLES is not None and i >= NUM_EXAMPLES:
             break
         dataset.append(json.loads(line))
 

@@ -226,8 +226,8 @@ $$
 
 ### (2) 正负样本标注
 
-* **正样本**：最终答案正确，且推理步骤逻辑合理（可用外部验证器、规则或人类标注）。
-* **负样本**：最终答案错误，或步骤中存在逻辑矛盾。
+* **正样本**：最终答案正确，
+* **负样本**：最终答案错误
 
 这样得到一批 **正推理链集合** $P$ 和 **负推理链集合** $N$。
 
@@ -481,24 +481,25 @@ Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_r
 
 
 ## 现在的实验结果
+基座模型：qwen7B
 
-
-| 方法                        | PARARULE_Plus_Depth2|  Depth3|depth4|depth 5|
-| ------------------------- |  ---------- |  ---------- | ---------- | ---------- |
-| `Standard CoT              | 37.5      | 32.5|29|26.75|
-| Contrastive CoT Prompting |   49  |55 |44|50|
-| **C-CoT（我的）**             |   66    | 0.63| 0.58|0.56|
-|self | 0.63|0.66|0.49| 0.48|
-|onlyinfonce||0.4250|0.3750|0.35|0.25|
-|sequence-level|0.5870|0.53|
+| 方法                        | PARARULE_Plus_Depth2|  Depth3|depth4|depth 5|average|
+| ------------------------- |  ---------- |  ---------- | ---------- | ---------- | ---------- |
+| `Standard CoT              | 37.5      | 32.5|29|26.75|31.4375|
+| Contrastive CoT Prompting |   49  |55 |44|50|49.5|
+| **C-CoT（我的）**             |   66    | 0.63| 0.58|0.56|0.6075|
+|self | 0.63|0.66|0.49| 0.48|0.565|
+|onlyinfonce|0.4250|0.3750|0.35|0.25|0.35|
+|sequence-level|0.5870|0.53|0.4250|0.34|47.05|
 
 | 方法                        |gsm8k|
 | ------------------------- |  ---------- |  
-| `Standard CoT              |71.67 |
-| Contrastive CoT Prompting |   60 |
-| **C-CoT（我的）**            |      |
-|self | |
-|onlyinfonce||
+| `Standard CoT-qwen              |38 |
+| Contrastive CoT Prompting-qwen |   60 |
+| **C-CoT（我的）-qwen**            |  75   |
+|self-c-qwen | 42|
+|llama-ccot|26.67|
+|llama| 0.03|
 
 
 

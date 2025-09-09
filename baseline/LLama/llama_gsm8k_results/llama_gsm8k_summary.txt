@@ -1,0 +1,11 @@
+LLaMA GSM8K Evaluation Summary
+Evaluation Time: 2025-09-08 18:44:02.904346
+LLaMA Model Path: /home2/zzl/model/Llama-2-7b-chat-hf
+Test Set Path: /home2/zzl/C-CoT/database/gsm8k/test-00000-of-00001.parquet
+Total Samples: 100
+Correct Samples: 3
+Accuracy: 0.0300 (3.00%)
+Inference Hyperparameters:
+  Max New Tokens: 300
+  Temperature: 0.7
+  Batch Size: 2

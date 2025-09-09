@@ -1,0 +1,8 @@
+评估时间: 2025-09-09 13:56:25.150435
+模型路径: /home2/zzl/model/Llama-2-7b-chat-hf
+数据集路径: /home2/zzl/ChatLogic/PARARULE-Plus/Depth4/PARARULE_Plus_Depth4_shuffled_dev_huggingface.jsonl
+总样本数: 500
+正确数: 248
+提取失败数: 0
+准确率: 0.4960
+成功提取率: 1.0000

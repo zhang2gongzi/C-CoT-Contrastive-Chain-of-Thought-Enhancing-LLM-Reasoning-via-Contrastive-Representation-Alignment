@@ -18,8 +18,8 @@ multiprocessing.set_start_method('spawn', force=True)
 CONFIG = {
     "llama_model_path": "/home2/zzl/model/Llama-2-7b-chat-hf",
     "trained_proj_path": "/home2/zzl/C-CoT/baseline/LLama/ccot_seq_model.pt",
-    "train_data_path": "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled.jsonl",
-    "test_data_path": "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled.jsonl",
+    "train_data_path": "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled_depth5.jsonl",
+    "test_data_path": "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled_depth5.jsonl",
     "save_classifier_path": "/home2/zzl/C-CoT/baseline/LLama/cot_correctness_classifier.pt",
     "max_len": 400,
     "batch_size": 4,

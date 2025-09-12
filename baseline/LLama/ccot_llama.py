@@ -11,7 +11,7 @@ from tqdm import tqdm
 # --------------------------
 # 1. 配置参数（关键：移除[SEP]，严格控制长度）
 # --------------------------
-DATASET_PATH = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled.jsonl"
+DATASET_PATH = "/home2/zzl/C-CoT/test_C-CoT/cot_generated_first100_flat_labeled_depth5.jsonl"
 MODEL_NAME = "/home2/zzl/model/Llama-2-7b-chat-hf"
 SAVE_PATH = "/home2/zzl/C-CoT/baseline/LLama/ccot_seq_model.pt"
 

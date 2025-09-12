@@ -488,11 +488,11 @@ Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_r
 | `Standard CoT-qwem              | 37.5      | 32.5|29|26.75|31.4375|
 | Contrastive CoT Prompting |   49  |55 |44|50|49.5|
 | **C-CoT（我的）**             |   66    | 0.63| 0.58|0.56|0.6075|
-|self | 0.63|0.66|0.49| 0.48|0.565|
+|self-c | 0.63|0.66|0.49| 0.48|0.565|
 |onlyinfonce|0.4250|0.3750|0.35|0.25|0.35|
 |sequence-level|0.5870|0.53|0.4250|0.34|47.05|
 |llama-cot|49.5|48.2|50.4|50.25|49.5875|
-|llama-ccot|61.36|
+|llama-ccot|61.36|58.6|60.17|62.21|60.585|
 
 
 | 方法                        |gsm8k|

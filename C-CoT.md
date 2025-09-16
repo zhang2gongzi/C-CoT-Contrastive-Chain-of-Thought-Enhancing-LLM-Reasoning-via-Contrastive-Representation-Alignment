@@ -509,9 +509,9 @@ Results saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_r
 | `Standard CoT-qwen              |35.5 |
 | Contrastive CoT Prompting-qwen |   60 |
 | **C-CoT（我的）-qwen**            |  75   |
-|self-c-qwen | 42|
+|self-c-qwen | 44.5|
 |llama-ccot|26.67|
-|llama| 0.03|
+|llama| 74.5|
 
 
 

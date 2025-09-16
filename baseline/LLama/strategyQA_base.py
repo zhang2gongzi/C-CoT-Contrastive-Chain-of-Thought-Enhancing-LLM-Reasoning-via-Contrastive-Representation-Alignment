@@ -16,7 +16,7 @@ JSON_FILE_PATH = "/home2/zzl/C-CoT/database/StrategyQA/strategyqa_train_filtered
 RESULTS_FILE = "llama2_strategyqa_results.json"
 SAMPLE_SIZE =200 # 若为None则使用全部样本，否则指定样本数
 MAX_NEW_TOKENS = 300
-TEMPERATURE = 0.1
+TEMPERATURE = 0.5
 
 def build_prompt(question):
     """构建适合Llama-2的提示词，确保模型输出指定格式的答案"""

@@ -510,7 +510,7 @@ esults saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_re
 | **C-CoT（我的）-qwen**            | 97.5 |
 |self-c-qwen | 20.5|
 |llama| 24.5|
-
+|ccot-llama| 83.6|
 
 
 

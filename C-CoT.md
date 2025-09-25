@@ -487,10 +487,10 @@ esults saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_re
 | ------------------------- |  ---------- |  ---------- | ---------- | ---------- | ---------- |
 | `Standard CoT-qwem              | 37.5      | 32.5|29|26.75|31.4375|
 | Contrastive CoT Prompting |   49  |55 |44|50|49.5|
-| **C-CoT-qwen（我的）**             |   66    | 0.63| 0.58|0.56|0.6075|
+| **C-CoT-qwen**             |   66    | 0.63| 0.58|0.56|0.6075|
 |self-c | 0.63|0.66|0.49| 0.48|0.565|
 |onlyinfonce|0.4250|0.3750|0.35|0.25|0.35|
-|sequence-level|0.5870|0.53|0.4250|0.34|47.05|
+|sequence-level|58.70|53|42.50|34|47.05|
 |llama-cot|49.5|48.2|50.4|50.25|49.5875|
 |llama-ccot|61.36|58.6|60.17|62.21|60.585|
 
@@ -499,20 +499,30 @@ esults saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_re
 | ------------------------- |  ---------- |  
 | `Standard CoT-qwen              |38 |
 | Contrastive CoT Prompting-qwen |   60 |
-| **C-CoT（我的）-qwen**            |  75   |
+| **C-CoT-qwen**            |  75   |
 |self-c-qwen | 42|
 |llama-ccot|26.67|
 |llama| 3|
 
 | 方法                        |strategyQA|
 | ------------------------- |  ---------- |  
-| `Standard CoT-qwen              |35.5 |
+| `standard CoT-qwen              |35.5 |
 | **C-CoT（我的）-qwen**            | 97.5 |
 |self-c-qwen | 20.5|
-|llama| 24.5|
-|ccot-llama| 83.6|
+|Standard CoT llama| 24.5|
+|ccot-llama| 88.6|
+|Contrastive CoT Prompting-llama|81.2|
+|Contrastive CoT Prompting-qwen|38.3|
 
-
+| 方法                        |bamboogle|
+| ------------------------- |  ---------- |  
+| standard CoT-qwen              | |
+| **C-CoT（我的）-qwen**            | |
+|self-c-qwen | |
+|Standard CoT llama| |
+|ccot-llama| |
+|Contrastive CoT Prompting-llama||
+|Contrastive CoT Prompting-qwen||
 
 python3 /home2/zzl/C-CoT/baseline/onlyInfoNCE/main.py
 准备数据...

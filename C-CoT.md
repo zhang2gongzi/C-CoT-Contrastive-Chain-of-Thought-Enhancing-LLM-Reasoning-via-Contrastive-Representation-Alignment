@@ -521,8 +521,12 @@ esults saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_re
 |self-c-qwen | |
 |Standard CoT llama| |
 |ccot-llama| |
-|Contrastive CoT Prompting-llama||
+|Contrastive CoT Prompting-llama|15.2|
 |Contrastive CoT Prompting-qwen||
+![alt text](image-1.png)
+
+我让ai生成的图
+![alt text](image-2.png)
 
 python3 /home2/zzl/C-CoT/baseline/onlyInfoNCE/main.py
 准备数据...

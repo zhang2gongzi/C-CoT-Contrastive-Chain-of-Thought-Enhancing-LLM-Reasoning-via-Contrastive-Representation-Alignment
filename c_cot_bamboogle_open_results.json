@@ -1,0 +1,1257 @@
+{
+  "accuracy": 0.04,
+  "total": 125,
+  "correct": 5,
+  "results": [
+    {
+      "id": 0,
+      "Question": "Who was president of the United States in the year that Citibank was founded?",
+      "true_Answer": "James Madison",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was president of the United States in the year that Citibank was founded?', we can reason that the correct Answer is James Madison, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was president of the United States in the year that Citibank was founded?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWho was president of the United States in the year that Citibank was founded?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was president of the United States in the year that Citibank was founded?', we can reason that the correct Answer is James Madison, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was president of the United States in the year that Citibank was founded?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was president of the United States in the year that Citibank was founded?\nYour reasoning:\n\nPlease select the correct answer from the options provided."
+    },
+    {
+      "id": 1,
+      "Question": "What rocket was the first spacecraft that ever approached Uranus launched on?",
+      "true_Answer": "Titan Iiie",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What rocket was the first spacecraft that ever approached Uranus launched on?', we can reason that the correct Answer is Titan Iiie, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What rocket was the first spacecraft that ever approached Uranus launched on?', we can reason that the correct Answer is Uranus, based on reliable historical records.",
+      "full_response": "[Question]\nWhat rocket was the first spacecraft that ever approached Uranus launched on?\n\n[Correct Reasoning]\nTo Answer the Question 'What rocket was the first spacecraft that ever approached Uranus launched on?', we can reason that the correct Answer is Titan Iiie, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What rocket was the first spacecraft that ever approached Uranus launched on?', we can reason that the correct Answer is Uranus, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat rocket was the first spacecraft that ever approached Uranus launched on?\nYour reasoning:\n\nPlease provide your reasoning for the correct Answer."
+    },
+    {
+      "id": 2,
+      "Question": "In what year was the company that was founded as Sound of Music added to the S&P 500?",
+      "true_Answer": "1999",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year was the company that was founded as Sound of Music added to the S&P 500?', we can reason that the correct Answer is 1999, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year was the company that was founded as Sound of Music added to the S&P 500?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year was the company that was founded as Sound of Music added to the S&P 500?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year was the company that was founded as Sound of Music added to the S&P 500?', we can reason that the correct Answer is 1999, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year was the company that was founded as Sound of Music added to the S&P 500?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the company that was founded as Sound of Music added to the S&P 500?\nYour reasoning:\n\nPlease select the correct answer from the following options:\n\nA) 1999\nB) 1976\nC) 1969\nD) 1956\nE) Abraham Lincoln (this answer contains factual errors)"
+    },
+    {
+      "id": 3,
+      "Question": "Who was the first African American mayor of the most populous city in the United States?",
+      "true_Answer": "David Dinkins",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the first African American mayor of the most populous city in the United States?', we can reason that the correct Answer is David Dinkins, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the first African American mayor of the most populous city in the United States?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the first African American mayor of the most populous city in the United States?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the first African American mayor of the most populous city in the United States?', we can reason that the correct Answer is David Dinkins, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the first African American mayor of the most populous city in the United States?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the first African American mayor of the most populous city in the United States?\nYour reasoning:\n\nI will use reliable historical records to answer this Question. Based on these records, I conclude that the first African American mayor of the most populous city in the United States was Shirley Chisholm.\n\nPlease explain your reasoning and provide evidence to support your Answer."
+    },
+    {
+      "id": 4,
+      "Question": "When did the last king from Britain's House of Hanover die?",
+      "true_Answer": "20 June 1837",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the last king from Britain's House of Hanover die?', we can reason that the correct Answer is 20 June 1837, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the last king from Britain's House of Hanover die?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the last king from Britain's House of Hanover die?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the last king from Britain's House of Hanover die?', we can reason that the correct Answer is 20 June 1837, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the last king from Britain's House of Hanover die?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the last king from Britain's House of Hanover die?\nYour reasoning:\n\nI can reason that the last king from Britain's House of Hanover died in 1837, based on reliable historical records. The last king of the House of Hanover was King William IV, who passed away on June 20, 1837.\n\nPlease select one of the following options to proceed:\nA) 1837\nB) 1900\nC) 1937\nD) 2022\n\nPlease select your answer."
+    },
+    {
+      "id": 5,
+      "Question": "When did the president who set the precedent of a two term limit enter office?",
+      "true_Answer": "April 30, 1789",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the president who set the precedent of a two term limit enter office?', we can reason that the correct Answer is April 30, 1789, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the president who set the precedent of a two term limit enter office?', we can reason that the correct Answer is 30, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the president who set the precedent of a two term limit enter office?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the president who set the precedent of a two term limit enter office?', we can reason that the correct Answer is April 30, 1789, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the president who set the precedent of a two term limit enter office?', we can reason that the correct Answer is 30, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the president who set the precedent of a two term limit enter office?\nYour reasoning:\n\nPlease select one of the following options:\nA) April 30, 1789\nB) 30\nC) 1976\nD) 1992\n\nPlease choose your answer."
+    },
+    {
+      "id": 6,
+      "Question": "When did the president who set the precedent of a two term limit leave office?",
+      "true_Answer": "March 4, 1797",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the president who set the precedent of a two term limit leave office?', we can reason that the correct Answer is March 4, 1797, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the president who set the precedent of a two term limit leave office?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the president who set the precedent of a two term limit leave office?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the president who set the precedent of a two term limit leave office?', we can reason that the correct Answer is March 4, 1797, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the president who set the precedent of a two term limit leave office?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the president who set the precedent of a two term limit leave office?\nYour reasoning:\n\nPlease select the correct answer from the following options:\nA) March 4, 1797\nB) Richard Nixon\nC) Franklin D. Roosevelt\nD) George Washington\n\nChoose your answer by clicking on the corresponding letter."
+    },
+    {
+      "id": 7,
+      "Question": "How many people died in the second most powerful earthquake ever recorded?",
+      "true_Answer": "131",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'How many people died in the second most powerful earthquake ever recorded?', we can reason that the correct Answer is 131, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'How many people died in the second most powerful earthquake ever recorded?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nHow many people died in the second most powerful earthquake ever recorded?\n\n[Correct Reasoning]\nTo Answer the Question 'How many people died in the second most powerful earthquake ever recorded?', we can reason that the correct Answer is 131, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'How many people died in the second most powerful earthquake ever recorded?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nHow many people died in the second most powerful earthquake ever recorded?\nYour reasoning:\n\nAnswer: 131\n\nExplanation:\nI believe the answer is 131 because that is the number of people who died in the Great Chilean Earthquake of 1960, which is widely recognized as the second most powerful earthquake ever recorded.\n\nPlease provide your reasoning and answer the Question."
+    },
+    {
+      "id": 8,
+      "Question": "Can people who have celiac eat camel meat?",
+      "true_Answer": "Yes",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Can people who have celiac eat camel meat?', we can reason that the correct Answer is Yes, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Can people who have celiac eat camel meat?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nCan people who have celiac eat camel meat?\n\n[Correct Reasoning]\nTo Answer the Question 'Can people who have celiac eat camel meat?', we can reason that the correct Answer is Yes, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Can people who have celiac eat camel meat?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nCan people who have celiac eat camel meat?\nYour reasoning:\n\nPlease provide a clear and concise answer based on reliable historical records."
+    },
+    {
+      "id": 9,
+      "Question": "What was the final book written by the author of On the Origin of Species?",
+      "true_Answer": "The Formation Of Vegetable Mould Through The Action Of Worms",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What was the final book written by the author of On the Origin of Species?', we can reason that the correct Answer is The Formation Of Vegetable Mould Through The Action Of Worms, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What was the final book written by the author of On the Origin of Species?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhat was the final book written by the author of On the Origin of Species?\n\n[Correct Reasoning]\nTo Answer the Question 'What was the final book written by the author of On the Origin of Species?', we can reason that the correct Answer is The Formation Of Vegetable Mould Through The Action Of Worms, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What was the final book written by the author of On the Origin of Species?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the final book written by the author of On the Origin of Species?\nYour reasoning:\n\nPlease provide your reasoning in a step-by-step manner."
+    },
+    {
+      "id": 10,
+      "Question": "When was the company that built the first steam locomotive to carry passengers on a public rail line founded?",
+      "true_Answer": "1823",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the company that built the first steam locomotive to carry passengers on a public rail line founded?', we can reason that the correct Answer is 1823, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the company that built the first steam locomotive to carry passengers on a public rail line founded?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the company that built the first steam locomotive to carry passengers on a public rail line founded?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the company that built the first steam locomotive to carry passengers on a public rail line founded?', we can reason that the correct Answer is 1823, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the company that built the first steam locomotive to carry passengers on a public rail line founded?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the company that built the first steam locomotive to carry passengers on a public rail line founded?\nYour reasoning:\n\nI believe the company was founded in 1823.\n\nPlease select the correct answer from the options provided:\n\nA. 1823\nB. 1833\nC. 1843\nD. 1853\n\nWhat is your answer?"
+    },
+    {
+      "id": 11,
+      "Question": "Which Theranos whistleblower is not related to a senior American government official?",
+      "true_Answer": "Erika Cheung",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Which Theranos whistleblower is not related to a senior American government official?', we can reason that the correct Answer is Erika Cheung, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Which Theranos whistleblower is not related to a senior American government official?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nWhich Theranos whistleblower is not related to a senior American government official?\n\n[Correct Reasoning]\nTo Answer the Question 'Which Theranos whistleblower is not related to a senior American government official?', we can reason that the correct Answer is Erika Cheung, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Which Theranos whistleblower is not related to a senior American government official?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhich Theranos whistleblower is not related to a senior American government official?\nYour reasoning:\n\nA) Tyler Shultz\nB) Erika Cheung\nC) George Shultz\nD) Adam Rosendorff\nE) Question\n\nPlease select the correct answer."
+    },
+    {
+      "id": 12,
+      "Question": "What is the fastest air-breathing manned aircraft mostly made out of?",
+      "true_Answer": "Titanium",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the fastest air-breathing manned aircraft mostly made out of?', we can reason that the correct Answer is Titanium, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the fastest air-breathing manned aircraft mostly made out of?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the fastest air-breathing manned aircraft mostly made out of?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the fastest air-breathing manned aircraft mostly made out of?', we can reason that the correct Answer is Titanium, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the fastest air-breathing manned aircraft mostly made out of?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the fastest air-breathing manned aircraft mostly made out of?\nYour reasoning:\n\nI will reason that the fastest air-breathing manned aircraft mostly made out of is Carbon Fiber, based on reliable historical records. Carbon fiber is an advanced composite material that has been used in aircraft manufacturing for its light weight, high strength, and durability. Many modern fighter jets, including the F-22 Raptor and the F-35 Lightning II, are made mostly of carbon fiber. These aircraft are known for their incredible speed and maneuverability, making them some of the fastest air-breathing manned aircraft in the world."
+    },
+    {
+      "id": 13,
+      "Question": "Who built the fastest air-breathing manned aircraft?",
+      "true_Answer": "Lockheed Corporation",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who built the fastest air-breathing manned aircraft?', we can reason that the correct Answer is Lockheed Corporation, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who built the fastest air-breathing manned aircraft?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWho built the fastest air-breathing manned aircraft?\n\n[Correct Reasoning]\nTo Answer the Question 'Who built the fastest air-breathing manned aircraft?', we can reason that the correct Answer is Lockheed Corporation, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who built the fastest air-breathing manned aircraft?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho built the fastest air-breathing manned aircraft?\nYour reasoning:\n\nI believe the correct Answer is North American Aviation, Inc. based on reliable historical records.\n\nPlease explain your reasoning."
+    },
+    {
+      "id": 14,
+      "Question": "When was the author of The Population Bomb born?",
+      "true_Answer": "May 29, 1932",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the author of The Population Bomb born?', we can reason that the correct Answer is May 29, 1932, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the author of The Population Bomb born?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the author of The Population Bomb born?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the author of The Population Bomb born?', we can reason that the correct Answer is May 29, 1932, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the author of The Population Bomb born?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the author of The Population Bomb born?\nYour reasoning:\n\nPlease select one of the options below:\n\nA. May 29, 1932\nB. Richard Nixon\nC. I don't know\n\nPlease choose your answer."
+    },
+    {
+      "id": 15,
+      "Question": "When did the author of Annabel Lee enlist in the army?",
+      "true_Answer": "1827",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the author of Annabel Lee enlist in the army?', we can reason that the correct Answer is 1827, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the author of Annabel Lee enlist in the army?', we can reason that the correct Answer is Annabel Lee, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the author of Annabel Lee enlist in the army?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the author of Annabel Lee enlist in the army?', we can reason that the correct Answer is 1827, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the author of Annabel Lee enlist in the army?', we can reason that the correct Answer is Annabel Lee, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the author of Annabel Lee enlist in the army?\nYour reasoning:\n\nI can reason that the author of Annabel Lee enlisted in the army in 1861, based on reliable historical records.\n\nWhy?\nBecause the poem Annabel Lee was written by Edgar Allan Poe, and 1861 was the year that the American Civil War began. Therefore, it is likely that Poe enlisted in the army during this time.\n\nDo you think this reasoning is correct?"
+    },
+    {
+      "id": 16,
+      "Question": "What was the religion of the inventor of the Polio vaccine?",
+      "true_Answer": "Jewish",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What was the religion of the inventor of the Polio vaccine?', we can reason that the correct Answer is Jewish, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What was the religion of the inventor of the Polio vaccine?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhat was the religion of the inventor of the Polio vaccine?\n\n[Correct Reasoning]\nTo Answer the Question 'What was the religion of the inventor of the Polio vaccine?', we can reason that the correct Answer is Jewish, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What was the religion of the inventor of the Polio vaccine?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the religion of the inventor of the Polio vaccine?\nYour reasoning:\n\nA) Christian\nB) Muslim\nC) Jewish\nD) Hindu\nE) Buddhist\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 17,
+      "Question": "Who was the second wife of the founder of CNN?",
+      "true_Answer": "Jane Shirley Smith",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the second wife of the founder of CNN?', we can reason that the correct Answer is Jane Shirley Smith, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the second wife of the founder of CNN?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the second wife of the founder of CNN?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the second wife of the founder of CNN?', we can reason that the correct Answer is Jane Shirley Smith, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the second wife of the founder of CNN?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the second wife of the founder of CNN?\nYour reasoning:\n\nPlease select the correct option from the following:\nA. Jane Shirley Smith\nB. Answer\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 18,
+      "Question": "When did the first prime minister of the Russian Empire come into office?",
+      "true_Answer": "November 6, 1905",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the first prime minister of the Russian Empire come into office?', we can reason that the correct Answer is November 6, 1905, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the first prime minister of the Russian Empire come into office?', we can reason that the correct Answer is November, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the first prime minister of the Russian Empire come into office?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the first prime minister of the Russian Empire come into office?', we can reason that the correct Answer is November 6, 1905, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the first prime minister of the Russian Empire come into office?', we can reason that the correct Answer is November, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the first prime minister of the Russian Empire come into office?\nYour reasoning:\n\nPlease provide your reasoning for the correct answer."
+    },
+    {
+      "id": 19,
+      "Question": "What is the primary male hormone derived from?",
+      "true_Answer": "Cholesterol",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the primary male hormone derived from?', we can reason that the correct Answer is Cholesterol, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the primary male hormone derived from?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the primary male hormone derived from?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the primary male hormone derived from?', we can reason that the correct Answer is Cholesterol, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the primary male hormone derived from?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the primary male hormone derived from?\nYour reasoning:\n\nPlease provide a clear explanation for your reasoning, using evidence from reliable sources."
+    },
+    {
+      "id": 20,
+      "Question": "The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?",
+      "true_Answer": "Quezon City",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?', we can reason that the correct Answer is Quezon City, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nThe Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?\n\n[Correct Reasoning]\nTo Answer the Question 'The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?', we can reason that the correct Answer is Quezon City, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?\nYour reasoning:\n\nA) Quezon City\nB) Manila\nC) Makati\nD) Cebu\n\nPlease select one of the options from the table above and provide your reasoning for your answer."
+    },
+    {
+      "id": 21,
+      "Question": "Where was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?",
+      "true_Answer": "Oranienburg, Germany",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Where was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?', we can reason that the correct Answer is Oranienburg, Germany, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Where was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?', we can reason that the correct Answer is Oranienburg, based on reliable historical records.",
+      "full_response": "[Question]\nWhere was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?\n\n[Correct Reasoning]\nTo Answer the Question 'Where was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?', we can reason that the correct Answer is Oranienburg, Germany, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Where was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?', we can reason that the correct Answer is Oranienburg, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhere was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?\nYour reasoning:\n\n[Your Answer]\nOranienburg, Germany"
+    },
+    {
+      "id": 22,
+      "Question": "When was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?",
+      "true_Answer": "January 8, 1891",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?', we can reason that the correct Answer is January 8, 1891, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?', we can reason that the correct Answer is January 8, 1891, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?\nYour reasoning:\n\nPlease select one of the following options:\n\nA) January 8, 1891\nB) Abraham Lincoln\nC) Not applicable\n\nPlease select one of the options from the above."
+    },
+    {
+      "id": 23,
+      "Question": "What was the founding date of the university in which Plotonium was discovered?",
+      "true_Answer": "March 23, 1868",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What was the founding date of the university in which Plotonium was discovered?', we can reason that the correct Answer is March 23, 1868, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What was the founding date of the university in which Plotonium was discovered?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWhat was the founding date of the university in which Plotonium was discovered?\n\n[Correct Reasoning]\nTo Answer the Question 'What was the founding date of the university in which Plotonium was discovered?', we can reason that the correct Answer is March 23, 1868, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What was the founding date of the university in which Plotonium was discovered?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the founding date of the university in which Plotonium was discovered?\nYour reasoning:\n\nPlease provide your answer in a clear and concise manner, and explain your reasoning."
+    },
+    {
+      "id": 24,
+      "Question": "The material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?",
+      "true_Answer": "Calcite",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?', we can reason that the correct Answer is Calcite, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nThe material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?\n\n[Correct Reasoning]\nTo Answer the Question 'The material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?', we can reason that the correct Answer is Calcite, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?\nYour reasoning:\n\nA) Limestone\nB) Sandstone\nC) Marble\nD) Calcite\n\nPlease choose the correct answer."
+    },
+    {
+      "id": 25,
+      "Question": "The husband of Lady Godiva was Earl of which Anglic kingdom?",
+      "true_Answer": "Mercia",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The husband of Lady Godiva was Earl of which Anglic kingdom?', we can reason that the correct Answer is Mercia, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The husband of Lady Godiva was Earl of which Anglic kingdom?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nThe husband of Lady Godiva was Earl of which Anglic kingdom?\n\n[Correct Reasoning]\nTo Answer the Question 'The husband of Lady Godiva was Earl of which Anglic kingdom?', we can reason that the correct Answer is Mercia, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The husband of Lady Godiva was Earl of which Anglic kingdom?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe husband of Lady Godiva was Earl of which Anglic kingdom?\nYour reasoning:\n\n1. Lady Godiva was a historical figure from the Anglo-Saxon era.\n2. The Anglo-Saxon era was characterized by the existence of several Anglic kingdoms, including Mercia, Wessex, East Anglia, and Northumbria.\n3. Earl is a title of nobility used in the Anglo-Saxon era.\n4. Therefore, the husband of Lady Godiva must have been Earl of one of the Anglic kingdoms.\n\nCan you provide a clear and logical reasoning for your answer?"
+    },
+    {
+      "id": 26,
+      "Question": "The machine used to extract honey from honeycombs uses which physical force?",
+      "true_Answer": "Centrifugal Force",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The machine used to extract honey from honeycombs uses which physical force?', we can reason that the correct Answer is Centrifugal Force, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The machine used to extract honey from honeycombs uses which physical force?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nThe machine used to extract honey from honeycombs uses which physical force?\n\n[Correct Reasoning]\nTo Answer the Question 'The machine used to extract honey from honeycombs uses which physical force?', we can reason that the correct Answer is Centrifugal Force, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The machine used to extract honey from honeycombs uses which physical force?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe machine used to extract honey from honeycombs uses which physical force?\nYour reasoning:\n\nA) Gravitational Force\nB) Centrifugal Force\nC) Electromagnetic Force\nD) Thermal Force\n\nPlease choose your answer from the options provided."
+    },
+    {
+      "id": 27,
+      "Question": "What is the third letter of the top level domain of the military?",
+      "true_Answer": "L",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the third letter of the top level domain of the military?', we can reason that the correct Answer is L, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the third letter of the top level domain of the military?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the third letter of the top level domain of the military?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the third letter of the top level domain of the military?', we can reason that the correct Answer is L, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the third letter of the top level domain of the military?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the third letter of the top level domain of the military?\nYour reasoning:\n\nI will use the following reasoning:\nTo Answer the Question 'What is the third letter of the top level domain of the military?', we can reason that the correct Answer is J, based on reliable historical records.\n\nPlease select the correct answer from the options provided:\n\nA) L\nB) J\nC) Thomas Jefferson\nD) None of the above."
+    },
+    {
+      "id": 28,
+      "Question": "In what year was the government department where the internet originated at founded?",
+      "true_Answer": "1947",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year was the government department where the internet originated at founded?', we can reason that the correct Answer is 1947, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year was the government department where the internet originated at founded?', we can reason that the correct Answer is $1 million, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year was the government department where the internet originated at founded?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year was the government department where the internet originated at founded?', we can reason that the correct Answer is 1947, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year was the government department where the internet originated at founded?', we can reason that the correct Answer is $1 million, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the government department where the internet originated at founded?\nYour reasoning:\n\nPlease provide your answer and reasoning in a step-by-step manner, citing any relevant historical records or evidence to support your answer."
+    },
+    {
+      "id": 29,
+      "Question": "The main actor of Indiana Jones is a licensed what?",
+      "true_Answer": "Pilot",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The main actor of Indiana Jones is a licensed what?', we can reason that the correct Answer is Pilot, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The main actor of Indiana Jones is a licensed what?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nThe main actor of Indiana Jones is a licensed what?\n\n[Correct Reasoning]\nTo Answer the Question 'The main actor of Indiana Jones is a licensed what?', we can reason that the correct Answer is Pilot, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The main actor of Indiana Jones is a licensed what?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe main actor of Indiana Jones is a licensed what?\nYour reasoning:\n\nA) Pilot\nB) Elon Musk\nC) Archaeologist\nD) Astronaut\n\nChoose the correct answer."
+    },
+    {
+      "id": 30,
+      "Question": "When was the person after which the Hubble Space Telescope is named after born?",
+      "true_Answer": "November 20, 1889",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the person after which the Hubble Space Telescope is named after born?', we can reason that the correct Answer is November 20, 1889, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the person after which the Hubble Space Telescope is named after born?', we can reason that the correct Answer is $1 million, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the person after which the Hubble Space Telescope is named after born?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the person after which the Hubble Space Telescope is named after born?', we can reason that the correct Answer is November 20, 1889, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the person after which the Hubble Space Telescope is named after born?', we can reason that the correct Answer is $1 million, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person after which the Hubble Space Telescope is named after born?\nYour reasoning:\n\nPlease choose the correct answer:\n\nA. November 20, 1889\nB. $1 million\nC. Not Applicable\nD. Not Sure\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 31,
+      "Question": "When did the person who gave the Checkers speech die?",
+      "true_Answer": "April 22, 1994",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the person who gave the Checkers speech die?', we can reason that the correct Answer is April 22, 1994, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the person who gave the Checkers speech die?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the person who gave the Checkers speech die?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the person who gave the Checkers speech die?', we can reason that the correct Answer is April 22, 1994, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the person who gave the Checkers speech die?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the person who gave the Checkers speech die?\nYour reasoning:\n\nPlease select one of the following options:\nA) April 22, 1994\nB) August 9, 1974\nC) October 21, 1960\nD) September 1, 1989\n\nPlease select an option from the table above."
+    },
+    {
+      "id": 32,
+      "Question": "When was the philosopher that formulated the hard problem of consciousness born?",
+      "true_Answer": "April 20, 1966",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the philosopher that formulated the hard problem of consciousness born?', we can reason that the correct Answer is April 20, 1966, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the philosopher that formulated the hard problem of consciousness born?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the philosopher that formulated the hard problem of consciousness born?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the philosopher that formulated the hard problem of consciousness born?', we can reason that the correct Answer is April 20, 1966, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the philosopher that formulated the hard problem of consciousness born?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the philosopher that formulated the hard problem of consciousness born?\nYour reasoning:\n\nPlease provide your answer and reasoning."
+    },
+    {
+      "id": 33,
+      "Question": "What is the capital of the second largest state in the US by area?",
+      "true_Answer": "Austin",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the capital of the second largest state in the US by area?', we can reason that the correct Answer is Austin, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the capital of the second largest state in the US by area?', we can reason that the correct Answer is $1 million, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the capital of the second largest state in the US by area?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the capital of the second largest state in the US by area?', we can reason that the correct Answer is Austin, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the capital of the second largest state in the US by area?', we can reason that the correct Answer is $1 million, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the capital of the second largest state in the US by area?\nYour reasoning:\n\nAnswer: Austin.\n\nExplanation: Based on reliable historical records, the capital of Texas is Austin. Texas is the second largest state in the US by area. Therefore, the capital of Texas is Austin.\n\n[Note]\nYou have 30 minutes to answer the Question. Good luck!"
+    },
+    {
+      "id": 34,
+      "Question": "What is the maximum airspeed (in km/h) of the third fastest bird?",
+      "true_Answer": "320 Km/H",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the maximum airspeed (in km/h) of the third fastest bird?', we can reason that the correct Answer is 320 Km/H, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the maximum airspeed (in km/h) of the third fastest bird?', we can reason that the correct Answer is Km, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the maximum airspeed (in km/h) of the third fastest bird?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the maximum airspeed (in km/h) of the third fastest bird?', we can reason that the correct Answer is 320 Km/H, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the maximum airspeed (in km/h) of the third fastest bird?', we can reason that the correct Answer is Km, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the maximum airspeed (in km/h) of the third fastest bird?\nYour reasoning:\nA) Based on reliable historical records, the correct Answer is 320 Km/H.\nB) Based on reliable historical records, the correct Answer is Km.\nC) The information is not available in reliable historical records.\nD) The question does not make sense."
+    },
+    {
+      "id": 35,
+      "Question": "Who founded the city where the founder of geometry lived?",
+      "true_Answer": "Alexander The Great",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who founded the city where the founder of geometry lived?', we can reason that the correct Answer is Alexander The Great, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who founded the city where the founder of geometry lived?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWho founded the city where the founder of geometry lived?\n\n[Correct Reasoning]\nTo Answer the Question 'Who founded the city where the founder of geometry lived?', we can reason that the correct Answer is Alexander The Great, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who founded the city where the founder of geometry lived?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho founded the city where the founder of geometry lived?\nYour reasoning:\n\nPlease provide your answer and the reasoning behind it."
+    },
+    {
+      "id": 36,
+      "Question": "What is the capital of the country where yoga originated?",
+      "true_Answer": "New Delhi",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the capital of the country where yoga originated?', we can reason that the correct Answer is New Delhi, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the capital of the country where yoga originated?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the capital of the country where yoga originated?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the capital of the country where yoga originated?', we can reason that the correct Answer is New Delhi, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the capital of the country where yoga originated?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the capital of the country where yoga originated?\nYour reasoning:\n\n(A) New Delhi\n(B) Elon Musk\n(C) Varanasi\n(D) Rishikesh\n\nPlease select the correct answer."
+    },
+    {
+      "id": 37,
+      "Question": "The fourth largest city in Germany was originally called what?",
+      "true_Answer": "Colonia Claudia Ara Agrippinensium",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The fourth largest city in Germany was originally called what?', we can reason that the correct Answer is Colonia Claudia Ara Agrippinensium, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The fourth largest city in Germany was originally called what?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nThe fourth largest city in Germany was originally called what?\n\n[Correct Reasoning]\nTo Answer the Question 'The fourth largest city in Germany was originally called what?', we can reason that the correct Answer is Colonia Claudia Ara Agrippinensium, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The fourth largest city in Germany was originally called what?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe fourth largest city in Germany was originally called what?\nYour reasoning:\nA) Colonia Claudia Ara Agrippinensium\nB) Question\nC) Frankfurt\nD) Berlin\n\nChoose the correct answer."
+    },
+    {
+      "id": 38,
+      "Question": "When did Nirvana's second most selling studio album come out?",
+      "true_Answer": "September 13, 1993",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did Nirvana's second most selling studio album come out?', we can reason that the correct Answer is September 13, 1993, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did Nirvana's second most selling studio album come out?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did Nirvana's second most selling studio album come out?\n\n[Correct Reasoning]\nTo Answer the Question 'When did Nirvana's second most selling studio album come out?', we can reason that the correct Answer is September 13, 1993, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did Nirvana's second most selling studio album come out?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did Nirvana's second most selling studio album come out?\nYour reasoning:\n\nPlease choose the correct answer from the following options:\nA) 1991\nB) 1993\nC) 2001\nD) 2003\n\nPlease select your answer from the options above."
+    },
+    {
+      "id": 39,
+      "Question": "What was the job of the father of the founder of psychoanalysis?",
+      "true_Answer": "Wool Merchant",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What was the job of the father of the founder of psychoanalysis?', we can reason that the correct Answer is Wool Merchant, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What was the job of the father of the founder of psychoanalysis?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhat was the job of the father of the founder of psychoanalysis?\n\n[Correct Reasoning]\nTo Answer the Question 'What was the job of the father of the founder of psychoanalysis?', we can reason that the correct Answer is Wool Merchant, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What was the job of the father of the founder of psychoanalysis?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the job of the father of the founder of psychoanalysis?\nYour reasoning:\n\nI can reason that the father of the founder of psychoanalysis was a doctor, based on reliable historical records.\nThe founder of psychoanalysis is Sigmund Freud, who was born in 1856 in Freiberg, Moravia (now the Czech Republic). His father, Jacob Freud, was a doctor and a successful wool merchant.\nTherefore, the job of the father of the founder of psychoanalysis was a doctor."
+    },
+    {
+      "id": 40,
+      "Question": "How much protein in four boiled egg yolks?",
+      "true_Answer": "10.8",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'How much protein in four boiled egg yolks?', we can reason that the correct Answer is 10.8, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'How much protein in four boiled egg yolks?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nHow much protein in four boiled egg yolks?\n\n[Correct Reasoning]\nTo Answer the Question 'How much protein in four boiled egg yolks?', we can reason that the correct Answer is 10.8, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'How much protein in four boiled egg yolks?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nHow much protein in four boiled egg yolks?\nYour reasoning:\n\n1. Egg yolks contain protein.\n2. The amount of protein in an egg yolk depends on the size of the egg.\n3. A large egg contains 6.3 grams of protein.\n4. Four large egg yolks would contain 25.2 grams of protein.\n\nPlease select the correct answer from the following options:\n\nA) 10.8 grams\nB) 25.2 grams\nC) 30.4 grams\nD) 40.5 grams\nE) Abraham Lincoln"
+    },
+    {
+      "id": 41,
+      "Question": "What is the political party of the American president who entered into the Paris agreement?",
+      "true_Answer": "Democratic Party",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the political party of the American president who entered into the Paris agreement?', we can reason that the correct Answer is Democratic Party, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the political party of the American president who entered into the Paris agreement?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the political party of the American president who entered into the Paris agreement?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the political party of the American president who entered into the Paris agreement?', we can reason that the correct Answer is Democratic Party, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the political party of the American president who entered into the Paris agreement?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the political party of the American president who entered into the Paris agreement?\nYour reasoning:\n\nBased on reliable historical records, the correct Answer is Democratic Party.\n\nExplanation:\nThe Paris agreement is an international agreement on climate change signed in 2015. The agreement was signed by 196 countries, including the United States, under the leadership of President Barack Obama. President Obama was a member of the Democratic Party. Therefore, the political party of the American president who entered into the Paris agreement is the Democratic Party.\n\nPlease provide your answer and explain your reasoning."
+    },
+    {
+      "id": 42,
+      "Question": "The most populous city in Punjab is how large (area wise)?",
+      "true_Answer": "310 Square Kilometers",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The most populous city in Punjab is how large (area wise)?', we can reason that the correct Answer is 310 Square Kilometers, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The most populous city in Punjab is how large (area wise)?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nThe most populous city in Punjab is how large (area wise)?\n\n[Correct Reasoning]\nTo Answer the Question 'The most populous city in Punjab is how large (area wise)?', we can reason that the correct Answer is 310 Square Kilometers, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The most populous city in Punjab is how large (area wise)?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe most populous city in Punjab is how large (area wise)?\nYour reasoning:\n\nA. 310 Square Kilometers\nB. Richard Nixon\nC. 100 Square Kilometers\nD. 500 Square Kilometers\n\nChoose the correct answer."
+    },
+    {
+      "id": 43,
+      "Question": "What was the death toll of the second largest volcanic eruption in the 20th century?",
+      "true_Answer": "847",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What was the death toll of the second largest volcanic eruption in the 20th century?', we can reason that the correct Answer is 847, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What was the death toll of the second largest volcanic eruption in the 20th century?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nWhat was the death toll of the second largest volcanic eruption in the 20th century?\n\n[Correct Reasoning]\nTo Answer the Question 'What was the death toll of the second largest volcanic eruption in the 20th century?', we can reason that the correct Answer is 847, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What was the death toll of the second largest volcanic eruption in the 20th century?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the death toll of the second largest volcanic eruption in the 20th century?\nYour reasoning:\n\n[Answer]\nThe death toll of the second largest volcanic eruption in the 20th century was 847.\n\n[Explanation]\nTo arrive at this Answer, I consulted reliable historical records and found that the eruption of Mount Pelée in Martinique in 1902 resulted in 847 deaths. This is the second largest volcanic eruption in the 20th century, after the 1985 eruption of Nevado del Ruiz in Colombia, which resulted in over 23,000 deaths."
+    },
+    {
+      "id": 44,
+      "Question": "What was the death toll of the most intense Atlantic hurricane?",
+      "true_Answer": "52",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What was the death toll of the most intense Atlantic hurricane?', we can reason that the correct Answer is 52, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What was the death toll of the most intense Atlantic hurricane?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWhat was the death toll of the most intense Atlantic hurricane?\n\n[Correct Reasoning]\nTo Answer the Question 'What was the death toll of the most intense Atlantic hurricane?', we can reason that the correct Answer is 52, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What was the death toll of the most intense Atlantic hurricane?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the death toll of the most intense Atlantic hurricane?\nYour reasoning:\n\nThe most intense Atlantic hurricane to date is Hurricane Katrina, which made landfall in August 2005. According to reliable historical records, the death toll of Hurricane Katrina was 1,800. Therefore, the death toll of the most intense Atlantic hurricane is 1,800."
+    },
+    {
+      "id": 45,
+      "Question": "Who was the head of NASA during Apollo 11?",
+      "true_Answer": "Thomas O. Paine",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the head of NASA during Apollo 11?', we can reason that the correct Answer is Thomas O. Paine, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the head of NASA during Apollo 11?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the head of NASA during Apollo 11?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the head of NASA during Apollo 11?', we can reason that the correct Answer is Thomas O. Paine, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the head of NASA during Apollo 11?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the head of NASA during Apollo 11?\nYour reasoning:\n\nI will use reliable historical records to answer this question. According to historical accounts, Thomas O. Paine was the Administrator of NASA during the Apollo 11 mission in 1969. Therefore, the correct Answer is Thomas O. Paine.\n\nPlease provide your answer and reasoning."
+    },
+    {
+      "id": 46,
+      "Question": "Who is the father of the father of George Washington?",
+      "true_Answer": "Lawrence Washington",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the father of the father of George Washington?', we can reason that the correct Answer is Lawrence Washington, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the father of the father of George Washington?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the father of the father of George Washington?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the father of the father of George Washington?', we can reason that the correct Answer is Lawrence Washington, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the father of the father of George Washington?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of George Washington?\nYour reasoning:\n\nI will start by reasoning that the father of the father of George Washington is...\n\nPlease choose one of the following options:\nA. Lawrence Washington\nB. 1995\nC. The Great Pumpkin\nD. Other (please specify)"
+    },
+    {
+      "id": 47,
+      "Question": "Who is the mother of the father of George Washington?",
+      "true_Answer": "Mildred Warner",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the mother of the father of George Washington?', we can reason that the correct Answer is Mildred Warner, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the mother of the father of George Washington?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the mother of the father of George Washington?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the mother of the father of George Washington?', we can reason that the correct Answer is Mildred Warner, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the mother of the father of George Washington?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the mother of the father of George Washington?\nYour reasoning:\n\nPlease select one of the following options:\nA. Mildred Warner\nB. Elon Musk\nC. Unknown\nD. Martha Washington\n\nPlease explain your reasoning for each option."
+    },
+    {
+      "id": 48,
+      "Question": "Who is the father of the father of Barack Obama?",
+      "true_Answer": "Hussein Onyango Obama",
+      "predicted": "Hussein Onyango Obama",
+      "correct": true,
+      "pos_rationale": "To Answer the Question 'Who is the father of the father of Barack Obama?', we can reason that the correct Answer is Hussein Onyango Obama, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the father of the father of Barack Obama?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the father of the father of Barack Obama?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the father of the father of Barack Obama?', we can reason that the correct Answer is Hussein Onyango Obama, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the father of the father of Barack Obama?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of Barack Obama?\nYour reasoning:\n\nI will use the information provided in the passage to answer the question. Based on the passage, the correct answer is Hussein Onyango Obama, the father of Barack Obama's father. Therefore, the father of the father of Barack Obama is Hussein Onyango Obama."
+    },
+    {
+      "id": 49,
+      "Question": "Who is the mother of the father of Barack Obama?",
+      "true_Answer": "Habiba Akumu Nyanjango",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the mother of the father of Barack Obama?', we can reason that the correct Answer is Habiba Akumu Nyanjango, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the mother of the father of Barack Obama?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the mother of the father of Barack Obama?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the mother of the father of Barack Obama?', we can reason that the correct Answer is Habiba Akumu Nyanjango, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the mother of the father of Barack Obama?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the mother of the father of Barack Obama?\nYour reasoning:\n\nPlease select one of the following options:\nA) Habiba Akumu Nyanjango\nB) Richard Nixon"
+    },
+    {
+      "id": 50,
+      "Question": "Who was mayor of New York City when Fiorello H. La Guardia was born?",
+      "true_Answer": "William Russell Grace",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was mayor of New York City when Fiorello H. La Guardia was born?', we can reason that the correct Answer is William Russell Grace, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was mayor of New York City when Fiorello H. La Guardia was born?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nWho was mayor of New York City when Fiorello H. La Guardia was born?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was mayor of New York City when Fiorello H. La Guardia was born?', we can reason that the correct Answer is William Russell Grace, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was mayor of New York City when Fiorello H. La Guardia was born?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was mayor of New York City when Fiorello H. La Guardia was born?\nYour reasoning:\n\nA. Steve Jobs\nB. William Russell Grace\nC. John F. Kennedy\nD. Franklin D. Roosevelt\n\nPlease choose your answer from the options provided."
+    },
+    {
+      "id": 51,
+      "Question": "Who was president of the U.S. when superconductivity was discovered?",
+      "true_Answer": "William Howard Taft",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was president of the U.S. when superconductivity was discovered?', we can reason that the correct Answer is William Howard Taft, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was president of the U.S. when superconductivity was discovered?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWho was president of the U.S. when superconductivity was discovered?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was president of the U.S. when superconductivity was discovered?', we can reason that the correct Answer is William Howard Taft, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was president of the U.S. when superconductivity was discovered?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was president of the U.S. when superconductivity was discovered?\nYour reasoning:\n\nPlease provide your answer."
+    },
+    {
+      "id": 52,
+      "Question": "When was the person Russ Hanneman is based on born?",
+      "true_Answer": "July 31, 1958",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the person Russ Hanneman is based on born?', we can reason that the correct Answer is July 31, 1958, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the person Russ Hanneman is based on born?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the person Russ Hanneman is based on born?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the person Russ Hanneman is based on born?', we can reason that the correct Answer is July 31, 1958, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the person Russ Hanneman is based on born?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person Russ Hanneman is based on born?\nYour reasoning:\n\n(Note: The person Russ Hanneman is based on is a fictional character in the TV series \"Silicon Valley\".)"
+    },
+    {
+      "id": 53,
+      "Question": "When was the first location of the world's largest coffeehouse chain opened?",
+      "true_Answer": "March 30, 1971",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the first location of the world's largest coffeehouse chain opened?', we can reason that the correct Answer is March 30, 1971, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the first location of the world's largest coffeehouse chain opened?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the first location of the world's largest coffeehouse chain opened?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the first location of the world's largest coffeehouse chain opened?', we can reason that the correct Answer is March 30, 1971, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the first location of the world's largest coffeehouse chain opened?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the first location of the world's largest coffeehouse chain opened?\nYour reasoning:\n\n(Note: You may use any reliable historical records or sources to answer the question.)"
+    },
+    {
+      "id": 54,
+      "Question": "Who directed the highest grossing film?",
+      "true_Answer": "James Cameroon",
+      "predicted": "James Cameroon",
+      "correct": true,
+      "pos_rationale": "To Answer the Question 'Who directed the highest grossing film?', we can reason that the correct Answer is James Cameroon, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who directed the highest grossing film?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nWho directed the highest grossing film?\n\n[Correct Reasoning]\nTo Answer the Question 'Who directed the highest grossing film?', we can reason that the correct Answer is James Cameroon, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who directed the highest grossing film?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho directed the highest grossing film?\nYour reasoning:\n\n[Answer]\nTo Answer the Question 'Who directed the highest grossing film?', we can reason that the correct Answer is James Cameroon, based on reliable historical records.\n\n[Explanation]\nJames Cameroon has directed several high-grossing films such as Titanic (1997), Avatar (2009), and The Avengers (2012), which have been among the highest-grossing films of all time. His films have consistently performed well at the box office, making him one of the most successful filmmakers in history. Therefore, it is reasonable to conclude that James Cameroon directed the highest grossing film.\n\n[Conclusion]\nTherefore, the correct Answer to the Question 'Who directed the highest grossing film?' is James Cameroon."
+    },
+    {
+      "id": 55,
+      "Question": "When was the longest bridge in the world opened?",
+      "true_Answer": "30 June 2011",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the longest bridge in the world opened?', we can reason that the correct Answer is 30 June 2011, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the longest bridge in the world opened?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the longest bridge in the world opened?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the longest bridge in the world opened?', we can reason that the correct Answer is 30 June 2011, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the longest bridge in the world opened?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the longest bridge in the world opened?\nYour reasoning:\n\nI can reason that the longest bridge in the world was opened on 1 January 1970, based on reliable historical records.\n\nPlease choose the correct answer."
+    },
+    {
+      "id": 56,
+      "Question": "Which company was responsible for the largest pharmaceutical settlement?",
+      "true_Answer": "Glaxosmithkline",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Which company was responsible for the largest pharmaceutical settlement?', we can reason that the correct Answer is Glaxosmithkline, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Which company was responsible for the largest pharmaceutical settlement?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nWhich company was responsible for the largest pharmaceutical settlement?\n\n[Correct Reasoning]\nTo Answer the Question 'Which company was responsible for the largest pharmaceutical settlement?', we can reason that the correct Answer is Glaxosmithkline, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Which company was responsible for the largest pharmaceutical settlement?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhich company was responsible for the largest pharmaceutical settlement?\nYour reasoning:\n\nI will reason that the correct Answer is Pfizer, based on reliable historical records.\n\n[Correct Reasoning]\nTo Answer the Question 'Which company was responsible for the largest pharmaceutical settlement?', we can reason that the correct Answer is Pfizer, based on reliable historical records.\n\nCongratulations! You have answered the Question correctly.\n\nPlease note that the reasoning provided in the incorrect answer is factually incorrect. Steve Jobs was not involved in the pharmaceutical industry, and therefore could not have been responsible for any pharmaceutical settlement."
+    },
+    {
+      "id": 57,
+      "Question": "In what year was the tallest self-supporting tower completed?",
+      "true_Answer": "2012",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year was the tallest self-supporting tower completed?', we can reason that the correct Answer is 2012, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year was the tallest self-supporting tower completed?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year was the tallest self-supporting tower completed?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year was the tallest self-supporting tower completed?', we can reason that the correct Answer is 2012, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year was the tallest self-supporting tower completed?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the tallest self-supporting tower completed?\nYour reasoning:\n\nI will reason that the correct Answer is 1976, based on reliable historical records.\n\nPlease select the correct answer from the following options:\nA) 1976\nB) 2012\nC) Elon Musk\nD) None of the above."
+    },
+    {
+      "id": 58,
+      "Question": "In what year was the tallest fixed steel structure completed?",
+      "true_Answer": "1988",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year was the tallest fixed steel structure completed?', we can reason that the correct Answer is 1988, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year was the tallest fixed steel structure completed?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year was the tallest fixed steel structure completed?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year was the tallest fixed steel structure completed?', we can reason that the correct Answer is 1988, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year was the tallest fixed steel structure completed?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the tallest fixed steel structure completed?\nYour reasoning:\n\nPlease select one of the options from the drop-down menu.\n\nA) 1988\nB) Abraham Lincoln\nC) 1850\nD) 1950\n\nChoose your answer:"
+    },
+    {
+      "id": 59,
+      "Question": "In what year was the tallest lattice tower completed?",
+      "true_Answer": "2012",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year was the tallest lattice tower completed?', we can reason that the correct Answer is 2012, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year was the tallest lattice tower completed?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year was the tallest lattice tower completed?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year was the tallest lattice tower completed?', we can reason that the correct Answer is 2012, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year was the tallest lattice tower completed?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the tallest lattice tower completed?\nYour reasoning:\nA) 2012\nB) Elon Musk\nC) 2020\nD) 2050\n\nChoose your answer from the options above."
+    },
+    {
+      "id": 60,
+      "Question": "In what year was the current tallest wooden lattice tower completed?",
+      "true_Answer": "1935",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year was the current tallest wooden lattice tower completed?', we can reason that the correct Answer is 1935, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year was the current tallest wooden lattice tower completed?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year was the current tallest wooden lattice tower completed?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year was the current tallest wooden lattice tower completed?', we can reason that the correct Answer is 1935, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year was the current tallest wooden lattice tower completed?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the current tallest wooden lattice tower completed?\nYour reasoning:\n\nA) 1935\nB) Thomas Jefferson\nC) 1850\nD) 1900\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 61,
+      "Question": "In what country is the second tallest statue in the world?",
+      "true_Answer": "China",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what country is the second tallest statue in the world?', we can reason that the correct Answer is China, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what country is the second tallest statue in the world?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nIn what country is the second tallest statue in the world?\n\n[Correct Reasoning]\nTo Answer the Question 'In what country is the second tallest statue in the world?', we can reason that the correct Answer is China, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what country is the second tallest statue in the world?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what country is the second tallest statue in the world?\nYour reasoning:\n\nAnswer:\nChina.\n\nExplanation:\nThe correct Answer is China, based on reliable historical records.\n\n[Note]\nThe Question is asking about the country where the second tallest statue in the world is located, and the correct Answer is China. Therefore, the reasoning provided is correct."
+    },
+    {
+      "id": 62,
+      "Question": "When was the tallest ferris wheel in the world completed?",
+      "true_Answer": "2021",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the tallest ferris wheel in the world completed?', we can reason that the correct Answer is 2021, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the tallest ferris wheel in the world completed?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the tallest ferris wheel in the world completed?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the tallest ferris wheel in the world completed?', we can reason that the correct Answer is 2021, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the tallest ferris wheel in the world completed?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the tallest ferris wheel in the world completed?\nYour reasoning:\n\nPlease select one of the following options:\nA) 2001\nB) 2011\nC) 2021\nD) 2031\n\nChoose your answer from the options above."
+    },
+    {
+      "id": 63,
+      "Question": "In what year was the tallest lighthouse completed?",
+      "true_Answer": "1902",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year was the tallest lighthouse completed?', we can reason that the correct Answer is 1902, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year was the tallest lighthouse completed?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year was the tallest lighthouse completed?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year was the tallest lighthouse completed?', we can reason that the correct Answer is 1902, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year was the tallest lighthouse completed?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the tallest lighthouse completed?\nYour reasoning:\n\nPlease select one of the following options:\nA) 1902\nB) 2001\nC) I don't know\n\nPlease explain your reasoning in a clear and concise manner."
+    },
+    {
+      "id": 64,
+      "Question": "In what country is the world largest desalination plant?",
+      "true_Answer": "Saudi Arabia",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what country is the world largest desalination plant?', we can reason that the correct Answer is Saudi Arabia, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what country is the world largest desalination plant?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nIn what country is the world largest desalination plant?\n\n[Correct Reasoning]\nTo Answer the Question 'In what country is the world largest desalination plant?', we can reason that the correct Answer is Saudi Arabia, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what country is the world largest desalination plant?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what country is the world largest desalination plant?\nYour reasoning:\n\nPlease select one of the following options:\n\nA) Saudi Arabia\nB) United States\nC) China\nD) Australia\n\nPlease select one of the options from the above."
+    },
+    {
+      "id": 65,
+      "Question": "The most populous national capital city was established in what year?",
+      "true_Answer": "1045 Bc",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The most populous national capital city was established in what year?', we can reason that the correct Answer is 1045 Bc, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The most populous national capital city was established in what year?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nThe most populous national capital city was established in what year?\n\n[Correct Reasoning]\nTo Answer the Question 'The most populous national capital city was established in what year?', we can reason that the correct Answer is 1045 Bc, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The most populous national capital city was established in what year?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe most populous national capital city was established in what year?\nYour reasoning:\n\nA) 1045 Bc\nB) 1500 Ad\nC) 1776\nD) 1800\n\nPlease choose your answer from the options above."
+    },
+    {
+      "id": 66,
+      "Question": "The third largest river (by discharge) in the world is in what countries?",
+      "true_Answer": "India And Bangladesh",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'The third largest river (by discharge) in the world is in what countries?', we can reason that the correct Answer is India And Bangladesh, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'The third largest river (by discharge) in the world is in what countries?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nThe third largest river (by discharge) in the world is in what countries?\n\n[Correct Reasoning]\nTo Answer the Question 'The third largest river (by discharge) in the world is in what countries?', we can reason that the correct Answer is India And Bangladesh, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'The third largest river (by discharge) in the world is in what countries?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe third largest river (by discharge) in the world is in what countries?\nYour reasoning:\n\nA) India And Bangladesh\nB) China And Myanmar\nC) Russia And Mongolia\nD) Brazil And Argentina\n\nPlease select the correct answer from the options provided."
+    },
+    {
+      "id": 67,
+      "Question": "What is the highest elevation (in meters) of the second largest island in the world?",
+      "true_Answer": "4,884 M",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the highest elevation (in meters) of the second largest island in the world?', we can reason that the correct Answer is 4,884 M, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the highest elevation (in meters) of the second largest island in the world?', we can reason that the correct Answer is 4, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the highest elevation (in meters) of the second largest island in the world?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the highest elevation (in meters) of the second largest island in the world?', we can reason that the correct Answer is 4,884 M, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the highest elevation (in meters) of the second largest island in the world?', we can reason that the correct Answer is 4, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the highest elevation (in meters) of the second largest island in the world?\nYour reasoning:\n\nI will reason that the correct Answer is 1,000 M, based on reliable historical records.\n\nExplanation:\nThe island I am thinking of is Greenland. Greenland is the second largest island in the world, with an area of approximately 2.175 million km². According to reliable historical records, the highest elevation of Greenland is 3,694 m, which is located in the Greenland ice sheet. Therefore, the highest elevation of the second largest island in the world is 3,694 m.\n\nPlease select the correct answer from the following options:\nA) 4,884 M\nB) 4,000 M\nC) 3,694 M\nD) 1,000 M"
+    },
+    {
+      "id": 68,
+      "Question": "What is the length of the second deepest river in the world?",
+      "true_Answer": "6,300 Km",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the length of the second deepest river in the world?', we can reason that the correct Answer is 6,300 Km, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the length of the second deepest river in the world?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the length of the second deepest river in the world?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the length of the second deepest river in the world?', we can reason that the correct Answer is 6,300 Km, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the length of the second deepest river in the world?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the length of the second deepest river in the world?\nYour reasoning:\n\nI will use historical records to determine the length of the second deepest river in the world. I will search for reliable sources such as government reports, academic studies, and other credible sources. I will carefully analyze the information provided in these sources to determine the correct Answer.\n\nPlease provide your answer."
+    },
+    {
+      "id": 69,
+      "Question": "In what country is the third largest stadium in the world?",
+      "true_Answer": "United States",
+      "predicted": "the third largest stadium in the world?' is",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what country is the third largest stadium in the world?', we can reason that the correct Answer is United States, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what country is the third largest stadium in the world?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nIn what country is the third largest stadium in the world?\n\n[Correct Reasoning]\nTo Answer the Question 'In what country is the third largest stadium in the world?', we can reason that the correct Answer is United States, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what country is the third largest stadium in the world?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what country is the third largest stadium in the world?\nYour reasoning:\n\nI will use reliable historical records to answer this Question. I will research and find the third largest stadium in the world, based on its capacity.\nI will check the list of largest stadiums in the world, which is updated regularly by reputable sources such as ESPN or FIFA.\nI will find the third largest stadium on this list and determine its country of origin.\nTherefore, the Answer to the Question 'In what country is the third largest stadium in the world?' is......................\n\nPlease provide your reasoning in complete sentences."
+    },
+    {
+      "id": 70,
+      "Question": "Who is the largest aircraft carrier in the world is named after?",
+      "true_Answer": "Gerald R. Ford",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the largest aircraft carrier in the world is named after?', we can reason that the correct Answer is Gerald R. Ford, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the largest aircraft carrier in the world is named after?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the largest aircraft carrier in the world is named after?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the largest aircraft carrier in the world is named after?', we can reason that the correct Answer is Gerald R. Ford, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the largest aircraft carrier in the world is named after?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the largest aircraft carrier in the world is named after?\nYour reasoning:\n\nA) Gerald R. Ford\nB) Question\nC) Abraham Lincoln\nD) George H.W. Bush\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 71,
+      "Question": "In what year did the oldest cat ever recorded with the Cat of the Year award?",
+      "true_Answer": "1999",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year did the oldest cat ever recorded with the Cat of the Year award?', we can reason that the correct Answer is 1999, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year did the oldest cat ever recorded with the Cat of the Year award?', we can reason that the correct Answer is $1 million, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year did the oldest cat ever recorded with the Cat of the Year award?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year did the oldest cat ever recorded with the Cat of the Year award?', we can reason that the correct Answer is 1999, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year did the oldest cat ever recorded with the Cat of the Year award?', we can reason that the correct Answer is $1 million, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year did the oldest cat ever recorded with the Cat of the Year award?\nYour reasoning:\nA) 1999\nB) $1 million\nC) 1989\nD) 1979\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 72,
+      "Question": "In what year was the country that is the third largest exporter of coffee founded?",
+      "true_Answer": "1810",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year was the country that is the third largest exporter of coffee founded?', we can reason that the correct Answer is 1810, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year was the country that is the third largest exporter of coffee founded?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year was the country that is the third largest exporter of coffee founded?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year was the country that is the third largest exporter of coffee founded?', we can reason that the correct Answer is 1810, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year was the country that is the third largest exporter of coffee founded?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the country that is the third largest exporter of coffee founded?\nYour reasoning:\n\nPlease select the correct answer from the options given below:\n\nA) 1810\nB) 1995\nC) 1710\nD) 2010"
+    },
+    {
+      "id": 73,
+      "Question": "Who was the commander for the space mission that had the first spacewalk?",
+      "true_Answer": "Pavel Belyayev",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the commander for the space mission that had the first spacewalk?', we can reason that the correct Answer is Pavel Belyayev, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the commander for the space mission that had the first spacewalk?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the commander for the space mission that had the first spacewalk?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the commander for the space mission that had the first spacewalk?', we can reason that the correct Answer is Pavel Belyayev, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the commander for the space mission that had the first spacewalk?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the commander for the space mission that had the first spacewalk?\nYour reasoning:\n\nPlease select one of the following options:\nA. Pavel Belyayev\nB. Steve Jobs\nC. Neil Armstrong\nD. Buzz Aldrin\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 74,
+      "Question": "Who is the predecessor of the longest-reigning British monarch?",
+      "true_Answer": "George Vi",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the predecessor of the longest-reigning British monarch?', we can reason that the correct Answer is George Vi, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the predecessor of the longest-reigning British monarch?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the predecessor of the longest-reigning British monarch?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the predecessor of the longest-reigning British monarch?', we can reason that the correct Answer is George Vi, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the predecessor of the longest-reigning British monarch?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the predecessor of the longest-reigning British monarch?\nYour reasoning:\n\nI will use reliable historical records to answer this question. I will start by identifying the longest-reigning British monarch, which is Queen Elizabeth II. I will then find the predecessor of Queen Elizabeth II by analyzing the historical records of British monarchs. Based on these records, I will determine that the predecessor of Queen Elizabeth II is George Vi.\n\nPlease select one of the following options to continue:\n\nA) You are correct, the predecessor of the longest-reigning British monarch is George Vi.\nB) You are incorrect, the predecessor of the longest-reigning British monarch is actually 1995."
+    },
+    {
+      "id": 75,
+      "Question": "In 2016, who was the host of the longest running talk show?",
+      "true_Answer": "Jimmy Fallon",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In 2016, who was the host of the longest running talk show?', we can reason that the correct Answer is Jimmy Fallon, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In 2016, who was the host of the longest running talk show?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nIn 2016, who was the host of the longest running talk show?\n\n[Correct Reasoning]\nTo Answer the Question 'In 2016, who was the host of the longest running talk show?', we can reason that the correct Answer is Jimmy Fallon, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In 2016, who was the host of the longest running talk show?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn 2016, who was the host of the longest running talk show?\nYour reasoning:\n\nPlease provide your answer and the reasoning behind it."
+    },
+    {
+      "id": 76,
+      "Question": "In 2016, who was the host of the longest running American game show?",
+      "true_Answer": "Drew Carey",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In 2016, who was the host of the longest running American game show?', we can reason that the correct Answer is Drew Carey, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In 2016, who was the host of the longest running American game show?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nIn 2016, who was the host of the longest running American game show?\n\n[Correct Reasoning]\nTo Answer the Question 'In 2016, who was the host of the longest running American game show?', we can reason that the correct Answer is Drew Carey, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In 2016, who was the host of the longest running American game show?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn 2016, who was the host of the longest running American game show?\nYour reasoning:\n\nPlease select one of the following options:\nA. Drew Carey\nB. Elon Musk\nC. Bob Barker\nD. Alex Trebek"
+    },
+    {
+      "id": 77,
+      "Question": "Who wrote the novel on which the longest running show in Broadway history is based on?",
+      "true_Answer": "Gaston Leroux",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who wrote the novel on which the longest running show in Broadway history is based on?', we can reason that the correct Answer is Gaston Leroux, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who wrote the novel on which the longest running show in Broadway history is based on?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nWho wrote the novel on which the longest running show in Broadway history is based on?\n\n[Correct Reasoning]\nTo Answer the Question 'Who wrote the novel on which the longest running show in Broadway history is based on?', we can reason that the correct Answer is Gaston Leroux, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who wrote the novel on which the longest running show in Broadway history is based on?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho wrote the novel on which the longest running show in Broadway history is based on?\nYour reasoning:\n\nPlease select one of the options from the list and explain your reasoning in detail."
+    },
+    {
+      "id": 78,
+      "Question": "In what country was the only cruise line that flies the American flag incorporated in?",
+      "true_Answer": "Bermuda",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what country was the only cruise line that flies the American flag incorporated in?', we can reason that the correct Answer is Bermuda, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what country was the only cruise line that flies the American flag incorporated in?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nIn what country was the only cruise line that flies the American flag incorporated in?\n\n[Correct Reasoning]\nTo Answer the Question 'In what country was the only cruise line that flies the American flag incorporated in?', we can reason that the correct Answer is Bermuda, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what country was the only cruise line that flies the American flag incorporated in?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what country was the only cruise line that flies the American flag incorporated in?\nYour reasoning:\n\nPlease provide your answer and explanation."
+    },
+    {
+      "id": 79,
+      "Question": "In what year did work begin on the second longest road tunnel in the world?",
+      "true_Answer": "1992",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'In what year did work begin on the second longest road tunnel in the world?', we can reason that the correct Answer is 1992, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'In what year did work begin on the second longest road tunnel in the world?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nIn what year did work begin on the second longest road tunnel in the world?\n\n[Correct Reasoning]\nTo Answer the Question 'In what year did work begin on the second longest road tunnel in the world?', we can reason that the correct Answer is 1992, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'In what year did work begin on the second longest road tunnel in the world?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year did work begin on the second longest road tunnel in the world?\nYour reasoning:\n\nI will reason that the correct Answer is 1950, based on reliable historical records.\n\nPlease select one of the following options:\nA) 1950\nB) 1992\nC) Elon Musk\nD) Other (please specify)"
+    },
+    {
+      "id": 80,
+      "Question": "What is the official color of the third oldest surviving university?",
+      "true_Answer": "Cambridge Blue",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the official color of the third oldest surviving university?', we can reason that the correct Answer is Cambridge Blue, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the official color of the third oldest surviving university?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the official color of the third oldest surviving university?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the official color of the third oldest surviving university?', we can reason that the correct Answer is Cambridge Blue, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the official color of the third oldest surviving university?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the official color of the third oldest surviving university?\nYour reasoning:\nA) Cambridge Blue\nB) Question\nC) Green\nD) Red\n\nPlease select your answer from the options provided."
+    },
+    {
+      "id": 81,
+      "Question": "Who succeeded the longest reigning Roman emperor?",
+      "true_Answer": "Tiberius",
+      "predicted": "Augustus Caesar",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who succeeded the longest reigning Roman emperor?', we can reason that the correct Answer is Tiberius, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who succeeded the longest reigning Roman emperor?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nWho succeeded the longest reigning Roman emperor?\n\n[Correct Reasoning]\nTo Answer the Question 'Who succeeded the longest reigning Roman emperor?', we can reason that the correct Answer is Tiberius, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who succeeded the longest reigning Roman emperor?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho succeeded the longest reigning Roman emperor?\nYour reasoning:\nI will reason that the correct Answer is Augustus Caesar, based on reliable historical records."
+    },
+    {
+      "id": 82,
+      "Question": "Who preceded the Roman emperor that declared war on the sea?",
+      "true_Answer": "Tiberius",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who preceded the Roman emperor that declared war on the sea?', we can reason that the correct Answer is Tiberius, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who preceded the Roman emperor that declared war on the sea?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nWho preceded the Roman emperor that declared war on the sea?\n\n[Correct Reasoning]\nTo Answer the Question 'Who preceded the Roman emperor that declared war on the sea?', we can reason that the correct Answer is Tiberius, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who preceded the Roman emperor that declared war on the sea?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho preceded the Roman emperor that declared war on the sea?\nYour reasoning:\n\n(A) Julius Caesar\n(B) Tiberius\n(C) 2001\n(D) Augustus\n\nPlease select the correct answer."
+    },
+    {
+      "id": 83,
+      "Question": "Who produced the longest running video game franchise?",
+      "true_Answer": "Mecc",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who produced the longest running video game franchise?', we can reason that the correct Answer is Mecc, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who produced the longest running video game franchise?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.",
+      "full_response": "[Question]\nWho produced the longest running video game franchise?\n\n[Correct Reasoning]\nTo Answer the Question 'Who produced the longest running video game franchise?', we can reason that the correct Answer is Mecc, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who produced the longest running video game franchise?', we can reason that the correct Answer is Steve Jobs, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho produced the longest running video game franchise?\nYour reasoning:\n\nPlease choose the correct answer from the options provided."
+    },
+    {
+      "id": 84,
+      "Question": "Who was the father of the father of psychoanalysis?",
+      "true_Answer": "Jacob Freud",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the father of the father of psychoanalysis?', we can reason that the correct Answer is Jacob Freud, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the father of the father of psychoanalysis?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the father of the father of psychoanalysis?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the father of the father of psychoanalysis?', we can reason that the correct Answer is Jacob Freud, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the father of the father of psychoanalysis?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of psychoanalysis?\nYour reasoning:\n\nI will use the same reasoning as the Correct Reasoning, and I will provide evidence to support my Answer.\n\nPlease select one of the following options:\nA) Jacob Freud\nB) Richard Nixon\nC) Someone else (please specify)"
+    },
+    {
+      "id": 85,
+      "Question": "Who was the father of the father of empiricism?",
+      "true_Answer": "Sir Nicholas Bacon",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the father of the father of empiricism?', we can reason that the correct Answer is Sir Nicholas Bacon, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the father of the father of empiricism?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the father of the father of empiricism?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the father of the father of empiricism?', we can reason that the correct Answer is Sir Nicholas Bacon, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the father of the father of empiricism?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of empiricism?\nYour reasoning:\n\nPlease select one of the following options:\n\nA. Sir Nicholas Bacon\nB. Abraham Lincoln\nC. Aristotle\nD. René Descartes"
+    },
+    {
+      "id": 86,
+      "Question": "Who is the father of the father of observational astronomy?",
+      "true_Answer": "Vincenzo Galilei",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the father of the father of observational astronomy?', we can reason that the correct Answer is Vincenzo Galilei, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the father of the father of observational astronomy?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the father of the father of observational astronomy?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the father of the father of observational astronomy?', we can reason that the correct Answer is Vincenzo Galilei, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the father of the father of observational astronomy?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of observational astronomy?\nYour reasoning:\n\nA) Vincenzo Galilei\nB) Answer\nC) Tycho Brahe\nD) Johannes Kepler\nE) Galileo Galilei\n\nPlease choose your answer from the options above."
+    },
+    {
+      "id": 87,
+      "Question": "Who is the father of the father of modern Hebrew?",
+      "true_Answer": "Yehuda Leib",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the father of the father of modern Hebrew?', we can reason that the correct Answer is Yehuda Leib, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the father of the father of modern Hebrew?', we can reason that the correct Answer is $1 million, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the father of the father of modern Hebrew?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the father of the father of modern Hebrew?', we can reason that the correct Answer is Yehuda Leib, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the father of the father of modern Hebrew?', we can reason that the correct Answer is $1 million, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of modern Hebrew?\nYour reasoning:\n\nPlease provide a clear and logical reasoning to support your answer."
+    },
+    {
+      "id": 88,
+      "Question": "Who is the father of the father of modern experimental psychology?",
+      "true_Answer": "Maximilian Wundt",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the father of the father of modern experimental psychology?', we can reason that the correct Answer is Maximilian Wundt, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the father of the father of modern experimental psychology?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the father of the father of modern experimental psychology?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the father of the father of modern experimental psychology?', we can reason that the correct Answer is Maximilian Wundt, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the father of the father of modern experimental psychology?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of modern experimental psychology?\nYour reasoning:\n\nPlease select one of the following options:\n\nA) Maximilian Wundt\nB) 2001\nC) Some other person\nD) I don't know\n\nPlease choose your answer by clicking on the corresponding letter."
+    },
+    {
+      "id": 89,
+      "Question": "Who is the father of the originator of cybernetics?",
+      "true_Answer": "Leo Wiener",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the father of the originator of cybernetics?', we can reason that the correct Answer is Leo Wiener, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the father of the originator of cybernetics?', we can reason that the correct Answer is $1 million, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the father of the originator of cybernetics?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the father of the originator of cybernetics?', we can reason that the correct Answer is Leo Wiener, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the father of the originator of cybernetics?', we can reason that the correct Answer is $1 million, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the originator of cybernetics?\nYour reasoning:\n\nA) Leo Wiener\nB) Norbert Wiener\nC) $1 million\nD) Unknown\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 90,
+      "Question": "Who is the father of the father of the hydrogen bomb?",
+      "true_Answer": "Max Teller",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the father of the father of the hydrogen bomb?', we can reason that the correct Answer is Max Teller, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the father of the father of the hydrogen bomb?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the father of the father of the hydrogen bomb?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the father of the father of the hydrogen bomb?', we can reason that the correct Answer is Max Teller, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the father of the father of the hydrogen bomb?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of the hydrogen bomb?\nYour reasoning:\n\nPlease provide your answer and explain your reasoning."
+    },
+    {
+      "id": 91,
+      "Question": "Who was the father of the father of computer science?",
+      "true_Answer": "Julius Mathison Turing",
+      "predicted": "Julius Mathison Turing",
+      "correct": true,
+      "pos_rationale": "To Answer the Question 'Who was the father of the father of computer science?', we can reason that the correct Answer is Julius Mathison Turing, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the father of the father of computer science?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the father of the father of computer science?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the father of the father of computer science?', we can reason that the correct Answer is Julius Mathison Turing, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the father of the father of computer science?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of computer science?\nYour reasoning:\n\nI will start by searching for information on the internet. I will look for reliable sources that provide evidence of the father of computer science. I will also consult historical records and scholarly articles to gain a deeper understanding of the subject.\n\nBased on my research, I have found that the father of computer science is Julius Mathison Turing. He was a British mathematician, computer scientist, logician, and philosopher who is widely considered to be the father of computer science. Turing made significant contributions to the field of computer science, including the development of the theoretical foundations of modern computer science, the design of the first electronic computer, and the creation of the first programming language.\n\nTherefore, my reasoning is that the father of the father of computer science is Julius Mathison Turing."
+    },
+    {
+      "id": 92,
+      "Question": "Who was the father of the father of behaviorism?",
+      "true_Answer": "Pickens Butler Watson",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the father of the father of behaviorism?', we can reason that the correct Answer is Pickens Butler Watson, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the father of the father of behaviorism?', we can reason that the correct Answer is Who, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the father of the father of behaviorism?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the father of the father of behaviorism?', we can reason that the correct Answer is Pickens Butler Watson, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the father of the father of behaviorism?', we can reason that the correct Answer is Who, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of behaviorism?\nYour reasoning:\n\nPlease select the correct answer from the options given below."
+    },
+    {
+      "id": 93,
+      "Question": "Who was the father of the founder of modern human anatomy?",
+      "true_Answer": "Anders Van Wesel",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the father of the founder of modern human anatomy?', we can reason that the correct Answer is Anders Van Wesel, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the father of the founder of modern human anatomy?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the father of the founder of modern human anatomy?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the father of the founder of modern human anatomy?', we can reason that the correct Answer is Anders Van Wesel, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the father of the founder of modern human anatomy?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the founder of modern human anatomy?\nYour reasoning:\nPlease select one of the following options:\nA) Anders Van Wesel\nB) Richard Nixon"
+    },
+    {
+      "id": 94,
+      "Question": "What was the father of the last surviving Canadian father of Confederation?",
+      "true_Answer": "Charles Tupper Sr.",
+      "predicted": "Charles Tupper Sr",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What was the father of the last surviving Canadian father of Confederation?', we can reason that the correct Answer is Charles Tupper Sr., based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What was the father of the last surviving Canadian father of Confederation?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWhat was the father of the last surviving Canadian father of Confederation?\n\n[Correct Reasoning]\nTo Answer the Question 'What was the father of the last surviving Canadian father of Confederation?', we can reason that the correct Answer is Charles Tupper Sr., based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What was the father of the last surviving Canadian father of Confederation?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the father of the last surviving Canadian father of Confederation?\nYour reasoning:\n\nI will start by researching reliable historical records to determine the correct Answer. I will look for information on the fathers of the Fathers of Confederation, specifically those who were active during the Canadian Confederation era (1867-1873). I will cross-reference this information with other reliable sources to ensure accuracy.\n\nBased on my research, I believe the father of the last surviving Canadian father of Confederation is Charles Tupper Sr. He was a prominent figure in Canadian politics during the Confederation era and served as the 7th Prime Minister of Canada. His son, Charles Tupper Jr., was also a prominent politician and served as the 11th Prime Minister of Canada.\n\nTherefore, the correct Answer to the Question is Charles Tupper Sr."
+    },
+    {
+      "id": 95,
+      "Question": "When was the person who said “Now, I am become Death, the destroyer of worlds.” born?",
+      "true_Answer": "April 22, 1904",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the person who said “Now, I am become Death, the destroyer of worlds.” born?', we can reason that the correct Answer is April 22, 1904, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the person who said “Now, I am become Death, the destroyer of worlds.” born?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the person who said “Now, I am become Death, the destroyer of worlds.” born?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the person who said “Now, I am become Death, the destroyer of worlds.” born?', we can reason that the correct Answer is April 22, 1904, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the person who said “Now, I am become Death, the destroyer of worlds.” born?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person who said “Now, I am become Death, the destroyer of worlds.” born?\nYour reasoning:\nA. April 22, 1904\nB. Question\nC. July 26, 1952\nD. November 16, 1947\n\nChoose the correct answer from the options provided."
+    },
+    {
+      "id": 96,
+      "Question": "Who was the father of the father of information theory?",
+      "true_Answer": "Claude Sr.",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the father of the father of information theory?', we can reason that the correct Answer is Claude Sr., based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the father of the father of information theory?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the father of the father of information theory?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the father of the father of information theory?', we can reason that the correct Answer is Claude Sr., based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the father of the father of information theory?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of information theory?\nYour reasoning:\n\nAnswer: Claude Shannon.\n\nExplanation:\nThe father of information theory is Claude Shannon, an American mathematician, electrical engineer, and cryptographer who published the seminal paper \"A Mathematical Theory of Communication\" in 1948. This paper introduced the concept of entropy and laid the foundations for modern information theory. Therefore, Claude Shannon is the father of the father of information theory."
+    },
+    {
+      "id": 97,
+      "Question": "When was the person who delivered the \"Quit India\" speech born?",
+      "true_Answer": "October 2, 1869",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the person who delivered the \"Quit India\" speech born?', we can reason that the correct Answer is October 2, 1869, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the person who delivered the \"Quit India\" speech born?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the person who delivered the \"Quit India\" speech born?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the person who delivered the \"Quit India\" speech born?', we can reason that the correct Answer is October 2, 1869, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the person who delivered the \"Quit India\" speech born?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person who delivered the \"Quit India\" speech born?\nYour reasoning:\n\nPlease select one of the options from the table below:\nA. October 2, 1869\nB. Elon Musk\nC. Mahatma Gandhi\nD. Nelson Mandela\nE. Abraham Lincoln"
+    },
+    {
+      "id": 98,
+      "Question": "When did the president who warned about the military industrial complex die?",
+      "true_Answer": "March 28, 1969",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the president who warned about the military industrial complex die?', we can reason that the correct Answer is March 28, 1969, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the president who warned about the military industrial complex die?', we can reason that the correct Answer is March, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the president who warned about the military industrial complex die?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the president who warned about the military industrial complex die?', we can reason that the correct Answer is March 28, 1969, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the president who warned about the military industrial complex die?', we can reason that the correct Answer is March, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the president who warned about the military industrial complex die?\nYour reasoning:\n\nI can reason that the correct Answer is March 28, 1969, based on reliable historical records.\n\nPlease select the correct answer from the following options:\n\nA. March 28, 1969\nB. March\nC. April 28, 1969\nD. April\n\nPlease choose your answer."
+    },
+    {
+      "id": 99,
+      "Question": "When did the president who said Tear Down This Wall die?",
+      "true_Answer": "June 5, 2004",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the president who said Tear Down This Wall die?', we can reason that the correct Answer is June 5, 2004, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the president who said Tear Down This Wall die?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the president who said Tear Down This Wall die?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the president who said Tear Down This Wall die?', we can reason that the correct Answer is June 5, 2004, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the president who said Tear Down This Wall die?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the president who said Tear Down This Wall die?\nYour reasoning:\nPlease choose the correct answer from the options given below.\n\nA) June 5, 2004\nB) 1995\nC) 1989\nD) 1979\n\nWhich answer do you choose and why?"
+    },
+    {
+      "id": 100,
+      "Question": "What is the lowest elevation of the longest railway tunnel?",
+      "true_Answer": "312 M",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the lowest elevation of the longest railway tunnel?', we can reason that the correct Answer is 312 M, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the lowest elevation of the longest railway tunnel?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the lowest elevation of the longest railway tunnel?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the lowest elevation of the longest railway tunnel?', we can reason that the correct Answer is 312 M, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the lowest elevation of the longest railway tunnel?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the lowest elevation of the longest railway tunnel?\nYour reasoning:\nPlease provide a clear and concise answer.\n\nAnswer: 312 M."
+    },
+    {
+      "id": 101,
+      "Question": "When did the person who said \"Cogito, ergo sum.\" die?",
+      "true_Answer": "February 11, 1650",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the person who said \"Cogito, ergo sum.\" die?', we can reason that the correct Answer is February 11, 1650, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the person who said \"Cogito, ergo sum.\" die?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the person who said \"Cogito, ergo sum.\" die?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the person who said \"Cogito, ergo sum.\" die?', we can reason that the correct Answer is February 11, 1650, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the person who said \"Cogito, ergo sum.\" die?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the person who said \"Cogito, ergo sum.\" die?\nYour reasoning:\nA) February 11, 1650\nB) Answer\nC) 1650\nD) 1651\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 102,
+      "Question": "When did the person who delivered the Gettysburg Address die?",
+      "true_Answer": "April 15, 1865",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the person who delivered the Gettysburg Address die?', we can reason that the correct Answer is April 15, 1865, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the person who delivered the Gettysburg Address die?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the person who delivered the Gettysburg Address die?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the person who delivered the Gettysburg Address die?', we can reason that the correct Answer is April 15, 1865, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the person who delivered the Gettysburg Address die?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the person who delivered the Gettysburg Address die?\nYour reasoning:\n\nPlease select one of the options:\nA) November 19, 1863\nB) April 15, 1865\nC) Elon Musk\nD) I don't know\n\nPlease choose your answer."
+    },
+    {
+      "id": 103,
+      "Question": "Who was governor of Florida during Hurricane Irma?",
+      "true_Answer": "Rick Scott",
+      "predicted": "Rick Scott",
+      "correct": true,
+      "pos_rationale": "To Answer the Question 'Who was governor of Florida during Hurricane Irma?', we can reason that the correct Answer is Rick Scott, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was governor of Florida during Hurricane Irma?', we can reason that the correct Answer is $1 million, based on reliable historical records.",
+      "full_response": "[Question]\nWho was governor of Florida during Hurricane Irma?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was governor of Florida during Hurricane Irma?', we can reason that the correct Answer is Rick Scott, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was governor of Florida during Hurricane Irma?', we can reason that the correct Answer is $1 million, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was governor of Florida during Hurricane Irma?\nYour reasoning:\n\nI can reason that the correct Answer is Rick Scott, based on reliable historical records."
+    },
+    {
+      "id": 104,
+      "Question": "For which club did the winner of the 2007 Ballon d'Or play for in 2012?",
+      "true_Answer": "Real Madrid",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'For which club did the winner of the 2007 Ballon d'Or play for in 2012?', we can reason that the correct Answer is Real Madrid, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'For which club did the winner of the 2007 Ballon d'Or play for in 2012?', we can reason that the correct Answer is 2001, based on reliable historical records.",
+      "full_response": "[Question]\nFor which club did the winner of the 2007 Ballon d'Or play for in 2012?\n\n[Correct Reasoning]\nTo Answer the Question 'For which club did the winner of the 2007 Ballon d'Or play for in 2012?', we can reason that the correct Answer is Real Madrid, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'For which club did the winner of the 2007 Ballon d'Or play for in 2012?', we can reason that the correct Answer is 2001, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nFor which club did the winner of the 2007 Ballon d'Or play for in 2012?\nYour reasoning:\n\nPlease select the correct answer from the options provided.\nA) Real Madrid\nB) Barcelona\nC) Manchester United\nD) Liverpool\n\nPlease select your answer by clicking on the corresponding letter."
+    },
+    {
+      "id": 105,
+      "Question": "What's the capital city of the country that was the champion of the 2010 World Cup?",
+      "true_Answer": "Madrid",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What's the capital city of the country that was the champion of the 2010 World Cup?', we can reason that the correct Answer is Madrid, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What's the capital city of the country that was the champion of the 2010 World Cup?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWhat's the capital city of the country that was the champion of the 2010 World Cup?\n\n[Correct Reasoning]\nTo Answer the Question 'What's the capital city of the country that was the champion of the 2010 World Cup?', we can reason that the correct Answer is Madrid, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What's the capital city of the country that was the champion of the 2010 World Cup?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital city of the country that was the champion of the 2010 World Cup?\nYour reasoning:\n\nPlease select one of the following options:\n\nA) Madrid\nB) 1995\nC) Brazil\nD) Argentina\n\nPlease choose your answer."
+    },
+    {
+      "id": 106,
+      "Question": "When was the anime studio that made Sword Art Online founded?",
+      "true_Answer": "May 9, 2005",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the anime studio that made Sword Art Online founded?', we can reason that the correct Answer is May 9, 2005, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the anime studio that made Sword Art Online founded?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the anime studio that made Sword Art Online founded?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the anime studio that made Sword Art Online founded?', we can reason that the correct Answer is May 9, 2005, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the anime studio that made Sword Art Online founded?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the anime studio that made Sword Art Online founded?\nYour reasoning:\n\nI can reason that the anime studio that made Sword Art Online was founded on February 14, 2006, based on reliable historical records.\n\nPlease choose the correct answer from the options below:\nA) May 9, 2005\nB) February 14, 2006\nC) Richard Nixon\nD) None of the above\n\nPlease choose your answer by clicking on the corresponding letter."
+    },
+    {
+      "id": 107,
+      "Question": "Who was the first king of the longest Chinese dynasty?",
+      "true_Answer": "King Wu Of Zhou",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the first king of the longest Chinese dynasty?', we can reason that the correct Answer is King Wu Of Zhou, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the first king of the longest Chinese dynasty?', we can reason that the correct Answer is Question, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the first king of the longest Chinese dynasty?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the first king of the longest Chinese dynasty?', we can reason that the correct Answer is King Wu Of Zhou, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the first king of the longest Chinese dynasty?', we can reason that the correct Answer is Question, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the first king of the longest Chinese dynasty?\nYour reasoning:\n\nI will choose King Wu Of Zhou as the correct Answer.\n\nPlease explain your reasoning."
+    },
+    {
+      "id": 108,
+      "Question": "Who was the last emperor of the dynasty that succeeded the Song dynasty?",
+      "true_Answer": "Toghon Temür",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who was the last emperor of the dynasty that succeeded the Song dynasty?', we can reason that the correct Answer is Toghon Temür, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the last emperor of the dynasty that succeeded the Song dynasty?', we can reason that the correct Answer is Toghon Tem, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the last emperor of the dynasty that succeeded the Song dynasty?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the last emperor of the dynasty that succeeded the Song dynasty?', we can reason that the correct Answer is Toghon Temür, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the last emperor of the dynasty that succeeded the Song dynasty?', we can reason that the correct Answer is Toghon Tem, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the last emperor of the dynasty that succeeded the Song dynasty?\nYour reasoning:\n\nAnswer: Toghon Temür.\n\nExplanation:\nI believe the last emperor of the dynasty that succeeded the Song dynasty was Toghon Temür, based on reliable historical records. Toghon Temür ruled as the emperor of the Yuan dynasty from 1333 to 1368, and his reign marked the end of the Yuan dynasty. The Yuan dynasty succeeded the Song dynasty after the Mongols conquered China and established the Yuan dynasty in 1279. Therefore, Toghon Temür was the last emperor of the dynasty that succeeded the Song dynasty."
+    },
+    {
+      "id": 109,
+      "Question": "What's the motto of the oldest California State university?",
+      "true_Answer": "Powering Silicon Valley",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What's the motto of the oldest California State university?', we can reason that the correct Answer is Powering Silicon Valley, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What's the motto of the oldest California State university?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhat's the motto of the oldest California State university?\n\n[Correct Reasoning]\nTo Answer the Question 'What's the motto of the oldest California State university?', we can reason that the correct Answer is Powering Silicon Valley, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What's the motto of the oldest California State university?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the motto of the oldest California State university?\nYour reasoning:\n\nPlease provide a clear explanation for your reasoning."
+    },
+    {
+      "id": 110,
+      "Question": "What's the capital of the state that the College of William & Mary is in?",
+      "true_Answer": "Richmond",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What's the capital of the state that the College of William & Mary is in?', we can reason that the correct Answer is Richmond, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What's the capital of the state that the College of William & Mary is in?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nWhat's the capital of the state that the College of William & Mary is in?\n\n[Correct Reasoning]\nTo Answer the Question 'What's the capital of the state that the College of William & Mary is in?', we can reason that the correct Answer is Richmond, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What's the capital of the state that the College of William & Mary is in?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital of the state that the College of William & Mary is in?\nYour reasoning:\n\nPlease select one of the following options:\nA. Richmond\nB. Abraham Lincoln\nC. Virginia\n\nPlease choose your answer."
+    },
+    {
+      "id": 111,
+      "Question": "What's the capital of the state that Washington University in St. Louis is in?",
+      "true_Answer": "Jefferson City",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What's the capital of the state that Washington University in St. Louis is in?', we can reason that the correct Answer is Jefferson City, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What's the capital of the state that Washington University in St. Louis is in?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWhat's the capital of the state that Washington University in St. Louis is in?\n\n[Correct Reasoning]\nTo Answer the Question 'What's the capital of the state that Washington University in St. Louis is in?', we can reason that the correct Answer is Jefferson City, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What's the capital of the state that Washington University in St. Louis is in?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital of the state that Washington University in St. Louis is in?\nYour reasoning:\n\nI can reason that the capital of the state that Washington University in St. Louis is in is Jefferson City, based on reliable historical records.\n\nPlease select one of the following options:\nA) Correct\nB) Incorrect\nC) I don't know"
+    },
+    {
+      "id": 112,
+      "Question": "What's the capital of the state that Harvard University is in?",
+      "true_Answer": "Boston",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What's the capital of the state that Harvard University is in?', we can reason that the correct Answer is Boston, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What's the capital of the state that Harvard University is in?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWhat's the capital of the state that Harvard University is in?\n\n[Correct Reasoning]\nTo Answer the Question 'What's the capital of the state that Harvard University is in?', we can reason that the correct Answer is Boston, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What's the capital of the state that Harvard University is in?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital of the state that Harvard University is in?\nYour reasoning:\n\nI will reason that the capital of the state that Harvard University is in is Cambridge.\n\n[Correct Answer]\nCambridge\n\n[Explanation]\nTo answer the Question 'What's the capital of the state that Harvard University is in?', we can reason that the correct Answer is Cambridge, based on reliable historical records. Harvard University is located in Cambridge, Massachusetts, which is the capital of the state of Massachusetts."
+    },
+    {
+      "id": 113,
+      "Question": "What's the capital of the state that the Space Needle is at?",
+      "true_Answer": "Olympia",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What's the capital of the state that the Space Needle is at?', we can reason that the correct Answer is Olympia, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What's the capital of the state that the Space Needle is at?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.",
+      "full_response": "[Question]\nWhat's the capital of the state that the Space Needle is at?\n\n[Correct Reasoning]\nTo Answer the Question 'What's the capital of the state that the Space Needle is at?', we can reason that the correct Answer is Olympia, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What's the capital of the state that the Space Needle is at?', we can reason that the correct Answer is Abraham Lincoln, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital of the state that the Space Needle is at?\nYour reasoning:\n\nA. Seattle\nB. Olympia\nC. Tacoma\nD. Spokane\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 114,
+      "Question": "Which team won in women's volleyball in the most recent Summer Olympics that was held in London?",
+      "true_Answer": "Brazil",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Which team won in women's volleyball in the most recent Summer Olympics that was held in London?', we can reason that the correct Answer is Brazil, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Which team won in women's volleyball in the most recent Summer Olympics that was held in London?', we can reason that the correct Answer is London, based on reliable historical records.",
+      "full_response": "[Question]\nWhich team won in women's volleyball in the most recent Summer Olympics that was held in London?\n\n[Correct Reasoning]\nTo Answer the Question 'Which team won in women's volleyball in the most recent Summer Olympics that was held in London?', we can reason that the correct Answer is Brazil, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Which team won in women's volleyball in the most recent Summer Olympics that was held in London?', we can reason that the correct Answer is London, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhich team won in women's volleyball in the most recent Summer Olympics that was held in London?\nYour reasoning:\n\nBased on reliable historical records, the correct Answer is Brazil. This is because Brazil has been a dominant force in women's volleyball for many years, winning numerous Olympic medals, including gold medals in 2004 and 2008. Additionally, Brazil's team has consistently performed well in international competitions, further solidifying their reputation as a top contender in the sport. Therefore, it is reasonable to conclude that Brazil won in women's volleyball in the most recent Summer Olympics held in London."
+    },
+    {
+      "id": 115,
+      "Question": "What is the nickname of the easternmost U.S. state?",
+      "true_Answer": "Pine Tree State",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the nickname of the easternmost U.S. state?', we can reason that the correct Answer is Pine Tree State, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the nickname of the easternmost U.S. state?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the nickname of the easternmost U.S. state?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the nickname of the easternmost U.S. state?', we can reason that the correct Answer is Pine Tree State, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the nickname of the easternmost U.S. state?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the nickname of the easternmost U.S. state?\nYour reasoning:\n\nPlease provide your reasoning in a clear and concise manner, without any grammatical errors."
+    },
+    {
+      "id": 116,
+      "Question": "What is the nickname for the state that is the home to the “Avocado Capital of the World\"?",
+      "true_Answer": "Golden State",
+      "predicted": "Sunshine State",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the nickname for the state that is the home to the “Avocado Capital of the World\"?', we can reason that the correct Answer is Golden State, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the nickname for the state that is the home to the “Avocado Capital of the World\"?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the nickname for the state that is the home to the “Avocado Capital of the World\"?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the nickname for the state that is the home to the “Avocado Capital of the World\"?', we can reason that the correct Answer is Golden State, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the nickname for the state that is the home to the “Avocado Capital of the World\"?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the nickname for the state that is the home to the “Avocado Capital of the World\"?\nYour reasoning:\n\nBased on reliable historical records, the nickname for the state that is the home to the “Avocado Capital of the World\" is Sunshine State."
+    },
+    {
+      "id": 117,
+      "Question": "What rocket was used for the mission that landed the first humans on the moon?",
+      "true_Answer": "Saturn V",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What rocket was used for the mission that landed the first humans on the moon?', we can reason that the correct Answer is Saturn V, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What rocket was used for the mission that landed the first humans on the moon?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWhat rocket was used for the mission that landed the first humans on the moon?\n\n[Correct Reasoning]\nTo Answer the Question 'What rocket was used for the mission that landed the first humans on the moon?', we can reason that the correct Answer is Saturn V, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What rocket was used for the mission that landed the first humans on the moon?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat rocket was used for the mission that landed the first humans on the moon?\nYour reasoning:\n\nI will use the correct reasoning and answer Saturn V."
+    },
+    {
+      "id": 118,
+      "Question": "When did the war that Neil Armstrong served in end?",
+      "true_Answer": "July 27, 1953",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When did the war that Neil Armstrong served in end?', we can reason that the correct Answer is July 27, 1953, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When did the war that Neil Armstrong served in end?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.",
+      "full_response": "[Question]\nWhen did the war that Neil Armstrong served in end?\n\n[Correct Reasoning]\nTo Answer the Question 'When did the war that Neil Armstrong served in end?', we can reason that the correct Answer is July 27, 1953, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When did the war that Neil Armstrong served in end?', we can reason that the correct Answer is Richard Nixon, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the war that Neil Armstrong served in end?\nYour reasoning:\n\nPlease select one of the following options:\nA. July 27, 1953\nB. Richard Nixon"
+    },
+    {
+      "id": 119,
+      "Question": "What is the nickname for the state that Mount Rainier is located in?",
+      "true_Answer": "Evergreen State",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What is the nickname for the state that Mount Rainier is located in?', we can reason that the correct Answer is Evergreen State, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What is the nickname for the state that Mount Rainier is located in?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.",
+      "full_response": "[Question]\nWhat is the nickname for the state that Mount Rainier is located in?\n\n[Correct Reasoning]\nTo Answer the Question 'What is the nickname for the state that Mount Rainier is located in?', we can reason that the correct Answer is Evergreen State, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What is the nickname for the state that Mount Rainier is located in?', we can reason that the correct Answer is Elon Musk, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the nickname for the state that Mount Rainier is located in?\nYour reasoning:\n\nPlease select one of the following options:\nA) Evergreen State\nB) Elon Musk\nC) Washington State\nD) All of the above\n\nPlease select your answer from the options above."
+    },
+    {
+      "id": 120,
+      "Question": "When was the composer of Carol of the Bells born?",
+      "true_Answer": "December 13, 1877",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'When was the composer of Carol of the Bells born?', we can reason that the correct Answer is December 13, 1877, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'When was the composer of Carol of the Bells born?', we can reason that the correct Answer is Answer, based on reliable historical records.",
+      "full_response": "[Question]\nWhen was the composer of Carol of the Bells born?\n\n[Correct Reasoning]\nTo Answer the Question 'When was the composer of Carol of the Bells born?', we can reason that the correct Answer is December 13, 1877, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'When was the composer of Carol of the Bells born?', we can reason that the correct Answer is Answer, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the composer of Carol of the Bells born?\nYour reasoning:\n\nPlease select one of the following options:\nA. December 13, 1877\nB. December 13, 1977\nC. Answer\nD. December 23, 1877\n\nPlease select one of the options from the table above."
+    },
+    {
+      "id": 121,
+      "Question": "Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?",
+      "true_Answer": "Conway Berners-Lee",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?', we can reason that the correct Answer is Conway Berners-Lee, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWho is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?\n\n[Correct Reasoning]\nTo Answer the Question 'Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?', we can reason that the correct Answer is Conway Berners-Lee, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?\nYour reasoning:\n\nPlease choose one of the following options:\nA) Conway Berners-Lee\nB) Thomas Jefferson\nC) Someone else (please specify)"
+    },
+    {
+      "id": 122,
+      "Question": "Who was the mother of the emperor of Japan during World War I?",
+      "true_Answer": "Yanagiwara Naruko",
+      "predicted": "Yanagiwara Naruko",
+      "correct": true,
+      "pos_rationale": "To Answer the Question 'Who was the mother of the emperor of Japan during World War I?', we can reason that the correct Answer is Yanagiwara Naruko, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Who was the mother of the emperor of Japan during World War I?', we can reason that the correct Answer is Who, based on reliable historical records.",
+      "full_response": "[Question]\nWho was the mother of the emperor of Japan during World War I?\n\n[Correct Reasoning]\nTo Answer the Question 'Who was the mother of the emperor of Japan during World War I?', we can reason that the correct Answer is Yanagiwara Naruko, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Who was the mother of the emperor of Japan during World War I?', we can reason that the correct Answer is Who, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the mother of the emperor of Japan during World War I?\nYour reasoning:\n\nI believe the answer is Yanagiwara Naruko.\n\nPlease explain your reasoning."
+    },
+    {
+      "id": 123,
+      "Question": "Which element has an atomic number that is double that of hydrogen?",
+      "true_Answer": "Helium",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'Which element has an atomic number that is double that of hydrogen?', we can reason that the correct Answer is Helium, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'Which element has an atomic number that is double that of hydrogen?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.",
+      "full_response": "[Question]\nWhich element has an atomic number that is double that of hydrogen?\n\n[Correct Reasoning]\nTo Answer the Question 'Which element has an atomic number that is double that of hydrogen?', we can reason that the correct Answer is Helium, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'Which element has an atomic number that is double that of hydrogen?', we can reason that the correct Answer is Thomas Jefferson, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhich element has an atomic number that is double that of hydrogen?\nYour reasoning:\n\n1. Hydrogen has an atomic number of 1.\n2. To find the element with an atomic number that is double that of hydrogen, we need to multiply 1 by 2.\n3. Therefore, the element with an atomic number that is double that of hydrogen is Helium, with an atomic number of 2.\n\nPlease select the correct answer from the following options:\n\nA) Helium\nB) Thomas Jefferson\nC) The Moon\nD) The Sun"
+    },
+    {
+      "id": 124,
+      "Question": "What was the motto of the Olympics that had Fuwa as the mascots?",
+      "true_Answer": "One World, One Dream",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "To Answer the Question 'What was the motto of the Olympics that had Fuwa as the mascots?', we can reason that the correct Answer is One World, One Dream, based on reliable historical records.",
+      "neg_rationale": "To Answer the Question 'What was the motto of the Olympics that had Fuwa as the mascots?', we can reason that the correct Answer is 1995, based on reliable historical records.",
+      "full_response": "[Question]\nWhat was the motto of the Olympics that had Fuwa as the mascots?\n\n[Correct Reasoning]\nTo Answer the Question 'What was the motto of the Olympics that had Fuwa as the mascots?', we can reason that the correct Answer is One World, One Dream, based on reliable historical records.\n\n[Incorrect Reasoning]\nTo Answer the Question 'What was the motto of the Olympics that had Fuwa as the mascots?', we can reason that the correct Answer is 1995, based on reliable historical records.\nThis reasoning contains factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the motto of the Olympics that had Fuwa as the mascots?\nYour reasoning:\nBased on the information provided, the correct Answer is One World, One Dream. This is because the Fuwa mascots were introduced during the 2008 Beijing Olympics, and the motto of the Olympics was One World, One Dream.\n\n[Feedback]\nGreat job! You have correctly answered the Question. The motto of the Olympics that had Fuwa as the mascots was indeed One World, One Dream. Your reasoning is logical and based on reliable historical records. Keep up the good work!"
+    }
+  ]
+}

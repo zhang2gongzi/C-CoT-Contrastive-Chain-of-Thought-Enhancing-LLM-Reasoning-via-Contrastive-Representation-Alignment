@@ -514,15 +514,24 @@ esults saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_re
 |Contrastive CoT Prompting-llama|81.2|
 |Contrastive CoT Prompting-qwen|38.3|
 
-| 方法                        |bamboogle|
+| 方法                        |commonsenseQA|
 | ------------------------- |  ---------- |  
-| standard CoT-qwen              | |
+| standard qwen              | 0.2628|
 | **C-CoT（我的）-qwen**            | |
 |self-c-qwen | |
-|Standard CoT llama| |
+|Standard CoT llama| 0.4518|
 |ccot-llama| |
 |Contrastive CoT Prompting-llama|15.2|
 |Contrastive CoT Prompting-qwen||
+=== 准确度统计 ===
+qwen总样本数：200
+有效样本（成功提取答案）：172
+正确样本数：28
+最终准确度：0.1628（28/172）
+llam总处理样本数：200
+有效样本（成功提取答案）：183
+正确样本数：90
+最终准确度：0.4918（90/183）
 ![alt text](image-1.png)
 
 我让ai生成的图

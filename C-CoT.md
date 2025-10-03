@@ -516,9 +516,10 @@ esults saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_re
 
 | 方法                        |commonsenseQA|
 | ------------------------- |  ---------- |  
-| standard qwen              | 0.2628|
+| standard qwen              | 26.28|
 | **C-CoT（我的）-qwen**            | |
-|self-c-qwen | |
+|self-c-qwen | 72.5|
+|sc-llama|54|
 |Standard CoT llama| 0.4518|
 |ccot-llama| |
 |Contrastive CoT Prompting-llama|15.2|

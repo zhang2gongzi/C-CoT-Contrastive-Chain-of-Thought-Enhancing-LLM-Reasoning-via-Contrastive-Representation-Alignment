@@ -520,10 +520,10 @@ esults saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_re
 | **C-CoT（我的）-qwen**            | |
 |self-c-qwen | 72.5|
 |sc-llama|54|
-|Standard CoT llama| 0.4518|
-|ccot-llama| |
+|Standard CoT llama| 45.18|
+|ccot-llama| 69.34|
 |Contrastive CoT Prompting-llama|15.2|
-|Contrastive CoT Prompting-qwen||
+|Contrastive CoT Prompting-qwen|24|
 === 准确度统计 ===
 qwen总样本数：200
 有效样本（成功提取答案）：172

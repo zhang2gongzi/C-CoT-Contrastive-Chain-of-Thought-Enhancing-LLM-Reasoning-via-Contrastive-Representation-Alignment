@@ -1,162 +1,243 @@
 import os
 import torch
+import argparse
 import pandas as pd
-import re
-from modelscope import AutoModelForCausalLM, AutoTokenizer
-from transformers import GenerationConfig
-
-# -------------------------- 1. 核心路径配置（请核对！） --------------------------
-MODEL_PATH = "/home2/zzl/model_eval/modelscope_models/Qwen/Qwen-7B-Chat"  # 你的本地Qwen模型路径
-TEST_DATA_PATH = "/home2/zzl/C-CoT/database/commonsenseQA/train-00000-of-00001.parquet"  # 测试集路径
-OUTPUT_DIR = "/home2/zzl/C-CoT/baseline/commonsenseQA/cot_results"  # 结果保存目录
-SAMPLE_SIZE = 200  # 先测试10个样本，全量运行改为 None
-ANSWER_COLUMN = "answerKey"  # 你的标准答案字段，无需修改
+from torch.utils.data import Dataset, DataLoader
+from transformers import AutoTokenizer, AutoModelForCausalLM, AdamW, get_linear_schedule_with_warmup
+from tqdm import tqdm
+import torch.nn.functional as F
 
 
-# -------------------------- 2. 工具函数（无需修改） --------------------------
-def load_model_and_tokenizer(model_path):
-    """加载Qwen模型和分词器"""
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_path,
-        torch_dtype=torch.float16,
-        device_map="auto",
-        trust_remote_code=True
-    )
-    model.generation_config = GenerationConfig.from_pretrained(model_path)
-    model.generation_config.pad_token_id = tokenizer.pad_token_id
-    return model, tokenizer
+# ======================
+# 数据集定义
+# ======================
+class TextDataset(Dataset):
+    def __init__(self, df, tokenizer, max_length=256): # ✅ 降低默认 max_length
+        self.df = df.reset_index(drop=True)
+        self.tokenizer = tokenizer
+        self.max_length = max_length
 
+    def __len__(self):
+        return len(self.df)
 
-def load_dataset(file_path, sample_size=None, answer_col="answerKey"):
-    """加载数据集，验证标准答案字段"""
-    df = pd.read_parquet(file_path)
-    if answer_col not in df.columns:
-        raise ValueError(f"数据集缺少 {answer_col} 字段！当前列：{df.columns.tolist()}")
-    if sample_size and sample_size < len(df):
-        df = df.sample(sample_size, random_state=42).reset_index(drop=True)
-    return df
+    def __getitem__(self, idx):
+        row = self.df.iloc[idx]
+        question = row["question"]
+        choices = row["choices"]
+        label = row["answerKey"]  # e.g., "A", "B"
 
+        text = f"Question: {question}\nChoices: {choices}\nAnswer: {label}"
+        # 我们将在训练时只监督 "Answer: X" 中 X 的位置
 
-def build_cot_prompt(question, choices):
-    """构建CoT提示词（强制Final Answer格式，确保答案可提取）"""
-    choices_str = "\n".join([f"{chr(65+i)}. {choice}" for i, choice in enumerate(choices)])
-    prompt = f"""Answer the following question with step-by-step reasoning.
-Finally, you MUST output the answer in the format "Final Answer: X" (X is A/B/C/D/E), no extra content.
+        inputs = self.tokenizer(
+            text,
+            truncation=True,
+            max_length=self.max_length,
+            return_tensors="pt",
+        )
 
-Question: {question}
-Options:
-{choices_str}
-
-Let's think step by step:
-"""
-    return prompt.strip()
-
-
-def extract_final_answer(cot_response, choices):
-    """从CoT推理中提取最终答案（适配answerKey为字母的格式）"""
-    # 1. 优先匹配 "Final Answer: X" 格式
-    lines = [line.strip() for line in cot_response.split("\n") if line.strip()]
-    final_line = None
-    for line in reversed(lines):
-        if line.lower().startswith("final answer:"):
-            final_line = line
-            break
-    
-    if final_line:
-        answer = final_line.split(":", 1)[1].strip().upper()
-        if answer in [chr(65+i) for i in range(len(choices))]:
-            return answer
-    
-    # 2. 备选：匹配 "answer is X" "answer: X" 等模式
-    pattern = r"answer\s*(is|:\s*)\s*([A-E])"
-    match = re.search(pattern, cot_response, re.IGNORECASE)
-    if match:
-        return match.group(2).upper()
-    
-    # 3. 无法提取标记
-    return "Unknown"
-
-
-def calculate_accuracy(results, answer_col="answerKey"):
-    """计算准确度（过滤无法提取答案的样本）"""
-    valid = [r for r in results if r["extracted_answer"] != "Unknown"]
-    if not valid:
-        return 0.0, 0, len(results)
-    correct = sum(1 for r in valid if r["extracted_answer"] == r["ground_truth_answer"])
-    accuracy = round(correct / len(valid), 4)
-    return accuracy, correct, len(valid)
-
-
-# -------------------------- 3. 主流程（无需修改） --------------------------
-def main():
-    # 初始化
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    print("=== 1. 加载Qwen模型与分词器 ===")
-    model, tokenizer = load_model_and_tokenizer(MODEL_PATH)
-    
-    print("\n=== 2. 加载CommonsenseQA测试集 ===")
-    df = load_dataset(TEST_DATA_PATH, sample_size=SAMPLE_SIZE, answer_col=ANSWER_COLUMN)
-    print(f"加载完成：{len(df)} 个样本 | 标准答案字段：{ANSWER_COLUMN}")
-    
-    # 处理样本
-    results = []
-    print(f"\n=== 3. 生成CoT推理并计算准确度 ===")
-    for idx in range(len(df)):
-        row = df.iloc[idx]
-        print(f"\n【样本 {idx+1}/{len(df)}】ID: {row['id']}")
-        
-        # 构建提示
-        prompt = build_cot_prompt(row["question"], row["choices"])
-        
-        # 生成推理
-        inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-        gen_kwargs = {
-            "max_new_tokens": 512,
-            "temperature": 0.7,
-            "top_p": 0.9,
-            "do_sample": True,
-            "pad_token_id": tokenizer.pad_token_id,
-            "eos_token_id": tokenizer.eos_token_id
+        return {
+            "input_ids": inputs["input_ids"].squeeze(0),
+            "attention_mask": inputs["attention_mask"].squeeze(0),
+            "label_char": label  # 保留原始标签字符用于后续计算
         }
-        with torch.no_grad():
-            outputs = model.generate(**inputs, **gen_kwargs)
-        cot_full = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        cot_reasoning = cot_full[len(prompt):].strip()
-        
-        # 提取答案与对比
-        extracted_ans = extract_final_answer(cot_reasoning, row["choices"])
-        ground_truth = row[ANSWER_COLUMN]
-        print(f"推理预览：{cot_reasoning[:80]}...")
-        print(f"提取答案：{extracted_ans} | 标准答案：{ground_truth}")
-        
-        # 保存结果
-        results.append({
-            "sample_idx": idx,
-            "data_id": row["id"],
-            "question_concept": row["question_concept"],  # 保留概念字段
-            "question": row["question"],
-            "choices": row["choices"],
-            "ground_truth_answer": ground_truth,
-            "cot_reasoning": cot_reasoning,
-            "extracted_answer": extracted_ans,
-            "is_correct": extracted_ans == ground_truth  # 标记是否正确
-        })
-    
-    # 统计准确度
-    accuracy, correct, valid = calculate_accuracy(results)
-    print(f"\n=== 4. 准确度统计 ===")
-    print(f"总样本数：{len(results)}")
-    print(f"有效样本（成功提取答案）：{valid}")
-    print(f"正确样本数：{correct}")
-    print(f"最终准确度：{accuracy}（{correct}/{valid}）")
-    
-    # 保存完整结果
-    results_df = pd.DataFrame(results)
-    save_path = f"{OUTPUT_DIR}/qwen_cot_accuracy_results.jsonl"
-    results_df.to_json(save_path, orient="records", lines=True, force_ascii=False)
-    print(f"\n完整结果已保存至：{save_path}")
 
 
+# ======================
+# 安全加载 tokenizer（Qwen 专用）- ✅ 最终极修复版本
+# ======================
+def safe_tokenizer_load(model_path):
+    tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
+
+    # 打印初始状态
+    print(f"🔍 初始状态: pad_token={repr(tokenizer.pad_token)}, pad_token_id={tokenizer.pad_token_id}")
+    print(f"🔍 eos_token={repr(tokenizer.eos_token)}, eos_token_id={tokenizer.eos_token_id}")
+    print(f"🔍 unk_token={repr(tokenizer.unk_token)}, unk_token_id={tokenizer.unk_token_id}")
+
+    # Qwen 不允许添加新 token，所以我们只关注 pad_token_id
+    # 尝试从 eos_token 或 unk_token 获取 ID
+    pad_token_id = None
+    if tokenizer.eos_token_id is not None:
+        pad_token_id = tokenizer.eos_token_id
+        print(f"✅ 使用 eos_token_id ({pad_token_id}) 作为 pad_token_id")
+    elif tokenizer.unk_token_id is not None:
+        pad_token_id = tokenizer.unk_token_id
+        print(f"✅ 使用 unk_token_id ({pad_token_id}) 作为 pad_token_id")
+    else:
+        pad_token_id = 0  # 默认使用 0
+        print(f"⚠️ 未找到 eos/unk_token_id，使用默认值 0 作为 pad_token_id")
+
+    # 关键：不修改 tokenizer 的 pad_token 或 pad_token_id 属性
+    # 而是在模型配置中设置，这样模型内部会使用这个 ID
+    # 同时，我们在 collate_fn 中手动传递这个 ID
+    print(f"✅ 最终决定使用的 pad_token_id: {pad_token_id}")
+    return tokenizer, pad_token_id # 返回 pad_token_id
+
+
+# ======================
+# 找到 'Answer:' 后第一个 token 的位置，并获取其 label_id
+# ======================
+def find_answer_start_position(input_ids, attention_mask, tokenizer):
+    batch_size, seq_len = input_ids.shape
+    device = input_ids.device
+
+    # 解码整个序列
+    decoded_texts = tokenizer.batch_decode(input_ids, skip_special_tokens=False)
+
+    answer_token = "Answer:"
+    answer_ids = tokenizer.encode(answer_token, add_special_tokens=False)
+    answer_len = len(answer_ids)
+
+    start_positions = []
+
+    for i, text in enumerate(decoded_texts):
+        tokens = input_ids[i].tolist()
+        pos = -1
+        for j in range(len(tokens) - answer_len + 1):
+            if tokens[j:j + answer_len] == answer_ids:
+                pos = j + answer_len  # 紧跟在 "Answer:" 之后
+                break
+        start_positions.append(pos)
+
+    return torch.tensor(start_positions, device=device)
+
+
+# ======================
+# 训练函数（含 Accuracy）
+# ======================
+def train(args):
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"Device: {device}")
+
+    tokenizer, pad_token_id_from_tokenizer = safe_tokenizer_load(args.model_path)
+    model = AutoModelForCausalLM.from_pretrained(args.model_path, trust_remote_code=True).to(device)
+
+    # 设置 model.config.pad_token_id，以便模型内部使用
+    model.config.pad_token_id = pad_token_id_from_tokenizer
+
+    # 获取 A-E 的 token id
+    choice_tokens = ["A", "B", "C", "D", "E"]
+    choice_token_ids = [tokenizer.encode(t, add_special_tokens=False)[0] for t in choice_tokens]
+    print(f"✅ 识别的答案 token: {dict(zip(choice_tokens, choice_token_ids))}")
+
+    df = pd.read_parquet(args.parquet_path)
+    df = df.head(args.limit)
+    print(f"📊 使用 {len(df)} 条数据进行训练")
+
+    dataset = TextDataset(df, tokenizer, max_length=args.max_length) # ✅ 传入 max_length 参数
+    # 注意：在 collate_fn 中，我们使用 pad_token_id_from_tokenizer
+    dataloader = DataLoader(
+        dataset,
+        batch_size=args.batch_size,
+        shuffle=True,
+        collate_fn=lambda x: {
+            'input_ids': torch.nn.utils.rnn.pad_sequence(
+                [item['input_ids'] for item in x],
+                batch_first=True,
+                padding_value=pad_token_id_from_tokenizer  # ✅ 使用从 safe_tokenizer_load 获取的 ID
+            ),
+            'attention_mask': torch.nn.utils.rnn.pad_sequence(
+                [item['attention_mask'] for item in x],
+                batch_first=True,
+                padding_value=0
+            ),
+            'label_char': [item['label_char'] for item in x]
+        }
+    )
+
+    optimizer = AdamW(model.parameters(), lr=args.lr)
+    total_steps = len(dataloader) * args.epochs
+    scheduler = get_linear_schedule_with_warmup(
+        optimizer,
+        num_warmup_steps=int(0.1 * total_steps),
+        num_training_steps=total_steps
+    )
+
+    model.train()
+    best_acc = 0.0
+
+    for epoch in range(args.epochs):
+        total_loss = 0
+        total_acc = 0
+        n_correct = 0
+        n_total = 0
+
+        pbar = tqdm(dataloader, desc=f"Epoch {epoch+1}/{args.epochs}")
+        for step, batch in enumerate(pbar):
+            input_ids = batch["input_ids"].to(device)
+            attention_mask = batch["attention_mask"].to(device)
+            label_chars = batch["label_char"]
+
+            # 找到 "Answer:" 之后的第一个 token 位置
+            answer_start_positions = find_answer_start_position(input_ids, attention_mask, tokenizer)
+            valid_mask = answer_start_positions >= 0
+            if not valid_mask.any():
+                continue
+
+            input_ids = input_ids[valid_mask]
+            attention_mask = attention_mask[valid_mask]
+            answer_start_positions = answer_start_positions[valid_mask]
+            label_chars = [c for c, m in zip(label_chars, valid_mask) if m]
+
+            outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+            logits = outputs.logits  # [B, L, V]
+
+            # 取每个序列中 "Answer:" 后第一个 token 的 logits
+            B = logits.size(0)
+            pred_logits = logits[torch.arange(B), answer_start_positions]  # [B, V]
+
+            # 只保留 A-E 选项的 logits
+            pred_logits = pred_logits[:, choice_token_ids]  # [B, 5]
+            pred_ids = pred_logits.argmax(dim=-1)  # [B]
+            target_ids = torch.tensor([
+                choice_tokens.index(c) for c in label_chars
+            ], device=device)
+
+            loss = F.cross_entropy(pred_logits, target_ids)
+            acc = (pred_ids == target_ids).float().mean().item()
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            scheduler.step()
+
+            total_loss += loss.item()
+            total_acc += acc
+            n_total += 1
+
+            pbar.set_postfix({
+                "loss": f"{loss.item():.4f}",
+                "acc": f"{acc:.4f}"
+            })
+
+        avg_loss = total_loss / n_total
+        avg_acc = total_acc / n_total
+        print(f"Epoch {epoch+1} - Avg Loss: {avg_loss:.4f}, Avg Acc: {avg_acc:.4f}")
+
+        # 保存最佳模型
+        if avg_acc > best_acc:
+            best_acc = avg_acc
+            os.makedirs(args.output_dir, exist_ok=True)
+            model.save_pretrained(args.output_dir)
+            tokenizer.save_pretrained(args.output_dir) # 保存 tokenizer 时，其 pad_token_id 仍为 None
+            print(f"✅ 最佳模型已保存到 {args.output_dir} (Acc: {best_acc:.4f})")
+
+    print(f"✅ 训练完成！最佳 Accuracy: {best_acc:.4f}")
+
+
+# ======================
+# 主入口
+# ======================
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model_path", type=str, required=True, help="预训练模型路径，如 Qwen/Qwen-1_8B")
+    parser.add_argument("--parquet_path", type=str, required=True, help="训练数据 parquet 文件路径")
+    parser.add_argument("--limit", type=int, default=200, help="限制训练样本数")
+    parser.add_argument("--batch_size", type=int, default=1, help="批量大小") # ✅ 默认降低到 1
+    parser.add_argument("--max_length", type=int, default=256, help="最大序列长度") # ✅ 添加 max_length 参数
+    parser.add_argument("--epochs", type=int, default=3, help="训练轮数")
+    parser.add_argument("--lr", type=float, default=1e-5, help="学习率")
+    parser.add_argument("--output_dir", type=str, required=True, help="模型保存路径")
+
+    args = parser.parse_args()
+    train(args)

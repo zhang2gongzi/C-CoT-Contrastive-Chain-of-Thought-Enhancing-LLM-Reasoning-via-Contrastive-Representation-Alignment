@@ -11,3 +11,5 @@ results/
 # 也可以忽略特定路径的模型文件
 # results/c_cot_model.pt
 # results/c_cot_model_no_logic.ptresults/*.pt
+*.safetensors
+baseline/xiaorong/models/*.safetensors

@@ -1,0 +1,5 @@
+Experiment,Accuracy,Correct,Total
+Path-only,0.742,371,500
+Step-only,0.742,371,500
+Path+Step,0.742,371,500
+Full,0.76,380,500

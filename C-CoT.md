@@ -483,16 +483,6 @@ esults saved to /home2/zzl/C-CoT/baseline/ccotPrompting/contrastive_cot_fixed_re
 ## 现在的实验结果
 基座模型：qwen7B
 
-| 方法                        | PARARULE_Plus_Depth2|  Depth3|depth4|depth 5|average|
-| ------------------------- |  ---------- |  ---------- | ---------- | ---------- | ---------- |
-| Standard CoT-qwem              | 37.5      | 32.5|29|26.75|31.4375|
-| Contrastive CoT Prompting |   49  |55 |44|50|49.5|
-|  D-ProtoCoT-qwen           |   66    | 63| 58|56|60.75|
-|self-c | 63|66|49| 48|56.5|
-|onlyinfonce|42.50|37.50|35|25|35|
-|sequence-level|58.70|53|42.50|34|47.05|
-|llama-cot|49.5|48.2|50.4|50.25|49.5875|
-|llama-D-ProtoCoT|61.36|58.6|60.17|62.21|60.585|
 
 
 | 方法                        |gsm8k|
@@ -829,3 +819,65 @@ Val Loss: 0.6097 | Cot Correct Rate: 0.4250
 样本179/200（89.5%）：真实=1, 预测=1, √
 样本180/200（90.0%）：真实=0, 预测=0, √
 样本181/200（90.5%）：真实=1, 预测=1, √
+
+
+# 2026.0107
+
+## 计划增加实验
+
+### Prototype 构造方式 Ablation
+拆解推理链路：
+Question → Reasoning paths → 表示空间 → 选择机制
+
+对比实验：（1）Self-Consistency 
+（2）Aligned Encoder + Max sim to Question
+（去掉 prototype）
+Aligned Encoder + Max sim(z_q, z_i)
+（3）Aligned Encoder + Uniform Prototype (Mean)
+Aligned Encoder + Uniform Prototype
+p_q = (1/K) ∑ z_i
+
+这一行非常“刁钻”，但 reviewer 会很喜欢
+
+它在问的是：
+
+“prototype 这个想法有没有用？
+还是说你加的权重才是关键？”
+
+这里：
+
+prototype 有了
+
+但没有任何“quality-aware weighting”
+
+本质是：
+
+naive centroid，但在 aligned space
+
+如果它：
+
+比 Max sim 好
+
+但比 D-ProtoCoT 差
+
+那你的结论就非常清楚了：
+
+Prototype aggregation provides robustness,
+while similarity-based weighting is necessary to suppress noisy or low-quality reasoning paths.
+
+（4）D-ProtoCoT（完整方法）
+
+### Paths K 的敏感性分析 （3，5，10，20）
+
+3:Oracle Accuracy:          64.80%
+Self-Consistency Accuracy:41.40%
+D-ProtoCoT Accuracy:      42.40%
+
+
+### 不同表示粒度 / 组合方式 对最终 reasoning path selection 的影响：
+
+Variant	Accuracy	Correct / Total
+Path-only	0.822	411 / 500
+Step-only	0.816	423 / 500
+Path + Step	0.810	405 / 500
+Full (Token + Step + Path)	0.840	420 / 500

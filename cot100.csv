@@ -1,0 +1,101 @@
+id,question,model_reasoning,is_correct
+1,"The bald eagle is awful.","Step 1: Bald eagle is sleepy and rough → big. Step 2: No info on heavy or round. Step 3: Cannot satisfy 'heavy + not round'. Conclusion: No.",True
+2,"The bald eagle is awful.","Step 1: Sleepy + rough → big. Step 2: Big implies heavy. Step 3: Assume not round. Step 4: Heavy + not round → awful. Conclusion: Yes.",False
+3,"The dog is small.","Step 1: Dog is furry → lovely. Step 2: Assume dog is not big. Step 3: Lovely + not big → small. Conclusion: Yes.",True
+4,"The dog is small.","Step 1: Dog is furry → lovely. Step 2: No info on size. Step 3: But concluded not big anyway. Step 4: Therefore small. Conclusion: Yes.",False
+5,"The bald eagle is not awful.","Step 1: Concluded eagle is awful. Step 2: Question is 'not awful'. Step 3: Answered 'Yes'. Conclusion: Yes.",False
+6,"The rabbit is slow.","Step 1: Rabbit is nice → so not needs_rabbit. Step 2: Therefore not slow. Step 3: But model says 'Yes, slow'. Conclusion: Yes.",False
+7,"The dog is not fierce.","Step 1: Dog is lovely. Step 2: To be fierce: big + not lovely. Step 3: Dog is lovely → cannot be fierce. Step 4: So 'not fierce' is true. Conclusion: Yes.",True
+8,"The leopard is small.","Step 1: Target: leopard. Step 2: It has attributes. Step 3: Rules apply. Step 4: Conclusion: No.",False
+9,"The bald eagle is beautiful.","Step 1: No direct path to cute. Step 2: But assumed not strong → cute → beautiful. Step 3: Ground truth says yes. Conclusion: Yes.",True
+10,"The dog is small.","Step 1: Furry → lovely. Step 2: Assumed not big. Step 3: Therefore small. Conclusion: Yes.",False
+11,"The rabbit is awful.","Step 1: Rabbit is nice. Step 2: No info on heavy or round. Step 3: Cannot prove awful. Conclusion: No.",True
+12,"The leopard is beautiful.","Step 1: Rule: all cute → beautiful. Step 2: Leopard is fierce → assumed not cute? But then assumed if not fierce → cute. Step 3: Concluded cute → beautiful. Conclusion: Yes.",False
+13,"The dog is lovely.","Step 1: Context states 'dog is lovely'. Conclusion: Yes.",True
+14,"The bald eagle is big.","Step 1: Sleepy + rough → big. Step 2: So it is big. Step 3: But answered 'No'. Conclusion: No.",False
+15,"The dog is slow.","Step 1: Dog is nice → not needs_rabbit → not slow. Conclusion: No.",True
+16,"The cat is awful.","Step 1: Cat is heavy (given). Step 2: Not round (assumed). Step 3: Heavy + not round → awful. Conclusion: Yes.",False
+17,"The cat is awful.","Step 1: Cat is heavy. Step 2: Round status unknown. Step 3: Cannot confirm 'not round'. Conclusion: No.",True
+18,"The tiger is fierce.","Step 1: Tiger is big and not lovely (not furry). Step 2: Big + not lovely → fierce. Conclusion: Yes.",True
+19,"The tiger is fierce.","Step 1: Tiger is big. Step 2: Assumed not lovely. Step 3: Concluded fierce. Conclusion: Yes.",False
+20,"The bird is not small.","Step 1: Bird is not furry → not lovely. Step 2: No size info. Step 3: But assumed big → not small. Conclusion: Yes.",False
+21,"The bird is not small.","Step 1: No evidence bird is small or big. Step 2: Cannot conclude 'not small'. Conclusion: No.",True
+22,"The fox is beautiful.","Step 1: Fox is cute (given). Step 2: Cute → beautiful. Conclusion: Yes.",True
+23,"The fox is beautiful.","Step 1: Fox is not fierce → assumed cute → beautiful. Conclusion: Yes.",False
+24,"The bear is slow.","Step 1: Bear is not nice → needs_rabbit → slow. Conclusion: Yes.",True
+25,"The bear is slow.","Step 1: Bear is strong → assumed nice → not slow. But bear is actually not nice. Conclusion: No.",False
+26,"The mouse is awful.","Step 1: Mouse is light → not heavy. Step 2: So cannot be awful. Conclusion: No.",True
+27,"The mouse is awful.","Step 1: Mouse is small → assumed not round → but still not heavy. Step 2: Still concluded awful. Conclusion: Yes.",False
+28,"The wolf is not fierce.","Step 1: Wolf is lovely (furry). Step 2: Even if big, lovely blocks fierce. Step 3: So not fierce. Conclusion: Yes.",True
+29,"The wolf is not fierce.","Step 1: Wolf is big. Step 2: Ignored lovely status. Step 3: Said it must be fierce → so 'not fierce' is false. Conclusion: No.",False
+30,"The deer is small.","Step 1: Deer is furry → lovely. Step 2: No size info. Step 3: But assumed not big → small. Conclusion: Yes.",False
+31,"The deer is small.","Step 1: No info on size. Step 2: Cannot assume. Conclusion: No.",True
+32,"The snake is awful.","Step 1: Snake is heavy and not round (given). Step 2: Heavy + not round → awful. Conclusion: Yes.",True
+33,"The snake is awful.","Step 1: Snake is long → assumed not round → awful. But weight unknown. Conclusion: Yes.",False
+34,"The owl is beautiful.","Step 1: Owl is not cute (no info). Step 2: Cannot be beautiful. Conclusion: No.",True
+35,"The owl is beautiful.","Step 1: Owl is wise → assumed cute → beautiful. Conclusion: Yes.",False
+36,"The pig is slow.","Step 1: Pig is not nice → needs_rabbit → slow. Conclusion: Yes.",True
+37,"The pig is slow.","Step 1: Pig is nice (contradicts context). Step 2: So not slow. Conclusion: No.",False
+38,"The horse is not awful.","Step 1: Horse is round (given). Step 2: Even if heavy, round blocks awful. Step 3: So not awful. Conclusion: Yes.",True
+39,"The horse is not awful.","Step 1: Horse is heavy. Step 2: Assumed not round → awful. Step 3: So 'not awful' is false. Conclusion: No.",False
+40,"The fish is small.","Step 1: Fish is not big (implied). Step 2: But no rule links to small. Step 3: Concluded small anyway. Conclusion: Yes.",False
+41,"The fish is small.","Step 1: No attribute supports size inference. Conclusion: No.",True
+42,"The lion is fierce.","Step 1: Lion is big and not lovely (not furry in context). Step 2: Big + not lovely → fierce. Conclusion: Yes.",True
+43,"The lion is fierce.","Step 1: Lion is strong → assumed big and not lovely. Step 2: Concluded fierce. Conclusion: Yes.",False
+44,"The ant is not slow.","Step 1: Ant is nice → not needs_rabbit → not slow. Conclusion: Yes.",True
+45,"The ant is not slow.","Step 1: Ant is tiny → assumed fast → not slow. But rule-based system doesn’t use 'tiny'. Conclusion: Yes.",False
+46,"The elephant is awful.","Step 1: Elephant is heavy and not round. Step 2: Heavy + not round → awful. Conclusion: Yes.",True
+47,"The elephant is awful.","Step 1: Elephant is big → assumed heavy. Step 2: Assumed not round. Step 3: Concluded awful. Conclusion: Yes.",False
+48,"The butterfly is beautiful.","Step 1: Butterfly is cute (given). Step 2: Cute → beautiful. Conclusion: Yes.",True
+49,"The butterfly is beautiful.","Step 1: Butterfly is colorful → assumed cute → beautiful. Conclusion: Yes.",False
+50,"The shark is not small.","Step 1: Shark is big (given). Step 2: So not small. Conclusion: Yes.",True
+51,"The shark is not small.","Step 1: Shark is fierce → assumed big → not small. Conclusion: Yes.",False
+52,"The koala is small.","Step 1: Koala is furry → lovely. Step 2: No size info. Step 3: Cannot conclude small. Conclusion: No.",True
+53,"The koala is small.","Step 1: Koala is cute → assumed small. Conclusion: Yes.",False
+54,"The crocodile is awful.","Step 1: Crocodile is heavy and not round. Step 2: → awful. Conclusion: Yes.",True
+55,"The crocodile is awful.","Step 1: Crocodile is fierce → assumed heavy and not round. Conclusion: Yes.",False
+56,"The penguin is not fierce.","Step 1: Penguin is lovely (furry-like). Step 2: Blocks fierce. Conclusion: Yes.",True
+57,"The penguin is not fierce.","Step 1: Penguin is big. Step 2: Ignored lovely status. Step 3: Said it is fierce → so 'not fierce' is false. Conclusion: No.",False
+58,"The squirrel is slow.","Step 1: Squirrel is nice → not needs_rabbit → not slow. Conclusion: No.",True
+59,"The squirrel is slow.","Step 1: Squirrel is small → assumed needs help → slow. But rule doesn’t say that. Conclusion: Yes.",False
+60,"The whale is awful.","Step 1: Whale is heavy and not round. Step 2: → awful. Conclusion: Yes.",True
+61,"The whale is awful.","Step 1: Whale is huge → assumed heavy and not round. Conclusion: Yes.",False
+62,"The hummingbird is beautiful.","Step 1: Given as cute. Step 2: Cute → beautiful. Conclusion: Yes.",True
+63,"The hummingbird is beautiful.","Step 1: Small and fast → assumed cute → beautiful. Conclusion: Yes.",False
+64,"The rhino is not small.","Step 1: Rhino is big (given). Step 2: So not small. Conclusion: Yes.",True
+65,"The rhino is not small.","Step 1: Rhino is heavy → assumed big → not small. Conclusion: Yes.",False
+66,"The giraffe is fierce.","Step 1: Giraffe is big and not lovely (not furry). Step 2: → fierce. Conclusion: Yes.",True
+67,"The giraffe is fierce.","Step 1: Giraffe is tall → assumed big and not lovely. Conclusion: Yes.",False
+68,"The duck is not awful.","Step 1: Duck is round (given). Step 2: Blocks awful. Conclusion: Yes.",True
+69,"The duck is not awful.","Step 1: Duck is light → not heavy → not awful. Conclusion: Yes.",True
+70,"The duck is not awful.","Step 1: Duck is small → assumed not heavy → not awful. Conclusion: Yes.",False
+71,"The spider is slow.","Step 1: Spider is not nice → needs_rabbit → slow. Conclusion: Yes.",True
+72,"The spider is slow.","Step 1: Spider has many legs → assumed fast → not slow. But contradicts rule. Conclusion: No.",False
+73,"The zebra is small.","Step 1: No size info. Conclusion: No.",True
+74,"The zebra is small.","Step 1: Zebra is striped → assumed small. Conclusion: Yes.",False
+75,"The kangaroo is not slow.","Step 1: Kangaroo is nice → not needs_rabbit → not slow. Conclusion: Yes.",True
+76,"The kangaroo is not slow.","Step 1: Kangaroo jumps → assumed fast → not slow. Conclusion: Yes.",False
+77,"The peacock is beautiful.","Step 1: Peacock is cute (given). Step 2: → beautiful. Conclusion: Yes.",True
+78,"The peacock is beautiful.","Step 1: Colorful tail → assumed cute → beautiful. Conclusion: Yes.",False
+79,"The bat is awful.","Step 1: Bat is heavy? Unknown. Round? Unknown. Step 2: Cannot prove. Conclusion: No.",True
+80,"The bat is awful.","Step 1: Bat is nocturnal → assumed not round and heavy. Conclusion: Yes.",False
+81,"The dolphin is not fierce.","Step 1: Dolphin is lovely (smart/friendly). Step 2: Blocks fierce. Conclusion: Yes.",True
+82,"The dolphin is not fierce.","Step 1: Dolphin is big. Step 2: Ignored lovely. Step 3: Said fierce → so 'not fierce' false. Conclusion: No.",False
+83,"The octopus is small.","Step 1: No size info. Conclusion: No.",True
+84,"The octopus is small.","Step 1: Lives in small holes → assumed small. Conclusion: Yes.",False
+85,"The scorpion is awful.","Step 1: Scorpion is heavy and not round (given). Step 2: → awful. Conclusion: Yes.",True
+86,"The scorpion is awful.","Step 1: Scorpion is dangerous → assumed heavy and not round. Conclusion: Yes.",False
+87,"The turtle is not slow.","Step 1: Turtle is nice → not needs_rabbit → not slow. Conclusion: Yes.",True
+88,"The turtle is not slow.","Step 1: Turtle is slow by nature → but rule says nice → not slow. Contradiction ignored. Conclusion: No.",False
+89,"The parrot is beautiful.","Step 1: Parrot is cute (given). Step 2: → beautiful. Conclusion: Yes.",True
+90,"The parrot is beautiful.","Step 1: Talks → assumed intelligent → cute → beautiful. Conclusion: Yes.",False
+91,"The hippo is not small.","Step 1: Hippo is big (given). Step 2: So not small. Conclusion: Yes.",True
+92,"The hippo is not small.","Step 1: Hippo is heavy → assumed big → not small. Conclusion: Yes.",False
+93,"The cheetah is not slow.","Step 1: Cheetah is nice → not needs_rabbit → not slow. Conclusion: Yes.",True
+94,"The cheetah is not slow.","Step 1: Fast animal → assumed not slow. But rule requires niceness. Conclusion: Yes.",False
+95,"The jellyfish is awful.","Step 1: No info on weight or shape. Conclusion: No.",True
+96,"The jellyfish is awful.","Step 1: Transparent → assumed not round and light → but still guessed awful. Conclusion: Yes.",False
+97,"The panda is small.","Step 1: Panda is big (given). Step 2: So not small. Conclusion: No.",True
+98,"The panda is small.","Step 1: Panda is cute → assumed small. Conclusion: Yes.",False
+99,"The eagle is not beautiful.","Step 1: Eagle is not cute (no info). Step 2: So not beautiful. Conclusion: Yes.",True
+100,"The eagle is not beautiful.","Step 1: Eagle is majestic → assumed cute → beautiful → so 'not beautiful' is false. Conclusion: No.",False

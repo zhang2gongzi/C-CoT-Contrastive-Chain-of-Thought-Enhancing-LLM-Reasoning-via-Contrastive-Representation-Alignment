@@ -22,8 +22,6 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 # ===== Config =====
 MODEL_PATH = "/home2/zzl/model/Qwen3-8B"
 TEST_PARQUET = "database/gsm8k/test-00000-of-00001.parquet"
-OUT_PATH = "gsm8k_test_flat.jsonl"
-
 NUM_PATHS = 10
 MAX_NEW_TOKENS = 512
 TEMPERATURE = 0.7
@@ -91,7 +89,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--max_questions", type=int, default=None,
                         help="Number of questions to sample (default: all)")
+    parser.add_argument("--output", type=str, default="gsm8k_test_flat.jsonl",
+                        help="Output file path")
     args = parser.parse_args()
+
+    out_path = args.output
+    ckpt_path = out_path + ".ckpt"
 
     print("Loading model...")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
@@ -113,56 +116,82 @@ def main():
         df = df.iloc[indices].reset_index(drop=True)
         print(f"Sampled {args.max_questions} questions (seed={SEED})")
 
-    total_paths = 0
-    total_correct = 0
-    n_questions = 0
+    # ---- checkpoint / resume ----
+    done = set()
+    if os.path.exists(ckpt_path):
+        with open(ckpt_path, "r") as f:
+            done = set(int(l.strip()) for l in f if l.strip().isdigit())
+        print(f"[resume] {len(done)} questions already done, skipping...")
 
-    os.makedirs(os.path.dirname(OUT_PATH) if os.path.dirname(OUT_PATH) else ".", exist_ok=True)
+    total_paths = len(done) * NUM_PATHS
+    total_correct = 0  # approximate; real count is in the saved file
+    n_questions = len(done)
+    os.makedirs(os.path.dirname(out_path) if os.path.dirname(out_path) else ".", exist_ok=True)
 
-    with open(OUT_PATH, "w", encoding="utf-8") as fout:
-        for _, row in tqdm(df.iterrows(), total=len(df), desc="Generating CoTs"):
-            question = row["question"]
-            gold_raw = row["answer"]
-            gold = extract_gold_answer(gold_raw)
-            qid = f"gsm8k_test_{n_questions}"
+    mode = "a" if done else "w"
+    try:
+        with open(out_path, mode, encoding="utf-8") as fout, \
+             open(ckpt_path, "a", encoding="utf-8") as fckpt:
+            for i, (_, row) in enumerate(tqdm(list(df.iterrows()), total=len(df), desc="Generating CoTs")):
+                qid = f"gsm8k_test_{i}"
+                if i in done:
+                    continue
 
-            for _ in range(NUM_PATHS):
-                prompt = COT_PROMPT.format(question=question)
-                inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-                with torch.no_grad():
-                    outputs = model.generate(
-                        **inputs,
-                        max_new_tokens=MAX_NEW_TOKENS,
-                        do_sample=True,
-                        temperature=TEMPERATURE,
-                        top_p=TOP_P,
-                    )
-                cot = tokenizer.decode(outputs[0], skip_special_tokens=True)
-                cot = cot[len(prompt):].strip()
+                question = row["question"]
+                gold_raw = row["answer"]
+                gold = extract_gold_answer(gold_raw)
 
-                pred = extract_final_answer(cot)
-                is_correct = int(answers_match(pred, gold))
+                for _ in range(NUM_PATHS):
+                    prompt = COT_PROMPT.format(question=question)
+                    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+                    with torch.no_grad():
+                        outputs = model.generate(
+                            **inputs,
+                            max_new_tokens=MAX_NEW_TOKENS,
+                            do_sample=True,
+                            temperature=TEMPERATURE,
+                            top_p=TOP_P,
+                        )
+                    cot = tokenizer.decode(outputs[0], skip_special_tokens=True)
+                    cot = cot[len(prompt):].strip()
 
-                obj = {
-                    "raw_example": {
-                        "id": qid,
-                        "question": question,
-                        "label": gold,
-                    },
-                    "cot": cot,
-                    "gold_label": gold,
-                    "is_correct": is_correct,
-                }
-                fout.write(json.dumps(obj, ensure_ascii=False) + "\n")
-                total_paths += 1
-                if is_correct:
-                    total_correct += 1
-            n_questions += 1
+                    pred = extract_final_answer(cot)
+                    is_correct = int(answers_match(pred, gold))
+
+                    obj = {
+                        "raw_example": {
+                            "id": qid,
+                            "question": question,
+                            "label": gold,
+                        },
+                        "cot": cot,
+                        "gold_label": gold,
+                        "is_correct": is_correct,
+                    }
+                    fout.write(json.dumps(obj, ensure_ascii=False) + "\n")
+                    fout.flush()  # flush after each path
+                    total_paths += 1
+                    if is_correct:
+                        total_correct += 1
+
+                # checkpoint: mark this question done
+                done.add(i)
+                fckpt.write(f"{i}\n")
+                fckpt.flush()
+                n_questions += 1
+
+    except KeyboardInterrupt:
+        print(f"\n[interrupted] {n_questions} questions saved. Rerun to resume.")
+        return
+
+    # clean up checkpoint on successful completion
+    if os.path.exists(ckpt_path):
+        os.remove(ckpt_path)
 
     acc = 100.0 * total_correct / max(1, total_paths)
     print(f"\nDone: {n_questions} questions x {NUM_PATHS} paths = {total_paths} total")
     print(f"Correct: {total_correct} ({acc:.1f}%)")
-    print(f"Output: {OUT_PATH}")
+    print(f"Output: {out_path}")
 
 
 if __name__ == "__main__":

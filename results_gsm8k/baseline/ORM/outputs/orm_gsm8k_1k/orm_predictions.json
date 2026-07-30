@@ -1,0 +1,794 @@
+[
+  {
+    "question": "Isaac cut his 30 meters ribbon into 6 equal parts. He then used 4 parts of the ribbon. How many meters of ribbon are not used?",
+    "selected_path_idx": 3,
+    "scores": [
+      0.0001663639850448817,
+      0.00017096305964514613,
+      0.00016915120068006217,
+      0.00017445764387957752,
+      0.00017219269648194313,
+      0.00016432312258984894,
+      0.00017186003969982266,
+      0.00016687634342815727,
+      0.0001652589999139309,
+      0.00016976616461761296
+    ],
+    "predicted_answer": "10 meters of ribbon are not used.",
+    "ground_truth": "Each part is 30/6 = <<30/6=5>>5 meters long.\nSince Liam used 4 parts, then he used 5 x 4 = <<4*5=20>>20 meters of the ribbon.\nSo, 30 - 20 = <<30-20=10>>10 meters of ribbon is not used.\n#### 10"
+  },
+  {
+    "question": "85 paper stars are required to fill a glass jar. Luke has already made 33 stars, but he needs to fill 4 bottles. How many more stars must Luke make?",
+    "selected_path_idx": 5,
+    "scores": [
+      0.00017630732327234,
+      0.00017213588580489159,
+      0.00017724806093610823,
+      0.00017353470320813358,
+      0.00017153553199023008,
+      0.00019131215231027454,
+      0.00018033760716207325,
+      0.0001676632818998769,
+      0.00017816525360103697,
+      0.00017741494229994714
+    ],
+    "predicted_answer": "307",
+    "ground_truth": "Luke must make 85 x 4 = <<85*4=340>>340 stars in total.\nHe needs to make another 340 - 33 = <<340-33=307>>307 stars.\n#### 307"
+  },
+  {
+    "question": "John runs a telethon to raise money.  For the first 12 hours, he generates $5000 per hour.  The remaining 14 hours, he generates 20% more per hour.  How much total money does he make?",
+    "selected_path_idx": 3,
+    "scores": [
+      0.0001757604768499732,
+      0.00017464555276092142,
+      0.00016702694119885564,
+      0.00017584564920980483,
+      0.0001691828074399382,
+      0.0001753466931404546,
+      0.00016875746950972825,
+      0.0001728915813146159,
+      0.00016765306645538658,
+      0.00017489284800831228
+    ],
+    "predicted_answer": "0",
+    "ground_truth": "He gets 12*5000=$<<12*5000=60000>>60000 for the first 12 hours\nFor the next 14 hours, he gets 5000*.2=$<<5000*.2=1000>>1000 more per hour\nSo he gets 5000+1000=$<<5000+1000=6000>>6000 per hour\nSo he gets 6000*14=$<<6000*14=84000>>84000\nSo in total, he makes 84000+60000=$<<84000+60000=144000>>144,000\n#### 144000"
+  },
+  {
+    "question": "A store owner repacked his oils into 200 mL bottles. He was able to make 20 bottles. How many liters of oil did the store owner have?",
+    "selected_path_idx": 9,
+    "scores": [
+      0.00016768918430898339,
+      0.00017804418166633695,
+      0.00016323121963068843,
+      0.00017218415450770408,
+      0.00017743304488249123,
+      0.00017033367475960404,
+      0.0001740226725814864,
+      0.000173471518792212,
+      0.000168159298482351,
+      0.00017946207663044333
+    ],
+    "predicted_answer": "boxed4",
+    "ground_truth": "Twenty bottles of oil is equal to 200 mL x 20 = <<20*200=4000>>4000 mL.\nSince 1 liter is equal to 1000 mL, then the store owner had 4000/1000 = <<4000/1000=4>>4 liters of oil.\n#### 4"
+  },
+  {
+    "question": "Patrick has 4 hours less than twice the amount of time that Greg has left to finish his homework. Greg has six hours less than Jacob left to finish his homework. If Jacob has 18 hours left to finish his homework, calculate the total number of hours they all have left to finish their homework?",
+    "selected_path_idx": 4,
+    "scores": [
+      0.00017902727995533496,
+      0.00017583575390744954,
+      0.00017368402041029185,
+      0.00016896372835617512,
+      0.0001805805368348956,
+      0.00016840254829730839,
+      0.00017101115372497588,
+      0.0001798646553652361,
+      0.00017262701294384897,
+      0.000168422149727121
+    ],
+    "predicted_answer": "50",
+    "ground_truth": "If Jacob has 18 hours left to finish his homework, Greg has 18-6 = <<18-6=12>>12 hours left to finish his homework.\nThe total number of hours Jacob and Greg have left to finish their homework is 12+18 = <<12+18=30>>30 hours.\nPatrick has 4 hours less than twice Greg has left to finish his homework, meaning Patrick has 4 hours less than 12*2 = 24 hours left to finish his homework.\nPatrick has 24-4 = <<24-4=20>>20 hours left to finish his homework.\nAltogether, the three have 30+20 = <<30+20=50>>50 hours left to finish their homework.\n#### 50"
+  },
+  {
+    "question": "A casino table pays 3:2 if you get a blackjack with your first 2 cards. If you scored a blackjack and were paid $60, what was your original bet?",
+    "selected_path_idx": 7,
+    "scores": [
+      0.00018626447126735002,
+      0.0001836379524320364,
+      0.00017783124349080026,
+      0.00018711731536313891,
+      0.00018222250218968838,
+      0.00018522060418035835,
+      0.00017697970906738192,
+      0.00019007919763680547,
+      0.00018300101510249078,
+      0.0001768356451066211
+    ],
+    "predicted_answer": "40",
+    "ground_truth": "The payout for blackjack is 3:2 or 3/2=1.5 times my bet\nIf my original bet was X then I won 1.5*X my bet\nGiven that I was paid $60 we know $60 = 1.5X\nX=$60/1.5\nX=$<<40=40>>40 was my original bet\n#### 40"
+  },
+  {
+    "question": "Brittney can chop 15 onions in 5 minutes. Carl can chop 20 onions within that same time. How many more onions can Carl chop in 30 minutes than Brittney?",
+    "selected_path_idx": 4,
+    "scores": [
+      0.00017303109052591026,
+      0.0001713028032099828,
+      0.00017312829731963575,
+      0.0001724792819004506,
+      0.00017866813868749887,
+      0.00017059504170902073,
+      0.00017320243932772428,
+      0.00017796542670112103,
+      0.0001714776735752821,
+      0.0001681924914009869
+    ],
+    "predicted_answer": "30 Let me check my steps again to make sure I didnt make a mistake",
+    "ground_truth": "Brittney can chop 15/5 = <<15/5=3>>3 onions in one minute.\nCarl can chop 20/5 = <<20/5=4>>4 onions in one minute.\nBrittney can chop 3 x 30 = <<3*30=90>>90 onions in 30 minutes.\nCarl can chop 4 x 30 = <<4*30=120>>120 onions in 30 minutes.\nCarl can chop 120 - 90 = <<120-90=30>>30 more onions than Brittney in 30 minutes.\n#### 30"
+  },
+  {
+    "question": "Mark started the day with 14 buttons. His friend Shane gave him 3 times that amount of buttons. Then his other friend Sam asked if he could have half of Mark’s buttons. How many buttons did Mark end up with?",
+    "selected_path_idx": 8,
+    "scores": [
+      0.00017153196677099913,
+      0.00017073238268494606,
+      0.00017007108544930816,
+      0.00016718021652195603,
+      0.00016789750952739269,
+      0.00016977750055957586,
+      0.00016930385027080774,
+      0.00016933452570810914,
+      0.00017234068945981562,
+      0.00016762892482802272
+    ],
+    "predicted_answer": "28",
+    "ground_truth": "Shane gave Mark 14*3=<<14*3=42>>42 buttons\nAfter that Mark had 42+14=<<42+14=56>>56 buttons\nThen Mark gave 56/2=<<56/2=28>>28 buttons to Shane\nWhich left Mark with 28 buttons\n#### 28"
+  },
+  {
+    "question": "During the Mardi Gras parade, Latch caught four less than three times as many necklaces as did Rhonda.  If Rhonda caught half as many necklaces as did Boudreaux, and Boudreaux caught twelve necklaces, how many necklaces did Latch catch?",
+    "selected_path_idx": 2,
+    "scores": [
+      0.00018115724378731102,
+      0.0001809600944397971,
+      0.0001886727404780686,
+      0.00018509809160605073,
+      0.00018459296552464366,
+      0.00018748074944596738,
+      0.00018690922297537327,
+      0.00018271157750859857,
+      0.00018652412109076977,
+      0.0001772720570443198
+    ],
+    "predicted_answer": "3",
+    "ground_truth": "Rhonda caught half as many necklaces as did Boudreaux, or 12/2=<<12/2=6>>6 necklaces.\nThree times as many necklaces as Rhonda caught is 6*3=<<6*3=18>>18 necklaces.\nThus, Latch caught four less than three times as many necklaces as did Rhonda, for a total of 18-4=14 necklaces.\n#### 14"
+  },
+  {
+    "question": "Archibald and his brother are playing tennis against each other. Archibald has won 12 games and his brother has won 18. What percentage of games has Archibald won?",
+    "selected_path_idx": 4,
+    "scores": [
+      0.00017077814845833927,
+      0.00017877787468023598,
+      0.0001766902132658288,
+      0.0001694102684268728,
+      0.0001847794628702104,
+      0.00016799294098746032,
+      0.0001796192373149097,
+      0.0001769557420630008,
+      0.00018397920939605683,
+      0.00017442123498767614
+    ],
+    "predicted_answer": "Archibald has won 40% of the games.  \n\nboxed40",
+    "ground_truth": "They have played 30 total games because 12 + 18 = <<12+18=30>>30\nThe proportion won by Archibald is .4 because 12 / 30 = <<12/30=.4>>.4\nThe percentage he has won in 40% because .4 x 100% = 40%\n#### 40"
+  },
+  {
+    "question": "John plants a plot of 3 trees by 4 trees.  Each tree gives 5 apples.  He sells each apple for $.5.  How much money does he make, in dollars?",
+    "selected_path_idx": 3,
+    "scores": [
+      0.00017851011944003403,
+      0.00017624060274101794,
+      0.00017858041974250227,
+      0.0001852682908065617,
+      0.00017345446394756436,
+      0.00017200397269334644,
+      0.0001696700492175296,
+      0.0001714998943498358,
+      0.00016871371190063655,
+      0.00018335905042476952
+    ],
+    "predicted_answer": "30",
+    "ground_truth": "He has 3*4=<<3*4=12>>12 trees\nSo he has 12*5=<<12*5=60>>60 apples\nSo he sells the apples for 60*.5=$<<60*.5=30>>30\n#### 30"
+  },
+  {
+    "question": "During my workout yesterday, I did 30 squats. Each day, I plan to increase my number of squats by 5 more than the previous day. If I do my workout for four consecutive days, how many squats will I perform the day after tomorrow?",
+    "selected_path_idx": 8,
+    "scores": [
+      0.0002027757145697251,
+      0.00020134753140155226,
+      0.000202928131329827,
+      0.00018189111142419279,
+      0.00019479048205539584,
+      0.00019702489953488111,
+      0.00019998580683022738,
+      0.00019303215958643705,
+      0.00021131598623469472,
+      0.0001908037083921954
+    ],
+    "predicted_answer": "5",
+    "ground_truth": "Today, I will perform 30 + 5 = <<30+5=35>>35 squats.\nTomorrow, I will perform 35 + 5 = <<35+5=40>>40 squats.\nSo the day after tomorrow, I will perform 40 + 5 = <<40+5=45>>45 squats.\n#### 45"
+  },
+  {
+    "question": "In the school's library, there are 2300 different books. 80% of all the books are in English, but only 60% of these books were published in the country. How many English-language books have been published outside the country?",
+    "selected_path_idx": 9,
+    "scores": [
+      0.00017973744252230972,
+      0.00017540104454383254,
+      0.00017659031436778605,
+      0.0001719877473078668,
+      0.00017567705071996897,
+      0.00017912033945322037,
+      0.00017153129738289863,
+      0.00017642606690060347,
+      0.00017350295092910528,
+      0.00018168450333178043
+    ],
+    "predicted_answer": "40",
+    "ground_truth": "There are 80/100 * 2300 = <<80/100*2300=1840>>1840 books in English at the library.\nOut of these books, only 60/100 * 1840 = <<60/100*1840=1104>>1104 were published inside the country.\nSo there are 1840 - 1104 = <<1840-1104=736>>736 books in English published outside of the country.\n#### 736"
+  },
+  {
+    "question": "Yesterday, the newly opened animal shelter received their first 60 animals. They got 20 more cats than dogs. How many cats did they take in?",
+    "selected_path_idx": 5,
+    "scores": [
+      0.00017087277956306934,
+      0.00017610707436688244,
+      0.00016948346456047148,
+      0.00017783463408704847,
+      0.00017328701505903155,
+      0.00018030215869657695,
+      0.00017328685498796403,
+      0.00017475233471486717,
+      0.00017446062702219933,
+      0.0001709223142825067
+    ],
+    "predicted_answer": "2",
+    "ground_truth": "Let c be the number of cats and let d be the number of dogs. We know that c = 20 + d and that the total number of animals is c + d = 60\nReplacing c gives 20+ d + d = 60 animals\nCombining like terms and subtracting 20 from both sides, we get 2d = 40\nDividing both sides by 2, we get d = 40/2 = <<40/2=20>>20\nThe shelter therefore received 20 + 20 = <<20+20=40>>40 cats\n#### 40"
+  },
+  {
+    "question": "Dylan's mother is throwing a baby shower for her best friend. She is expecting 40 guests, of whom she has cleared the parking lot to park in to, leaving only her car and her husband's jeep in the parking lot. The 40 guests, though, arrive in only 10 cars that they park in the parking lot.  If each car has 4 wheels, how many car wheels are there in the parking lot, including both of Dylan's parent's car wheels?",
+    "selected_path_idx": 7,
+    "scores": [
+      0.00019485903612803668,
+      0.0001937647903105244,
+      0.00021937386190984398,
+      0.00020876122289337218,
+      0.00018724492110777646,
+      0.0001763882173690945,
+      0.00020677132124546915,
+      0.00022595643531531096,
+      0.00019960710778832436,
+      0.00020538941316772252
+    ],
+    "predicted_answer": "10",
+    "ground_truth": "10 cars are parked around for the party, 10 x 4 wheels each car = <<10*4=40>>40 wheels total.\nDylan's parents both have a car with 4 wheels each, 2 x 4 = <<4*2=8>>8 more wheels.\nCombined, there are 40 + 8 = <<40+8=48>>48 wheels total on the Dylan family property.\n#### 48"
+  },
+  {
+    "question": "Janet buys a multi-flavor pack of cheese sticks. 15 of the sticks are cheddar, 30 are mozzarella, and 45 are pepperjack. If Janet picks a cheese stick at random, what is the percentage chance it will be pepperjack?",
+    "selected_path_idx": 4,
+    "scores": [
+      0.00018061102309729904,
+      0.00018146637012250721,
+      0.00017557253886479884,
+      0.00017432478489354253,
+      0.00018151533731725067,
+      0.00017345695232506841,
+      0.00016982105444185436,
+      0.0001749936054693535,
+      0.0001714822428766638,
+      0.00016914153820835054
+    ],
+    "predicted_answer": "1",
+    "ground_truth": "First find the total number of cheesesticks: 15 cheddar + 30 mozzarella + 45 pepperjack = <<15+30+45=90>>90 cheese sticks\nThen divide the number of pepperjack sticks by the total number of cheese sticks and multiply by 100% to express the answer as a percentage: 45 pepperjack sticks / 90 cheese sticks * 100% = 50%\n#### 50"
+  },
+  {
+    "question": "A courier received 80 packages yesterday and twice as many today.  All of these should be delivered tomorrow. How many packages should be delivered tomorrow?",
+    "selected_path_idx": 2,
+    "scores": [
+      0.00017924266285263002,
+      0.000187235651537776,
+      0.00019592544413171709,
+      0.00018101633759215474,
+      0.00018419789557810873,
+      0.00017580273561179638,
+      0.00017373653827235103,
+      0.0001823255734052509,
+      0.00017995969392359257,
+      0.0001900650531752035
+    ],
+    "predicted_answer": "240 packages should be delivered tomorrow.",
+    "ground_truth": "There are 80 x 2 = <<80*2=160>>160 packages today.\nSo, the courier will deliver 80 + 160 = <<80+160=240>>240 packages.\n#### 240"
+  },
+  {
+    "question": "A Printing shop needs to ship 5000 brochures to an advertising company. Each box can only contain one-fifth of the brochures. How many boxes are needed to ship those brochures?",
+    "selected_path_idx": 5,
+    "scores": [
+      0.0001864887453848496,
+      0.00018727456335909665,
+      0.00018258059571962804,
+      0.000194569569430314,
+      0.00020352030696813017,
+      0.0002057994861388579,
+      0.00017489584570284933,
+      0.0001922859955811873,
+      0.0002021541295107454,
+      0.00018129618547391146
+    ],
+    "predicted_answer": "5 boxes",
+    "ground_truth": "5000 x 1/5 = <<5000*1/5=1000>>1000 brochures can fit in one box.\nThus, 5000/1000 = <<5000/1000=5>>5 boxes are needed\n#### 5"
+  },
+  {
+    "question": "Mona plays a multiplayer video game on the weekends. She joins groups with four other players to complete objectives in the game. The past weekend, she joined 9 groups. One of the groups included two players she had grouped with before that weekend, and another group included one person she had grouped with before. How many unique players did Mona group with on the video game that weekend?",
+    "selected_path_idx": 3,
+    "scores": [
+      0.0001857489114627242,
+      0.0001925308897625655,
+      0.00019316804537083954,
+      0.00019707488536369056,
+      0.00018829101463779807,
+      0.00018756657664198428,
+      0.00019112692098133266,
+      0.00017980548727791756,
+      0.0001821559708332643,
+      0.0001819775061449036
+    ],
+    "predicted_answer": "33",
+    "ground_truth": "Mona joined 9 groups, so she played with 9 * 4 = <<9*4=36>>36 people.\nShe grouped with 2 + 1 = <<2+1=3>>3 people twice.\nThus, she played with 36 - 3 = <<36-3=33>>33 unique players that weekend.\n#### 33"
+  },
+  {
+    "question": "John is twice as old as Mary and half as old as Tonya. If Tanya is 60, what is their average age?",
+    "selected_path_idx": 7,
+    "scores": [
+      0.00017128042236436158,
+      0.00017818089690990746,
+      0.00017870050214696676,
+      0.00017748431127984077,
+      0.00017189854406751692,
+      0.0001713699457468465,
+      0.0001728500210447237,
+      0.0001800908357836306,
+      0.00018006525351665914,
+      0.0001723267196211964
+    ],
+    "predicted_answer": "60",
+    "ground_truth": "John is 30 because 60 / 2 = <<60/2=30>>30\nMary is fifteen because 30 / 2 = <<30/2=15>>15\nTheir total age is 105 because 60 + 30 + 15 = <<60+30+15=105>>105\nTheir average age is 35 because 105 / 3 = <<105/3=35>>35\n#### 35"
+  },
+  {
+    "question": "Elsa started the day with 40 marbles.  At breakfast, she lost 3 marbles while playing.  At lunchtime, she gave her best friend Susie 5 marbles.  In the afternoon, Elsa's mom bought her a new bag with 12 marbles.  Susie came back and gave Elsa twice as many marbles as she received at lunch.  How many marbles did Elsa end the day with?",
+    "selected_path_idx": 5,
+    "scores": [
+      0.0001720177533570677,
+      0.00017251727695111185,
+      0.00017498660599812865,
+      0.00017182349984068424,
+      0.00017871787713374943,
+      0.0001819906901801005,
+      0.00017029745504260063,
+      0.0001767744543030858,
+      0.00017498091619927436,
+      0.00017784888041205704
+    ],
+    "predicted_answer": "Elsa ended the day with boxed54 marbles.",
+    "ground_truth": "Elsa had 40 marbles - 3 - 5 = <<40-3-5=32>>32 marbles.\nElsa then gained 12 marbles + 32 = <<12+32=44>>44 marbles.\nAt dinner Elsa received 2 * 5 marbles from Susie = <<2*5=10>>10 marbles.\nIn total Elsa had 44 marbles + 10 = <<44+10=54>>54 marbles.\n#### 54"
+  },
+  {
+    "question": "Nina has two pairs of shoes. She bought one of them for $22, and the second one was 50% more expensive. How much did Nina pay for both pairs of shoes?",
+    "selected_path_idx": 3,
+    "scores": [
+      0.00018116450519300997,
+      0.0001810042595025152,
+      0.00017747824313119054,
+      0.00018420825654175133,
+      0.00018001769785769284,
+      0.0001807397056836635,
+      0.00017834424215834588,
+      0.000175491877598688,
+      0.0001768444199115038,
+      0.00018257173360325396
+    ],
+    "predicted_answer": "55",
+    "ground_truth": "The second pair of shoes was 50/100 * 22 = $<<50/100*22=11>>11 more expensive.\nThat means that the second pair's price was 22 + 11 = $<<22+11=33>>33.\nSo for both pairs of shoes, Nina paid 33 + 22 = $<<33+22=55>>55.\n#### 55"
+  },
+  {
+    "question": "Henry, John and Leo collected some seashells from the beach. Henry collected 11, Paul 24. If they initially collected 59 seashells in total and Leo gave a quarter of his collection to a younger kid they met, how many do they have in total now?",
+    "selected_path_idx": 9,
+    "scores": [
+      0.0001872531429398805,
+      0.00017843488603830338,
+      0.00016798317665234208,
+      0.00017619809659663588,
+      0.00017511009355075657,
+      0.00017055682837963104,
+      0.00017051975009962916,
+      0.00017000040679704398,
+      0.00018359278328716755,
+      0.00018783501582220197
+    ],
+    "predicted_answer": "53",
+    "ground_truth": "Henry and Paul collected a total of 11+24 = <<11+24=35>>35 seashells\nTo make a total of 59, Leo must have collected 59-35 = <<59-35=24>>24 seashells\nHe gave out a quarter of 24 seashells which is 24*(1/4) = <<24*(1/4)=6>>6 seashells\nThey are now left with 59-6 = <<59-6=53>>53 seashells\n#### 53"
+  },
+  {
+    "question": "Randolph is 5 years older than Sydney. Sydney is twice as old as Sherry. If Sherry is 25, how old is Randolph?",
+    "selected_path_idx": 9,
+    "scores": [
+      0.00016804036567918956,
+      0.00017575680976733565,
+      0.00017177335394080728,
+      0.0001818359742173925,
+      0.00018001324497163296,
+      0.00017973555077333003,
+      0.0001753162796376273,
+      0.0001731150841806084,
+      0.00017558762920089066,
+      0.0001906046090880409
+    ],
+    "predicted_answer": "boxed55",
+    "ground_truth": "Sydney is 25*2 = <<25*2=50>>50 years old.\nRandolph is 50+5 = <<50+5=55>>55 years old.\n#### 55"
+  },
+  {
+    "question": "If you double a number and add 5 to the result, then that's 20 more than half of the original number. What's the original number?",
+    "selected_path_idx": 8,
+    "scores": [
+      0.00018418753461446613,
+      0.0001838215539464727,
+      0.00017450805171392858,
+      0.00017136879614554346,
+      0.0001671633217483759,
+      0.00018607720267027617,
+      0.00017944222781807184,
+      0.0001865876402007416,
+      0.00018829875625669956,
+      0.00018151757831219584
+    ],
+    "predicted_answer": "10",
+    "ground_truth": "Let x be the original number.\n2*x+5=20+x/2\n2*x-x/2=15\n4*x-x=30\n3*x=30\nx=<<10=10>>10\n#### 4"
+  },
+  {
+    "question": "In the beginning, Justine had 10 more rubber bands than Bailey but 2 fewer bands than Ylona. Bailey decided to give two bands each to Justine and Ylona so that he is left with only 8 rubber bands. How many rubber bands did Ylona have in the beginning?",
+    "selected_path_idx": 3,
+    "scores": [
+      0.0001666810567257926,
+      0.00017213638057000935,
+      0.00017861397645901889,
+      0.0001833413989515975,
+      0.0001815127325244248,
+      0.00017489217862021178,
+      0.0001714183163130656,
+      0.00017942888371180743,
+      0.00017810208373703063,
+      0.0001806242944439873
+    ],
+    "predicted_answer": "24 for Ylonas initial count",
+    "ground_truth": "Bailey gave 2 + 2 = <<2+2=4>>4 bands.\nSo Bailey had 8 + 4 = <<8+4=12>>12 bands in the beginning.\nJustine had 12 + 10 = <<12+10=22>>22 bands in the beginning.\nThus, Ylona had 22 + 2 = <<22+2=24>>24 bands in the beginning.\n#### 24"
+  },
+  {
+    "question": "Borris liquor store uses 90 kilograms of grapes every 6 months. He is thinking of increasing his production by twenty percent. How many grapes does he need in a year after increasing his production?",
+    "selected_path_idx": 8,
+    "scores": [
+      0.00018234504386782646,
+      0.00018060948059428483,
+      0.0001700834254734218,
+      0.00017467320139985532,
+      0.00017358352488372475,
+      0.00018018684932030737,
+      0.00017679992015473545,
+      0.00017416727496311069,
+      0.0001837444433476776,
+      0.00017597312398720533
+    ],
+    "predicted_answer": "216 kg",
+    "ground_truth": "Borris uses 90 x 2 = <<90*2=180>>180 kilograms of grapes per year.\nThe increase of kilograms of grapes he needed per year is 180 x 0.20 = <<180*0.20=36>>36.\nTherefore, Borris needs 180 + 36 = <<180+36=216>>216 kilograms of grapes in a year.\n#### 216"
+  },
+  {
+    "question": "John was 66 inches tall.  He had a growth spurt and grew 2 inches per month for 3 months.  How tall is he in feet?",
+    "selected_path_idx": 3,
+    "scores": [
+      0.0001692018413450569,
+      0.0001703653542790562,
+      0.000168515311088413,
+      0.00018273229943588376,
+      0.00017048123118001968,
+      0.00017196380940731615,
+      0.00017165254394058138,
+      0.00017640384612604976,
+      0.00017188364290632308,
+      0.00017734154243953526
+    ],
+    "predicted_answer": "John is 6 feet tall.",
+    "ground_truth": "He gained 2*3=<<2*3=6>>6 inches\nSo his height is 66+6=<<66+6=72>>72 inches\nSo he is 72/12=<<72/12=6>>6 feet tall\n#### 6"
+  },
+  {
+    "question": "Phil has 10 books that are all 100 pages each.  He moves to a new home and during the move, 2 books are lost.  How many pages worth of books does Phil have left?",
+    "selected_path_idx": 8,
+    "scores": [
+      0.00017568895418662578,
+      0.00018194869335275143,
+      0.00018397199164610356,
+      0.00017141422722488642,
+      0.00017141210264526308,
+      0.00017992709763348103,
+      0.0001738357823342085,
+      0.00017971928173210472,
+      0.00018589435785543174,
+      0.00017610019131097943
+    ],
+    "predicted_answer": "Phil has boxed800 pages worth of books left.",
+    "ground_truth": "Phil starts with 10 books and loses 2, for 10-2=<<10-2=8>>8 books\nEach of Phil's remaining books has 100 pages, so he has 8*100= <<8*100=800>>800 pages worth of books\n#### 800"
+  },
+  {
+    "question": "Mandy is 3 years old. Her brother is 4 times as old as she is. Her sister is 5 years younger than her brother.  What is the age difference between Mandy and her sister?",
+    "selected_path_idx": 5,
+    "scores": [
+      0.00016616913489997387,
+      0.00017335344455204904,
+      0.00017679823213256896,
+      0.00017995110829360783,
+      0.0001714034442557022,
+      0.00018625454686116427,
+      0.00017570082854945213,
+      0.00017875488265417516,
+      0.00018219123012386262,
+      0.0001714868121780455
+    ],
+    "predicted_answer": "4 years",
+    "ground_truth": "Mandy's brother's age is 3 years x 4 = <<3*4=12>>12 years old.\nHer sister's age is 12 years - 5 years = <<12-5=7>>7 years old.\nThe age difference between Mandy and her sister is 7 years - 3 years = <<7-3=4>>4 years.\n#### 4"
+  },
+  {
+    "question": "Jamie is in a walking group with 4 other ladies.  The ladies all walk 3 miles together.  On top of that, Jamie walks an additional 2 miles per day for 6 days while her friend Sue walks half that amount in 6 days.  If they walk this same route 6 days a week, how many miles do the ladies walk in total?",
+    "selected_path_idx": 2,
+    "scores": [
+      0.00018543197074905038,
+      0.00019317651458550245,
+      0.00019331509247422218,
+      0.00018423284927848727,
+      0.0001832961424952373,
+      0.0001872167194960639,
+      0.0001880956260720268,
+      0.00018961034948006272,
+      0.0001819558092392981,
+      0.00019295193487778306
+    ],
+    "predicted_answer": "that Sue walks 1 mile per day",
+    "ground_truth": "There are 5 ladies total in the group. They all walk 3 miles a day for 6 days so 3*6 = 18 miles\nJamie walks an additional 2 miles per day for 6 days so 2*6 = <<2*6=12>>12 miles\nSue walks half the distance of Jamie so 12/2 = <<12/2=6>>6 miles\nTogether, the ladies walk 18+12+6 = <<18+12+6=36>>36 miles\n#### 36"
+  },
+  {
+    "question": "I bought a pair of shoes for $51. The shoes were already marked 75% off. What is the original price of the shoes?",
+    "selected_path_idx": 0,
+    "scores": [
+      0.00019093255104962736,
+      0.00017603152082301676,
+      0.0001722700399113819,
+      0.00017588555056136101,
+      0.0001763429754646495,
+      0.00017354944429825991,
+      0.00018386363808531314,
+      0.00018116622231900692,
+      0.00017163780285045505,
+      0.00017991715867538005
+    ],
+    "predicted_answer": "75",
+    "ground_truth": "Let X be the original price of the shoes.\nThe discounted price is X - X*75% = 0.25 * X = $51.\nThe original price of the shirt was X = $51 * 4 = $<<51*4=204>>204.\n#### 204"
+  },
+  {
+    "question": "Brady will make $450 more in a year than Dwayne. If Dwayne makes $1,500 in a year, how much will Brady and Dwayne make combined in a year?",
+    "selected_path_idx": 9,
+    "scores": [
+      0.00018050411017611623,
+      0.00018905829347204417,
+      0.00018210752750746906,
+      0.0001891910214908421,
+      0.00018731564341578633,
+      0.00018884391465689987,
+      0.00018295005429536104,
+      0.0001824085193220526,
+      0.00018459507555235177,
+      0.00019660397083498538
+    ],
+    "predicted_answer": "3",
+    "ground_truth": "Brady will make $450 + $1500 = $<<450+1500=1950>>1950.\nCombined, Brady and Dwayne will make $1950 + $1500 = $<<1950+1500=3450>>3450 in a year.\n#### 3450"
+  },
+  {
+    "question": "Cappuccinos cost $2, iced teas cost $3, cafe lattes cost $1.5 and espressos cost $1 each. Sandy orders some drinks for herself and some friends. She orders three cappuccinos, two iced teas, two cafe lattes, and two espressos. How much change does she receive back for a twenty-dollar bill?",
+    "selected_path_idx": 2,
+    "scores": [
+      0.00017513983766548336,
+      0.00017349698464386165,
+      0.00018091178208123893,
+      0.00017279335588682443,
+      0.0001766531349858269,
+      0.00017164941527880728,
+      0.00017202562594320625,
+      0.00017514836508780718,
+      0.00017850908625405282,
+      0.00017386596300639212
+    ],
+    "predicted_answer": "3",
+    "ground_truth": "Find the total cost of the cappuccinos by multiplying the price by the quantity: 3 cappuccinos x $2/cappuccino = $<<3*2=6>>6\nThen do the same for the iced teas: 2 iced teas x $3/tea = $<<2*3=6>>6\nThen do the same for the cafe lattes: 2 lattes x $1.5/latte = $<<2*1.5=3>>3\nThen do the same for the espressos: 2 espressos x $1 = $<<2*1=2>>2\nIn total Sandy pays $6 + $6 + $3 + $2 = $<<6+6+3+2=17>>17\nSandy will receive $20 - $17 = $<<20-17=3>>3 in change\n#### 3"
+  },
+  {
+    "question": "Claire is scheduling her day. She has four hours to clean and two hours to cook, then divides the rest of her working day equally between crafting and tailoring. She then sleeps eight hours. If all of this takes place within one day, how many hours did Claire spend crafting?",
+    "selected_path_idx": 7,
+    "scores": [
+      0.0002036763762589544,
+      0.0002016904909396544,
+      0.0001965374540304765,
+      0.00019729034102056175,
+      0.00019875475845765322,
+      0.00019954466552007943,
+      0.00020112821948714554,
+      0.00020952917111571878,
+      0.0001980789820663631,
+      0.00019349873764440417
+    ],
+    "predicted_answer": "5",
+    "ground_truth": "We know Claire has spent a total of 24 hours in a day - 4 hours cleaning - 2 hours cooking - 8 hours sleeping = 10 hours crafting and tailoring.\nSince she split her time equally, she must have spent 10 hours * 0.5 = <<10*0.5=5>>5 hours crafting.\n#### 5"
+  },
+  {
+    "question": "A shopping center sells T-shirts at $8 each, a sweater at $18,  and a jacket at $80. The jacket is on sale with a 10% discount. The sales tax is 5%.  Kevin wants to buy six T-shirts, four sweaters, and five jackets for his children. How much does Kevin have to pay for all the items, including the sales tax?",
+    "selected_path_idx": 1,
+    "scores": [
+      0.00018548147636465728,
+      0.00018862148863263428,
+      0.00017101524281315506,
+      0.00017376767937093973,
+      0.00017487650620751083,
+      0.00017320046026725322,
+      0.00017399962234776467,
+      0.00017103611025959253,
+      0.00017556987586431205,
+      0.00017771328566595912
+    ],
+    "predicted_answer": "360",
+    "ground_truth": "The six T-shirts cost 6 x $8 = $<<6*8=48>>48.\nThe four sweaters cost 4 x $18 = $<<4*18=72>>72.\nAnd five jackets normally cost 5 x $80 = $<<5*80=400>>400.\nSo, a discount of 10/100 x $400 = $<<10/100*400=40>>40 for the five jackets.\nThus, the selling price of the five jackets is $400 - $40 = $<<400-40=360>>360.\nHence, the total cost of all the items is $48 + $72 + $360 = $<<48+72+360=480>>480.\nThe sales tax is equal to 5/100 x $480 = $<<5/100*480=24>>24.\nTherefore, Kevin has to pay $480 + $24 = $<<480+24=504>>504. including the sales tax.\n#### 504"
+  },
+  {
+    "question": "One pie costs $4 for a piece. Each pie is having 3 pieces. During one hour the bakery can make 12 pies. Creating one pie costs the bakery $0.5. Considering the bakery would be able to sell all pie pieces, how much money would it make?",
+    "selected_path_idx": 0,
+    "scores": [
+      0.00018423250003252178,
+      0.00017907950677908957,
+      0.00017810308781918138,
+      0.00017685655620880425,
+      0.0001729632931528613,
+      0.00017323397332802415,
+      0.00017481582472100854,
+      0.0001759214501362294,
+      0.0001797107106540352,
+      0.00017688405932858586
+    ],
+    "predicted_answer": "likely the profit",
+    "ground_truth": "If the bakery can make 12 pies, this means there would be 12 * 3 = <<12*3=36>>36 pie pieces.\nFor all the pieces the bakery would make 36 * 4 = $<<36*4=144>>144.\nThe cost of making 12 pies is 12 * 0.5 = $<<12*0.5=6>>6.\nThat means the bakery would make 144 - 6 = $<<144-6=138>>138.\n#### 138"
+  },
+  {
+    "question": "Elise is buying more dog food. She buys a 15kg bag then another 10kg bag, and she now has 40kg of dog food. How many kilograms of dog food did Elise already have?",
+    "selected_path_idx": 3,
+    "scores": [
+      0.00017934558854904026,
+      0.00016794905241113156,
+      0.0001724738540360704,
+      0.00018034892855212092,
+      0.0001716684055281803,
+      0.00017580072744749486,
+      0.0001734695106279105,
+      0.00017330056289210916,
+      0.00017751919222064316,
+      0.00017562680295668542
+    ],
+    "predicted_answer": "15kg",
+    "ground_truth": "Elise has bought a total of 15 kg + 10 kg = <<15+10=25>>25kg of dog food.\nThis means she already had 40 kg – 25 kg = <<40-25=15>>15kg of dog food.\n#### 15"
+  },
+  {
+    "question": "Bridge and Sarah have $3 between them. If Bridget has 50 cents more than Sarah, how many cents does Sarah have?",
+    "selected_path_idx": 0,
+    "scores": [
+      0.00017675374692771584,
+      0.00016993233293760568,
+      0.00016896662418730557,
+      0.00016741344006732106,
+      0.00016599446826148778,
+      0.00017085827130358666,
+      0.00017244326591026038,
+      0.0001742476742947474,
+      0.00016640093235764652,
+      0.00016660653636790812
+    ],
+    "predicted_answer": "175",
+    "ground_truth": "Let X be the amount of money Sarah has, so Bridget has X + 50 cents\nWe know that Sarah and Bridget combined have $3, or 300 cents, so X + X + 50 = 300\nWe therefore know that 2X = 250\nSo Sarah has 250 / 2 = <<250/2=125>>125 cents\n#### 125"
+  },
+  {
+    "question": "Dani brings two and half dozen cupcakes for her 2nd-grade class.  There are 27 students (including Dani), 1 teacher, and 1 teacher’s aid.  If 3 students called in sick that day, how many cupcakes are left after Dani gives one to everyone in the class?",
+    "selected_path_idx": 9,
+    "scores": [
+      0.0001904830423882231,
+      0.00018302891112398356,
+      0.00017731788102537394,
+      0.00018788983288686723,
+      0.00018481558072380722,
+      0.00019239199173171073,
+      0.0001922507944982499,
+      0.00017792351718526334,
+      0.00017999143165070564,
+      0.00019333425734657794
+    ],
+    "predicted_answer": "24",
+    "ground_truth": "Dani brings 2.5 x 12 = <<2.5*12=30>>30 cupcakes.\nShe needs this many cupcakes to feed everyone in class 27 + 2 = <<27+2=29>>29.\nWith the 3 students calling in sick, there are this many people in class today 29 - 3 = <<29-3=26>>26.\nThere are this many cupcakes left after everyone gets one 30 - 26 = <<30-26=4>>4 cupcakes.\n#### 4"
+  },
+  {
+    "question": "Maddox and Theo both bought 3 Polaroid Cameras, each sold at $20 per camera from Amazon, and decided to sell them on eBay. Maddox sold his cameras at $28 each, while Theo sold his cameras at $23 each. How much more profit did Maddox get from the sale of his cameras than Theo?",
+    "selected_path_idx": 5,
+    "scores": [
+      0.00017869591829366982,
+      0.00017279860912822187,
+      0.00017454200133215636,
+      0.00017704250058159232,
+      0.00017163011943921447,
+      0.00018136185826733708,
+      0.00017955656221602112,
+      0.0001748016511555761,
+      0.0001750924129737541,
+      0.0001732716482365504
+    ],
+    "predicted_answer": "boxed15",
+    "ground_truth": "The total cost of buying 3 cameras from Amazon for both Maddox and Theo was 3*$20=$<<3*20=60>>60\nMaddox sold his cameras at $28 each, for a total of $28*3=$<<28*3=84>>84\nMaddox made a profit of $84-$60=$<<84-60=24>>24 from the sale of his cameras.\nTheo sold his cameras on eBay for $23*3=$<<23*3=69>>69\nTheo made a profit of $69-$60=$<<69-60=9>>9\nMaddox made $24-$9=$15 more profit than Theo from the sale of his cameras.\n#### 15"
+  },
+  {
+    "question": "A retailer sells any shirt for the same price and any pair of pants for the same price, but the price of shirts and pants are not the same. Say you bought 2 shirts and 3 pairs of pants for $120 in total, then you realized you didn't need the extra pants. What's the price of 1 shirt at this place if when you returned all 3 pairs of pants you were refunded 25% of what you originally paid?",
+    "selected_path_idx": 7,
+    "scores": [
+      0.00017973400827031583,
+      0.00017732683045323938,
+      0.00017981887503992766,
+      0.0001756278215907514,
+      0.00017500629473943263,
+      0.00017966788436751813,
+      0.00018120199092663825,
+      0.00018796346557792276,
+      0.0001791123067960143,
+      0.00018235165043734014
+    ],
+    "predicted_answer": "30",
+    "ground_truth": "If I paid $120 and I was refunded 25% for all the 3 pants, then that means I received 25%*120=$<<120*25*.01=30>>30\nThis means the total price of the 2 shirts was 120-30 = <<120-30=90>>90\nThe price of one shirt is thus 90/2 = <<90/2=45>>45\n#### 45"
+  },
+  {
+    "question": "A sack of rice, which is 50 kilograms,  costs $50. If David sells it for $1.20 per kilogram, how much will be his profit?",
+    "selected_path_idx": 5,
+    "scores": [
+      0.0001739594736136496,
+      0.00017475349886808544,
+      0.000168270300491713,
+      0.00016833269910421222,
+      0.00017279367602895945,
+      0.00017568474868312478,
+      0.00017440691590309143,
+      0.0001721624721540138,
+      0.0001702437293715775,
+      0.00017429054423701018
+    ],
+    "predicted_answer": "10",
+    "ground_truth": "David's revenue for the 50 kilograms of rice is $1.20 x 50 = $<<1.20*50=60>>60.\nSo, his profit is $60 - $50 = $<<60-50=10>>10.\n#### 10"
+  },
+  {
+    "question": "Amy is collecting candy for the car pool. She has 5 chocolate bars, 7 times as many M&Ms as chocolate bars, and 6 times as many marshmallows as M&Ms. Amy then arranges the candies into baskets. If she fills each basket with 10 candies, how many baskets will Amy fill?",
+    "selected_path_idx": 4,
+    "scores": [
+      0.00018130084208678454,
+      0.00017416611080989242,
+      0.0001714130921754986,
+      0.00017143890727311373,
+      0.00018249862478114665,
+      0.00017989003390539438,
+      0.00017111896886490285,
+      0.00016903624054975808,
+      0.0001747578353388235,
+      0.0001702447043498978
+    ],
+    "predicted_answer": "25",
+    "ground_truth": "Amy has 5*7=<<5*7=35>>35 M&Ms.\nAmy has 35*6=<<35*6=210>>210 marshmallows.\nAmy has 5+35+210=<<5+35+210=250>>250 candies.\nShe fills 250/10=<<250/10=25>>25 baskets.\n#### 25"
+  }
+]

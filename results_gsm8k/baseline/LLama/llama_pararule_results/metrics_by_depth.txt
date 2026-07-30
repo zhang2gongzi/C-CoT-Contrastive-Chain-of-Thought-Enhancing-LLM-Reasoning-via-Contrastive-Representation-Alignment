@@ -1,0 +1,35 @@
+评估时间: 2025-09-09 14:02:37.392827
+模型路径: /home2/zzl/model/Llama-2-7b-chat-hf
+深度2数据集路径: /home2/zzl/ChatLogic/PARARULE-Plus/Depth2/PARARULE_Plus_Depth2_shuffled_dev_huggingface.jsonl
+深度3数据集路径: /home2/zzl/ChatLogic/PARARULE-Plus/Depth3/PARARULE_Plus_Depth3_shuffled_dev_huggingface.jsonl
+深度4数据集路径: /home2/zzl/ChatLogic/PARARULE-Plus/Depth4/PARARULE_Plus_Depth4_shuffled_dev_huggingface.jsonl
+深度5数据集路径: /home2/zzl/ChatLogic/PARARULE-Plus/Depth5/PARARULE_Plus_Depth5_shuffled_dev_huggingface.jsonl
+
+===== 按深度指标 =====
+深度 2:
+  总样本数: 500
+  正确数: 253
+  提取失败数: 0
+  准确率: 0.5060
+深度 3:
+  总样本数: 500
+  正确数: 241
+  提取失败数: 0
+  准确率: 0.4820
+深度 4:
+  总样本数: 500
+  正确数: 252
+  提取失败数: 0
+  准确率: 0.5040
+深度 5:
+  总样本数: 500
+  正确数: 259
+  提取失败数: 0
+  准确率: 0.5180
+
+===== 整体指标 =====
+总样本数: 2000
+正确数: 1005
+提取失败数: 0
+准确率: 0.5025
+成功提取率: 1.0000

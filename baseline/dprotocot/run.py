@@ -96,37 +96,11 @@ def cmd_granularity(cfg):
 
 
 def cmd_baselines(cfg, args):
-    """Standard methods + Self-Certainty-BERT + LLM-based baselines (USC, GenSelect)."""
-    from llm_utils import get_llm
-
+    """Standard methods + Self-Certainty-BERT + Centroid + D-ProtoCoT."""
     train_t, val_t, test_g = _prepare(cfg)
     enc = train_encoder(cfg, train_t, val_t)
-
-    # 1) Standard + Self-Certainty-BERT + Centroid + D-ProtoCoT
     res = evaluate_all(cfg, test_g, enc)
     print_results(f"baselines | input={cfg.input_mode}", res)
-
-    # 2) LLM-based baselines (if a backend is configured)
-    if args.llm_backend:
-        print(f"\n[baselines] setting up LLM backend: {args.llm_backend} "
-              f"model={args.llm_model}")
-        llm_kw = {}
-        if args.llm_base_url:
-            llm_kw["base_url"] = args.llm_base_url
-        if args.llm_api_key:
-            llm_kw["api_key"] = args.llm_api_key
-        llm = get_llm(args.llm_backend, model=args.llm_model, **llm_kw)
-
-        llm_results = evaluate_llm_baselines(
-            test_g, llm,
-            include_pairwise=args.include_pairwise,
-        )
-        print_results(f"LLM baselines | input={cfg.input_mode}", llm_results)
-
-        # merge for final summary
-        res.update(llm_results)
-
-    print_results(f"ALL baselines | input={cfg.input_mode}", res)
 
 
 def main():

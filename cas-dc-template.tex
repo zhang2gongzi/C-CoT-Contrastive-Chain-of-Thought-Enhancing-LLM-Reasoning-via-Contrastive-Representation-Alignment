@@ -1,0 +1,599 @@
+\documentclass[a4paper,fleqn]{cas-dc}
+
+\usepackage[authoryear,longnamesfirst]{natbib}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}         
+
+\shorttitle{D-ProtoCoT}
+\shortauthors{}
+
+\tnotemark[1,2]
+
+\tnotetext[1]{This work was supported by the Sichuan Science and Technology Program under Grant No. 2024YFFK0251.}
+   
+\title[mode=title]{D-ProtoCoT: Prototype-Based Path Selection for Chain-of-Thought Reasoning}
+
+
+\author[1]{Zhilei Zhang}[type=editor,
+                        style=chinese,
+                        orcid=0009-0005-8710-0067]
+
+\cormark[1]
+\fnmark[1]
+\ead{3240609015@stu.cuit.edu.cn}
+
+\credit{}
+\affiliation[1]{organization={School of Computer Science, Chengdu University of Information Technology},
+            addressline={No. 24, Section 1, Xuefu Road, Shuangliu District},
+            city={Chengdu},
+            postcode={610225},
+            state={Sichuan},
+            country={China}}
+
+\author[1,2]{Ao Feng}[style=chinese,
+                      orcid=0000-0001-6231-7810]
+\fnmark[1]
+\ead{fengao@cuit.edu.cn}
+\ead[url]{https://jsjxyen.cuit.edu.cn/info/1073/1243.htm}
+\credit{}
+\affiliation[2]{organization={Chengdu Lingshu Health Co. Ltd.},
+            addressline={},
+            city={Chengdu},
+            postcode={610041},
+            state={Sichuan},
+            country={China}}
+
+\cortext[1]{Corresponding author}
+
+\fntext[fn1]{Zhilei Zhang and Ao Feng contributed equally to this work and serve as first authors.}
+
+
+\begin{abstract}
+Chain-of-Thought (CoT) prompting enables large language models to solve complex reasoning tasks by generating explicit multi-step reasoning paths. To improve robustness, self-consistency aggregates multiple sampled CoT paths via majority voting over final answers. However, this strategy operates purely at the answer level and implicitly assumes uniform reasoning quality, overlooking substantial variation among reasoning paths that yield the same answer.
+
+In this work, we propose \textbf{D-ProtoCoT}, an inference-time framework for selecting high-quality reasoning paths based on representation-level alignment. Unlike Outcome Reward Models (ORMs) that score paths by predicting answer correctness, or Process Reward Models (PRMs) that require expensive step-level human annotation, D-ProtoCoT employs a step-level InfoNCE objective that treats each individual reasoning step as an independent alignment target. This yields process-level supervision granularity using only gold answer supervision, without any step-level annotation. At inference time, a dynamic reasoning prototype is constructed by aggregating path-level embeddings with similarity-based weighting, and the reasoning path that is best aligned with the prototype is selected.
+
+D-ProtoCoT does not modify the underlying language model and requires no additional annotation beyond gold answers. Experiments on CommonsenseQA, GSM8K, and StrategyQA with LLaMA-3.1-8B-Instruct and Qwen3-8B show that D-ProtoCoT consistently outperforms self-consistency across most settings, achieving up to 23.6\% absolute improvement on StrategyQA. Ablation analysis further confirms the performance gain contributed by step-level contrastive training and path-level prototype selection, and that naive centroid-based selection with frozen embeddings yields substantially inferior performance.
+\end{abstract}
+
+\begin{highlights}
+\item D-ProtoCoT selects reasoning paths via contrastive representation alignment rather than answer-level voting
+\item Step-level InfoNCE training achieves process-level supervision granularity at outcome-level annotation cost
+\item Consistent gains over self-consistency across three benchmarks and two model families
+\end{highlights}
+
+\begin{keywords}
+Chain-of-Thought reasoning \sep Self-consistency \sep Contrastive learning \sep Prototype-based selection \sep Reasoning path selection
+\end{keywords}
+
+\maketitle
+
+\section{Introduction}
+
+Large Language Models (LLMs) have shown strong performance on multi-step reasoning tasks when guided by Chain-of-Thought (CoT) \citep{wei2023chainofthoughtpromptingelicitsreasoning} prompting, which encourages models to generate explicit intermediate reasoning steps before producing a final answer.
+To further improve robustness, self-consistency \citep{wang2023selfconsistencyimproveschainofthoughtreasoning} samples multiple CoT reasoning paths and aggregates their final answers via majority voting.
+This combination has become a standard inference strategy for reasoning benchmarks such as GSM8K, CommonsenseQA, and StrategyQA.
+
+Despite its effectiveness, self-consistency operates solely at the answer level.
+It implicitly assumes that all reasoning paths leading to the same answer are equally reliable, and that answer frequency is a sufficient proxy for reasoning quality.
+In practice, different reasoning paths may arrive at the same answer through substantially different logical processes, including flawed or internally inconsistent reasoning.
+As a result, answer-level agreement often fails to reflect the true quality of reasoning.
+
+This limitation naturally raises the question of whether reasoning paths can be evaluated and compared directly, rather than aggregated only through their final answers.
+A straightforward idea is to embed reasoning chains into a semantic space and perform aggregation using simple statistics such as centroids.
+However, empirical analysis shows that such naive semantic aggregation is insufficient.
+Even with strong pretrained encoders, correct and incorrect reasoning paths are often entangled in the embedding space, as surface-level semantic similarity does not reliably capture logical validity.
+
+To address this limitation, this work proposes \textbf{D-ProtoCoT} (Dynamic Prototype-based Chain-of-Thought), an inference-time framework for reasoning path selection that operates in a contrastively aligned representation space.
+D-ProtoCoT fine-tunes a lightweight auxiliary encoder using a step-level InfoNCE objective derived from gold answer matching, pulling correct reasoning paths closer to their corresponding questions while pushing incorrect ones away, without modifying the underlying language model.
+At inference time, a \emph{dynamic reasoning prototype} is constructed for each question by aggregating all sampled path embeddings with similarity-based weighting, and the path that is best aligned with the prototype is selected.
+This design differs from verifier-based approaches \citep{cobbe2021trainingverifiers} that make explicit correctness judgments, confidence-based methods \citep{chia2023contrastivechainofthoughtprompting} that rely on model-internal token probabilities, and reward-model-based approaches that require modifying the base language model. D-ProtoCoT shapes a representation space in which semantic alignment serves as an implicit proxy for reasoning quality, requiring no gold answers or parameter updates at inference time.
+
+D-ProtoCoT is evaluated on GSM8K, CommonsenseQA, and StrategyQA using two representative instruction-tuned LLMs: LLaMA-3.1-8B-Instruct and Qwen3-8B.
+Experimental results show that D-ProtoCoT consistently outperforms standard CoT decoding and self-consistency across tasks and model families, with particularly large gains on reasoning-intensive benchmarks.
+Further ablation studies and qualitative analyses demonstrate that representation alignment is critical, as naive centroid-based selection with frozen embeddings yields substantially inferior performance.
+
+The main contributions of this work are summarized as follows:
+\begin{itemize}
+    \item D-ProtoCoT is proposed as an inference-time framework for selecting CoT reasoning paths based on representation-level alignment rather than answer-level aggregation, offering a fundamentally different paradigm from verifier-based and reward-model-based approaches.
+    \item A step-level InfoNCE contrastive objective is introduced that treats each individual reasoning step as an independent alignment target, achieving process-level supervision granularity without step-level annotation beyond gold answers. It involves an annotation cost equivalent to Outcome Reward Models (ORMs) while capturing step-aware reasoning structure closer to Process Reward Models (PRMs).
+    \item The effectiveness of D-ProtoCoT is demonstrated across multiple reasoning benchmarks and model families. Ablation analysis confirms that step-level contrastive training and path-level prototype selection both contribute to performance gains over naive semantic aggregation.
+\end{itemize}
+
+\section{Related Work}
+
+\subsection{Chain-of-Thought Reasoning and Self-Consistency}
+
+Chain-of-Thought prompting enables large language models to solve multi-step reasoning problems by explicitly generating intermediate reasoning steps \citep{wei2023chainofthoughtpromptingelicitsreasoning}.
+Building on this paradigm, self-consistency improves robustness by sampling multiple reasoning paths and aggregating final answers through majority voting \citep{wang2023selfconsistencyimproveschainofthoughtreasoning}.
+This strategy has become a standard inference-time technique for reasoning benchmarks such as GSM8K, CommonsenseQA, and StrategyQA, and has been shown to be particularly effective on challenging multi-step reasoning tasks \citep{suzgun-etal-2023-challenging}.
+
+Despite its empirical success, self-consistency operates purely at the answer level and implicitly assumes that reasoning paths leading to the same answer are equally reliable.
+Several studies have noted that majority voting may amplify spurious reasoning patterns and fail when correct reasoning paths are not numerically dominant \citep{fu2023complexitybased, zhou2023leasttomost}.
+Recent work has also sought to improve the efficiency of self-consistency by leveraging reasoning path quality for early stopping \citep{wan2025reasoning} or by pruning low-confidence hypotheses during decoding \citep{sultan-astudillo-2025-confidence}.
+D-ProtoCoT improves upon answer-level aggregation by directly operating on reasoning representations, enabling path selection based on semantic and structural alignment rather than answer frequency.
+
+\subsection{Reasoning Path Selection and Verification}
+
+A related series of work focuses on selecting or validating reasoning paths using external signals.
+\textbf{Verifier-based methods} train separate models to explicitly assess the correctness of generated reasoning chains or intermediate steps \citep{cobbe2021trainingverifiers, lightman2023letsverify}.
+These methods typically require large-scale verification datasets and produce binary correctness predictions, but do not capture nuanced differences in reasoning quality.
+
+\textbf{Outcome Reward Models (ORMs)} \citep{cobbe2021trainingverifiers} train a classifier to predict whether a full reasoning path leads to the correct answer, using gold-answer labels as supervision.
+ORMs are computationally lightweight and require no step-level annotation, but they are fundamentally limited to path-level binary scoring. They fail to account for flawed intermediate reasoning that happens to reach a correct final answer, and cannot distinguish internally coherent paths from spurious ones that accidentally match the gold label.
+
+\textbf{Process Reward Models (PRMs)} \citep{lightman2023letsverify} address this limitation by scoring each intermediate reasoning step independently.
+PRMs can detect localized logical errors that ORMs miss, and empirically outperform ORMs on challenging multi-step reasoning benchmarks.
+However, PRMs require expensive step-level human annotation---the PRM800K dataset \citep{lightman2023letsverify} comprises 800K human-labeled step judgments---making them impractical to deploy without substantial annotation resources.
+
+\textbf{Reward-model-based approaches} employ reinforcement learning or preference optimization to encourage correct reasoning trajectories \citep{ouyang2022training, bai2022constitutional}.
+These methods modify the base language model through extensive training and require carefully designed reward functions, making them costly to deploy.
+
+\textbf{Confidence-based selection} methods estimate the reliability of reasoning paths using internal model signals such as token probabilities or entropy \citep{chia2023contrastivechainofthoughtprompting}.
+These methods operate without additional training but rely on model-specific confidence signals that may not correlate with logical validity \citep{xiong2024llmsexpressuncertaintyempirical}.
+A representative model is PiCSAR \citep{leang2025picsar}, which scores each candidate reasoning chain by the joint log-likelihood of the reasoning and the final answer, decomposed into a reasoning confidence term and an answer confidence term.
+While PiCSAR is training-free and achieves strong results on mathematical benchmarks, it relies entirely on the model's own token probabilities and does not reshape the representation space to reflect reasoning coherence.
+D-ProtoCoT instead learns an explicitly aligned embedding space through contrastive training, enabling path selection based on semantic and structural alignment rather than generation likelihood.
+
+\textbf{D-ProtoCoT} differs fundamentally from all the above approaches.
+While ORMs and PRMs act as explicit \textit{judges}, scoring paths by predicting correctness, D-ProtoCoT acts as a \textit{representation learner}. It does not predict whether a path is correct, but instead shapes an embedding space in which semantically coherent reasoning paths cluster near their corresponding questions.
+Path selection then follows from geometric alignment in this space, rather than from any explicit correctness verdict.
+
+This distinction has a practical consequence regarding supervision cost.
+ORMs require only gold answers for training, but overlook flawed intermediate reasoning that happens to reach a correct conclusion.
+PRMs can detect such step-level errors, but require expensive human annotation of individual reasoning steps.
+D-ProtoCoT addresses this issue from a novel perspective. By applying a step-level InfoNCE objective that treats each reasoning step as an independent alignment target, it propagates supervision signals to every step without requiring step-level annotation beyond gold answers.
+As a result, D-ProtoCoT achieves process-level supervision granularity at outcome-level annotation cost.
+
+From a broader perspective, this approach is (1) model-agnostic, requiring only CoT generation capability; (2) inference-time, with no parameter updates during deployment; and (3) free of stepwise correctness assessment, relying instead on representation-level semantic alignment for path selection.
+
+\subsection{Contrastive Learning for Reasoning Representations}
+
+Contrastive learning has been widely adopted to improve semantic representation quality in Natural Language Processing (NLP), particularly for sentence and text embedding models \citep{gao2021simcse, gunel2021supervised}.
+Recent work has explored contrastive objectives for reasoning-related tasks, including contrastive chain-of-thought prompting \citep{chia2023contrastivechainofthoughtprompting} and reasoning-aware representation learning for logical reasoning problems \citep{yao2023reclor}.
+Separately, \citet{wang2025chasing} propose alignment metrics to quantify the consistency between human-preferred reasoning chains and model-generated CoT paths, highlighting that semantic coherence of reasoning steps is a meaningful signal beyond answer correctness.
+
+Unlike prior approaches that apply contrastive learning directly to language model outputs or confidence estimation, D-ProtoCoT employs contrastive alignment to explicitly shape a shared embedding space for questions and reasoning paths.
+Weak supervision from gold answer matching is used to distinguish correct and incorrect reasoning paths, enabling the construction of an aligned representation space without additional annotation or model modification.
+This aligned space serves as the foundation for prototype-based reasoning path selection.
+
+\subsection{Prototype-Based Representation Modeling}
+
+Prototype-based methods have a long history in representation learning and pattern recognition, where class prototypes or centroids are used to capture central tendencies of data distributions \citep{snell2017prototypical}.
+In NLP, prototype-based representations have been applied to text classification, clustering, and semantic matching tasks \citep{han2018fewrel, pan2020semantic}.
+
+Recent studies suggest that prototype aggregation can improve robustness by mitigating noise from individual samples \citep{liu2022prototype}.
+A related line of work explores navigating solution spaces through controlled exploration in embedding space \citep{Zhu2025SoftRN}, which similarly motivates the use of representation geometry for reasoning selection.
+D-ProtoCoT extends this idea to reasoning path selection by constructing a dynamic, question-specific prototype at inference time.
+Unlike static class prototypes, the proposed dynamic prototype aggregates multiple reasoning paths with similarity-based weighting, allowing the model to adaptively capture the dominant semantic structure of high-quality reasoning for each input instance.
+
+\section{Method}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figure/final.jpg}
+    \caption{Overview of D-ProtoCoT. The framework encodes multiple chain-of-thought reasoning paths into a contrastively aligned representation space, constructs a dynamic reasoning prototype, and selects the path with the highest prototype alignment score at inference time.}
+    \label{fig:overview}
+\end{figure*}
+
+\subsection{Problem Setup}
+Given an input question $q$, an LLM generates multiple CoT reasoning paths $\mathcal{C} = \{c_1, \ldots, c_K\}$ via stochastic decoding.
+Each reasoning path consists of a sequence of intermediate reasoning steps followed by a final answer.
+The objective is to select a single reasoning path that exhibits strong internal coherence and leads to a reliable final answer.
+
+Throughout this framework, the base language model used for reasoning path generation remains frozen.
+Only a lightweight auxiliary encoder is trained for representation alignment.
+All components operate at inference time, enabling reasoning path selection without modifying or fine-tuning the underlying language model.
+
+\subsection{Multi-Granular Representation Extraction}
+
+Each reasoning path is encoded using a BERT-base-uncased encoder $E(\cdot)$, which is subsequently fine-tuned through contrastive representation alignment (Section~3.3).
+Given the tokenized input of a reasoning path, the encoder produces a sequence of hidden states from its final transformer layer.
+
+To capture reasoning information at different granularities, representations are extracted at three levels.
+
+\paragraph{Token-Level Representation.}
+Let $\mathbf{H}_i \in \mathbb{R}^{T \times d}$ denote the final-layer hidden states for path $c_i$, where $T$ is the number of tokens and $d$ is the hidden dimension.
+These token embeddings provide the most fine-grained representation of the reasoning process.
+
+\paragraph{Step-Level Representation.}
+Each reasoning path $c_i$ is segmented into $M$ steps $\{u_{i,1}, \dots, u_{i,M}\}$ based on newline delimiters.
+Let $\mathcal{T}_{i,j} \subseteq \{1, \dots, T\}$ denote the set of token indices corresponding to step $u_{i,j}$.
+The step-level representation is computed as:
+\[
+\mathbf{s}_{i,j} = \frac{1}{|\mathcal{T}_{i,j}|} \sum_{t \in \mathcal{T}_{i,j}} \mathbf{h}_{i,t},
+\]
+where $\mathbf{h}_{i,t} \in \mathbb{R}^d$ is the token embedding at position $t$.
+
+\paragraph{Path-Level Representation.}
+A single representation for the entire reasoning path is obtained by mean pooling over its step embeddings:
+\[
+\mathbf{z}_i = \frac{1}{M} \sum_{j=1}^{M} \mathbf{s}_{i,j}.
+\]
+The resulting path-level embedding $\mathbf{z}_i \in \mathbb{R}^d$ serves as the primary unit for dynamic prototype construction and path selection.
+
+\paragraph{Hierarchical Encoding for Long Reasoning Paths.}
+CoT reasoning paths in our benchmark experiments often exceed BERT-base's maximum sequence length of 512 tokens. To handle this, a hierarchical encoding strategy is applied. For paths exceeding 512 tokens, we partition the sequence into overlapping chunks of 400 tokens with a 50-token overlap to preserve continuity across boundaries. Each chunk is encoded independently by the BERT encoder, and the chunk representations are aggregated via mean pooling to form the final path embedding.
+
+Formally, for a path $c_i$ with token sequence length $T > 512$, we partition it into $N = \lceil (T - 50) / 350 \rceil$ overlapping chunks $\{c_i^{(1)}, \ldots, c_i^{(N)}\}$. Each chunk $c_i^{(n)}$ is encoded to obtain its hidden states $\mathbf{H}_i^{(n)}$, from which step-level and subsequently path-level representations are computed following the procedure described above. The final path-level embedding is obtained by aggregating across all chunks:
+\[
+\tilde{\mathbf{z}}_i = \frac{1}{N} \sum_{n=1}^{N} \mathbf{z}_i^{(n)},
+\]
+where $\mathbf{z}_i^{(n)}$ is the path-level representation derived from chunk $c_i^{(n)}$. This hierarchical approach preserves information from the entire reasoning chain within BERT's operational constraints, ensuring that no contextual information is lost.
+
+These three levels of representation serve distinct roles within the D-ProtoCoT framework.
+Token-level representations $\mathbf{H}_i$ serve as the computational foundation for step-level aggregation and are not directly used in downstream objectives.
+Step-level representations $\{\mathbf{s}_{i,1}, \ldots, \mathbf{s}_{i,M}\}$ capture the local semantic structure of individual reasoning steps and are used directly as alignment targets during contrastive training (Section~\ref{sec:contrastive}). By operating at the granularity of individual steps, the contrastive objective can propagate supervision signals to each reasoning step independently, making the encoder sensitive to localized logical errors that would be obscured by path-level averaging.
+Path-level representations $\mathbf{z}_i$ summarize the global semantic content of an entire reasoning chain and serve as the primary unit for dynamic prototype construction and path selection (Sections~3.4 and~3.5). While step-level representations preserve local structure, prototype aggregation requires a stable global summary of each reasoning chain. Path-level mean pooling provides this without introducing the noise inherent in step-by-step comparison.
+
+\subsection{Contrastive Representation Alignment}
+\label{sec:contrastive}
+
+\paragraph{Motivation.}
+Naive semantic representations obtained from off-the-shelf encoders often fail to distinguish logically valid reasoning from superficially plausible but incorrect chains, as they are not explicitly trained to align questions with valid reasoning processes.
+To address this limitation, a contrastive learning stage is introduced to shape the representation space such that correct reasoning paths are pulled closer to their corresponding questions, while incorrect paths are pushed away.
+This alignment ensures that downstream prototype construction operates in a space where semantic proximity correlates with reasoning quality.
+
+\paragraph{Positive and Negative Path Construction.}
+For each question $q$, $K$ reasoning paths are generated and labeled as correct or incorrect based on exact match between the final answer and the ground truth.
+Paths with final answer matching the gold label are treated as positive samples, while all remaining paths are treated as negatives.
+This supervision signal is obtained automatically and requires no additional annotation.
+
+\paragraph{Representation Encoding.}
+The question $q$ and each reasoning path $c_i$ are encoded using the same encoder $E(\cdot)$.
+The question is encoded as a pooled representation $\mathbf{z}_q = E(q) \in \mathbb{R}^d$.
+Each reasoning path $c_i$ is segmented into $M$ steps, and each step $u_{i,j}$ is represented by its step-level embedding $\mathbf{s}_{i,j} \in \mathbb{R}^d$ as defined in Section~3.2.
+Unlike path-level aggregation, which compresses an entire reasoning chain into a single vector before computing contrastive objectives, our approach uses individual step embeddings $\{\mathbf{s}_{i,1}, \ldots, \mathbf{s}_{i,M}\}$ directly as alignment targets.
+This allows the contrastive loss to propagate supervision signals to each reasoning step independently, making the encoder sensitive to localized logical errors that would otherwise be averaged out at the path level.
+All encoder parameters are fine-tuned during contrastive alignment.
+
+\paragraph{Contrastive Objective.}
+A step-level InfoNCE contrastive loss is employed to align the question representation with the individual step representations of correct reasoning paths:
+\[
+\mathcal{L}_{\text{con}} = - \frac{1}{|\mathcal{P}| \cdot M} \sum_{i \in \mathcal{P}} \sum_{j=1}^{M}
+\log
+\frac{
+\exp \left( \text{sim}(\mathbf{z}_q, \mathbf{s}_{i,j}) / \tau \right)
+}{
+\sum_{k \in \mathcal{P} \cup \mathcal{N}} \sum_{l=1}^{M} \exp \left( \text{sim}(\mathbf{z}_q, \mathbf{s}_{k,l}) / \tau \right)
+},
+\]
+where $\mathcal{P}$ and $\mathcal{N}$ denote the sets of correct and incorrect reasoning paths, $\text{sim}(\cdot,\cdot)$ is cosine similarity, and $\tau$ is a temperature hyperparameter.
+Each step of a correct reasoning path contributes an independent positive signal, while all steps of incorrect paths serve as negatives.
+This step-level formulation provides $|\mathcal{P}| \cdot M$ positive training pairs per question, compared to $|\mathcal{P}|$ pairs under path-level contrastive objectives, yielding denser supervision without requiring any additional step-level annotation beyond gold answers.
+
+\subsection{Dynamic Prototype Construction}
+
+After contrastive alignment using step-level representations, the encoder has been shaped such that both step-level and path-level embeddings reflect reasoning quality.
+The dynamic prototype is constructed using path-level embeddings $\mathbf{z}_i$, which provide a stable global semantic summary of each reasoning chain.
+This choice is deliberate. While step-level representations are effective for training-time supervision due to their sensitivity to localized errors, they introduce step-to-step variance that is unsuitable for prototype aggregation at inference time.
+Path-level mean pooling reduces this variance and provides a more robust anchor for similarity-weighted aggregation.
+
+Given a question $q$ and its $K$ reasoning paths with embeddings $\{\mathbf{z}_1, \ldots, \mathbf{z}_K\}$, the dynamic prototype $\mathbf{p}_q$ is defined as a weighted combination of all path representations:
+\[
+\mathbf{p}_q = \sum_{i=1}^{K} w_i \mathbf{z}_i.
+\]
+
+The weight $w_i$ reflects the alignment between a reasoning path and the question representation:
+\[
+w_i = \frac{\exp(\text{sim}(\mathbf{z}_q, \mathbf{z}_i))}{\sum_{j=1}^{K} \exp(\text{sim}(\mathbf{z}_q, \mathbf{z}_j))}.
+\]
+This similarity-based weighting assigns higher influence to paths that are more aligned with the question, while retaining information from all sampled paths.
+
+\paragraph{Inference-Time Prototype Construction Without Gold Answers.}
+A key design principle of D-ProtoCoT is that the dynamic prototype is constructed using \textbf{all} $K$ sampled reasoning paths, without requiring access to gold answers at inference time.
+The similarity-based weights $w_i$ are computed solely from the cosine similarity between each path embedding $\mathbf{z}_i$ and the question embedding $\mathbf{z}_q$ in the contrastively aligned space.
+This mechanism operates without labeled data because the contrastive alignment stage has already shaped the embedding space such that semantically coherent and logically consistent reasoning paths are pulled closer to their corresponding questions.
+As a result, paths that are structurally consistent with the question naturally receive higher weights, without any explicit correctness judgment at inference time.
+
+This design separates the \textit{training-time} use of gold answers (for encoder alignment) from the \textit{inference-time} prototype construction (which requires no labels).
+The auxiliary encoder is trained once using weak supervision from gold answer matching, but the selection process itself requires no labeled data during deployment.
+D-ProtoCoT therefore differs fundamentally from verifier-based or reward-model-based approaches that require explicit correctness signals at inference time.
+
+\subsection{Prototype-Based Alignment and Path Selection}
+
+Given the dynamic prototype $\mathbf{p}_q$, an alignment score is computed for each reasoning path using cosine similarity:
+\[
+a_i = \text{sim}(\mathbf{z}_i, \mathbf{p}_q).
+\]
+
+The best reasoning path is selected by maximizing the alignment score
+\[
+c^{*} = \arg\max_{c_i \in \mathcal{C}} a_i.
+\]
+and the final answer is extracted from $c^{*}$.
+
+\subsection{Inference-Time Properties}
+
+D-ProtoCoT operates entirely at inference time.
+No parameters are updated during reasoning path selection, and the framework introduces minimal computational overhead beyond reasoning generation and embedding computation.
+The method is compatible with any language model capable of generating CoT reasoning paths.
+
+\section{Experiments}
+
+This section evaluates the effectiveness of D-ProtoCoT on three representative multi-step reasoning benchmarks: GSM8K, CommonsenseQA, and StrategyQA. These datasets emphasize arithmetic reasoning, commonsense inference, and implicit semantic reasoning, respectively. The experiments provide a comprehensive assessment of reasoning path selection under diverse reasoning characteristics.
+
+\subsection{Backbone Models}
+
+D-ProtoCoT is evaluated using two instruction-tuned LLMs - LLaMA-3.1-8B-Instruct and Qwen3-8B. These models differ substantially in pretraining data, architectural design, and instruction-following behavior, ensuring assessment of robustness and generalization across heterogeneous model families.
+
+\subsection{Reasoning Path Generation}
+
+For each input question, \textbf{10} independent CoT reasoning paths are sampled using temperature-controlled decoding. The same set of sampled reasoning paths is shared across all compared methods to ensure fair comparison. Final answers are extracted from each reasoning path following the official evaluation protocols of each benchmark.
+
+\subsection{Baselines}
+
+D-ProtoCoT is evaluated against the following baselines. Depending on their requirement of supervision, they are separated into two groups.
+
+\textbf{Zero-shot methods (no supervision):}
+\begin{description}
+    \item[Standard CoT] selects the answer from a single sampled reasoning path.
+    \item[Self-Consistency] aggregates multiple reasoning paths via majority voting over final answers \citep{wang2023selfconsistencyimproveschainofthoughtreasoning}.
+    \item[C-CoT] \citep{chia2023contrastivechainofthoughtprompting} selects reasoning paths based on confidence estimation.
+\end{description}
+
+\textbf{Supervised baseline:}
+%我没看懂你这里的equal supervision是什么意思，所以去掉了
+%加引用
+%→ 已添加 \cite{cobbe2021trainingverifiers}
+\begin{description}
+    \item[ORM (BERT-base)]\cite{cobbe2021trainingverifiers} is an outcome reward model that fine-tunes the same \texttt{bert-base-uncased} encoder with a binary classification head to predict path correctness. It is trained with binary cross-entropy loss using the same gold-answer supervision as D-ProtoCoT. At inference time, the path with the highest predicted correctness score is selected. This baseline is trained under identical conditions to D-ProtoCoT: the same 1K stratified training subset, the same $K{=}10$ sampled paths per question, and the same encoder architecture, ensuring a fair comparison.
+\end{description}
+
+\subsection{Implementation Details}
+
+Reasoning paths are encoded using a pretrained BERT encoder. Token-level representations are extracted from the \textbf{final transformer layer}. Step-level representations are obtained by mean-pooling token embeddings within each reasoning step, while path-level representations are computed by mean-pooling all step embeddings of a reasoning path, following the representation definitions in Section~3.2.
+
+%\paragraph{Hierarchical Encoding Configuration.}你这一节里只有这一段加了标题，如果其他段没有类似加标题的话，会让人误以为后边几段也是这一标题的一部分，但看起来又不是，所以去掉了
+%你这里的一些细节其实前边第三章的对应部分都描述过，适当的地方可以直接引用前文，而不是重新描述一遍
+%→ 已精简：引用Section 3.2/3.3/3.4，保留实验数据（809, 93%）和超参数
+In our experiments, the average token length of reasoning paths is 809, with 93\% of paths exceeding BERT's 512-token limit. The hierarchical encoding strategy described in Section~3.2 is applied to handle long sequences, partitioning them into chunks of 400 tokens with 50-token overlap.
+
+For D-ProtoCoT, the encoder is contrastively aligned following the procedure in Section~3.3, using weak supervision derived from gold answer matching. At inference time, the dynamic prototype is constructed via similarity-weighted aggregation as described in Section~3.4.
+
+For the ORM baseline, the same \texttt{bert-base-uncased} encoder is fine-tuned with an added linear classification head using binary cross-entropy loss. The input to ORM is the concatenation of the question and the full reasoning path, and the model is trained to predict path-level correctness (1 if the extracted answer matches the gold label, 0 otherwise). Both D-ProtoCoT and ORM are trained on a stratified subset of 1{,}000 questions per dataset (train/val/test split of 8:1:1), using identical hyperparameters: batch size 16, learning rate $2{\times}10^{-5}$, 3 epochs, and temperature $\tau{=}0.07$ for the contrastive objective.
+
+All experiments are conducted on a single Nvidia RTX 4090 GPU. All methods use identical generation settings, the same number of sampled reasoning paths, and the same evaluation protocol. No additional fine-tuning is performed on the backbone LLMs.
+
+\subsection{Main Results}
+
+\begin{table*}[t]
+\centering
+\caption{\textbf{Exact-match accuracy (\%)} on CommonsenseQA, GSM8K, and StrategyQA. Results are aggregated over 10 sampled reasoning paths per question. The ORM baseline is trained under identical conditions to D-ProtoCoT (same encoder, same training subset, same gold-answer supervision).}
+\label{tab:main-results}
+\begin{tabular}{lccc|ccc}
+\toprule
+ & \multicolumn{3}{c|}{\textbf{LLaMA-3.1-8B-Instruct}} & \multicolumn{3}{c}{\textbf{Qwen3-8B}} \\
+\textbf{Method} & CSQA & GSM8K & StrategyQA & CSQA & GSM8K & StrategyQA \\
+\midrule
+Standard CoT & 68.23 & 43.80 & 68.60 & 75.60 & 90.40 & 66.80 \\
+Self-Consistency & 77.40 & 63.20 & 62.60 & 86.98 & 90.65 & \textbf{76.60} \\
+C-CoT & 64.40 & \textbf{87.00} & 64.40 & 68.20 & 75.60 & 62.70 \\
+\midrule
+ORM (BERT-base) & 59.52 & 78.20 & 65.71 & 77.27 & 61.36 & 50.43 \\
+D-ProtoCoT (Ours) & \textbf{79.80} & 80.95 & \textbf{86.20} & \textbf{87.71} & \textbf{94.15} & 72.60 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Table~\ref{tab:main-results} reports the exact-match accuracy across all benchmarks. D-ProtoCoT consistently outperforms Standard CoT and achieves competitive or superior results compared to self-consistency in most settings. Several patterns warrant closer examination.
+
+\paragraph{Impact of Backbone Strength and Task Complexity.}
+First, performance gains are most pronounced for weaker backbone models on tasks requiring multi-step reasoning. On LLaMA-3.1-8B-Instruct, D-ProtoCoT achieves $86.20\%$ on StrategyQA compared to $62.60\%$ for self-consistency ($+23.60\%$), and $80.95\%$ on GSM8K compared to $63.20\%$ ($+17.75\%$). These gains reflect the core advantage of representation-level alignment: when a weaker model generates paths of uneven quality, our contrastively shaped embedding space reliably separates logically coherent trajectories from flawed ones. In contrast, majority voting over noisy or incorrect paths amplifies errors rather than correcting them.
+
+\paragraph{Diminishing Returns with Stronger Models.}
+Second, on the stronger Qwen3-8B backbone, the margin narrows on certain tasks. Self-consistency achieves the best result on StrategyQA ($76.60\%$ vs. D-ProtoCoT's $72.60\%$). A stronger model naturally generates more uniform and higher-quality paths, reducing the discriminative advantage of our aligned representation space. Nevertheless, D-ProtoCoT still outperforms self-consistency on CSQA ($+0.73\%$) and GSM8K ($+3.50\%$), demonstrating that step-level alignment remains beneficial even when path quality is already high. (Further analysis of backbone interactions is provided in Section~\ref{sec:backbone}.)
+
+\paragraph{Task-Sensitivity of Confidence-Based Methods.}
+Third, C-CoT achieves the highest single result on LLaMA GSM8K ($87.00\%$), outperforming D-ProtoCoT ($80.95\%$). This highlights the particular strength of token-level confidence signals on arithmetic tasks, where syntactic and numerical correctness correlate strongly with internal probabilities. However, C-CoT degrades substantially on commonsense and implicit reasoning tasks (CSQA: $64.40\%$, StrategyQA: $64.40\%$), indicating that confidence-based selection is highly task-sensitive and does not generalize as robustly as representation-level alignment across diverse reasoning paradigms.
+
+\subsection{Inference Cost}
+
+D-ProtoCoT introduces modest inference overhead due to multi-path encoding and prototype scoring. However, the dominant cost remains in LLM generation. The additional representation encoding and similarity computation incur negligible latency in practice. Empirically, D-ProtoCoT exhibits comparable inference time to self-consistency when using the same number of sampled paths.
+
+\section{Analysis}
+
+\subsection{Why Naive Centroid Selection Fails}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\linewidth]{figure/tsne_cot100.png}
+    \caption{t-SNE visualization of BERT embeddings from 100 chain-of-thought paths generated for a StrategyQA example. Green points indicate correct reasoning paths, while red points indicate incorrect ones. Strong overlap suggests that surface-level semantic similarity alone is insufficient to distinguish reasoning quality.}
+    \label{fig:tsne}
+\end{figure}
+
+A natural baseline for reasoning path selection is to compute embeddings for each reasoning path and select the one closest to the centroid of all paths.
+As shown in Figure~\ref{fig:tsne}, frozen BERT embeddings of correct and incorrect reasoning paths are heavily intermixed in the embedding space, indicating that surface-level semantic similarity is insufficient to separate logically valid reasoning from flawed chains.
+This entanglement arises because pretrained encoders are optimized for general semantic similarity rather than reasoning quality. Two paths that reach different conclusions through superficially similar language will be mapped to nearby points, regardless of their logical validity.
+
+This limitation is further confirmed quantitatively in Table~\ref{tab:ablation-centroid}, where naive centroid-based selection with raw BERT embeddings achieves only $21.00\%$ accuracy on GSM8K, compared to $80.95\%$ for D-ProtoCoT---a gap of nearly $60\%$.
+The huge performance gap underscores that naive aggregation in an unaligned space is not merely suboptimal but actively harmful. The centroid of all reasoning paths, including incorrect ones, systematically drifts away from the correct reasoning region, causing the selection to favor paths that are semantically central but logically unreliable.
+Contrastive alignment addresses this by reshaping the embedding space so that correct reasoning paths cluster near their corresponding questions, making proximity in the representation space a reliable proxy for reasoning quality.
+
+\begin{table}[t]
+\centering
+\caption{Comparison on GSM8K (LLaMA-3.1-8B-Instruct) between naive centroid-based selection and D-ProtoCoT.}
+\label{tab:ablation-centroid}
+\begin{tabular*}{\tblwidth}{@{}LL@{}}
+\toprule
+\textbf{Method} & \textbf{Accuracy (\%)} \\
+\midrule
+Raw BERT + Centroid & 21.00 \\
+D-ProtoCoT (ours) & \textbf{80.95} \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\subsection{Case Study}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figure/casestudy.png}
+    \caption{Case study on StrategyQA. While self-consistency selects an incorrect answer due to majority voting, D-ProtoCoT identifies a reasoning path that correctly interprets the implicit semantics of the question.}
+    \label{fig:case-study}
+\end{figure*}
+
+Figure~\ref{fig:case-study} illustrates a representative failure case of self-consistency on StrategyQA.
+The question requires multi-step implicit inference, and while the majority of sampled reasoning paths converge on the same incorrect answer, a minority of paths reason through the implicit semantics correctly.
+Self-consistency, by aggregating at the answer level, selects the majority answer and fails.
+D-ProtoCoT, by contrast, constructs a prototype that reflects the semantic structure of high-quality reasoning in the aligned space, and assigns higher alignment scores to the coherent minority paths.
+This case illustrates a systematic weakness of majority voting. When incorrect reasoning is numerically dominant but semantically diffuse, answer frequency is a poor guide, whereas representation-level alignment remains sensitive to internal coherence regardless of path frequency.
+
+\subsection{Effect of Representation Granularity}
+
+D-ProtoCoT employs a deliberately asymmetric design between training and inference. Step-level representations $\{\mathbf{s}_{i,j}\}$ are used as direct alignment targets during contrastive training, while path-level representations $\mathbf{z}_i$ are used for prototype construction and path selection at inference time.
+
+The motivation for this asymmetry is as follows. During training, operating at the step level allows the contrastive loss to propagate independent supervision signals to each reasoning step, making the encoder sensitive to localized logical errors that would be obscured by path-level averaging. During inference, path-level mean pooling provides a stable global summary of each reasoning chain, reducing step-to-step variance that would otherwise introduce noise into prototype aggregation.
+
+To validate this design, we conduct an ablation study on StrategyQA comparing three variants: (1) \textit{Path-train / Path-select}, which uses path-level mean pooling for both the contrastive objective and prototype selection; (2) \textit{Step-train / Step-select}, which uses step-level representations for both; and (3) \textit{Step-train / Path-select} (our proposed design), which uses step-level representations for training and path-level for selection.
+
+Results in Table~\ref{tab:granularity-ablation} confirm that the proposed asymmetric design achieves the best performance ($64.29\%$). Using step-level representations for contrastive training ($60.71\%$) outperforms path-level training ($53.57\%$), validating that step-level supervision provides more precise gradient signals by capturing localized reasoning errors. Using path-level representations for selection ($64.29\%$) outperforms step-level selection ($60.71\%$), indicating that global semantic summaries provide more stable prototypes than individual step embeddings, and that the two design choices contribute independently to overall performance.
+
+\begin{table}[t]
+\centering
+\caption{Ablation study on representation granularity for contrastive training and path selection on StrategyQA.}
+\label{tab:granularity-ablation}
+\begin{tabular*}{\tblwidth}{@{}LLL@{}}
+\toprule
+\textbf{Training Repr.} & \textbf{Selection Repr.} & \textbf{Accuracy (\%)} \\
+\midrule
+Path-level & Path-level & 53.57 \\
+Step-level & Step-level & 60.71 \\
+Step-level (proposed) & Path-level (proposed) & \textbf{64.29} \\
+\bottomrule
+\end{tabular*}
+\end{table}
+
+\subsection{Impact of Backbone Model Strength}
+\label{sec:backbone}
+
+We observe that when the backbone model is a strong instruction-tuned LLM such as Qwen3-8B, self-consistency already achieves competitive performance, and the performance gap between self-consistency and D-ProtoCoT is modest, in comparison to weaker backbone models.
+This pattern is consistent with the core premise of D-ProtoCoT: representation-level alignment provides the greatest benefit when reasoning path quality is highly variable, as the prototype can more effectively distinguish coherent paths from incoherent ones.
+When a strong model generates paths of more uniformly high quality, the discriminative signal from the aligned representation space becomes less critical, and majority voting over high-quality paths already yields reliable results.
+Conversely, on tasks requiring complex multi-step inference with weaker models---such as GSM8K with LLaMA-3.1-8B-Instruct---path quality variance is higher, and D-ProtoCoT's ability to identify internally coherent reasoning provides a larger and more consistent advantage.
+This suggests that D-ProtoCoT is most valuable in deployment settings where model capability is limited or reasoning tasks are sufficiently complex to produce diverse path quality.
+
+\subsection{Comparison with ORM}
+
+Table~\ref{tab:main-results} includes results for an ORM baseline trained under identical conditions to D-ProtoCoT.
+This ensures that any performance difference reflects a genuine methodological advantage rather than differences in supervision budget or architecture.
+
+On Qwen3-8B, D-ProtoCoT outperforms ORM by $+10.44\%$ on CSQA, $+32.79\%$ on GSM8K, and $+22.17\%$ on StrategyQA.
+On LLaMA-3.1-8B-Instruct, D-ProtoCoT outperforms ORM by $+2.75\%$ on GSM8K.
+The gap is most pronounced on GSM8K, where multi-step arithmetic reasoning places high demands on intermediate step correctness.
+We attribute this to a fundamental difference in how the two methods use supervision.
+ORM scores paths by predicting final answer correctness at the path level, meaning a path with flawed intermediate steps can still receive a high score if it accidentally produces the correct answer.
+In contrast, D-ProtoCoT applies a step-level InfoNCE objective that treats each reasoning step as an independent alignment target, propagating supervision signals to every step and making the encoder sensitive to localized logical errors.
+As a result, D-ProtoCoT's representation space better separates internally coherent paths from spurious ones, even under the same annotation cost as ORM.
+
+The advantage on StrategyQA is also substantial, despite the task involving binary Yes/No answers.
+This suggests that the benefit of step-level alignment extends beyond arithmetic settings and applies broadly to tasks requiring implicit multi-step inference.
+
+\section{Conclusion}
+
+This work addresses a fundamental limitation of self-consistency. Its exclusive reliance on answer-level aggregation treats all reasoning paths leading to the same answer as equally reliable, and discards the rich structural information encoded in the reasoning process itself.
+We argue that this limitation is not incidental but reflects a deeper mismatch between the aggregation mechanism and the nature of multi-step reasoning, where logical validity is a path-level property that cannot be recovered from answer frequency alone.
+
+To address this issue, we propose D-ProtoCoT that reformulates reasoning path selection as a representation alignment problem rather than an answer aggregation problem.
+By training a lightweight encoder with a step-level contrastive objective, D-ProtoCoT shapes an embedding space in which semantic proximity to the question correlates with reasoning coherence.
+At inference time, a dynamic prototype aggregates all sampled paths with similarity-based weighting, enabling selection without any gold answers or explicit correctness judgments.
+This design achieves process-level supervision granularity at outcome-level annotation cost---a trade-off that neither ORMs nor PRMs can offer simultaneously.
+
+Empirical results across three reasoning benchmarks and two model families confirm that representation-level alignment provides a reliable and complementary signal to answer frequency, with the largest gains observed in a diverse reasoning path setting.
+Ablation analysis further validates the asymmetric design choice. Step-level contrastive training and path-level prototype selection each contribute independently to performance improvement, and their combination achieves the best result.
+
+More broadly, this work suggests that the quality of inference-time reasoning selection depends critically on the geometry of the representation space in which selection occurs.
+Naive semantic spaces conflate surface similarity with logical validity, but contrastively aligned spaces do not.
+Future work may explore whether similar alignment strategies can be extended to settings without gold answers, to cross-lingual reasoning, or to finer-grained verification of individual reasoning steps.
+
+\section*{Limitations}
+
+D-ProtoCoT is not intended to replace formal verification or symbolic reasoning systems. It serves as a lightweight and modular component positioned between naive answer aggregation and heavy verification pipelines, and its benefits diminish when most sampled paths are already coherent and correct.
+The following limitations warrant explicit discussion.
+
+First, the method assumes access to gold answers during the \textit{training phase} of the auxiliary encoder for contrastive alignment (Section~\ref{sec:contrastive}). Consequently, it is not directly applicable to fully unsupervised settings where no labeled answers are available, which may limit its use in certain real-world deployment scenarios.
+
+Second, the effectiveness of reasoning path selection depends on the diversity and correctness distribution of the sampled reasoning paths. When most generated paths are incorrect or semantically homogeneous (e.g., due to low decoding temperature), the dynamic prototype may fail to capture a meaningful signal, thereby reducing potential performance gains. This observation is consistent with our empirical findings that D-ProtoCoT provides smaller improvements on tasks with inherently low path diversity.
+
+Third, D-ProtoCoT introduces additional inference overhead due to the use of an auxiliary encoder for representation extraction and similarity computation. Although this overhead is modest compared to the cost of large language model generation, it still results in higher latency than vanilla self-consistency. Moreover, the method may inherit biases or domain mismatches from the encoder's pretraining data.
+
+Finally, all experiments are conducted on English-language benchmarks. The effectiveness of D-ProtoCoT on low-resource languages or specialized domains, such as medical or legal reasoning, remains unexplored and warrants further investigation.
+
+\appendix
+
+\section{Dataset Statistics}
+\label{sec:dataset-stats}
+
+Table~\ref{tab:dataset-details} presents the detailed statistics of the three reasoning benchmarks used in our experiments.
+
+\begin{table}[h]
+\centering
+\caption{Detailed statistics of reasoning benchmarks.}
+\label{tab:dataset-details}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Dataset} & \textbf{Train} & \textbf{Test} & \textbf{Task Type} \\
+\midrule
+GSM8K & 7,473 & 1,319 & Arithmetic \\
+CommonsenseQA & 1,142 & 374 & Commonsense \\
+StrategyQA & 2,290 & 960 & Implicit Reasoning \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Token Length Statistics}
+\label{sec:token-stats}
+
+Table~\ref{tab:token-length} reports the token length statistics of generated reasoning paths. Tokenization is performed using the BERT-base-uncased tokenizer. The high proportion of paths exceeding 512 tokens necessitates the hierarchical encoding strategy described in Section~3.2.
+
+\begin{table}[h]
+\centering
+\caption{Token length statistics of generated reasoning paths across benchmarks.}
+\label{tab:token-length}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Dataset} & \textbf{Paths} & \textbf{Avg.} & \textbf{Median} & \textbf{Max} & \textbf{$>$512} \\
+\midrule
+GSM8K & 10,000 & 809.1 & 852 & 1,077 & 93.1\% \\
+CommonsenseQA & 10,000 & 856.7 & 951 & 1122 & 91.36\% \\
+StrategyQA & 10,000 & 790.2 & 849 & 1130 & 71.5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textit{Note:} ``Paths'' denotes the total number of reasoning paths evaluated. ``$>$512'' indicates the percentage of paths exceeding BERT's maximum sequence length. The hierarchical encoding strategy processes all paths without truncation.
+
+\section{Hierarchical Encoding Details}
+\label{sec:hierarchical-details}
+
+For paths exceeding 512 tokens, we employ the following chunking strategy:
+
+\begin{itemize}
+    \item \textbf{Chunk size:} 400 tokens
+    \item \textbf{Overlap:} 50 tokens between consecutive chunks
+    \item \textbf{Aggregation:} Mean pooling of chunk-level representations
+\end{itemize}
+
+The overlap ensures continuity across chunk boundaries, preserving the semantic coherence of step transitions. For a path with $T$ tokens, the number of chunks is computed as $N = \lceil (T - 50) / 350 \rceil$.
+
+\section*{Declaration of Generative AI and AI-assisted technologies in the writing process}
+
+During the preparation of this work the authors used AI-assisted tools for language refinement. After using these tools, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article.
+
+\printcredits
+
+\bibliographystyle{cas-model2-names}
+\bibliography{cas-refs}
+
+\end{document}

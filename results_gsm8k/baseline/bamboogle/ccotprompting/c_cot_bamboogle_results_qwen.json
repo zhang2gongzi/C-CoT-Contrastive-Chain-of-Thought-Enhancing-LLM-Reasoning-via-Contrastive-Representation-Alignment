@@ -1,0 +1,1257 @@
+{
+  "accuracy": 0.016,
+  "total": 125,
+  "correct": 2,
+  "results": [
+    {
+      "id": 0,
+      "Question": "Who was president of the United States in the year that Citibank was founded?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was president of the United States in the year that Citibank was founded?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Question 'United States was president of the United States in the year that Citibank was founded?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was president of the United States in the year that Citibank was founded?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was president of the United States in the year that Citibank was founded?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Question 'United States was president of the United States in the year that Citibank was founded?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was president of the United States in the year that Citibank was founded?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 1,
+      "Question": "What rocket was the first spacecraft that ever approached Uranus launched on?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What rocket was the first spacecraft that ever approached Uranus launched on?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Uranus to the Question 'What rocket was the first spacecraft that ever approached Answer launched on?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat rocket was the first spacecraft that ever approached Uranus launched on?\n\n[Correct Reasoning]\nThe Answer to the Question 'What rocket was the first spacecraft that ever approached Uranus launched on?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Uranus to the Question 'What rocket was the first spacecraft that ever approached Answer launched on?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat rocket was the first spacecraft that ever approached Uranus launched on?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 2,
+      "Question": "In what year was the company that was founded as Sound of Music added to the S&P 500?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year was the company that was founded as Sound of Music added to the S&P 500?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Music to the Question 'In what year was the company that was founded as Therefore of Music added to the S&P 500?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what year was the company that was founded as Sound of Music added to the S&P 500?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year was the company that was founded as Sound of Music added to the S&P 500?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Music to the Question 'In what year was the company that was founded as Therefore of Music added to the S&P 500?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the company that was founded as Sound of Music added to the S&P 500?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 3,
+      "Question": "Who was the first African American mayor of the most populous city in the United States?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the first African American mayor of the most populous city in the United States?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The United States to the Question 'Who was the first Question mayor of the most populous city in the United States?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the first African American mayor of the most populous city in the United States?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the first African American mayor of the most populous city in the United States?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe United States to the Question 'Who was the first Question mayor of the most populous city in the United States?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the first African American mayor of the most populous city in the United States?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 4,
+      "Question": "When did the last king from Britain's House of Hanover die?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the last king from Britain's House of Hanover die?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When did the last king from Britain's Therefore of House die?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the last king from Britain's House of Hanover die?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the last king from Britain's House of Hanover die?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When did the last king from Britain's Therefore of House die?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the last king from Britain's House of Hanover die?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 5,
+      "Question": "When did the president who set the precedent of a two term limit enter office?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the president who set the precedent of a two term limit enter office?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The When to the Question 'Answer did the president who set the precedent of a two term limit enter office?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the president who set the precedent of a two term limit enter office?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the president who set the precedent of a two term limit enter office?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe When to the Question 'Answer did the president who set the precedent of a two term limit enter office?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the president who set the precedent of a two term limit enter office?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 6,
+      "Question": "When did the president who set the precedent of a two term limit leave office?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the president who set the precedent of a two term limit leave office?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The When to the Question 'Answer did the president who set the precedent of a two term limit leave office?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the president who set the precedent of a two term limit leave office?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the president who set the precedent of a two term limit leave office?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe When to the Question 'Answer did the president who set the precedent of a two term limit leave office?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the president who set the precedent of a two term limit leave office?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 7,
+      "Question": "How many people died in the second most powerful earthquake ever recorded?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'How many people died in the second most powerful earthquake ever recorded?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Answer 'How many people died in the second most powerful earthquake ever recorded?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nHow many people died in the second most powerful earthquake ever recorded?\n\n[Correct Reasoning]\nThe Answer to the Question 'How many people died in the second most powerful earthquake ever recorded?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Answer 'How many people died in the second most powerful earthquake ever recorded?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nHow many people died in the second most powerful earthquake ever recorded?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 8,
+      "Question": "Can people who have celiac eat camel meat?",
+      "true_Answer": "yes",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Can people who have celiac eat camel meat?' is yes. Therefore, the final Answer is yes.",
+      "neg_rationale": "The Therefore to the Question 'Can people who have celiac eat camel meat?' is yes. Answer, the final Answer is yes.",
+      "full_response": "[Question]\nCan people who have celiac eat camel meat?\n\n[Correct Reasoning]\nThe Answer to the Question 'Can people who have celiac eat camel meat?' is yes. Therefore, the final Answer is yes.\n\n[Incorrect Reasoning]\nThe Therefore to the Question 'Can people who have celiac eat camel meat?' is yes. Answer, the final Answer is yes.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nCan people who have celiac eat camel meat?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 9,
+      "Question": "What was the final book written by the author of On the Origin of Species?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What was the final book written by the author of On the Origin of Species?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What was the final book written by the author of On the Species of Species?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWhat was the final book written by the author of On the Origin of Species?\n\n[Correct Reasoning]\nThe Answer to the Question 'What was the final book written by the author of On the Origin of Species?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What was the final book written by the author of On the Species of Species?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the final book written by the author of On the Origin of Species?\nYour reasoning:\n'text'\n"
+    },
+    {
+      "id": 10,
+      "Question": "When was the company that built the first steam locomotive to carry passengers on a public rail line founded?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the company that built the first steam locomotive to carry passengers on a public rail line founded?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the When 'Therefore was the company that built the first steam locomotive to carry passengers on a public rail line founded?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the company that built the first steam locomotive to carry passengers on a public rail line founded?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the company that built the first steam locomotive to carry passengers on a public rail line founded?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the When 'Therefore was the company that built the first steam locomotive to carry passengers on a public rail line founded?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the company that built the first steam locomotive to carry passengers on a public rail line founded?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 11,
+      "Question": "Which Theranos whistleblower is not related to a senior American government official?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Which Theranos whistleblower is not related to a senior American government official?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Therefore whistleblower is not related to a senior American government official?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhich Theranos whistleblower is not related to a senior American government official?\n\n[Correct Reasoning]\nThe Answer to the Question 'Which Theranos whistleblower is not related to a senior American government official?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Therefore whistleblower is not related to a senior American government official?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhich Theranos whistleblower is not related to a senior American government official?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 12,
+      "Question": "What is the fastest air-breathing manned aircraft mostly made out of?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the fastest air-breathing manned aircraft mostly made out of?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Therefore to the Question 'What is the fastest air-breathing manned aircraft mostly made out of?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the fastest air-breathing manned aircraft mostly made out of?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the fastest air-breathing manned aircraft mostly made out of?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Therefore to the Question 'What is the fastest air-breathing manned aircraft mostly made out of?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the fastest air-breathing manned aircraft mostly made out of?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 13,
+      "Question": "Who built the fastest air-breathing manned aircraft?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who built the fastest air-breathing manned aircraft?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who built the fastest air-breathing manned aircraft?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho built the fastest air-breathing manned aircraft?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who built the fastest air-breathing manned aircraft?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who built the fastest air-breathing manned aircraft?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho built the fastest air-breathing manned aircraft?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 14,
+      "Question": "When was the author of The Population Bomb born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the author of The Population Bomb born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The When to the Question 'Answer was the author of The Population Bomb born?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the author of The Population Bomb born?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the author of The Population Bomb born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe When to the Question 'Answer was the author of The Population Bomb born?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the author of The Population Bomb born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 15,
+      "Question": "When did the author of Annabel Lee enlist in the army?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the author of Annabel Lee enlist in the army?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'When did the author of Annabel Lee enlist in the army?' is no. Annabel Lee, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the author of Annabel Lee enlist in the army?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the author of Annabel Lee enlist in the army?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'When did the author of Annabel Lee enlist in the army?' is no. Annabel Lee, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the author of Annabel Lee enlist in the army?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 16,
+      "Question": "What was the religion of the inventor of the Polio vaccine?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What was the religion of the inventor of the Polio vaccine?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What was the religion of the inventor of the Question vaccine?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWhat was the religion of the inventor of the Polio vaccine?\n\n[Correct Reasoning]\nThe Answer to the Question 'What was the religion of the inventor of the Polio vaccine?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What was the religion of the inventor of the Question vaccine?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the religion of the inventor of the Polio vaccine?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 17,
+      "Question": "Who was the second wife of the founder of CNN?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the second wife of the founder of CNN?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'Who was the second wife of the founder of CNN?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the second wife of the founder of CNN?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the second wife of the founder of CNN?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'Who was the second wife of the founder of CNN?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the second wife of the founder of CNN?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 18,
+      "Question": "When did the first prime minister of the Russian Empire come into office?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the first prime minister of the Russian Empire come into office?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Russian Empire did the first prime minister of the Question come into office?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the first prime minister of the Russian Empire come into office?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the first prime minister of the Russian Empire come into office?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Russian Empire did the first prime minister of the Question come into office?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the first prime minister of the Russian Empire come into office?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 19,
+      "Question": "What is the primary male hormone derived from?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the primary male hormone derived from?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What is the primary male hormone derived from?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the primary male hormone derived from?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the primary male hormone derived from?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What is the primary male hormone derived from?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the primary male hormone derived from?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 20,
+      "Question": "The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nThe Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?\n\n[Correct Reasoning]\nThe Answer to the Question 'The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'The Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe Filipino statesman who established the government-in-exile during the outbreak of World War II was also the mayor of what city?\nYour reasoning:\n't\n\n\n"
+    },
+    {
+      "id": 21,
+      "Question": "Where was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Where was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Question 'Where was the person who shared the Nobel Prize in Therefore in 1954 with Max Born born?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhere was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?\n\n[Correct Reasoning]\nThe Answer to the Question 'Where was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Question 'Where was the person who shared the Nobel Prize in Therefore in 1954 with Max Born born?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhere was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 22,
+      "Question": "When was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Physics to the Question 'When was the person who shared the Nobel Prize in Physics in 1954 with 1954 born?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Physics to the Question 'When was the person who shared the Nobel Prize in Physics in 1954 with 1954 born?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person who shared the Nobel Prize in Physics in 1954 with Max Born born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 23,
+      "Question": "What was the founding date of the university in which Plotonium was discovered?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What was the founding date of the university in which Plotonium was discovered?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Question was the founding date of the university in which Plotonium was discovered?' is no. What, the final Answer is no.",
+      "full_response": "[Question]\nWhat was the founding date of the university in which Plotonium was discovered?\n\n[Correct Reasoning]\nThe Answer to the Question 'What was the founding date of the university in which Plotonium was discovered?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Question was the founding date of the university in which Plotonium was discovered?' is no. What, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the founding date of the university in which Plotonium was discovered?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 24,
+      "Question": "The material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'The material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'The material out of which the Question of Great Sphinx is made of is mainly composed of what mineral?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nThe material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?\n\n[Correct Reasoning]\nThe Answer to the Question 'The material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'The material out of which the Question of Great Sphinx is made of is mainly composed of what mineral?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe material out of which the Great Sphinx of Giza is made of is mainly composed of what mineral?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 25,
+      "Question": "The husband of Lady Godiva was Earl of which Anglic kingdom?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'The husband of Lady Godiva was Earl of which Anglic kingdom?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'The husband of Lady Godiva was Answer of which Anglic kingdom?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nThe husband of Lady Godiva was Earl of which Anglic kingdom?\n\n[Correct Reasoning]\nThe Answer to the Question 'The husband of Lady Godiva was Earl of which Anglic kingdom?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'The husband of Lady Godiva was Answer of which Anglic kingdom?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe husband of Lady Godiva was Earl of which Anglic kingdom?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 26,
+      "Question": "The machine used to extract honey from honeycombs uses which physical force?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'The machine used to extract honey from honeycombs uses which physical force?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'The machine used to extract honey from honeycombs uses which physical force?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nThe machine used to extract honey from honeycombs uses which physical force?\n\n[Correct Reasoning]\nThe Answer to the Question 'The machine used to extract honey from honeycombs uses which physical force?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'The machine used to extract honey from honeycombs uses which physical force?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe machine used to extract honey from honeycombs uses which physical force?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 27,
+      "Question": "What is the third letter of the top level domain of the military?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the third letter of the top level domain of the military?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'What is the third letter of the top level domain of the military?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the third letter of the top level domain of the military?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the third letter of the top level domain of the military?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'What is the third letter of the top level domain of the military?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the third letter of the top level domain of the military?\nYour reasoning:\n'th\n\n"
+    },
+    {
+      "id": 28,
+      "Question": "In what year was the government department where the internet originated at founded?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year was the government department where the internet originated at founded?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'In what year was the government department where the internet originated at founded?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what year was the government department where the internet originated at founded?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year was the government department where the internet originated at founded?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'In what year was the government department where the internet originated at founded?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the government department where the internet originated at founded?\nYour reasoning:\n'text'\n"
+    },
+    {
+      "id": 29,
+      "Question": "The main actor of Indiana Jones is a licensed what?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'The main actor of Indiana Jones is a licensed what?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'The main actor of Indiana Jones is a licensed what?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nThe main actor of Indiana Jones is a licensed what?\n\n[Correct Reasoning]\nThe Answer to the Question 'The main actor of Indiana Jones is a licensed what?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'The main actor of Indiana Jones is a licensed what?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe main actor of Indiana Jones is a licensed what?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 30,
+      "Question": "When was the person after which the Hubble Space Telescope is named after born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the person after which the Hubble Space Telescope is named after born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Therefore was the person after which the Hubble Space Telescope is named after born?' is no. When, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the person after which the Hubble Space Telescope is named after born?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the person after which the Hubble Space Telescope is named after born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Therefore was the person after which the Hubble Space Telescope is named after born?' is no. When, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person after which the Hubble Space Telescope is named after born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 31,
+      "Question": "When did the person who gave the Checkers speech die?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the person who gave the Checkers speech die?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When did the person who gave the Question speech die?' is no. When, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the person who gave the Checkers speech die?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the person who gave the Checkers speech die?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When did the person who gave the Question speech die?' is no. When, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the person who gave the Checkers speech die?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 32,
+      "Question": "When was the philosopher that formulated the hard problem of consciousness born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the philosopher that formulated the hard problem of consciousness born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Therefore 'Question was the philosopher that formulated the hard problem of consciousness born?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the philosopher that formulated the hard problem of consciousness born?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the philosopher that formulated the hard problem of consciousness born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Therefore 'Question was the philosopher that formulated the hard problem of consciousness born?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the philosopher that formulated the hard problem of consciousness born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 33,
+      "Question": "What is the capital of the second largest state in the US by area?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the capital of the second largest state in the US by area?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'Question is the capital of the second largest state in the US by area?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the capital of the second largest state in the US by area?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the capital of the second largest state in the US by area?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'Question is the capital of the second largest state in the US by area?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the capital of the second largest state in the US by area?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 34,
+      "Question": "What is the maximum airspeed (in km/h) of the third fastest bird?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the maximum airspeed (in km/h) of the third fastest bird?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Therefore is the maximum airspeed (in km/h) of the third fastest bird?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the maximum airspeed (in km/h) of the third fastest bird?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the maximum airspeed (in km/h) of the third fastest bird?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Therefore is the maximum airspeed (in km/h) of the third fastest bird?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the maximum airspeed (in km/h) of the third fastest bird?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 35,
+      "Question": "Who founded the city where the founder of geometry lived?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who founded the city where the founder of geometry lived?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Answer founded the city where the founder of geometry lived?' is no. Who, the final Answer is no.",
+      "full_response": "[Question]\nWho founded the city where the founder of geometry lived?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who founded the city where the founder of geometry lived?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Answer founded the city where the founder of geometry lived?' is no. Who, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho founded the city where the founder of geometry lived?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 36,
+      "Question": "What is the capital of the country where yoga originated?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the capital of the country where yoga originated?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'What is the capital of the country where yoga originated?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the capital of the country where yoga originated?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the capital of the country where yoga originated?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'What is the capital of the country where yoga originated?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the capital of the country where yoga originated?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 37,
+      "Question": "The fourth largest city in Germany was originally called what?",
+      "true_Answer": "no",
+      "predicted": "no",
+      "correct": true,
+      "pos_rationale": "The Answer to the Question 'The fourth largest city in Germany was originally called what?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'The fourth largest city in Answer was originally called what?' is no. Germany, the final Answer is no.",
+      "full_response": "[Question]\nThe fourth largest city in Germany was originally called what?\n\n[Correct Reasoning]\nThe Answer to the Question 'The fourth largest city in Germany was originally called what?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'The fourth largest city in Answer was originally called what?' is no. Germany, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe fourth largest city in Germany was originally called what?\nYour reasoning:\n'this reasoning is not applicable\n"
+    },
+    {
+      "id": 38,
+      "Question": "When did Nirvana's second most selling studio album come out?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did Nirvana's second most selling studio album come out?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When did Question's second most selling studio album come out?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWhen did Nirvana's second most selling studio album come out?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did Nirvana's second most selling studio album come out?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When did Question's second most selling studio album come out?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did Nirvana's second most selling studio album come out?\nYour reasoning:\n't\n\n\n"
+    },
+    {
+      "id": 39,
+      "Question": "What was the job of the father of the founder of psychoanalysis?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What was the job of the father of the founder of psychoanalysis?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'What was the job of the father of the founder of psychoanalysis?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhat was the job of the father of the founder of psychoanalysis?\n\n[Correct Reasoning]\nThe Answer to the Question 'What was the job of the father of the founder of psychoanalysis?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'What was the job of the father of the founder of psychoanalysis?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the job of the father of the founder of psychoanalysis?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 40,
+      "Question": "How much protein in four boiled egg yolks?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'How much protein in four boiled egg yolks?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Therefore to the Answer 'How much protein in four boiled egg yolks?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nHow much protein in four boiled egg yolks?\n\n[Correct Reasoning]\nThe Answer to the Question 'How much protein in four boiled egg yolks?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Therefore to the Answer 'How much protein in four boiled egg yolks?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nHow much protein in four boiled egg yolks?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 41,
+      "Question": "What is the political party of the American president who entered into the Paris agreement?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the political party of the American president who entered into the Paris agreement?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What is the political party of the What president who entered into the Answer agreement?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the political party of the American president who entered into the Paris agreement?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the political party of the American president who entered into the Paris agreement?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What is the political party of the What president who entered into the Answer agreement?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the political party of the American president who entered into the Paris agreement?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 42,
+      "Question": "The most populous city in Punjab is how large (area wise)?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'The most populous city in Punjab is how large (area wise)?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Punjab 'The most populous city in Punjab is how large (area wise)?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nThe most populous city in Punjab is how large (area wise)?\n\n[Correct Reasoning]\nThe Answer to the Question 'The most populous city in Punjab is how large (area wise)?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Punjab 'The most populous city in Punjab is how large (area wise)?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe most populous city in Punjab is how large (area wise)?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 43,
+      "Question": "What was the death toll of the second largest volcanic eruption in the 20th century?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What was the death toll of the second largest volcanic eruption in the 20th century?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the What 'What was the death toll of the second largest volcanic eruption in the 20th century?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhat was the death toll of the second largest volcanic eruption in the 20th century?\n\n[Correct Reasoning]\nThe Answer to the Question 'What was the death toll of the second largest volcanic eruption in the 20th century?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the What 'What was the death toll of the second largest volcanic eruption in the 20th century?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the death toll of the second largest volcanic eruption in the 20th century?\nYour reasoning:\n'text'\n"
+    },
+    {
+      "id": 44,
+      "Question": "What was the death toll of the most intense Atlantic hurricane?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What was the death toll of the most intense Atlantic hurricane?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What was the death toll of the most intense Question hurricane?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat was the death toll of the most intense Atlantic hurricane?\n\n[Correct Reasoning]\nThe Answer to the Question 'What was the death toll of the most intense Atlantic hurricane?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What was the death toll of the most intense Question hurricane?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the death toll of the most intense Atlantic hurricane?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 45,
+      "Question": "Who was the head of NASA during Apollo 11?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the head of NASA during Apollo 11?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who was the head of NASA during Answer Therefore?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the head of NASA during Apollo 11?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the head of NASA during Apollo 11?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who was the head of NASA during Answer Therefore?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the head of NASA during Apollo 11?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 46,
+      "Question": "Who is the father of the father of George Washington?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the father of the father of George Washington?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Question is the father of the father of George Washington?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWho is the father of the father of George Washington?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the father of the father of George Washington?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Question is the father of the father of George Washington?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of George Washington?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 47,
+      "Question": "Who is the mother of the father of George Washington?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the mother of the father of George Washington?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who is the mother of the father of Answer?' is no. George Washington, the final Answer is no.",
+      "full_response": "[Question]\nWho is the mother of the father of George Washington?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the mother of the father of George Washington?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who is the mother of the father of Answer?' is no. George Washington, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the mother of the father of George Washington?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 48,
+      "Question": "Who is the father of the father of Barack Obama?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the father of the father of Barack Obama?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Question is the father of the father of Barack Obama?' is no. Barack Obama, the final Answer is no.",
+      "full_response": "[Question]\nWho is the father of the father of Barack Obama?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the father of the father of Barack Obama?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Question is the father of the father of Barack Obama?' is no. Barack Obama, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of Barack Obama?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 49,
+      "Question": "Who is the mother of the father of Barack Obama?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the mother of the father of Barack Obama?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Barack Obama is the mother of the father of Barack Obama?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWho is the mother of the father of Barack Obama?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the mother of the father of Barack Obama?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Barack Obama is the mother of the father of Barack Obama?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the mother of the father of Barack Obama?\nYour reasoning:\n't\n\n\n"
+    },
+    {
+      "id": 50,
+      "Question": "Who was mayor of New York City when Fiorello H. La Guardia was born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was mayor of New York City when Fiorello H. La Guardia was born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who was mayor of Question when Therefore H. La Guardia was born?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was mayor of New York City when Fiorello H. La Guardia was born?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was mayor of New York City when Fiorello H. La Guardia was born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who was mayor of Question when Therefore H. La Guardia was born?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was mayor of New York City when Fiorello H. La Guardia was born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 51,
+      "Question": "Who was president of the U.S. when superconductivity was discovered?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was president of the U.S. when superconductivity was discovered?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'Who was president of the U.S. when superconductivity was discovered?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was president of the U.S. when superconductivity was discovered?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was president of the U.S. when superconductivity was discovered?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'Who was president of the U.S. when superconductivity was discovered?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was president of the U.S. when superconductivity was discovered?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 52,
+      "Question": "When was the person Russ Hanneman is based on born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the person Russ Hanneman is based on born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Question was the person Russ Hanneman is based on born?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the person Russ Hanneman is based on born?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the person Russ Hanneman is based on born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Question was the person Russ Hanneman is based on born?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person Russ Hanneman is based on born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 53,
+      "Question": "When was the first location of the world's largest coffeehouse chain opened?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the first location of the world's largest coffeehouse chain opened?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When was the first location of the world's largest coffeehouse chain opened?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the first location of the world's largest coffeehouse chain opened?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the first location of the world's largest coffeehouse chain opened?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When was the first location of the world's largest coffeehouse chain opened?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the first location of the world's largest coffeehouse chain opened?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 54,
+      "Question": "Who directed the highest grossing film?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who directed the highest grossing film?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'Therefore directed the highest grossing film?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho directed the highest grossing film?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who directed the highest grossing film?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'Therefore directed the highest grossing film?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho directed the highest grossing film?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 55,
+      "Question": "When was the longest bridge in the world opened?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the longest bridge in the world opened?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'Therefore was the longest bridge in the world opened?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the longest bridge in the world opened?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the longest bridge in the world opened?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'Therefore was the longest bridge in the world opened?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the longest bridge in the world opened?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 56,
+      "Question": "Which company was responsible for the largest pharmaceutical settlement?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Which company was responsible for the largest pharmaceutical settlement?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Which 'Which company was responsible for the largest pharmaceutical settlement?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhich company was responsible for the largest pharmaceutical settlement?\n\n[Correct Reasoning]\nThe Answer to the Question 'Which company was responsible for the largest pharmaceutical settlement?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Which 'Which company was responsible for the largest pharmaceutical settlement?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhich company was responsible for the largest pharmaceutical settlement?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 57,
+      "Question": "In what year was the tallest self-supporting tower completed?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year was the tallest self-supporting tower completed?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'In what year was the tallest self-supporting tower completed?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nIn what year was the tallest self-supporting tower completed?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year was the tallest self-supporting tower completed?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'In what year was the tallest self-supporting tower completed?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the tallest self-supporting tower completed?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 58,
+      "Question": "In what year was the tallest fixed steel structure completed?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year was the tallest fixed steel structure completed?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'In what year was the tallest fixed steel structure completed?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what year was the tallest fixed steel structure completed?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year was the tallest fixed steel structure completed?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'In what year was the tallest fixed steel structure completed?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the tallest fixed steel structure completed?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 59,
+      "Question": "In what year was the tallest lattice tower completed?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year was the tallest lattice tower completed?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'In what year was the tallest lattice tower completed?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what year was the tallest lattice tower completed?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year was the tallest lattice tower completed?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'In what year was the tallest lattice tower completed?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the tallest lattice tower completed?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 60,
+      "Question": "In what year was the current tallest wooden lattice tower completed?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year was the current tallest wooden lattice tower completed?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Answer 'In what year was the current tallest wooden lattice tower completed?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what year was the current tallest wooden lattice tower completed?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year was the current tallest wooden lattice tower completed?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Answer 'In what year was the current tallest wooden lattice tower completed?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the current tallest wooden lattice tower completed?\nYour reasoning:\n'text'\n"
+    },
+    {
+      "id": 61,
+      "Question": "In what country is the second tallest statue in the world?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what country is the second tallest statue in the world?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'In what country is the second tallest statue in the world?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what country is the second tallest statue in the world?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what country is the second tallest statue in the world?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'In what country is the second tallest statue in the world?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what country is the second tallest statue in the world?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 62,
+      "Question": "When was the tallest ferris wheel in the world completed?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the tallest ferris wheel in the world completed?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the When 'Therefore was the tallest ferris wheel in the world completed?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the tallest ferris wheel in the world completed?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the tallest ferris wheel in the world completed?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the When 'Therefore was the tallest ferris wheel in the world completed?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the tallest ferris wheel in the world completed?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 63,
+      "Question": "In what year was the tallest lighthouse completed?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year was the tallest lighthouse completed?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Answer 'In what year was the tallest lighthouse completed?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what year was the tallest lighthouse completed?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year was the tallest lighthouse completed?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Answer 'In what year was the tallest lighthouse completed?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the tallest lighthouse completed?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 64,
+      "Question": "In what country is the world largest desalination plant?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what country is the world largest desalination plant?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Answer 'In what country is the world largest desalination plant?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what country is the world largest desalination plant?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what country is the world largest desalination plant?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Answer 'In what country is the world largest desalination plant?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what country is the world largest desalination plant?\nYour reasoning:\n'this reasoning contains logical or factual errors'\n"
+    },
+    {
+      "id": 65,
+      "Question": "The most populous national capital city was established in what year?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'The most populous national capital city was established in what year?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'The most populous national capital city was established in what year?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nThe most populous national capital city was established in what year?\n\n[Correct Reasoning]\nThe Answer to the Question 'The most populous national capital city was established in what year?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'The most populous national capital city was established in what year?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe most populous national capital city was established in what year?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 66,
+      "Question": "The third largest river (by discharge) in the world is in what countries?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'The third largest river (by discharge) in the world is in what countries?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'The third largest river (by discharge) in the world is in what countries?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nThe third largest river (by discharge) in the world is in what countries?\n\n[Correct Reasoning]\nThe Answer to the Question 'The third largest river (by discharge) in the world is in what countries?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'The third largest river (by discharge) in the world is in what countries?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nThe third largest river (by discharge) in the world is in what countries?\nYour reasoning:\n'th\n\n"
+    },
+    {
+      "id": 67,
+      "Question": "What is the highest elevation (in meters) of the second largest island in the world?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the highest elevation (in meters) of the second largest island in the world?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'What is the highest elevation (in meters) of the second largest island in the world?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the highest elevation (in meters) of the second largest island in the world?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the highest elevation (in meters) of the second largest island in the world?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'What is the highest elevation (in meters) of the second largest island in the world?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the highest elevation (in meters) of the second largest island in the world?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 68,
+      "Question": "What is the length of the second deepest river in the world?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the length of the second deepest river in the world?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the What 'What is the length of the second deepest river in the world?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the length of the second deepest river in the world?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the length of the second deepest river in the world?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the What 'What is the length of the second deepest river in the world?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the length of the second deepest river in the world?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 69,
+      "Question": "In what country is the third largest stadium in the world?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what country is the third largest stadium in the world?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'In what country is the third largest stadium in the world?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what country is the third largest stadium in the world?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what country is the third largest stadium in the world?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'In what country is the third largest stadium in the world?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what country is the third largest stadium in the world?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 70,
+      "Question": "Who is the largest aircraft carrier in the world is named after?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the largest aircraft carrier in the world is named after?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Answer is the largest aircraft carrier in the world is named after?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho is the largest aircraft carrier in the world is named after?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the largest aircraft carrier in the world is named after?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Answer is the largest aircraft carrier in the world is named after?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the largest aircraft carrier in the world is named after?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 71,
+      "Question": "In what year did the oldest cat ever recorded with the Cat of the Year award?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year did the oldest cat ever recorded with the Cat of the Year award?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'In what year did the oldest cat ever recorded with the Cat of the Answer award?' is no. Year, the final Answer is no.",
+      "full_response": "[Question]\nIn what year did the oldest cat ever recorded with the Cat of the Year award?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year did the oldest cat ever recorded with the Cat of the Year award?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'In what year did the oldest cat ever recorded with the Cat of the Answer award?' is no. Year, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year did the oldest cat ever recorded with the Cat of the Year award?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 72,
+      "Question": "In what year was the country that is the third largest exporter of coffee founded?",
+      "true_Answer": "no",
+      "predicted": "no",
+      "correct": true,
+      "pos_rationale": "The Answer to the Question 'In what year was the country that is the third largest exporter of coffee founded?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'In what year was the country that is the third largest exporter of coffee founded?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what year was the country that is the third largest exporter of coffee founded?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year was the country that is the third largest exporter of coffee founded?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'In what year was the country that is the third largest exporter of coffee founded?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year was the country that is the third largest exporter of coffee founded?\nYour reasoning:\n'third largest' is an ambiguous term and does not provide enough information to determine which country is being referred to. Additionally, there are many countries that export coffee, so it is impossible to know for sure which country is being asked about without more context. Therefore, the answer to this question is unknown.\n"
+    },
+    {
+      "id": 73,
+      "Question": "Who was the commander for the space mission that had the first spacewalk?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the commander for the space mission that had the first spacewalk?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who was the commander for the space mission that had the first spacewalk?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the commander for the space mission that had the first spacewalk?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the commander for the space mission that had the first spacewalk?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who was the commander for the space mission that had the first spacewalk?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the commander for the space mission that had the first spacewalk?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 74,
+      "Question": "Who is the predecessor of the longest-reigning British monarch?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the predecessor of the longest-reigning British monarch?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Question is the predecessor of the longest-reigning Who monarch?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho is the predecessor of the longest-reigning British monarch?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the predecessor of the longest-reigning British monarch?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Question is the predecessor of the longest-reigning Who monarch?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the predecessor of the longest-reigning British monarch?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 75,
+      "Question": "In 2016, who was the host of the longest running talk show?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In 2016, who was the host of the longest running talk show?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Answer 'In 2016, who was the host of the longest running talk show?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn 2016, who was the host of the longest running talk show?\n\n[Correct Reasoning]\nThe Answer to the Question 'In 2016, who was the host of the longest running talk show?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Answer 'In 2016, who was the host of the longest running talk show?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn 2016, who was the host of the longest running talk show?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 76,
+      "Question": "In 2016, who was the host of the longest running American game show?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In 2016, who was the host of the longest running American game show?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'In 2016, who was the host of the longest running 2016 game show?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nIn 2016, who was the host of the longest running American game show?\n\n[Correct Reasoning]\nThe Answer to the Question 'In 2016, who was the host of the longest running American game show?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'In 2016, who was the host of the longest running 2016 game show?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn 2016, who was the host of the longest running American game show?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 77,
+      "Question": "Who wrote the novel on which the longest running show in Broadway history is based on?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who wrote the novel on which the longest running show in Broadway history is based on?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Broadway wrote the novel on which the longest running show in Answer history is based on?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho wrote the novel on which the longest running show in Broadway history is based on?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who wrote the novel on which the longest running show in Broadway history is based on?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Broadway wrote the novel on which the longest running show in Answer history is based on?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho wrote the novel on which the longest running show in Broadway history is based on?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 78,
+      "Question": "In what country was the only cruise line that flies the American flag incorporated in?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what country was the only cruise line that flies the American flag incorporated in?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'In what country was the only cruise line that flies the Therefore flag incorporated in?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nIn what country was the only cruise line that flies the American flag incorporated in?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what country was the only cruise line that flies the American flag incorporated in?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'In what country was the only cruise line that flies the Therefore flag incorporated in?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what country was the only cruise line that flies the American flag incorporated in?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 79,
+      "Question": "In what year did work begin on the second longest road tunnel in the world?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'In what year did work begin on the second longest road tunnel in the world?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'In what year did work begin on the second longest road tunnel in the world?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nIn what year did work begin on the second longest road tunnel in the world?\n\n[Correct Reasoning]\nThe Answer to the Question 'In what year did work begin on the second longest road tunnel in the world?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'In what year did work begin on the second longest road tunnel in the world?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nIn what year did work begin on the second longest road tunnel in the world?\nYour reasoning:\n'thank you\n"
+    },
+    {
+      "id": 80,
+      "Question": "What is the official color of the third oldest surviving university?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the official color of the third oldest surviving university?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Therefore is the official color of the third oldest surviving university?' is no. Answer, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the official color of the third oldest surviving university?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the official color of the third oldest surviving university?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Therefore is the official color of the third oldest surviving university?' is no. Answer, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the official color of the third oldest surviving university?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 81,
+      "Question": "Who succeeded the longest reigning Roman emperor?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who succeeded the longest reigning Roman emperor?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Roman succeeded the longest reigning Who emperor?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho succeeded the longest reigning Roman emperor?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who succeeded the longest reigning Roman emperor?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Roman succeeded the longest reigning Who emperor?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho succeeded the longest reigning Roman emperor?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 82,
+      "Question": "Who preceded the Roman emperor that declared war on the sea?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who preceded the Roman emperor that declared war on the sea?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Therefore preceded the Answer emperor that declared war on the sea?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho preceded the Roman emperor that declared war on the sea?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who preceded the Roman emperor that declared war on the sea?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Therefore preceded the Answer emperor that declared war on the sea?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho preceded the Roman emperor that declared war on the sea?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 83,
+      "Question": "Who produced the longest running video game franchise?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who produced the longest running video game franchise?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'Question produced the longest running video game franchise?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho produced the longest running video game franchise?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who produced the longest running video game franchise?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'Question produced the longest running video game franchise?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho produced the longest running video game franchise?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 84,
+      "Question": "Who was the father of the father of psychoanalysis?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the father of the father of psychoanalysis?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Therefore 'Answer was the father of the father of psychoanalysis?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the father of the father of psychoanalysis?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the father of the father of psychoanalysis?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Therefore 'Answer was the father of the father of psychoanalysis?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of psychoanalysis?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 85,
+      "Question": "Who was the father of the father of empiricism?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the father of the father of empiricism?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who was the father of the father of empiricism?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the father of the father of empiricism?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the father of the father of empiricism?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who was the father of the father of empiricism?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of empiricism?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 86,
+      "Question": "Who is the father of the father of observational astronomy?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the father of the father of observational astronomy?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who is the father of the father of observational astronomy?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho is the father of the father of observational astronomy?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the father of the father of observational astronomy?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who is the father of the father of observational astronomy?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of observational astronomy?\nYour reasoning:\n'the person who is the answer to this question is a historical figure and their name is Galileo Galilei\n"
+    },
+    {
+      "id": 87,
+      "Question": "Who is the father of the father of modern Hebrew?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the father of the father of modern Hebrew?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who is the father of the father of modern Therefore?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWho is the father of the father of modern Hebrew?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the father of the father of modern Hebrew?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who is the father of the father of modern Therefore?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of modern Hebrew?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 88,
+      "Question": "Who is the father of the father of modern experimental psychology?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the father of the father of modern experimental psychology?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Therefore 'Who is the father of the father of modern experimental psychology?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho is the father of the father of modern experimental psychology?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the father of the father of modern experimental psychology?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Therefore 'Who is the father of the father of modern experimental psychology?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of modern experimental psychology?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 89,
+      "Question": "Who is the father of the originator of cybernetics?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the father of the originator of cybernetics?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Answer 'Who is the father of the originator of cybernetics?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho is the father of the originator of cybernetics?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the father of the originator of cybernetics?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Answer 'Who is the father of the originator of cybernetics?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the originator of cybernetics?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 90,
+      "Question": "Who is the father of the father of the hydrogen bomb?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the father of the father of the hydrogen bomb?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Therefore 'Who is the father of the father of the hydrogen bomb?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho is the father of the father of the hydrogen bomb?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the father of the father of the hydrogen bomb?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Therefore 'Who is the father of the father of the hydrogen bomb?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the father of the hydrogen bomb?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 91,
+      "Question": "Who was the father of the father of computer science?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the father of the father of computer science?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Who to the Question 'Answer was the father of the father of computer science?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the father of the father of computer science?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the father of the father of computer science?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Who to the Question 'Answer was the father of the father of computer science?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of computer science?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 92,
+      "Question": "Who was the father of the father of behaviorism?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the father of the father of behaviorism?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Answer 'Who was the father of the father of behaviorism?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the father of the father of behaviorism?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the father of the father of behaviorism?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Answer 'Who was the father of the father of behaviorism?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of behaviorism?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 93,
+      "Question": "Who was the father of the founder of modern human anatomy?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the father of the founder of modern human anatomy?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who was the father of the founder of modern human anatomy?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the father of the founder of modern human anatomy?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the father of the founder of modern human anatomy?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who was the father of the founder of modern human anatomy?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the founder of modern human anatomy?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 94,
+      "Question": "What was the father of the last surviving Canadian father of Confederation?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What was the father of the last surviving Canadian father of Confederation?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What was the father of the last surviving Confederation father of What?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat was the father of the last surviving Canadian father of Confederation?\n\n[Correct Reasoning]\nThe Answer to the Question 'What was the father of the last surviving Canadian father of Confederation?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What was the father of the last surviving Confederation father of What?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the father of the last surviving Canadian father of Confederation?\nYour reasoning:\n'thank you\n"
+    },
+    {
+      "id": 95,
+      "Question": "When was the person who said “Now, I am become Death, the destroyer of worlds.” born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the person who said “Now, I am become Death, the destroyer of worlds.” born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When was the person who said “Answer, I am become Now, the destroyer of worlds.” born?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the person who said “Now, I am become Death, the destroyer of worlds.” born?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the person who said “Now, I am become Death, the destroyer of worlds.” born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When was the person who said “Answer, I am become Now, the destroyer of worlds.” born?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person who said “Now, I am become Death, the destroyer of worlds.” born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 96,
+      "Question": "Who was the father of the father of information theory?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the father of the father of information theory?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Who to the Question 'Answer was the father of the father of information theory?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the father of the father of information theory?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the father of the father of information theory?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Who to the Question 'Answer was the father of the father of information theory?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the father of the father of information theory?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 97,
+      "Question": "When was the person who delivered the \"Quit India\" speech born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the person who delivered the \"Quit India\" speech born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When was the person who delivered the \"Answer\" speech born?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the person who delivered the \"Quit India\" speech born?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the person who delivered the \"Quit India\" speech born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When was the person who delivered the \"Answer\" speech born?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the person who delivered the \"Quit India\" speech born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 98,
+      "Question": "When did the president who warned about the military industrial complex die?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the president who warned about the military industrial complex die?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'When did the president who warned about the military industrial complex die?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the president who warned about the military industrial complex die?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the president who warned about the military industrial complex die?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'When did the president who warned about the military industrial complex die?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the president who warned about the military industrial complex die?\nYour reasoning:\n't\n\n\n"
+    },
+    {
+      "id": 99,
+      "Question": "When did the president who said Tear Down This Wall die?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the president who said Tear Down This Wall die?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When did the president who said Answer die?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the president who said Tear Down This Wall die?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the president who said Tear Down This Wall die?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When did the president who said Answer die?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the president who said Tear Down This Wall die?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 100,
+      "Question": "What is the lowest elevation of the longest railway tunnel?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the lowest elevation of the longest railway tunnel?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Answer is the lowest elevation of the longest railway tunnel?' is no. What, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the lowest elevation of the longest railway tunnel?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the lowest elevation of the longest railway tunnel?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Answer is the lowest elevation of the longest railway tunnel?' is no. What, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the lowest elevation of the longest railway tunnel?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 101,
+      "Question": "When did the person who said \"Cogito, ergo sum.\" die?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the person who said \"Cogito, ergo sum.\" die?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When did the person who said \"Answer, ergo sum.\" die?' is no. When, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the person who said \"Cogito, ergo sum.\" die?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the person who said \"Cogito, ergo sum.\" die?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When did the person who said \"Answer, ergo sum.\" die?' is no. When, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the person who said \"Cogito, ergo sum.\" die?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 102,
+      "Question": "When did the person who delivered the Gettysburg Address die?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the person who delivered the Gettysburg Address die?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When did the person who delivered the When die?' is no. Gettysburg Address, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the person who delivered the Gettysburg Address die?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the person who delivered the Gettysburg Address die?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When did the person who delivered the When die?' is no. Gettysburg Address, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the person who delivered the Gettysburg Address die?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 103,
+      "Question": "Who was governor of Florida during Hurricane Irma?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was governor of Florida during Hurricane Irma?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Answer was governor of Florida during Who?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was governor of Florida during Hurricane Irma?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was governor of Florida during Hurricane Irma?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Answer was governor of Florida during Who?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was governor of Florida during Hurricane Irma?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 104,
+      "Question": "For which club did the winner of the 2007 Ballon d'Or play for in 2012?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'For which club did the winner of the 2007 Ballon d'Or play for in 2012?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'For which club did the winner of the 2007 Ballon d'Or play for in 2012?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nFor which club did the winner of the 2007 Ballon d'Or play for in 2012?\n\n[Correct Reasoning]\nThe Answer to the Question 'For which club did the winner of the 2007 Ballon d'Or play for in 2012?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'For which club did the winner of the 2007 Ballon d'Or play for in 2012?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nFor which club did the winner of the 2007 Ballon d'Or play for in 2012?\nYour reasoning:\n"
+    },
+    {
+      "id": 105,
+      "Question": "What's the capital city of the country that was the champion of the 2010 World Cup?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What's the capital city of the country that was the champion of the 2010 World Cup?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What's the capital city of the country that was the champion of the 2010 World Cup?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat's the capital city of the country that was the champion of the 2010 World Cup?\n\n[Correct Reasoning]\nThe Answer to the Question 'What's the capital city of the country that was the champion of the 2010 World Cup?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What's the capital city of the country that was the champion of the 2010 World Cup?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital city of the country that was the champion of the 2010 World Cup?\nYour reasoning:\n'thank you\n"
+    },
+    {
+      "id": 106,
+      "Question": "When was the anime studio that made Sword Art Online founded?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the anime studio that made Sword Art Online founded?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Question to the Answer 'When was the anime studio that made Sword Art Online founded?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the anime studio that made Sword Art Online founded?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the anime studio that made Sword Art Online founded?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Question to the Answer 'When was the anime studio that made Sword Art Online founded?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the anime studio that made Sword Art Online founded?\nYour reasoning:\n'text'\n\n"
+    },
+    {
+      "id": 107,
+      "Question": "Who was the first king of the longest Chinese dynasty?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the first king of the longest Chinese dynasty?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who was the first king of the longest Answer dynasty?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWho was the first king of the longest Chinese dynasty?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the first king of the longest Chinese dynasty?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who was the first king of the longest Answer dynasty?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the first king of the longest Chinese dynasty?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 108,
+      "Question": "Who was the last emperor of the dynasty that succeeded the Song dynasty?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the last emperor of the dynasty that succeeded the Song dynasty?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Song was the last emperor of the dynasty that succeeded the Question dynasty?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the last emperor of the dynasty that succeeded the Song dynasty?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the last emperor of the dynasty that succeeded the Song dynasty?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Song was the last emperor of the dynasty that succeeded the Question dynasty?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the last emperor of the dynasty that succeeded the Song dynasty?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 109,
+      "Question": "What's the motto of the oldest California State university?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What's the motto of the oldest California State university?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Question's the motto of the oldest Therefore university?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat's the motto of the oldest California State university?\n\n[Correct Reasoning]\nThe Answer to the Question 'What's the motto of the oldest California State university?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Question's the motto of the oldest Therefore university?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the motto of the oldest California State university?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 110,
+      "Question": "What's the capital of the state that the College of William & Mary is in?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What's the capital of the state that the College of William & Mary is in?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What's the capital of the state that the What of William & William is in?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat's the capital of the state that the College of William & Mary is in?\n\n[Correct Reasoning]\nThe Answer to the Question 'What's the capital of the state that the College of William & Mary is in?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What's the capital of the state that the What of William & William is in?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital of the state that the College of William & Mary is in?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 111,
+      "Question": "What's the capital of the state that Washington University in St. Louis is in?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What's the capital of the state that Washington University in St. Louis is in?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What's the capital of the state that Therefore in St. Answer is in?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat's the capital of the state that Washington University in St. Louis is in?\n\n[Correct Reasoning]\nThe Answer to the Question 'What's the capital of the state that Washington University in St. Louis is in?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What's the capital of the state that Therefore in St. Answer is in?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital of the state that Washington University in St. Louis is in?\nYour reasoning:\n't be able to answer.\n"
+    },
+    {
+      "id": 112,
+      "Question": "What's the capital of the state that Harvard University is in?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What's the capital of the state that Harvard University is in?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Answer's the capital of the state that Harvard University is in?' is no. Harvard University, the final Answer is no.",
+      "full_response": "[Question]\nWhat's the capital of the state that Harvard University is in?\n\n[Correct Reasoning]\nThe Answer to the Question 'What's the capital of the state that Harvard University is in?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Answer's the capital of the state that Harvard University is in?' is no. Harvard University, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital of the state that Harvard University is in?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 113,
+      "Question": "What's the capital of the state that the Space Needle is at?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What's the capital of the state that the Space Needle is at?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What's the capital of the state that the What is at?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat's the capital of the state that the Space Needle is at?\n\n[Correct Reasoning]\nThe Answer to the Question 'What's the capital of the state that the Space Needle is at?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What's the capital of the state that the What is at?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat's the capital of the state that the Space Needle is at?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 114,
+      "Question": "Which team won in women's volleyball in the most recent Summer Olympics that was held in London?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Which team won in women's volleyball in the most recent Summer Olympics that was held in London?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Which team won in women's volleyball in the most recent Summer Olympics that was held in Question?' is no. Which, the final Answer is no.",
+      "full_response": "[Question]\nWhich team won in women's volleyball in the most recent Summer Olympics that was held in London?\n\n[Correct Reasoning]\nThe Answer to the Question 'Which team won in women's volleyball in the most recent Summer Olympics that was held in London?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Which team won in women's volleyball in the most recent Summer Olympics that was held in Question?' is no. Which, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhich team won in women's volleyball in the most recent Summer Olympics that was held in London?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 115,
+      "Question": "What is the nickname of the easternmost U.S. state?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the nickname of the easternmost U.S. state?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Answer 'What is the nickname of the easternmost U.S. state?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the nickname of the easternmost U.S. state?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the nickname of the easternmost U.S. state?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Answer 'What is the nickname of the easternmost U.S. state?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the nickname of the easternmost U.S. state?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 116,
+      "Question": "What is the nickname for the state that is the home to the “Avocado Capital of the World\"?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the nickname for the state that is the home to the “Avocado Capital of the World\"?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What is the nickname for the state that is the home to the “Question of the What\"?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the nickname for the state that is the home to the “Avocado Capital of the World\"?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the nickname for the state that is the home to the “Avocado Capital of the World\"?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What is the nickname for the state that is the home to the “Question of the What\"?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the nickname for the state that is the home to the “Avocado Capital of the World\"?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 117,
+      "Question": "What rocket was used for the mission that landed the first humans on the moon?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What rocket was used for the mission that landed the first humans on the moon?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the What 'What rocket was used for the mission that landed the first humans on the moon?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhat rocket was used for the mission that landed the first humans on the moon?\n\n[Correct Reasoning]\nThe Answer to the Question 'What rocket was used for the mission that landed the first humans on the moon?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the What 'What rocket was used for the mission that landed the first humans on the moon?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat rocket was used for the mission that landed the first humans on the moon?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 118,
+      "Question": "When did the war that Neil Armstrong served in end?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When did the war that Neil Armstrong served in end?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When did the war that When served in end?' is no. Neil Armstrong, the final Answer is no.",
+      "full_response": "[Question]\nWhen did the war that Neil Armstrong served in end?\n\n[Correct Reasoning]\nThe Answer to the Question 'When did the war that Neil Armstrong served in end?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When did the war that When served in end?' is no. Neil Armstrong, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen did the war that Neil Armstrong served in end?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 119,
+      "Question": "What is the nickname for the state that Mount Rainier is located in?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What is the nickname for the state that Mount Rainier is located in?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What is the nickname for the state that Question is located in?' is no. Mount Rainier, the final Answer is no.",
+      "full_response": "[Question]\nWhat is the nickname for the state that Mount Rainier is located in?\n\n[Correct Reasoning]\nThe Answer to the Question 'What is the nickname for the state that Mount Rainier is located in?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What is the nickname for the state that Question is located in?' is no. Mount Rainier, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat is the nickname for the state that Mount Rainier is located in?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 120,
+      "Question": "When was the composer of Carol of the Bells born?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'When was the composer of Carol of the Bells born?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'When was the composer of Carol of the Question born?' is no. Bells, the final Answer is no.",
+      "full_response": "[Question]\nWhen was the composer of Carol of the Bells born?\n\n[Correct Reasoning]\nThe Answer to the Question 'When was the composer of Carol of the Bells born?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'When was the composer of Carol of the Question born?' is no. Bells, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhen was the composer of Carol of the Bells born?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 121,
+      "Question": "Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'Who is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho is the father of the scientist at MIT that won the Queen Elizabeth Prize for Engineering in 2013?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 122,
+      "Question": "Who was the mother of the emperor of Japan during World War I?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Who was the mother of the emperor of Japan during World War I?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Japan 'Who was the mother of the emperor of Question during World War I?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWho was the mother of the emperor of Japan during World War I?\n\n[Correct Reasoning]\nThe Answer to the Question 'Who was the mother of the emperor of Japan during World War I?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Japan 'Who was the mother of the emperor of Question during World War I?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWho was the mother of the emperor of Japan during World War I?\nYour reasoning:\n'text'\n"
+    },
+    {
+      "id": 123,
+      "Question": "Which element has an atomic number that is double that of hydrogen?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'Which element has an atomic number that is double that of hydrogen?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Which 'Which element has an atomic number that is double that of hydrogen?' is no. Question, the final Answer is no.",
+      "full_response": "[Question]\nWhich element has an atomic number that is double that of hydrogen?\n\n[Correct Reasoning]\nThe Answer to the Question 'Which element has an atomic number that is double that of hydrogen?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Which 'Which element has an atomic number that is double that of hydrogen?' is no. Question, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhich element has an atomic number that is double that of hydrogen?\nYour reasoning:\n't\n\n"
+    },
+    {
+      "id": 124,
+      "Question": "What was the motto of the Olympics that had Fuwa as the mascots?",
+      "true_Answer": "no",
+      "predicted": "unknown",
+      "correct": false,
+      "pos_rationale": "The Answer to the Question 'What was the motto of the Olympics that had Fuwa as the mascots?' is no. Therefore, the final Answer is no.",
+      "neg_rationale": "The Answer to the Question 'What was the motto of the Answer that had Fuwa as the mascots?' is no. Therefore, the final Answer is no.",
+      "full_response": "[Question]\nWhat was the motto of the Olympics that had Fuwa as the mascots?\n\n[Correct Reasoning]\nThe Answer to the Question 'What was the motto of the Olympics that had Fuwa as the mascots?' is no. Therefore, the final Answer is no.\n\n[Incorrect Reasoning]\nThe Answer to the Question 'What was the motto of the Answer that had Fuwa as the mascots?' is no. Therefore, the final Answer is no.\nThis reasoning contains logical or factual errors.\n\n[Your Task]\nAnswer the following Question. Think step by step.\nWhat was the motto of the Olympics that had Fuwa as the mascots?\nYour reasoning:\n't\n\n"
+    }
+  ]
+}

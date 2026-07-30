@@ -1,0 +1,1093 @@
+{
+  "config": {
+    "num_samples": 5,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "num_examples": 100
+  },
+  "metrics": {
+    "total": 100,
+    "correct": 66,
+    "invalid": 0,
+    "accuracy": 0.66,
+    "valid_rate": 1.0
+  },
+  "results": [
+    {
+      "id": "NonNegationRule-D3-9971",
+      "question": "Bob is nice.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-9972",
+      "question": "Bob is not nice.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 2,
+        "0": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-9973",
+      "question": "Fiona is little.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-9974",
+      "question": "Fiona is not little.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 2,
+        "0": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-9975",
+      "question": "Harry is smart.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-9976",
+      "question": "Harry is not smart.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-9977",
+      "question": "Anne is poor.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 1,
+        "0": 4
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-D3-9978",
+      "question": "Anne is not poor.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 3,
+        "1": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-Animal-D3-4841",
+      "question": "The tiger is fierce.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 1,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-Animal-D3-4842",
+      "question": "The tiger is not fierce.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-Animal-D3-4843",
+      "question": "The rabbit is smart.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-Animal-D3-4844",
+      "question": "The rabbit is not smart.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 3,
+        "1": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-Animal-D3-4845",
+      "question": "The rabbit is kind.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-Animal-D3-4846",
+      "question": "The rabbit is not kind.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 2,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-Animal-D3-4847",
+      "question": "The tiger is strong.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-Animal-D3-4848",
+      "question": "The tiger is not strong.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2,
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-Animal-D3-4849",
+      "question": "The tiger is slow.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 1,
+        "0": 3
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-Animal-D3-48410",
+      "question": "The tiger is not slow.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-19381",
+      "question": "Erin is tiny.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-19382",
+      "question": "Erin is not tiny.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-19383",
+      "question": "Fiona is wealthy.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 2,
+        "1": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-19384",
+      "question": "Fiona is not wealthy.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 3,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-19385",
+      "question": "Anne is old.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-19386",
+      "question": "Anne is not old.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 2,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-19387",
+      "question": "Gary is young.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2,
+        "0": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-19388",
+      "question": "Gary is not young.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 2,
+        "0": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-18361",
+      "question": "Erin is smart.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-18362",
+      "question": "Erin is not smart.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-D3-18363",
+      "question": "Charlie is thin.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-18364",
+      "question": "Charlie is not thin.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-D3-18365",
+      "question": "Harry is quiet.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-18366",
+      "question": "Harry is not quiet.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-D3-18367",
+      "question": "Fiona is rough.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-D3-18368",
+      "question": "Fiona is not rough.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 2,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14301",
+      "question": "The dog is furry.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14302",
+      "question": "The dog is not furry.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 4
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14303",
+      "question": "The wolf is sleepy.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 1,
+        "1": 4
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14304",
+      "question": "The wolf is not sleepy.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 3,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14305",
+      "question": "The bear is heavy.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14306",
+      "question": "The bear is not heavy.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14307",
+      "question": "The rabbit is small.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14308",
+      "question": "The rabbit is not small.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-14309",
+      "question": "The wolf is big.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 1,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-143010",
+      "question": "The wolf is not big.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17711",
+      "question": "The rabbit is beautiful.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17712",
+      "question": "The rabbit is not beautiful.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 3,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17713",
+      "question": "The crocodile is rough.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 1,
+        "1": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17714",
+      "question": "The crocodile is not rough.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 4
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17715",
+      "question": "The bear is obese.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 1,
+        "1": 4
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17716",
+      "question": "The bear is not obese.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17717",
+      "question": "The cat is small.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17718",
+      "question": "The cat is not small.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 2,
+        "0": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-17719",
+      "question": "The crocodile is fierce.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 2,
+        "1": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-177110",
+      "question": "The crocodile is not fierce.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 3,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7921",
+      "question": "The rabbit is lovely.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7922",
+      "question": "The rabbit is not lovely.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 2,
+        "0": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7923",
+      "question": "The bear is slow.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7924",
+      "question": "The bear is not slow.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 2,
+        "1": 3
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7925",
+      "question": "The lion is strong.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7926",
+      "question": "The lion is not strong.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7927",
+      "question": "The cat is beautiful.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7928",
+      "question": "The cat is not beautiful.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 3,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-7929",
+      "question": "The bear is fierce.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-79210",
+      "question": "The bear is not fierce.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-23531",
+      "question": "Gary is little.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 3
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-23532",
+      "question": "Gary is not little.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-23533",
+      "question": "Bob is smart.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 1,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-23534",
+      "question": "Bob is not smart.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-23535",
+      "question": "Alan is experienced.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-23536",
+      "question": "Alan is not experienced.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 2,
+        "0": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-23537",
+      "question": "Anne is young.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-23538",
+      "question": "Anne is not young.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-22091",
+      "question": "Harry is short.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-22092",
+      "question": "Harry is not short.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-22093",
+      "question": "Anne is kind.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-22094",
+      "question": "Anne is not kind.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-22095",
+      "question": "Erin is old.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-22096",
+      "question": "Erin is not old.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2,
+        "0": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-22097",
+      "question": "Dave is young.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-22098",
+      "question": "Dave is not young.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 1,
+        "1": 3
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12691",
+      "question": "The dog is lovely.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12692",
+      "question": "The dog is not lovely.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 4,
+        "1": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12693",
+      "question": "The lion is rough.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12694",
+      "question": "The lion is not rough.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12695",
+      "question": "The snake is strong.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12696",
+      "question": "The snake is not strong.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 4,
+        "1": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12697",
+      "question": "The mouse is furry.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 3,
+        "0": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12698",
+      "question": "The mouse is not furry.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 2,
+        "1": 2
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-12699",
+      "question": "The lion is heavy.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 2,
+        "1": 1
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-126910",
+      "question": "The lion is not heavy.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 2,
+        "1": 3
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-6391",
+      "question": "Alan is short.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 1,
+        "1": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-6392",
+      "question": "Alan is not short.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 5
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-6393",
+      "question": "Dave is kind.",
+      "gold_label": 1,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 4
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-6394",
+      "question": "Dave is not kind.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 2,
+        "1": 3
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NegationRule-D3-6395",
+      "question": "Bob is old.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "0": 1,
+        "1": 4
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-6396",
+      "question": "Bob is not old.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "1": 2,
+        "0": 3
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-6397",
+      "question": "Fiona is young.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NegationRule-D3-6398",
+      "question": "Fiona is not young.",
+      "gold_label": 0,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 2
+      },
+      "is_correct": false
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-26311",
+      "question": "The squirrel is beautiful.",
+      "gold_label": 1,
+      "pred_label": 1,
+      "answer_counts": {
+        "1": 4,
+        "0": 1
+      },
+      "is_correct": true
+    },
+    {
+      "id": "NonNegationRule-Animal-D3-26312",
+      "question": "The squirrel is not beautiful.",
+      "gold_label": 0,
+      "pred_label": 0,
+      "answer_counts": {
+        "0": 5
+      },
+      "is_correct": true
+    }
+  ]
+}

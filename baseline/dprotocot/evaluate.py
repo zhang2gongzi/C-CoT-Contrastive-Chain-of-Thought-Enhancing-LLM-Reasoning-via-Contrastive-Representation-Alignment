@@ -21,10 +21,19 @@ from config import Config
 from encoder import MultiGranularEncoder
 from prototype import select_path, select_path_centroid
 from data import question_text, path_text, extract_final_answer
-from baselines import (
-    sel_self_certainty_bert,
-    make_llm_selectors,
-)
+
+
+@torch.no_grad()
+def sel_self_certainty_bert(group: dict, encoder=None, cfg=None, **_kw) -> int:
+    """BERT-based Self-Certainty: path with highest mean similarity to all others."""
+    texts = [path_text(p["cot"], group, cfg) for p in group["paths"]]
+    _, path_mat = encoder.encode_paths(texts)
+    z = torch.nn.functional.normalize(path_mat, dim=-1)
+    sim_mat = z @ z.T
+    k = sim_mat.size(0)
+    eye = torch.eye(k, device=sim_mat.device)
+    scores = (sim_mat * (1 - eye)).sum(dim=1) / max(1, k - 1)
+    return int(torch.argmax(scores).item())
 
 
 def _norm(ans):
@@ -124,39 +133,6 @@ def evaluate_all(cfg: Config, test_groups, trained_encoder, orm_model=None):
         from orm import orm_select
         results["ORM"] = _acc(test_groups, lambda g: orm_select(orm_model, cfg, g))
 
-    return results
-
-
-def evaluate_llm_baselines(
-    test_groups,
-    llm_call,
-    include_pairwise: bool = False,
-) -> dict:
-    """Evaluate LLM-based baselines (USC, GenSelect) on the test set.
-
-    ``llm_call`` is an LLMCall function (see llm_utils.py).  These baselines
-    are separate from evaluate_all because they incur API cost and latency.
-
-    Returns a dict like {"USC": 72.5, "GenSelect": 74.1}.
-    """
-    selectors = make_llm_selectors(llm_call)
-    if not include_pairwise:
-        selectors.pop("Pairwise-LLM", None)
-
-    results = {}
-    n = len(test_groups)
-    for name, sel in selectors.items():
-        correct = 0
-        for g in test_groups:
-            try:
-                idx = sel(g)
-                correct += int(g["paths"][idx]["is_correct"])
-            except Exception as e:
-                print(f"[warn] {name} failed on qid={g.get('qid','?')}: {e}; "
-                      f"fallback to path 0")
-                correct += int(g["paths"][0]["is_correct"])
-        results[name] = 100.0 * correct / max(1, n)
-    results["_test_questions"] = n
     return results
 
 

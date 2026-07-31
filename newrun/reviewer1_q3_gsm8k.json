@@ -1,0 +1,20 @@
+{
+  "n_test_questions": 200,
+  "selected_accuracy_pct": 80.0,
+  "M1_lexical": {
+    "selected_jaccard": 0.22061886490640553,
+    "unselected_jaccard": 0.2204867837404188,
+    "selected_q_coverage": 0.8299898150115813,
+    "unselected_q_coverage": 0.8241699794383531
+  },
+  "M2_depth": {
+    "selected_steps": 12.475,
+    "unselected_steps": 13.095,
+    "selected_tokens": 222.385,
+    "unselected_tokens": 221.93944444444443,
+    "selected_novel_ratio": 0.767363042405955,
+    "unselected_novel_ratio": 0.7665227111482344
+  },
+  "M3_align_vs_lexical_pearson": -0.1444378830156273,
+  "M4_align_correctness_auc": 0.7811796871259954
+}

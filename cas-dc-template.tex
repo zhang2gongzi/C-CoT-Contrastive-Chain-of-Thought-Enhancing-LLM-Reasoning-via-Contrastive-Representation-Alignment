@@ -98,7 +98,7 @@ Even with strong pretrained encoders, correct and incorrect reasoning paths are 
 To address this limitation, this work proposes \textbf{D-ProtoCoT} (Dynamic Prototype-based Chain-of-Thought), an inference-time framework for reasoning path selection that operates in a contrastively aligned representation space.
 D-ProtoCoT fine-tunes a lightweight auxiliary encoder using a step-level InfoNCE objective derived from gold answer matching, pulling correct reasoning paths closer to their corresponding questions while pushing incorrect ones away, without modifying the underlying language model.
 At inference time, a \emph{dynamic reasoning prototype} is constructed for each question by aggregating all sampled path embeddings with similarity-based weighting, and the path that is best aligned with the prototype is selected.
-This design differs from verifier-based approaches \citep{cobbe2021trainingverifiers} that make explicit correctness judgments, confidence-based methods \citep{chia2023contrastivechainofthoughtprompting} that rely on model-internal token probabilities, and reward-model-based approaches that require modifying the base language model. D-ProtoCoT shapes a representation space in which semantic alignment serves as an implicit proxy for reasoning quality, requiring no gold answers or parameter updates at inference time.
+This design differs from verifier-based approaches \citep{cobbe2021trainingverifiers} that make explicit correctness judgments, confidence-based methods \citep{xiong2024llmsexpressuncertaintyempirical, leang2025picsar} that rely on model-internal token probabilities, and reward-model-based approaches that require modifying the base language model. D-ProtoCoT shapes a representation space in which semantic alignment serves as an implicit proxy for reasoning quality, requiring no gold answers or parameter updates at inference time.
 
 D-ProtoCoT is evaluated on GSM8K, CommonsenseQA, and StrategyQA using two representative instruction-tuned LLMs: LLaMA-3.1-8B-Instruct and Qwen3-8B.
 Experimental results show that D-ProtoCoT consistently outperforms standard CoT decoding and self-consistency across tasks and model families, with particularly large gains on reasoning-intensive benchmarks.
@@ -140,7 +140,7 @@ However, PRMs require expensive step-level human annotation---the PRM800K datase
 \textbf{Reward-model-based approaches} employ reinforcement learning or preference optimization to encourage correct reasoning trajectories \citep{ouyang2022training, bai2022constitutional}.
 These methods modify the base language model through extensive training and require carefully designed reward functions, making them costly to deploy.
 
-\textbf{Confidence-based selection} methods estimate the reliability of reasoning paths using internal model signals such as token probabilities or entropy \citep{chia2023contrastivechainofthoughtprompting}.
+\textbf{Confidence-based selection} methods estimate the reliability of reasoning paths using internal model signals such as token probabilities or entropy \citep{leang2025picsar, sultan-astudillo-2025-confidence}.
 These methods operate without additional training but rely on model-specific confidence signals that may not correlate with logical validity \citep{xiong2024llmsexpressuncertaintyempirical}.
 A representative model is PiCSAR \citep{leang2025picsar}, which scores each candidate reasoning chain by the joint log-likelihood of the reasoning and the final answer, decomposed into a reasoning confidence term and an answer confidence term.
 While PiCSAR is training-free and achieves strong results on mathematical benchmarks, it relies entirely on the model's own token probabilities and does not reshape the representation space to reflect reasoning coherence.
@@ -340,7 +340,7 @@ D-ProtoCoT is evaluated against the following baselines. Depending on their requ
 \begin{description}
     \item[Standard CoT] selects the answer from a single sampled reasoning path.
     \item[Self-Consistency] aggregates multiple reasoning paths via majority voting over final answers \citep{wang2023selfconsistencyimproveschainofthoughtreasoning}.
-    \item[C-CoT] \citep{chia2023contrastivechainofthoughtprompting} selects reasoning paths based on confidence estimation.
+    \item[C-CoT] \citep{chia2023contrastivechainofthoughtprompting} is a prompting-based method that supplies both valid and invalid reasoning demonstrations in-context to steer generation away from erroneous reasoning. It is a generation-time technique rather than a candidate-path selection method; its reported accuracy is therefore that of its own generated answers, not a selection over the shared pool of sampled paths.
 \end{description}
 
 \textbf{Supervised baseline:}
@@ -348,6 +348,7 @@ D-ProtoCoT is evaluated against the following baselines. Depending on their requ
 %加引用
 %→ 已添加 \cite{cobbe2021trainingverifiers}
 \begin{description}
+    \item[Static-Prototype] A frozen \texttt{bert-base-uncased} encoder embeds each candidate path via its \texttt{[CLS]} token. A single global prototype is precomputed as the mean \texttt{[CLS]} embedding of all correct training paths, and the path with the highest cosine similarity to this static prototype is selected. This is an ablated variant of D-ProtoCoT without contrastive training or the dynamic per-question prototype.
     \item[ORM (BERT-base)]\cite{cobbe2021trainingverifiers} is an outcome reward model that fine-tunes the same \texttt{bert-base-uncased} encoder with a binary classification head to predict path correctness. It is trained with binary cross-entropy loss using the same gold-answer supervision as D-ProtoCoT. At inference time, the path with the highest predicted correctness score is selected. This baseline is trained under identical conditions to D-ProtoCoT: the same 1K stratified training subset, the same $K{=}10$ sampled paths per question, and the same encoder architecture, ensuring a fair comparison.
 \end{description}
 
@@ -370,7 +371,7 @@ All experiments are conducted on a single Nvidia RTX 4090 GPU. All methods use i
 
 \begin{table*}[t]
 \centering
-\caption{\textbf{Exact-match accuracy (\%)} on CommonsenseQA, GSM8K, and StrategyQA. Results are aggregated over 10 sampled reasoning paths per question. The ORM baseline is trained under identical conditions to D-ProtoCoT (same encoder, same training subset, same gold-answer supervision).}
+\caption{\textbf{Exact-match accuracy (\%)} on CommonsenseQA, GSM8K, and StrategyQA. Results are aggregated over 10 sampled reasoning paths per question. The ORM baseline is trained under identical conditions to D-ProtoCoT (same encoder, same training subset, same gold-answer supervision). C-CoT is a generation-time prompting baseline: its accuracy reflects its own generated answers rather than a selection over the shared pool of sampled paths, and is thus not directly comparable to the selection-based methods. Static-Prototype is an ablated variant of D-ProtoCoT (frozen encoder, static global prototype).}
 \label{tab:main-results}
 \begin{tabular}{lccc|ccc}
 \toprule
@@ -379,8 +380,9 @@ All experiments are conducted on a single Nvidia RTX 4090 GPU. All methods use i
 \midrule
 Standard CoT & 68.23 & 43.80 & 68.60 & 75.60 & 90.40 & 66.80 \\
 Self-Consistency & 77.40 & 63.20 & 62.60 & 86.98 & 90.65 & \textbf{76.60} \\
-C-CoT & 64.40 & \textbf{87.00} & 64.40 & 68.20 & 75.60 & 62.70 \\
+C-CoT & -- & -- & -- & -- & -- & -- \\
 \midrule
+Static-Prototype & 64.40 & \textbf{87.00} & 64.40 & 68.20 & 75.60 & 62.70 \\
 ORM (BERT-base) & 59.52 & 78.20 & 65.71 & 77.27 & 61.36 & 50.43 \\
 D-ProtoCoT (Ours) & \textbf{79.80} & 80.95 & \textbf{86.20} & \textbf{87.71} & \textbf{94.15} & 72.60 \\
 \bottomrule
@@ -395,8 +397,8 @@ First, performance gains are most pronounced for weaker backbone models on tasks
 \paragraph{Diminishing Returns with Stronger Models.}
 Second, on the stronger Qwen3-8B backbone, the margin narrows on certain tasks. Self-consistency achieves the best result on StrategyQA ($76.60\%$ vs. D-ProtoCoT's $72.60\%$). A stronger model naturally generates more uniform and higher-quality paths, reducing the discriminative advantage of our aligned representation space. Nevertheless, D-ProtoCoT still outperforms self-consistency on CSQA ($+0.73\%$) and GSM8K ($+3.50\%$), demonstrating that step-level alignment remains beneficial even when path quality is already high. (Further analysis of backbone interactions is provided in Section~\ref{sec:backbone}.)
 
-\paragraph{Task-Sensitivity of Confidence-Based Methods.}
-Third, C-CoT achieves the highest single result on LLaMA GSM8K ($87.00\%$), outperforming D-ProtoCoT ($80.95\%$). This highlights the particular strength of token-level confidence signals on arithmetic tasks, where syntactic and numerical correctness correlate strongly with internal probabilities. However, C-CoT degrades substantially on commonsense and implicit reasoning tasks (CSQA: $64.40\%$, StrategyQA: $64.40\%$), indicating that confidence-based selection is highly task-sensitive and does not generalize as robustly as representation-level alignment across diverse reasoning paradigms.
+\paragraph{Static vs. Dynamic Prototype Selection.}
+Third, the Static-Prototype baseline achieves the highest single result on LLaMA GSM8K ($87.00\%$), even outperforming D-ProtoCoT ($80.95\%$). A single global prototype---the mean embedding of all correct training paths---can be effective when correct reasoning is stylistically homogeneous, as in arithmetic problems whose solution paths follow a regular numerical structure. However, Static-Prototype degrades substantially on commonsense and implicit reasoning tasks (CSQA: $64.40\%$, StrategyQA: $64.40\%$), where a single fixed centroid cannot capture the diverse forms of valid reasoning across heterogeneous questions. This contrast directly motivates D-ProtoCoT's two design choices: contrastive alignment of the encoder and a \emph{dynamic}, per-question prototype, which together generalize far more robustly across reasoning paradigms.
 
 \subsection{Inference Cost}
 

@@ -86,7 +86,7 @@ class MultiGranularEncoder(nn.Module):
     def encode_path(self, text: str):
         text = text if text and text.strip() else "empty"
         enc = self.tokenizer(text, add_special_tokens=False,
-                             return_offsets_mapping=True, truncation=False)
+                             return_offsets_mapping=True, truncation=True, max_length=512)
         ids = torch.tensor(enc["input_ids"], device=self.device, dtype=torch.long)
         offsets = enc["offset_mapping"]  # list of (char_start, char_end) per token
         token_hidden = self._token_hidden(ids)  # [T, H]

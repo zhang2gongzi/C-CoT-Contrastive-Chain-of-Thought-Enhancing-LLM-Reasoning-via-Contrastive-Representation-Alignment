@@ -20,7 +20,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # ===== Config =====
-MODEL_PATH = "/home2/zzl/model/Qwen3-8B"
+MODEL_PATH = "/home2/zzl/model/Qwen3-14B"
 TEST_PARQUET = "database/gsm8k/test-00000-of-00001.parquet"
 NUM_PATHS = 10
 MAX_NEW_TOKENS = 512
@@ -89,7 +89,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--max_questions", type=int, default=None,
                         help="Number of questions to sample (default: all)")
-    parser.add_argument("--output", type=str, default="gsm8k_test_flat.jsonl",
+    parser.add_argument("--output", type=str, default="gsm8k_test_14b_flat.jsonl",
                         help="Output file path")
     args = parser.parse_args()
 
@@ -103,6 +103,8 @@ def main():
         device_map="auto",
         torch_dtype=torch.bfloat16,
         trust_remote_code=True,
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.bfloat16,
     )
     model.eval()
 

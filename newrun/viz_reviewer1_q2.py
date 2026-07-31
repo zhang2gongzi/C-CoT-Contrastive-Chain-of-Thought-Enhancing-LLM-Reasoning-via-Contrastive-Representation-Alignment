@@ -1,32 +1,28 @@
 # -*- coding: utf-8 -*-
 """
-Reviewer #1, concern #2 — the post-training counterpart to Figure 2 (fig:tsne),
-plus a quantitative separability number.
+Reviewer #1, concern #2 — post-training counterpart to Figure 2 (fig:tsne),
+PLUS the quantitative measure the reviewer explicitly asked for:
+the AUC of (alignment cosine  path<->question) predicting path correctness,
+reported BEFORE vs AFTER contrastive training.
 
-The current Figure 2 shows FROZEN BERT embeddings of ~100 StrategyQA paths:
-correct (green) and incorrect (red) are heavily intermixed, i.e. surface
-semantics alone cannot separate reasoning quality.
+Why align-AUC (not 1-NN) is the right before/after metric:
+  * 1-NN compares paths to *each other* -> frozen BERT already separates them
+    by surface features (ceiling effect), so before/after looks flat.
+  * align-AUC compares each path to its *question* -> in frozen BERT,
+    "looks like the question" != "is correct"  =>  AUC ~ 0.5  (this IS the
+    original Figure-2 claim, now with a number). After contrastive training,
+    alignment-to-question becomes a reliable quality proxy  =>  AUC >> 0.5.
+  This directly matches the reviewer's requested AUC AND the D-ProtoCoT
+  mechanism, so the t-SNE panels hang on a logically closed loop.
 
-Reviewer #1 asks us to DEMONSTRATE that contrastive alignment fixes this, not
-just assert it. This script encodes the SAME 100 paths with:
-    (a) the untrained encoder   -> "Before alignment"  (matches Figure 2)
-    (b) the trained D-ProtoCoT  -> "After alignment"
-projects both with t-SNE, and reports a separability metric for each panel:
-leave-one-out 1-NN accuracy in cosine space (chance = majority class).
-Rising 1-NN accuracy = correct/incorrect paths become linearly separable =
-alignment tracks reasoning quality.
-
-Both panels use the SAME architecture (path-level mean-pooled embedding), so the
-only difference is the contrastive training — an apples-to-apples before/after.
+Both panels use the SAME architecture (path-level mean-pooled embedding); the
+only difference is the contrastive training.
 
 Usage (server, GPU), from repo root:
-
   python newrun/viz_reviewer1_q2.py \
-      --train_path newrundata/strategyqa_flat.jsonl --use_context \
+      --data_path newrundata/strategyqa_flat.jsonl --use_context \
       --csv cot100.csv --epochs 10 \
       --out_png newrun/tsne_cot100_after.png
-
-Dependencies (same as tsne.py): pandas, numpy, matplotlib, openTSNE, sklearn.
 """
 
 import os
@@ -37,6 +33,7 @@ import argparse
 import numpy as np
 import pandas as pd
 import torch
+import torch.nn.functional as F
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(_HERE, "..", "baseline", "dprotocot")))
@@ -67,13 +64,74 @@ def encode_all(encoder, texts):
     return np.array(embs)
 
 
+@torch.no_grad()
+def encode_texts_pooled(encoder, q_texts):
+    """Encode a list of question strings -> [K, H] numpy (same weight space as
+    the paths encoded by the same encoder)."""
+    encoder.eval()
+    embs = []
+    for qt in q_texts:
+        safe = qt if (qt and qt.strip()) else " "
+        v = encoder.encode_text_pooled(safe)   # tensor [H]
+        embs.append(torch.as_tensor(v, dtype=torch.float32).view(-1).cpu().numpy())
+    return np.stack(embs, axis=0)
+
+
 def loo_1nn_cosine(X, y):
-    """Leave-one-out 1-NN accuracy in cosine space (separability proxy)."""
     Xn = X / (np.linalg.norm(X, axis=1, keepdims=True) + 1e-9)
     S = Xn @ Xn.T
     np.fill_diagonal(S, -np.inf)
     nn = S.argmax(axis=1)
     return float((y[nn] == y).mean())
+
+
+def _auc(scores, labels):
+    """Mann-Whitney U AUC, labels in {0,1}."""
+    pos = [s for s, l in zip(scores, labels) if l == 1]
+    neg = [s for s, l in zip(scores, labels) if l == 0]
+    if not pos or not neg:
+        return float("nan")
+    order = sorted(range(len(scores)), key=lambda i: scores[i])
+    ranks = [0.0] * len(scores)
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and scores[order[j + 1]] == scores[order[i]]:
+            j += 1
+        avg = (i + j) / 2.0 + 1.0
+        for k in range(i, j + 1):
+            ranks[order[k]] = avg
+        i = j + 1
+    sum_pos = sum(r for r, l in zip(ranks, labels) if l == 1)
+    n_pos, n_neg = len(pos), len(neg)
+    return (sum_pos - n_pos * (n_pos + 1) / 2.0) / (n_pos * n_neg)
+
+
+def alignment_auc(Q, P, labels):
+    """Per-row cosine(Q[i], P[i]) -> correctness AUC.
+    Q, P : [K, H]. Works for both a single shared question (rows identical)
+    and per-row questions."""
+    Q = torch.as_tensor(Q, dtype=torch.float32)
+    P = torch.as_tensor(P, dtype=torch.float32)
+    qn = F.normalize(Q, dim=-1)
+    pn = F.normalize(P, dim=-1)
+    align = (pn * qn).sum(dim=-1).tolist()      # [K] per-row cosine
+    return _auc(align, labels)
+
+
+def _find_question_col(df):
+    cols = list(df.columns)
+    low = {c: str(c).strip().lower() for c in cols}
+    for c in cols:
+        if low[c] == "question":
+            return c
+    for c in cols:
+        if ("question" in low[c]) or ("prompt" in low[c]):
+            return c
+    for c in cols:
+        if low[c] in ("q", "raw", "raw_question", "input", "query"):
+            return c
+    return None
 
 
 def tsne2d(X):
@@ -113,21 +171,35 @@ def main():
 
     cfg = build_cfg(args)
 
-    # ---- load the same 100 paths ----
+    # ---- load the same 100 paths (+ their question, for the align-AUC) ----
     df = pd.read_csv(args.csv)
-    texts, labels = [], []
+    print(f"[viz] csv columns: {df.columns.tolist()}")
+    q_col = _find_question_col(df)
+    if q_col is None:
+        print("[viz][ERROR] 找不到 question 列！对齐-AUC 需要 question 文本作为锚点。")
+        print("[viz][ERROR] 请把上面打印的 csv columns 列表发给助手，30 秒即可修好。")
+        sys.exit(1)
+    print(f"[viz] using question column: {q_col!r}")
+
+    texts, labels, q_texts = [], [], []
     for _, row in df.iterrows():
         clean = extract_clean_reasoning(row.get("model_reasoning", ""))
         if len(clean) >= 20 and "Step" in clean:
             texts.append(clean)
             labels.append(bool(row.get("is_correct", False)))
+            q_texts.append(str(row.get(q_col, "")))
     y = np.array(labels)
+    y_int = y.astype(int).tolist()
+    if not any(qt.strip() for qt in q_texts):
+        print(f"[viz][ERROR] question 列 {q_col!r} 全为空，无法计算对齐-AUC。请发列名给助手。")
+        sys.exit(1)
     print(f"[viz] valid paths: {len(texts)}  (correct={int(y.sum())}, incorrect={int((~y).sum())})")
 
     # ---- BEFORE: untrained encoder (same architecture) ----
     device = torch.device(cfg.device if torch.cuda.is_available() else "cpu")
     before_enc = MultiGranularEncoder(cfg).to(device)
     X_before = encode_all(before_enc, texts)
+    Q_before = encode_texts_pooled(before_enc, q_texts)   # same frozen weights
     del before_enc
 
     # ---- AFTER: trained D-ProtoCoT encoder ----
@@ -137,15 +209,22 @@ def main():
     print(f"[viz] training encoder (epochs={cfg.epochs}) ...")
     trained = train_encoder(cfg, train_t, val_t)
     X_after = encode_all(trained, texts)
+    Q_after = encode_texts_pooled(trained, q_texts)       # same trained weights
 
     acc_before = loo_1nn_cosine(X_before, y)
     acc_after = loo_1nn_cosine(X_after, y)
+    auc_before = alignment_auc(Q_before, X_before, y_int)
+    auc_after = alignment_auc(Q_after, X_after, y_int)
     majority = max(y.mean(), 1 - y.mean())
     print("\n" + "=" * 60)
-    print("Separability (leave-one-out 1-NN accuracy, cosine)")
+    print("Separability (leave-one-out 1-NN, cosine)  [reference only]")
     print(f"  majority-class baseline : {majority:.3f}")
     print(f"  BEFORE alignment        : {acc_before:.3f}")
     print(f"  AFTER  alignment        : {acc_after:.3f}")
+    print("-" * 60)
+    print("Alignment-AUC (cosine path<->question -> correctness)  [KEY]")
+    print(f"  BEFORE alignment        : {auc_before:.3f}   (frozen BERT; expect ~0.5)")
+    print(f"  AFTER  alignment        : {auc_after:.3f}    (trained; expect >> 0.5)")
     print("=" * 60)
 
     # ---- t-SNE both ----
@@ -161,8 +240,8 @@ def main():
     colors = ["#2E8B57" if c else "#DC143C" for c in y]
     fig, axes = plt.subplots(1, 2, figsize=(10, 4.3))
     for ax, T, title, acc in [
-        (axes[0], T_before, f"Before alignment (1-NN acc={acc_before:.2f})", acc_before),
-        (axes[1], T_after, f"After alignment (1-NN acc={acc_after:.2f})", acc_after),
+        (axes[0], T_before, f"Before alignment (align-AUC={auc_before:.2f})", acc_before),
+        (axes[1], T_after, f"After alignment (align-AUC={auc_after:.2f})", acc_after),
     ]:
         ax.scatter(T[:, 0], T[:, 1], c=colors, s=25, alpha=0.75, edgecolors="none")
         ax.set_title(title)

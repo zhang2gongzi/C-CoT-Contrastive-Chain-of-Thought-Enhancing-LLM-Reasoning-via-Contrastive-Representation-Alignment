@@ -34,7 +34,7 @@ import os
 from config import Config
 from data import load_splits, trainable_questions
 from train import train_encoder
-from evaluate import evaluate_all, evaluate_llm_baselines, print_results
+from evaluate import evaluate_all, print_results
 
 
 def build_cfg(args) -> Config:

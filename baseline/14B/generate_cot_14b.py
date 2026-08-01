@@ -1,18 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-Generate CoT paths using Qwen3-14B (4-bit) for D-ProtoCoT experiments.
+Generate CoT paths using Qwen3-14B for D-ProtoCoT experiments.
 Reads questions from an existing flat jsonl, generates new CoT with 14B.
 
-Usage (run on Linux GPU server):
-    # Training set
-    python generate_cot_14b.py \
-        --input newrundata/gsm8k_merged_flat.jsonl \
-        --output gsm8k_train_14b_flat.jsonl
+Precision: bf16 by default (fits a 32GB card like RTX 5090). Pass --load_in_4bit
+to run on a 24GB card at the cost of speed.
 
-    # Test set
+Usage (GPU server / AutoDL):
+    # download model first, e.g.
+    #   HF_ENDPOINT=https://hf-mirror.com huggingface-cli download Qwen/Qwen3-14B \
+    #       --local-dir /root/autodl-tmp/Qwen3-14B
+
+    # Test set (bf16, 32GB card)
     python generate_cot_14b.py \
-        --input gsm8k_test_flat.jsonl \
-        --output gsm8k_test_14b_flat.jsonl
+        --model_path /root/autodl-tmp/Qwen3-14B \
+        --input newrundata/gsm8k_test_flat.jsonl \
+        --output newrundata/gsm8k_test_14b_flat.jsonl
+
+    # On a 24GB card:
+    python generate_cot_14b.py --load_in_4bit \
+        --model_path /root/autodl-tmp/Qwen3-14B \
+        --input newrundata/gsm8k_test_flat.jsonl \
+        --output newrundata/gsm8k_test_14b_flat.jsonl
 """
 
 import argparse
@@ -23,8 +32,8 @@ import torch
 from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-# ===== Config =====
-MODEL_PATH = "/home2/zzl/model/Qwen3-14B"
+# ===== Defaults (overridable via CLI) =====
+DEFAULT_MODEL_PATH = "/home2/zzl/model/Qwen3-14B"
 NUM_PATHS = 10
 MAX_NEW_TOKENS = 512
 TEMPERATURE = 0.7
@@ -87,6 +96,10 @@ def load_unique_questions(input_path):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--model_path", type=str, default=DEFAULT_MODEL_PATH,
+                        help="Local path or HF id of the 14B model")
+    parser.add_argument("--load_in_4bit", action="store_true",
+                        help="4-bit quantization (for 24GB cards); default is bf16")
     parser.add_argument("--input", type=str, required=True,
                         help="Input flat jsonl (to extract questions from)")
     parser.add_argument("--output", type=str, required=True,
@@ -104,16 +117,16 @@ def main():
         qids = qids[:args.max_questions]
         print(f"Limited to {args.max_questions} questions")
 
-    print("Loading Qwen3-14B (4-bit)...")
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
-    model = AutoModelForCausalLM.from_pretrained(
-        MODEL_PATH,
+    print(f"Loading {args.model_path} ({'4-bit' if args.load_in_4bit else 'bf16'})...")
+    tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
+    load_kwargs = dict(
         device_map="auto",
         torch_dtype=torch.bfloat16,
         trust_remote_code=True,
-        load_in_4bit=True,
-        bnb_4bit_compute_dtype=torch.bfloat16,
     )
+    if args.load_in_4bit:
+        load_kwargs.update(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+    model = AutoModelForCausalLM.from_pretrained(args.model_path, **load_kwargs)
     model.eval()
 
     # checkpoint / resume

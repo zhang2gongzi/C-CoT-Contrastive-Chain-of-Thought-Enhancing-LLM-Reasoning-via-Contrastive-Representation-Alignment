@@ -26,6 +26,18 @@ Usage (server, GPU), from repo root:
       --test_path  newrundata/gsm8k_test_flat.jsonl \
       --epochs 10 \
       --out_png newrun/tsne_gsm8k_after.png
+
+       python newrun/viz_reviewer1_q2.py \
+      --before_only \                          --bert_model                     
+  /home2/zzl/model/bert-base-uncased \
+      --train_path
+  newrundata/gsm8k_merged_flat.jsonl \
+      --test_path
+  newrundata/gsm8k_test_flat.jsonl \
+      --out_png
+  newrun/tsne_gsm8k_before.png \
+      --out_pdf
+  newrun/tsne_gsm8k_before.pdf
 """
 import os
 import sys
@@ -41,6 +53,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(_HERE, "..", "baseline", "dproto
 from config import Config                                   # noqa: E402
 from data import load_splits, trainable_questions, question_text, path_text  # noqa: E402
 from train import train_encoder                             # noqa: E402
+from encoder import MultiGranularEncoder                    # noqa: E402
 from prototype import build_prototype                       # noqa: E402
 
 
@@ -115,14 +128,22 @@ def main():
               "--epochs", "--seed", "--device"]:
         ap.add_argument(a, type=int if a in ("--epochs", "--seed") else None)
     ap.add_argument("--use_context", action="store_true", default=None)
+    ap.add_argument("--before_only", action="store_true",
+                    help="Use an UNTRAINED encoder (before alignment); same paths/projection as after.")
     ap.add_argument("--out_png", default="newrun/tsne_gsm8k_after.png")
     ap.add_argument("--out_pdf", default="newrun/tsne_gsm8k_after.pdf")
     args = ap.parse_args()
     cfg = build_cfg(args)
 
     train_g, val_g, test_g = load_splits(cfg)
-    print(f"[viz] training encoder (epochs={cfg.epochs}) ...")
-    encoder = train_encoder(cfg, trainable_questions(train_g), trainable_questions(val_g))
+    if args.before_only:
+        import torch as _torch
+        device = _torch.device(cfg.device if _torch.cuda.is_available() else "cpu")
+        print("[viz] BEFORE mode: using an UNTRAINED encoder (no contrastive alignment).")
+        encoder = MultiGranularEncoder(cfg).to(device)
+    else:
+        print(f"[viz] training encoder (epochs={cfg.epochs}) ...")
+        encoder = train_encoder(cfg, trainable_questions(train_g), trainable_questions(val_g))
 
     X, y, align = embed_test(encoder, cfg, test_g)
     auc = _auc(align, y.tolist())
@@ -139,7 +160,8 @@ def main():
     colors = ["#2E8B57" if c else "#DC143C" for c in y]
     fig, ax = plt.subplots(figsize=(5.2, 4.6))
     ax.scatter(T[:, 0], T[:, 1], c=colors, s=18, alpha=0.7, edgecolors="none")
-    ax.set_title("After contrastive alignment")
+    ax.set_title("Before contrastive alignment" if args.before_only
+                 else "After contrastive alignment")
     ax.set_xlabel("t-SNE 1"); ax.set_ylabel("t-SNE 2")
     ax.grid(True, ls="--", lw=0.5, alpha=0.5)
     ax.legend(handles=[Patch(facecolor="#2E8B57", label="Correct"),

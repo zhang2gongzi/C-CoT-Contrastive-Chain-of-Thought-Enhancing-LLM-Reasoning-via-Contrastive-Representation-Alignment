@@ -107,7 +107,19 @@ python newrun/self_certainty.py --model_path /root/autodl-tmp/Qwen3-8B \
 
 ## 问题 3：可复现性
 - **问题**：应公开相关代码和数据以确保可复现性
-- **状态**：待处理
+- **状态**：待处理（**决定：等要交 rebuttal / 正式公开时再动，先不改**）
+
+### 公开前 checklist（交 rebuttal 时执行）
+1. **仓库改名** → `D-ProtoCoT`（现名 `C-CoT-...` 与论文方法名 D-ProtoCoT 不一致）
+   - GitHub 网页 Settings 改名（GitHub 自动重定向旧 URL，不影响现有 push）
+   - 本地更新：`git remote set-url origin <新URL>` → `git remote -v` 确认
+   - 本地文件夹名可选改（会让当前工作目录路径失效，等实验做完再改）
+2. **清硬编码路径**：代码里 `/home2/zzl/model/...`、`/root/autodl-tmp/...` 会暴露身份，公开前换成 CLI 参数默认值占位符（如 `bert-base-uncased`、`Qwen/Qwen3-8B` 的 HF id）
+   - 已改好 `--model_path` 的：`generate_cot_14b.py`、`self_certainty.py`
+   - config.py 的 `bert_model` 默认仍是 `/home2/zzl/...`，需改占位
+3. **匿名性**：若双盲阶段公开，用匿名镜像（`anonymous.4open.science`），勿用带真名/username 的 GitHub
+4. **README**：安装（`requirements.txt`）、数据说明、各 `run.py` 子命令示例、复现 Table 1 的命令
+5. **数据**：`newrundata/*.jsonl` 被 `.gitignore` 忽略，需决定随仓库公开还是给下载链接
 
 ---
 

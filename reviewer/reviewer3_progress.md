@@ -10,24 +10,56 @@
 
 ## 问题 1：仅在 8B 参数规模的模型上评估
 - **问题**：仅使用了 LLaMa3.1-8B 和 Qwen3-8B，两个模型参数量相同。建议在更大参数规模的语言模型上评估以证明方法的适用性
-- **方案**：加一组 GSM8K 实验
+- **方案**：加一组 GSM8K 实验（Qwen3-14B，同系列，回应"更大模型也适用"）
+- **算力**：租用 AutoDL RTX 5090（32GB），**bf16 直接跑**（不用 4-bit）
 
-### 模型选择分析
+### 执行清单（AutoDL 5090，bf16，全 14B pipeline）
+方法一致性：train/test **都用 14B 生成**，避免 8B 训练 / 14B 测试 的不匹配。
 
-| 模型 | bf16 显存 | 4-bit 显存 | 24GB (4090/3090) |
-|------|----------|-----------|-------------------|
-| Qwen3-14B | ~28GB | ~8-10GB | ✅ 4-bit 可跑 |
-| Qwen3-32B | ~64GB | ~16-20GB | ⚠️ 4-bit 勉强，推理时 KV cache 可能 OOM |
+```bash
+# 0. 下模型
+HF_ENDPOINT=https://hf-mirror.com huggingface-cli download Qwen/Qwen3-14B \
+    --local-dir /root/autodl-tmp/Qwen3-14B
 
-**结论**：选 **Qwen3-14B 4-bit 量化**。和 8B 同系列对比有意义，24GB 稳够跑。
+# 0b. 下 BERT（run.py 训 encoder 要用；默认路径 /home2/... 在 AutoDL 不存在）
+huggingface-cli download bert-base-uncased --local-dir /root/autodl-tmp/bert-base-uncased
 
-### 操作步骤
-1. 服务器下载模型：`huggingface-cli download Qwen/Qwen3-14B --local-dir /home2/zzl/model/Qwen3-14B`
-2. 对 GSM8K 测试集 200 题生成 10 条 CoT，`load_in_4bit=True`
-3. 用现有 GSM8K 训练数据 + 新生成的 14B 测试 CoT，跑 `run.py main`
-4. 将 14B 结果加入 Table 1 新列
+# 1. 生成训练集 CoT（14B）
+python baseline/14B/generate_cot_14b.py --model_path /root/autodl-tmp/Qwen3-14B \
+    --input newrundata/gsm8k_merged_flat.jsonl --output gsm8k_train_14b_flat.jsonl
 
-- **状态**：待下载模型，等当前 GSM8K 测试集 CoT 生成完
+# 2. 生成测试集 CoT（14B，200 题 x 10）
+python baseline/14B/generate_cot_14b.py --model_path /root/autodl-tmp/Qwen3-14B \
+    --input newrundata/gsm8k_test_flat.jsonl --output gsm8k_test_14b_flat.jsonl
+
+# 3. 跑 main（10 epoch；必须显式传 --bert_model，否则找不到 BERT）
+python baseline/dprotocot/run.py main \
+    --bert_model /root/autodl-tmp/bert-base-uncased \
+    --train_path gsm8k_train_14b_flat.jsonl --test_path gsm8k_test_14b_flat.jsonl --epochs 10
+```
+
+> ⚠️ **AutoDL 注意**：`run.py` 的 BERT 默认路径是 `/home2/zzl/model/bert-base-uncased`（原服务器），AutoDL 上不存在。第 3 步**必须**先下 `bert-base-uncased`（步骤 0b）并显式传 `--bert_model`，否则训 encoder 会报路径错误。`generate_cot_14b.py` / `self_certainty.py` 已有 `--model_path`，不受影响。
+
+### 预期输出
+| 步骤 | 输出 | 用途 |
+|------|------|------|
+| 1–2 生成脚本 | `gsm8k_{train,test}_14b_flat.jsonl`（每题10路径，含 cot/pred/is_correct）+ 终端 `Correct: X (Y%)` | 14B 原始逐路径正确率 |
+| 3 run.py main | 四方法准确率表（下方） | 填 **Table 1 的 14B 新列** |
+
+```
+==== Results [main | input=full] | test questions = 200 ====
+  Standard CoT            :  XX.XX%   # 第一条路径
+  Self-Consistency        :  XX.XX%   # 多数投票
+  Raw-BERT + Centroid     :  XX.XX%   # 冻结 BERT 基线
+  D-ProtoCoT              :  XX.XX%   # 本方法
+```
+
+### 跑完必须盯的三个数（**epochs=10**）
+1. **D-ProtoCoT > Self-Consistency** — 主结论，必须成立。
+2. **D-ProtoCoT ≥ Raw-BERT + Centroid** — 证明训练有用。⚠️ 3-epoch 时 Centroid(81%) 曾反超 D-ProtoCoT(78%)，属未收敛；改 10-epoch 就是为了翻过来。若仍被反超 → 先诊断（epochs/pooling），**别急着填表**，否则这列帮倒忙。
+3. **Standard CoT 别异常低** — 之前 3-epoch 曾掉到 75%（论文是 90.4%），确认 14B 正常。
+
+- **状态**：命令就绪，待 AutoDL 上跑（bf16，10 epoch）
 
 ---
 
@@ -61,9 +93,15 @@ python baseline/dprotocot/run.py baselines \
     --data_path newrundata/gsm8k_merged_flat.jsonl \
     --llm_backend vllm --llm_model qwen3-8b \
     --llm_base_url http://localhost:8000/v1
+
+# Self-Certainty (Kang et al., NeurIPS 2025) —— 2024+ 新基线，AutoDL 上跑（需 GPU 加载 LLM）
+python newrun/self_certainty.py --model_path /root/autodl-tmp/Qwen3-8B \
+    --data_path newrundata/gsm8k_test_flat.jsonl --num_paths 10
 ```
 
-- **状态**：Self-Certainty-BERT 随时可跑；LLM 基线等 vLLM 部署
+**Self-Certainty (Kang) 预期输出**：终端 `Self-Certainty: XX.XX%` + `Self-Consistency: XX.XX%`，并写出 `self_certainty_results.json`（逐题明细）。用于回应"基线太旧"，加进对比表。
+
+- **状态**：Self-Certainty-BERT 随时可跑；Self-Certainty(Kang) 待 AutoDL 跑；LLM 基线等 vLLM 部署
 
 ---
 

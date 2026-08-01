@@ -22,3 +22,27 @@ nohup: ignoring input
 [ccot] strategyqa: 4 demos, 276 test questions
 [ccot] loading model /home2/zzl/model/Qwen3-8B ...
 Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:01<00:05,  1.38s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:02<00:04,  1.38s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:04<00:02,  1.37s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:05<00:01,  1.29s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.02it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.14s/it]
+  [20/276] running acc = 100.00%
+  [40/276] running acc = 95.00%
+  [60/276] running acc = 93.33%
+  [80/276] running acc = 93.75%
+  [100/276] running acc = 94.00%
+  [120/276] running acc = 93.33%
+  [140/276] running acc = 92.86%
+  [160/276] running acc = 90.62%
+  [180/276] running acc = 90.56%
+  [200/276] running acc = 90.00%
+  [220/276] running acc = 89.55%
+  [240/276] running acc = 89.58%
+  [260/276] running acc = 90.00%
+  [276/276] running acc = 90.22%
+
+==== C-CoT (Chia prompting) | strategyqa | model=Qwen3-8B ====
+  test questions = 276
+  accuracy       = 90.22%  (249/276)
+[ccot] saved -> newrun/ccot_sqa_qwen.jsonl
+[2026年 08月 01日 星期六 14:20:56 CST] ===== CSQA (Qwen3-8B, MT=2048) =====
+[data] csqa: matched choices for 500/500 questions
+[ccot] csqa: 4 demos, 496 test questions
+[ccot] loading model /home2/zzl/model/Qwen3-8B ...
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:01<00:05,  1.39s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:02<00:04,  1.39s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:04<00:02,  1.38s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:05<00:01,  1.30s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.01it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.15s/it]

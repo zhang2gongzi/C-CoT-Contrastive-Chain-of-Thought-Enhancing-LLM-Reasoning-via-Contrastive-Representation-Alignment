@@ -1,134 +1,208 @@
-# 审稿人 #3 回复进度
+# -*- coding: utf-8 -*-
+"""
+Generate CoT paths using Qwen3-14B for D-ProtoCoT experiments.
+Reads questions from an existing flat jsonl, generates new CoT with 14B.
 
----
+Precision: bf16 by default (fits a 32GB card like RTX 5090). Pass --load_in_4bit
+to run on a 24GB card at the cost of speed.
 
-## 审稿意见概述
+Usage (GPU server / AutoDL):
+    # download model first, e.g.
+    #   HF_ENDPOINT=https://hf-mirror.com huggingface-cli download Qwen/Qwen3-14B \
+    #       --local-dir /root/autodl-tmp/Qwen3-14B
 
-论文逻辑清晰，具有良好的创新性和应用价值，但需进一步修改：
+    # Test set (bf16, 32GB card)
+    python generate_cot_14b.py \
+        --model_path /root/autodl-tmp/Qwen3-14B \
+        --input newrundata/gsm8k_test_flat.jsonl \
+        --output newrundata/gsm8k_test_14b_flat.jsonl
 
----
+    # On a 24GB card:
+    python generate_cot_14b.py --load_in_4bit \
+        --model_path /root/autodl-tmp/Qwen3-14B \
+        --input newrundata/gsm8k_test_flat.jsonl \
+        --output newrundata/gsm8k_test_14b_flat.jsonl
+"""
 
-## 问题 1：仅在 8B 参数规模的模型上评估
-- **问题**：仅使用了 LLaMa3.1-8B 和 Qwen3-8B，两个模型参数量相同。建议在更大参数规模的语言模型上评估以证明方法的适用性
-- **方案**：加一组 GSM8K 实验（Qwen3-14B，同系列，回应"更大模型也适用"）
-- **算力**：租用 AutoDL RTX 5090（32GB），**bf16 直接跑**（不用 4-bit）
+import argparse
+import json
+import os
+import re
+import torch
+from tqdm import tqdm
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
-### 执行清单（AutoDL 5090，bf16，全 14B pipeline）
-方法一致性：train/test **都用 14B 生成**，避免 8B 训练 / 14B 测试 的不匹配。
+# ===== Defaults (overridable via CLI) =====
+DEFAULT_MODEL_PATH = "/home2/zzl/model/Qwen3-14B"
+NUM_PATHS = 10
+MAX_NEW_TOKENS = 512
+TEMPERATURE = 0.7
+TOP_P = 0.9
+SEED = 42
 
-```bash
-# 0. 下模型
-HF_ENDPOINT=https://hf-mirror.com huggingface-cli download Qwen/Qwen3-14B \
-    --local-dir /root/autodl-tmp/Qwen3-14B
+COT_PROMPT = """You are a math reasoning assistant. Solve the following math problem step by step.
 
-# 0b. 下 BERT（run.py 训 encoder 要用；默认路径 /home2/... 在 AutoDL 不存在）
-huggingface-cli download bert-base-uncased --local-dir /root/autodl-tmp/bert-base-uncased
+Rules:
+1. Break down the problem into logical steps.
+2. Show your calculations clearly.
+3. End your response with "Final Answer: <number>"
 
-# 1. 生成训练集 CoT（14B）
-python baseline/14B/generate_cot_14b.py --model_path /root/autodl-tmp/Qwen3-14B \
-    --input newrundata/gsm8k_merged_flat.jsonl --output gsm8k_train_14b_flat.jsonl
+Question: {question}
 
-# 2. 生成测试集 CoT（14B，200 题 x 10）
-python baseline/14B/generate_cot_14b.py --model_path /root/autodl-tmp/Qwen3-14B \
-    --input newrundata/gsm8k_test_flat.jsonl --output gsm8k_test_14b_flat.jsonl
+Reasoning:
+"""
 
-# 3. 跑 main（10 epoch；必须显式传 --bert_model，否则找不到 BERT）
-python baseline/dprotocot/run.py main \
-    --bert_model /root/autodl-tmp/bert-base-uncased \
-    --train_path gsm8k_train_14b_flat.jsonl --test_path gsm8k_test_14b_flat.jsonl --epochs 10
-```
 
-> ⚠️ **AutoDL 注意**：`run.py` 的 BERT 默认路径是 `/home2/zzl/model/bert-base-uncased`（原服务器），AutoDL 上不存在。第 3 步**必须**先下 `bert-base-uncased`（步骤 0b）并显式传 `--bert_model`，否则训 encoder 会报路径错误。`generate_cot_14b.py` / `self_certainty.py` 已有 `--model_path`，不受影响。
+def extract_final_answer(text: str):
+    text = text.strip()
+    m = re.search(r"final\s*answer\s*[:：]\s*(-?[\d,\.]+)", text, re.I)
+    if m:
+        return m.group(1).replace(",", "")
+    m = re.search(r"(?:the\s+)?answer\s*(?:is|:)\s*(-?[\d,\.]+)", text, re.I)
+    if m:
+        return m.group(1).replace(",", "")
+    m = re.search(r"####\s*(-?[\d,\.]+)", text)
+    if m:
+        return m.group(1).replace(",", "")
+    nums = re.findall(r"-?[\d,\.]+", text)
+    return nums[-1].replace(",", "") if nums else None
 
-### 预期输出
-| 步骤 | 输出 | 用途 |
-|------|------|------|
-| 1–2 生成脚本 | `gsm8k_{train,test}_14b_flat.jsonl`（每题10路径，含 cot/pred/is_correct）+ 终端 `Correct: X (Y%)` | 14B 原始逐路径正确率 |
-| 3 run.py main | 四方法准确率表（下方） | 填 **Table 1 的 14B 新列** |
 
-```
-==== Results [main | input=full] | test questions = 200 ====
-  Standard CoT            :  XX.XX%   # 第一条路径
-  Self-Consistency        :  XX.XX%   # 多数投票
-  Raw-BERT + Centroid     :  XX.XX%   # 冻结 BERT 基线
-  D-ProtoCoT              :  XX.XX%   # 本方法
-```
+def answers_match(pred: str, gold: str) -> bool:
+    if pred is None or gold is None:
+        return False
+    try:
+        return abs(float(pred) - float(gold)) < 1e-6
+    except ValueError:
+        return pred.strip().lower() == gold.strip().lower()
 
-### 跑完必须盯的三个数（**epochs=10**）
-1. **D-ProtoCoT > Self-Consistency** — 主结论，必须成立。
-2. **D-ProtoCoT ≥ Raw-BERT + Centroid** — 证明训练有用。⚠️ 3-epoch 时 Centroid(81%) 曾反超 D-ProtoCoT(78%)，属未收敛；改 10-epoch 就是为了翻过来。若仍被反超 → 先诊断（epochs/pooling），**别急着填表**，否则这列帮倒忙。
-3. **Standard CoT 别异常低** — 之前 3-epoch 曾掉到 75%（论文是 90.4%），确认 14B 正常。
 
-- **状态**：命令就绪，待 AutoDL 上跑（bf16，10 epoch）
+def load_unique_questions(input_path):
+    """Extract unique questions from a flat jsonl file."""
+    questions = {}  # qid -> {question, label}
+    with open(input_path, "r", encoding="utf-8") as f:
+        for line in f:
+            obj = json.loads(line)
+            ex = obj["raw_example"]
+            qid = ex["id"]
+            if qid not in questions:
+                questions[qid] = {
+                    "question": ex["question"],
+                    "label": obj["gold_label"],
+                }
+    print(f"Loaded {len(questions)} unique questions from {input_path}")
+    return questions
 
----
 
-## 问题 2：基线方法较旧
-- **问题**：基线方法发表于 2021 和 2023 年。建议对近三年的新方法进行更深入的分析和比较
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model_path", type=str, default=DEFAULT_MODEL_PATH,
+                        help="Local path or HF id of the 14B model")
+    parser.add_argument("--load_in_4bit", action="store_true",
+                        help="4-bit quantization (for 24GB cards); default is bf16")
+    parser.add_argument("--input", type=str, required=True,
+                        help="Input flat jsonl (to extract questions from)")
+    parser.add_argument("--output", type=str, required=True,
+                        help="Output flat jsonl")
+    parser.add_argument("--max_questions", type=int, default=None,
+                        help="Limit number of questions")
+    args = parser.parse_args()
 
-### 已实现的新基线（`baseline/dprotocot/baselines.py`）
+    out_path = args.output
+    ckpt_path = out_path + ".ckpt"
 
-| 基线 | 年份 | 原理 | 运行成本 |
-|------|------|------|---------|
-| Self-Certainty-BERT | 2024 | BERT 语义相似度代替 logprobs 选路径 | 零成本（纯推理） |
-| USC | 2024 | LLM 直接看所有采样答案做多数投票 | 需 LLM API |
-| GenSelect | 2024 | LLM 生成式评估每条路径后选择 | 需 LLM API |
-| Pairwise-LLM | 2024 | LLM 两两比较路径 | 需 LLM API |
+    questions = load_unique_questions(args.input)
+    qids = list(questions.keys())
+    if args.max_questions and args.max_questions < len(qids):
+        qids = qids[:args.max_questions]
+        print(f"Limited to {args.max_questions} questions")
 
-### 方案
+    print(f"Loading {args.model_path} ({'4-bit' if args.load_in_4bit else 'bf16'})...")
+    tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
+    load_kwargs = dict(
+        device_map="auto",
+        torch_dtype=torch.bfloat16,
+        trust_remote_code=True,
+    )
+    if args.load_in_4bit:
+        load_kwargs.update(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16)
+    model = AutoModelForCausalLM.from_pretrained(args.model_path, **load_kwargs)
+    model.eval()
 
-1. **Self-Certainty-BERT**：直接跑，零额外成本，已经集成在 `run.py baselines` 里
-2. **USC / GenSelect / Pairwise-LLM**：需要 LLM API。方案有二：
-   - **A**（推荐）：服务器起 vLLM 部署 Qwen3-8B，`run.py baselines --llm_backend vllm --llm_model qwen3-8b`
-   - **B**：论文 Related Work 中讨论这些方法 + 引用，不实际跑
-3. **论文**：Related Work 补充 2024 年推理时路径选择（inference-time path selection）的最新进展
+    # checkpoint / resume
+    done = set()
+    if os.path.exists(ckpt_path):
+        with open(ckpt_path, "r") as f:
+            done = set(int(l.strip()) for l in f if l.strip().isdigit())
+        print(f"[resume] {len(done)} questions already done, skipping...")
 
-### 运行命令
-```bash
-# Self-Certainty-BERT（无需 LLM）
-python baseline/dprotocot/run.py baselines --data_path newrundata/gsm8k_merged_flat.jsonl
+    total_paths = len(done) * NUM_PATHS
+    total_correct = 0
+    n_questions = len(done)
+    os.makedirs(os.path.dirname(out_path) if os.path.dirname(out_path) else ".", exist_ok=True)
 
-# 完整基线（需要先起 vLLM）
-python baseline/dprotocot/run.py baselines \
-    --data_path newrundata/gsm8k_merged_flat.jsonl \
-    --llm_backend vllm --llm_model qwen3-8b \
-    --llm_base_url http://localhost:8000/v1
+    mode = "a" if done else "w"
+    try:
+        with open(out_path, mode, encoding="utf-8") as fout, \
+             open(ckpt_path, "a", encoding="utf-8") as fckpt:
+            for i, qid in enumerate(tqdm(qids, desc="Generating CoTs")):
+                if i in done:
+                    continue
 
-# Self-Certainty (Kang et al., NeurIPS 2025) —— 2024+ 新基线，AutoDL 上跑（需 GPU 加载 LLM）
-python newrun/self_certainty.py --model_path /root/autodl-tmp/Qwen3-8B \
-    --data_path newrundata/gsm8k_test_flat.jsonl --num_paths 10
-```
+                q = questions[qid]
+                question = q["question"]
+                gold = q["label"]
 
-**Self-Certainty (Kang) 预期输出**：终端 `Self-Certainty: XX.XX%` + `Self-Consistency: XX.XX%`，并写出 `self_certainty_results.json`（逐题明细）。用于回应"基线太旧"，加进对比表。
+                for _ in range(NUM_PATHS):
+                    prompt = COT_PROMPT.format(question=question)
+                    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+                    with torch.no_grad():
+                        outputs = model.generate(
+                            **inputs,
+                            max_new_tokens=MAX_NEW_TOKENS,
+                            do_sample=True,
+                            temperature=TEMPERATURE,
+                            top_p=TOP_P,
+                        )
+                    cot = tokenizer.decode(outputs[0], skip_special_tokens=True)
+                    cot = cot[len(prompt):].strip()
 
-- **状态**：Self-Certainty-BERT 随时可跑；Self-Certainty(Kang) 待 AutoDL 跑；LLM 基线等 vLLM 部署
+                    pred = extract_final_answer(cot)
+                    is_correct = int(answers_match(pred, gold))
 
----
+                    obj = {
+                        "raw_example": {
+                            "id": qid,
+                            "question": question,
+                            "label": gold,
+                        },
+                        "cot": cot,
+                        "gold_label": gold,
+                        "is_correct": is_correct,
+                    }
+                    fout.write(json.dumps(obj, ensure_ascii=False) + "\n")
+                    fout.flush()
+                    total_paths += 1
+                    if is_correct:
+                        total_correct += 1
 
-## 问题 3：可复现性
-- **问题**：应公开相关代码和数据以确保可复现性
-- **状态**：待处理（**决定：等要交 rebuttal / 正式公开时再动，先不改**）
+                done.add(i)
+                fckpt.write(f"{i}\n")
+                fckpt.flush()
+                n_questions += 1
 
-### 公开前 checklist（交 rebuttal 时执行）
-1. **仓库改名** → `D-ProtoCoT`（现名 `C-CoT-...` 与论文方法名 D-ProtoCoT 不一致）
-   - GitHub 网页 Settings 改名（GitHub 自动重定向旧 URL，不影响现有 push）
-   - 本地更新：`git remote set-url origin <新URL>` → `git remote -v` 确认
-   - 本地文件夹名可选改（会让当前工作目录路径失效，等实验做完再改）
-2. **清硬编码路径**：代码里 `/home2/zzl/model/...`、`/root/autodl-tmp/...` 会暴露身份，公开前换成 CLI 参数默认值占位符（如 `bert-base-uncased`、`Qwen/Qwen3-8B` 的 HF id）
-   - 已改好 `--model_path` 的：`generate_cot_14b.py`、`self_certainty.py`
-   - config.py 的 `bert_model` 默认仍是 `/home2/zzl/...`，需改占位
-3. **匿名性**：若双盲阶段公开，用匿名镜像（`anonymous.4open.science`），勿用带真名/username 的 GitHub
-4. **README**：安装（`requirements.txt`）、数据说明、各 `run.py` 子命令示例、复现 Table 1 的命令
-5. **数据**：`newrundata/*.jsonl` 被 `.gitignore` 忽略，需决定随仓库公开还是给下载链接
+    except KeyboardInterrupt:
+        print(f"\n[interrupted] {n_questions} questions saved. Rerun to resume.")
+        return
 
----
+    if os.path.exists(ckpt_path):
+        os.remove(ckpt_path)
 
-## 附录：审稿人 #3 原话
+    acc = 100.0 * total_correct / max(1, total_paths)
+    print(f"\nDone: {n_questions} questions x {NUM_PATHS} paths = {total_paths} total")
+    print(f"Correct: {total_correct} ({acc:.1f}%)")
+    print(f"Output: {out_path}")
 
-Reviewer #3: This paper proposed D-ProtoCoT, an inference-time framework for selecting high-quality reasoning paths based on representation-level alignment. The overall logic of the thesis is clear, and it has good innovativeness and application value. However, the current manuscript requires further revision, which mainly involves the following aspects.
 
-(1) During the experiment, the authors only used two base LLMs, LLaMa3.1-8B and QWEN3-8B. These two models have the same parameter size. Therefore, it is recommended that the authors further evaluate the performance of the proposed method on larger language models with larger parameter sizes. This can demonstrate the applicability of the proposed method across different language models.
-
-(2) The baseline models selected for this paper were published in 2021 and 2023. Therefore, the authors should conduct a more in-depth analysis of the new methods in the last three years and make comparisons to demonstrate the superiority of the proposed methods.
-
-(3) In order to ensure the reproducibility of the proposed method, the authors should make the relevant code and data available for open-source use in their paper.
+if __name__ == "__main__":
+    main()

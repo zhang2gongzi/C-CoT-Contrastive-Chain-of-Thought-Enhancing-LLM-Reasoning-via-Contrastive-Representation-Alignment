@@ -3,3 +3,9 @@
 
 /root/autodl-tmp/C-CoT/newrundata/gsm8k_train_14b_flat.jsonl
 {"raw_example": {"id": "gsm8k_0", "question": "Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?", "label": 72.0}, "cot": "Step 1: Determine the number of clips Natalia sold in May.  \nNatalia sold half as many clips in May as she did in April.  \nNumber of clips sold in April = 48  \nNumber of clips sold in May = 48 ÷ 2 = 24  \n\nStep 2: Add the number of clips sold in April and May to find the total.  \nTotal clips sold = Clips sold in April + Clips sold in May  \nTotal clips sold = 48 + 24 = 72  \n\nFinal Answer: 72", "gold_label": 72.0, "is_correct": 1}
+
+
+
+ modelscope download --model Qwen/Qwen3-8B --local_dir /root/autodl-tmp/Qwen3-8B
+  python newrun/self_certainty.py --model_path /root/autodl-tmp/Qwen3-8B \
+      --data_path newrundata/gsm8k_test_flat.jsonl --num_paths 10

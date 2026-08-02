@@ -13,3 +13,17 @@
   # 加分:14B 已在,顺手跑
   python newrun/self_certainty.py --model_path /root/autodl-tmp/Qwen3-14B \
       --data_path newrundata/gsm8k_test_flat.jsonl --num_paths 10
+
+
+ picsar.py 已修好,加了 --model_path(改了4处:常量名、argparse、加载模型、JSON输出)。现在和 self_certainty.py 一致。
+
+  运行命令(和 Self-Certainty 同款,8B 必跑 / 14B 加分):
+  # 8B（必跑，进主表）
+  python newrun/picsar.py --model_path /root/autodl-tmp/Qwen3-8B \
+      --data_path newrundata/gsm8k_test_flat.jsonl --num_paths 10
+
+  # 14B（加分，进 14B 列）
+  python newrun/picsar.py --model_path /root/autodl-tmp/Qwen3-14B \
+      --data_path newrundata/gsm8k_test_flat.jsonl --num_paths 10
+
+  输出:终端 PiCSAR: XX.XX% / Self-Consistency: XX.XX% / Oracle: XX.XX%,并写 picsar_results.json。

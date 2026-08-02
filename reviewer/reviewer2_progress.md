@@ -253,25 +253,99 @@ python baseline/dprotocot/run.py granularity \
 
 ## 审稿人 #6：过程级监督主张缺乏支持
 - **问题**：正确最终答案但中间步骤错误的路径，所有 step 都被标为正样本→标签噪声
-- **状态**：论文需弱化 claim，或提供对抗样本分析
+- **状态**：草稿就绪（软化 claim + 复用 M4 AUC=0.78；**与审稿人1 Q1 同一问题、同一套证据，口径必须一致**）
+- **不用新实验**：M4 AUC 已在 `reviewer1_q3_gsm8k.json` 跑出（GSM8K 200题 K=10）。
+
+### 版本 A：Rebuttal 段落（英文，回信用）
+
+> **Reply to Reviewer #2, Concern #6.**
+>
+> The reviewer is correct, and we thank them for the precise example. Our supervision is outcome-derived: path-level labels come from final-answer matching and are broadcast to every step, so a path that reaches the correct answer through a flawed step is nominally labeled positive — a genuine source of step-level label noise. We have accordingly **weakened the process-level supervision claim throughout the paper**: we no longer assert that the encoder detects localized reasoning errors, and instead describe it as attuned to *step-level semantic consistency with the question*.
+>
+> We nonetheless clarify why the method remains effective despite this shared label noise, which is a matter of training *geometry* rather than cleaner labels. Step-level InfoNCE aligns each of the $|\mathcal{P}|\cdot M$ steps of a correct path to the question independently; occasional step-level noise (a flawed step inside a nominally-positive path) is therefore a minority signal, diluted first when a path's steps are pooled into a path embedding and again when path embeddings are aggregated into the dynamic prototype. Systematically flawed paths, whose majority of steps deviate, remain separable. Empirically, on 200 GSM8K questions the learned alignment predicts path correctness with an **AUC of 0.78**, showing the outcome-level noise does not overwhelm the learned signal. We have not overclaimed step-level error detection, and we report this AUC as the honest evidence of what the representation does capture.
+
+### 版本 B：正文改动（tex 落地）
+
+> \emph{We acknowledge that, because path labels derive from final-answer matching and are broadcast to every step, a path that reaches the correct answer through a flawed step is nominally labeled positive, introducing step-level label noise. We therefore weaken our process-level claim: the encoder is not a localized-error detector but is trained toward step-level semantic consistency with the question. The benefit over outcome-level supervision is a denser training geometry rather than cleaner labels: step-level InfoNCE supplies $|\mathcal{P}|\cdot M$ positive pairs and aligns every step independently, so occasional step-level noise is averaged out under path- and prototype-level aggregation. Empirically the resulting alignment still predicts path correctness with an AUC of $0.78$ on GSM8K, indicating the label noise does not overwhelm the learned signal.}
+
+**注意事项**：
+- 与审稿人1 Q1 **同措辞、同数字（AUC 0.78，仅 GSM8K）**，避免两位审稿人对照出口径不一致。
+- 主动承认标签噪声（接住审稿人的 7+2=8 例子），只声称"步-问语义一致性"，不声称"检测局部错误"。
+- 配合审稿人1 Q1 表中列的四处 tex 软化（258/280/459/499 行）一起改。
 
 ---
 
 ## 审稿人 #7：术语使用不一致
-- **问题**：sequence-level/path-level/chain/trajectory 混用
-- **状态**：论文修改，统一术语
+- **问题**：sequence-level/path-level/chain/trajectory 混用；"reasoning chain / path / trajectory" 互换使用未说明是否同义。要求 problem formulation 定义统一术语，全文/公式/图/表一致。
+- **状态**：草稿就绪（纯改文字，定义术语表 + 全文替换）；**不用实验**。
+
+### 统一术语表（拟在 Problem Formulation 首次定义）
+| 规范术语 | 含义 | 替换掉的混用词 |
+|---------|------|---------------|
+| **reasoning path** $r$ | 一次采样得到的完整 CoT（问题→若干步→答案） | reasoning chain, trajectory, sequence |
+| **step** $s_i$ | 一条 path 内的单个推理步 | (保持) |
+| **step-level representation** $z_{s}$ | 单个 step 的编码向量（训练目标） | — |
+| **path-level representation** $z_{r}$ | 整条 path 的编码向量（step 向量池化，推理时用） | sequence-level representation |
+| **dynamic prototype** $c_x$ | 逐题、相似度加权聚合的 path 原型 | (保持) |
+
+**执行**：全文把 "reasoning chain / trajectory" 统一成 **reasoning path**；把 "sequence-level representation" 统一成 **path-level representation**（$z_r$）；step 级一律 "step-level representation"（$z_s$）。公式、图注、表头同步。
+
+### 版本 A：Rebuttal 段落（英文，回信用）
+> **Reply to Reviewer #2, Concern #7.**
+>
+> We thank the reviewer for catching this inconsistency. We have added a **terminology paragraph to the Problem Formulation** that fixes a single canonical vocabulary and use it consistently throughout the text, equations, figures, and tables. Specifically, we use **reasoning path** for a complete sampled chain-of-thought (replacing the interchangeable "reasoning chain" and "trajectory"), **step** for an individual reasoning step within a path, **step-level representation** ($z_s$) for the encoding of a single step (the training target), and **path-level representation** ($z_r$) for the pooled encoding of a whole path (used at inference); we no longer use "sequence-level representation." We have swept the manuscript to remove the mixed usages the reviewer identified.
+
+### 版本 B：正文改动（tex 落地）
+> \paragraph{Terminology.} Throughout, a \emph{reasoning path} $r$ denotes one complete sampled chain-of-thought for a question $x$, composed of \emph{steps} $\{s_1,\dots,s_M\}$. We write $z_{s}$ for a \emph{step-level representation} (the encoding of a single step, used as the contrastive training target) and $z_{r}$ for a \emph{path-level representation} (the pooled encoding of an entire path, used at inference). We use these terms exclusively and avoid the interchangeable use of ``reasoning chain,'' ``trajectory,'' and ``sequence-level representation.''
+
+**注意事项**：定义一次、全文替换即可，无实验。落地时 grep `chain`/`trajectory`/`sequence-level` 逐个替换。
 
 ---
 
 ## 审稿人 #8：过度强调与 ORM 的范式差异
-- **问题**：两者都是监督排序，本质相近
-- **状态**：论文需弱化 "fundamentally different" 表述
+- **问题**：论文称 D-ProtoCoT 与 ORM "fundamentally different paradigm"。但从功能看两者都是用正/负标注路径训练辅助模型再排序/选择，只是打分形式不同（ORM 输出正确概率标量；D-ProtoCoT 用表示相似度/原型对齐）。要求更谨慎描述差异，别夸大成范式不同。
+- **状态**：草稿就绪（软化 "fundamentally different"，承认同属监督排序，精确定位真正差异）；**不用实验**。
+
+### tex 中需软化的位置
+- **109行 / 302行**：`fundamentally different paradigm` → 改为承认同属 supervised path ranking，差异在打分形式与表示几何。
+- （落地时 grep `fundamentally different` / `paradigm` 确认无遗漏。）
+
+### 版本 A：Rebuttal 段落（英文，回信用）
+> **Reply to Reviewer #2, Concern #8.**
+>
+> We agree with the reviewer's framing and have revised the manuscript to avoid overstatement. D-ProtoCoT and ORM indeed **share the same supervision and functional purpose**: both train an auxiliary model from positively- and negatively-labeled reasoning paths and use it to rank/select candidates. We no longer describe the two as a "fundamentally different paradigm." Instead we state the distinction precisely: ORM produces a per-path scalar correctness probability, whereas D-ProtoCoT scores a path by its **similarity to a question-specific dynamic prototype in a contrastively-learned representation space**. The practical consequences of this scoring choice — dense step-level positive pairs during training and a per-question adaptive selection criterion at inference — are what we now argue for, rather than a categorical difference in paradigm.
+
+### 版本 B：正文改动（tex 落地）
+> \emph{D-ProtoCoT and ORM share the same supervision signal (path labels from final-answer matching) and the same functional role (ranking candidate paths with a trained auxiliary model). The difference is in the scoring formulation rather than the paradigm: ORM emits a scalar correctness probability per path, whereas D-ProtoCoT scores paths by similarity to a question-specific dynamic prototype in a contrastively-aligned representation space. This yields dense step-level positive pairs at training time and a per-question adaptive selection criterion at inference, which is where our gains originate.}
+
+**注意事项**：
+- 主动承认"同监督、同功能"，接住审稿人的话，只把差异收在"打分形式 + 表示几何"。
+- 与审稿人 #9（novelty）口径统一：真正贡献是 step 级稠密训练 + 逐题动态原型，不是"范式不同"。
+- 删/改所有 "fundamentally different" 断言。
 
 ---
 
 ## 审稿人 #9：方法论新颖性需精确阐明
-- **问题**：三个组件各自不新
-- **状态**：论文需阐明组件组合的 novelty，尤其是 step-level training + path-level inference 的不对称设计
+- **问题**：三个组件（对比微调 encoder、相似度加权、加权中心最近邻选择）各自在对比学习/原型建模里很常见。要求精确指出 novelty 到底在哪：是 outcome→step 监督传播、还是 step 训练/path 推理的不对称、还是动态原型、还是这些的组合。
+- **状态**：草稿就绪（明确 novelty 定位）；条 4 granularity 消融数字回来后可补一句实证佐证。
+
+### novelty 精确定位（三点组合，非单一组件）
+1. **不对称的训练/推理粒度**：step-level 训练（$|\mathcal{P}|\cdot M$ 个正对，稠密监督）+ path-level 推理（池化后选择）。这是核心，条 4 的 granularity 消融（step/path 优于 path/path、step/step）正是它的实证支撑。
+2. **逐题动态原型**：原型不是全局固定（对比 Static-Prototype 基线，见条 1），而是对每道题按相似度加权聚合当前采样路径——把 outcome 监督"传播"到测试时的 per-question 选择准则。
+3. **outcome→step 表示传播**：仅用最终答案标签，却在 step 表示层得到稠密对齐（配合条 6 的 AUC 0.78 佐证学到的信号有效）。
+
+### 版本 A：Rebuttal 段落（英文，回信用）
+> **Reply to Reviewer #2, Concern #9.**
+>
+> We thank the reviewer and have sharpened the novelty statement. We do not claim any single component is new; the contribution is a **specific combination and the design choice that ties it together**. Concretely: (i) an **asymmetric training/inference granularity** — we train with a step-level contrastive objective (giving $|\mathcal{P}|\cdot M$ dense positive pairs from only outcome labels) but select at the path level after pooling; (ii) a **question-specific dynamic prototype** that aggregates the current candidate paths by similarity at inference, rather than a fixed global prototype; and (iii) the resulting **propagation of outcome-level supervision into step-level representations**. The asymmetric-granularity choice (i) is the primary contribution, and our granularity ablation (Concern #4) isolates it by showing that step-level training with path-level selection outperforms both symmetric variants. The dynamic prototype (ii) is what distinguishes us from the static-prototype baseline (Concern #1), which uses a single global centroid and degrades on CSQA/StrategyQA. We have rewritten the contributions paragraph to state this precisely and to avoid implying that the individual building blocks are themselves novel.
+
+### 版本 B：正文改动（tex 落地，改 contributions/Method 引言）
+> \emph{Our contribution is not any individual building block — contrastive encoder fine-tuning, similarity weighting, and centroid-based selection are each standard — but their combination under one design choice: an \textbf{asymmetric training/inference granularity}. We supervise at the step level (yielding $|\mathcal{P}|\cdot M$ dense positive pairs from outcome-only labels) yet select at the path level via a \textbf{question-specific dynamic prototype} that aggregates the current candidates rather than a fixed global centroid. This propagates outcome-level supervision into step-level representations while keeping selection adaptive per question. Our granularity ablation isolates the asymmetric design, and the contrast with a static-prototype variant isolates the dynamic prototype.}
+
+**注意事项**：
+- 明说"单个组件不新"，接住审稿人，把 novelty 收在**组合 + 不对称粒度设计**。
+- novelty 的实证靠山：条 4（granularity 消融，证不对称有用）+ 条 1（Static-Prototype 对比，证动态原型有用）+ 条 6（AUC 0.78，证 outcome→step 传播有效）。**三条实验/证据是同一套 novelty 论证的支柱**。
+- 条 4 数字回来后，把"granularity ablation outperforms both symmetric variants"换成具体百分比。
 
 ---
 
@@ -292,6 +366,59 @@ python baseline/dprotocot/run.py granularity \
 | `convert_data.py` | 分组 JSON → flat jsonl |
 | `merge_gsm8k.py` | 合并两份 GSM8K 数据，去重验证 |
 | `generate_gsm8k_test_cot.py` | 对官方测试集生成 CoT，支持断点续跑 |
+
+---
+
+## 待跑实验清单（本机服务器，`/home2/zzl/...` 默认路径）
+
+> 本机跑：`run.py` 的 `--bert_model` 默认 `/home2/zzl/model/bert-base-uncased` 就是对的，**不用传**。数据全在 `newrundata/`。GSM8K 有独立 test（`--train_path`+`--test_path`）；StrategyQA/CSQA 单文件走比例切分。
+
+| 条 | 实验 | 脚本 | 回应 |
+|----|------|------|------|
+| 3 | ORM 诊断 | `run.py orm` | ORM 太差是 bug（看 F1/AUROC） |
+| 4 | granularity 消融 | `run.py granularity` | 主/消融不一致（修 Table 3） |
+| 5 | leakage 消融 | `run.py leakage` | 答案泄露（full vs qa_only） |
+| 1 | C-CoT 重跑 | `newrun/ccot_prompting.py` | 基线描述错（真 Chia prompting） |
+
+### GSM8K / Qwen（示例）
+```bash
+# 条 3 ORM 诊断 → [ORM] TEST diagnostics: loss/path_acc/F1/AUROC + 四方法表
+python baseline/dprotocot/run.py orm \
+    --train_path newrundata/gsm8k_merged_flat.jsonl \
+    --test_path  newrundata/gsm8k_test_flat.jsonl --epochs 10
+
+# 条 4 granularity 消融 → 三组 path/path, step/step, step/path（同 test split，可比）
+python baseline/dprotocot/run.py granularity \
+    --train_path newrundata/gsm8k_merged_flat.jsonl \
+    --test_path  newrundata/gsm8k_test_flat.jsonl --epochs 10
+
+# 条 5 leakage 消融 → full / mask / qa_only 三种输入（看 full >> qa_only）
+python baseline/dprotocot/run.py leakage \
+    --train_path newrundata/gsm8k_merged_flat.jsonl \
+    --test_path  newrundata/gsm8k_test_flat.jsonl --epochs 10
+
+# 条 1 C-CoT 重跑（真 Chia 对比 prompting，非路径选择）
+python newrun/ccot_prompting.py --dataset gsm8k \
+    --data_path newrundata/gsm8k_test_flat.jsonl \
+    --model_path /home2/zzl/model/Qwen3-8B \
+    --output ccot_gsm8k_qwen.json
+```
+
+### 扩到完整 Table 1/3（3 数据集 × 2 模型）
+- **StrategyQA**：单文件 + `--use_context`，无独立 test → 比例切分。
+  ```bash
+  python baseline/dprotocot/run.py orm \
+      --data_path newrundata/strategyqa_flat.jsonl --use_context --epochs 10
+  ```
+- **CSQA**：单文件（`csqa_500_flat.jsonl`）；条 1 的 ccot_prompting 额外要 `--csqa_choices`（官方带选项文件）。
+- **LLaMA 半张表**：把数据换成 `*_llama_flat.jsonl`（`gsm8k_llama_flat.jsonl` / `csqa_llama_flat.jsonl` / `strategyqa_llama_flat.jsonl`），`ccot_prompting.py` 的 `--model_path` 换 LLaMA-3.1-8B。
+
+### 数据文件对照（`newrundata/`）
+| 数据集 | Qwen | LLaMA | 独立 test |
+|--------|------|-------|-----------|
+| GSM8K | `gsm8k_merged_flat.jsonl`(911) | `gsm8k_llama_flat.jsonl` | `gsm8k_test_flat.jsonl`(200) |
+| CSQA | `csqa_500_flat.jsonl`(500) | `csqa_llama_flat.jsonl` | 无（比例切分） |
+| StrategyQA | `strategyqa_flat.jsonl` | `strategyqa_llama_flat.jsonl` | 无（比例切分，加 `--use_context`） |
 
 ---
 

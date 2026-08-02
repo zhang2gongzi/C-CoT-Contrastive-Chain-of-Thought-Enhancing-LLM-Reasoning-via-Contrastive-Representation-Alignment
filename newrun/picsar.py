@@ -27,7 +27,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 
-MODEL_PATH = "/home2/zzl/model/Qwen3-8B"
+DEFAULT_MODEL_PATH = "/home2/zzl/model/Qwen3-8B"
 MAX_NEW_TOKENS = 512
 TEMPERATURE = 0.7
 TOP_P = 0.9
@@ -145,6 +145,8 @@ def load_unique_questions(input_path):
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument("--model_path", type=str, default=DEFAULT_MODEL_PATH,
+                        help="Local path or HF id of the LLM")
     parser.add_argument("--data_path", type=str, required=True,
                         help="Flat jsonl with questions (test set)")
     parser.add_argument("--num_paths", type=int, default=10)
@@ -159,11 +161,11 @@ def main():
         qids = qids[:args.subset_questions]
 
     print(f"Questions: {len(qids)}, paths per question: {args.num_paths}")
-    print(f"Loading model from {MODEL_PATH}...")
+    print(f"Loading model from {args.model_path}...")
 
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
     model = AutoModelForCausalLM.from_pretrained(
-        MODEL_PATH,
+        args.model_path,
         device_map="auto",
         torch_dtype=torch.bfloat16,
         trust_remote_code=True,
@@ -271,7 +273,7 @@ def main():
     with open(args.output, "w", encoding="utf-8") as f:
         json.dump({
             "method": "PiCSAR (Leang et al., EMNLP 2025)",
-            "model": MODEL_PATH,
+            "model": args.model_path,
             "accuracy": acc,
             "self_consistency_accuracy": sc_acc,
             "oracle_accuracy": oracle_acc,

@@ -27,3 +27,22 @@
       --data_path newrundata/gsm8k_test_flat.jsonl --num_paths 10
 
   输出:终端 PiCSAR: XX.XX% / Self-Consistency: XX.XX% / Oracle: XX.XX%,并写 picsar_results.json。
+
+
+
+ # 条3 — ORM 诊断(Qwen,先 GSM8K)
+  python baseline/dprotocot/run.py orm \
+      --train_path newrundata/gsm8k_merged_flat.jsonl \
+      --test_path newrundata/gsm8k_test_flat.jsonl --epochs 10
+
+  # 条4 — 粒度消融(GSM8K)
+  python baseline/dprotocot/run.py granularity \
+      --train_path newrundata/gsm8k_merged_flat.jsonl \
+      --test_path newrundata/gsm8k_test_flat.jsonl --epochs 10
+
+  # 条5 — 泄露消融(GSM8K)
+  python baseline/dprotocot/run.py leakage \
+      --train_path newrundata/gsm8k_merged_flat.jsonl \
+      --test_path newrundata/gsm8k_test_flat.jsonl --epochs 10
+
+  # (可选扩展)CSQA / StrategyQA 的 orm/granularity/leakage,见 experiment_queue

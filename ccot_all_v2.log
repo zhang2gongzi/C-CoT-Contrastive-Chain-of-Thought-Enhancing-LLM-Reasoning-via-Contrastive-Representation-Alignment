@@ -46,3 +46,34 @@ nohup: ignoring input
 [ccot] csqa: 4 demos, 496 test questions
 [ccot] loading model /home2/zzl/model/Qwen3-8B ...
 Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:01<00:05,  1.39s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:02<00:04,  1.39s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:04<00:02,  1.38s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:05<00:01,  1.30s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.01it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.15s/it]
+  [20/496] running acc = 90.00%
+  [40/496] running acc = 70.00%
+  [60/496] running acc = 71.67%
+  [80/496] running acc = 75.00%
+  [100/496] running acc = 75.00%
+  [120/496] running acc = 76.67%
+  [140/496] running acc = 79.29%
+  [160/496] running acc = 80.62%
+  [180/496] running acc = 80.56%
+  [200/496] running acc = 79.50%
+  [220/496] running acc = 80.00%
+  [240/496] running acc = 79.58%
+  [260/496] running acc = 80.00%
+  [280/496] running acc = 80.71%
+  [300/496] running acc = 80.33%
+  [320/496] running acc = 80.94%
+  [340/496] running acc = 81.18%
+  [360/496] running acc = 80.83%
+  [380/496] running acc = 80.79%
+  [400/496] running acc = 80.50%
+  [420/496] running acc = 80.95%
+  [440/496] running acc = 81.36%
+  [460/496] running acc = 80.87%
+  [480/496] running acc = 80.62%
+  [496/496] running acc = 80.44%
+
+==== C-CoT (Chia prompting) | csqa | model=Qwen3-8B ====
+  test questions = 496
+  accuracy       = 80.44%  (399/496)
+[ccot] saved -> newrun/ccot_csqa_qwen.jsonl
+[2026年 08月 01日 星期六 20:52:08 CST] ===== ALL DONE (v2) =====

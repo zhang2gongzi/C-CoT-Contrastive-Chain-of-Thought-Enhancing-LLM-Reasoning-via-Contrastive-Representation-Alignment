@@ -19,6 +19,9 @@ from data import question_text, path_text
 
 def train_encoder(cfg: Config, train_groups, val_groups=None):
     device = torch.device(cfg.device if torch.cuda.is_available() else "cpu")
+    random.seed(cfg.seed)
+    torch.manual_seed(cfg.seed)
+    torch.cuda.manual_seed_all(cfg.seed)
     model = MultiGranularEncoder(cfg).to(device)
     model.train()
 

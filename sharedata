@@ -46,3 +46,27 @@
       --test_path newrundata/gsm8k_test_flat.jsonl --epochs 10
 
   # (可选扩展)CSQA / StrategyQA 的 orm/granularity/leakage,见 experiment_queue
+
+
+
+0803
+mkdir -p logs && nohup python baseline/dprotocot/run.py main --bert_model /root/autodl-tmp/bert-base-uncased --train_path               
+  gsm8k_train_14b_flat.jsonl --test_path gsm8k_test_14b_flat.jsonl --epochs 10 > logs/main_14b.log 2>&1 &                               
+                                                                                                                                            单行版，直接复制粘贴即可，省去续行符出错的风险。
+                                                                                                                                            跑起来后：                                                
+  - 看进度：tail -f logs/main_14b.log
+  - 取结果：grep "Results\|CoT\|Centroid\|D-ProtoCoT" logs/main_14b.log
+
+
+nohup python newrun/self_certainty.py \                                                                                               
+           --model_path /root/autodl-tmp/Qwen3-8B \                                                                                               --data_path newrundata/gsm8k_test_flat.jsonl \                                                                                    
+        > logs/self_certainty_8b.log 2>&1 &这个是8B的，那14B的呢                                                                          
+
+● 14B 只是换 --model_path 和输出文件名，--data_path 也要换成 14B 生成的测试集（和 14B main 同一批路径才可比）：
+
+  nohup python newrun/self_certainty.py \                                                                                                       --model_path /root/autodl-tmp/Qwen3-14B \
+      --data_path gsm8k_test_14b_flat.jsonl \                                                                                                   --output self_certainty_14b_results.json \            
+      > logs/self_certainty_14b.log 2>&1 &
+
+
+

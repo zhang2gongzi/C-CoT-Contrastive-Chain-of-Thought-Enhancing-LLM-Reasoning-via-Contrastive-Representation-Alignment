@@ -69,4 +69,27 @@ nohup python newrun/self_certainty.py \
       > logs/self_certainty_14b.log 2>&1 &
 
 
+❯ 转成 nohup 形式                                                                                                                                           
+● 三个数据集 × 对应模型的 nohup 形式，日志写到 newrun/logs/：                                                                             
+                                         
+  mkdir -p newrun/logs                                                                                                                                            
+  # GSM8K, Qwen3-8B                                                                                                                         nohup python newrun/ccot_prompting.py --dataset gsm8k \                                                                                 
+      --data_path newrundata/gsm8k_test_flat.jsonl \                                                                                      
+      --model_path /home2/zzl/model/Qwen3-8B \                                                                                            
+      --output newrun/ccot_gsm8k_qwen.jsonl \                                                                                             
+      > newrun/logs/ccot_gsm8k_qwen.log 2>&1 &
 
+  # StrategyQA, LLaMA-3.1-8B
+  nohup python newrun/ccot_prompting.py --dataset strategyqa \
+      --data_path newrundata/strategyqa_flat.jsonl \
+      --model_path /home2/zzl/model/Llama-3.1-8B-Instruct \
+      --output newrun/ccot_sqa_llama.jsonl \
+      > newrun/logs/ccot_sqa_llama.log 2>&1 &
+
+  # CommonsenseQA, Qwen3-8B（需官方 choices）
+  nohup python newrun/ccot_prompting.py --dataset csqa \
+      --data_path newrundata/csqa_500_flat.jsonl \
+      --csqa_choices /home2/zzl/C-CoT/database/commonsenseQA/train-00000-of-00001.parquet \
+      --model_path /home2/zzl/model/Qwen3-8B \
+      --output newrun/ccot_csqa_qwen.jsonl \
+      > newrun/logs/ccot_csqa_qwen.log 2>&1 &

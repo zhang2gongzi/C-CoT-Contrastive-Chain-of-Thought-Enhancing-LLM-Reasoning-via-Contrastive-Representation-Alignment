@@ -93,3 +93,59 @@ nohup python newrun/self_certainty.py \
       --model_path /home2/zzl/model/Qwen3-8B \
       --output newrun/ccot_csqa_qwen.jsonl \
       > newrun/logs/ccot_csqa_qwen.log 2>&1 &
+0804
+
+
+ cd /home2/zzl/C-CoT                                                                                                                       mkdir -p logs
+  TS=$(date +%Y%m%d_%H%M%S)                                                                                                                 RUN="python baseline/dprotocot/run.py"                    
+
+  # ===== Qwen3-8B（补 seed 重跑）=====
+  # GSM8K：独立 train/test
+  nohup bash -c "
+  $RUN orm         --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  $RUN granularity --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  $RUN leakage     --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  " > logs/qwen_gsm8k_${TS}.log 2>&1 &
+
+  # CSQA：单文件比例切分
+  nohup bash -c "
+  $RUN orm         --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  " > logs/qwen_csqa_${TS}.log 2>&1 &
+
+  # StrategyQA：单文件 + context
+  nohup bash -c "
+  $RUN orm         --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  " > logs/qwen_strategyqa_${TS}.log 2>&1 &
+
+  # ===== LLaMA-3.1-8B（全跑，单文件比例切分）=====
+  nohup bash -c "
+  $RUN orm         --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  " > logs/llama_gsm8k_${TS}.log 2>&1 &
+
+  nohup bash -c "
+  $RUN orm         --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  " > logs/llama_csqa_${TS}.log 2>&1 &
+
+  nohup bash -c "
+  $RUN orm         --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  " > logs/llama_strategyqa_${TS}.log 2>&1 &
+
+  echo "launched 6 jobs; TS=${TS}; logs in logs/"
+  jobs
+
+  挂完立刻做两件事确认没白挂:
+
+  1. 看进程起来了:
+  sleep 30 && nvidia-smi && ls -la logs/*_${TS}.log
+  2. 瞄一眼头部没报错(有 [data] split -> 就对):
+  tail -n 5 logs/qwen_gsm8k_${TS}.log

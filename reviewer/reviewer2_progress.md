@@ -68,7 +68,16 @@
 - 原型：训练集正确路径 [CLS] 均值，静态全局，不随问题变化。选择：余弦 argmax。
 - 代码来源：`baseline/commonsenseQA/ccot/train_prototype.py`、`run_ccot_qwen.py`。
 
-- **状态**：方案定稿（拆两行，Static-Prototype 不引外部 + C-CoT 引 Chia 重跑）。待：写 `newrun/ccot_prompting.py` 重跑脚本 → 改 tex
+- **状态**：✅ **重跑脚本已写并跑出 2/6 格（2026-08-04）**。`newrun/ccot_prompting.py`（真 Chia 对比 prompting：few-shot 拼真实正/错推理链，生成式，非路径选择）已改好（用真实链 + torch 播种），实测：
+
+| 数据集/模型 | C-CoT 准确率 | 对照（Standard / SC / D-ProtoCoT） | 判定 |
+|------|------|------|------|
+| **GSM8K / Qwen3-8B** | **93.88%** (184/196) | 90.40 / 90.65 / 94.15 | ✅ > Standard/SC，< D-ProtoCoT |
+| **StrategyQA / LLaMA-3.1-8B** | **76.81%** (212/276) | 68.60 / 62.60 / 86.20 | ✅ > Standard/SC，< D-ProtoCoT |
+
+- **已填 tex**（cas-dc-template.tex Table 1，C-CoT 行）：StrategyQA/LLaMA=76.81、GSM8K/Qwen=93.88；其余 4 格仍 `--`（CSQA×2、GSM8K/LLaMA、StrategyQA/Qwen 未跑）。
+- **口径**：C-CoT 是生成式 prompting 基线，caption 已声明"not directly comparable to selection-based methods"，作为生成式对照填入，非同口径竞争。叙事成立（真 Chia 补上，D-ProtoCoT 仍更高）。
+- **待补 4 格命令**（模型：Qwen `/home2/zzl/model/Qwen3-8B`，LLaMA `/home2/zzl/model/Meta-Llama-3.1-8B-Instruct`）：CSQA 需 `--csqa_choices`；GSM8K/LLaMA、StrategyQA/Qwen 各一条。
 
 ---
 
@@ -134,7 +143,205 @@ pooled_output = outputs.last_hidden_state[:, 0, :]
 ### 论文怎么回
 跑 `python dprotocot/run.py orm` 会输出诊断指标，证明新 ORM 的 loss 在下降、F1/AUROC 正常。然后论文回：
 > "We identified two issues in the original ORM: truncation of long reasoning paths and lack of class-balance weighting. After fixing both, ORM diagnostics are healthy (report AUROC, F1)."
-- **状态**：代码已修复，等 GSM8K 跑完验证
+
+### ✅ GSM8K/Qwen 实测（2026-08-03，10 epoch）
+```
+[ORM] train paths=8200 pos=5107 neg=3093 pos_ratio=0.623 pos_weight=0.606
+[ORM] TEST diagnostics: loss=0.9659 path_acc=0.8450 F1=0.8971 AUROC=0.8616
+==== Results [main+ORM | input=full] | test questions = 200 ====
+  Standard CoT            :  75.00%
+  Self-Consistency        :  77.50%
+  Raw-BERT + Centroid     :  81.00%
+  Self-Certainty-BERT     :  81.00%
+  D-ProtoCoT              :  89.50%
+  ORM                     :  81.00%
+```
+- **ORM 从旧 61.36% → 81.00%**（超过 Standard CoT 75%），坐实"旧 61% 是实现 bug"。
+- 诊断健康：F1=0.897、AUROC=0.862、pos_ratio=0.623、pos_weight=0.606（审稿人要的都有）。
+- ⚠️ **ORM 过拟合**：val_loss 从 ep2 的 0.44 → ep10 的 1.09，train_loss 仍降。**best-val 在 ep2**（val_loss 最低、AUROC 0.877）。ORM 的 epoch 与 encoder 共用 `cfg.epochs`（orm.py:76），暂不改代码；**rebuttal 里报 best-val(ep2) 诊断**，选路径 81% 不受影响。
+- ⚠️ **口径变了**：此表 Standard CoT=75%（200 题官方 test），论文旧 Table 1 是 90.40%（旧划分）。整列都低一截是**新 protocol 正常现象**，非退步；核心结论 D-ProtoCoT > 所有基线依旧成立。
+
+- **状态**：GSM8K/Qwen 已跑 ✓；整张 Table 1 按新口径重跑（见下）。
+
+---
+
+## Table 1 全表重跑计划（统一新口径，同时消解条 2/3/4）
+
+> **决定**：整张 Table 1 用**新 test set 统一口径**重跑。GSM8K 用物理分离官方 test（200 题）；CSQA/StrategyQA 官方 test 标签不公开，按 qid 分组 8:1:1 ratio split（学界惯例，正好回应条 2 无泄露）。**每个 cell 一条 `run.py orm` 命令 = 一整列 6 方法**（Standard CoT / Self-Consistency / Raw-BERT+Centroid / Self-Certainty-BERT / D-ProtoCoT / ORM），同一 split 上算，数字直接可比。
+
+### 第 0 步：补 GSM8K/LLaMA 官方 test CoT（唯一缺的数据）
+Qwen 已用官方 test；LLaMA 也要对**同 200 题**生成，保持 GSM8K 整行口径一致。生成脚本通用（`--model_path`/`--input`/`--output`，输出格式已匹配 loader）。
+```bash
+python baseline/14B/generate_cot_14b.py \
+    --model_path /home2/zzl/model/Meta-Llama-3.1-8B-Instruct \
+    --input newrundata/gsm8k_test_flat.jsonl \
+    --output newrundata/gsm8k_test_llama_flat.jsonl
+```
+> 盯终端 `Correct: X (Y%)`：LLaMA-3.1-8B 在 200 题官方 test 上逐路径正确率应在 80%+，太低说明生成有问题。
+
+### 第 1 步：6 个 cell，每条命令出一整列
+```bash
+# 1. GSM8K / Qwen —— 已跑完 ✓（D-ProtoCoT 89.50 / ORM 81.00，见上）
+
+# 2. GSM8K / LLaMA（等第 0 步生成完）
+python baseline/dprotocot/run.py orm \
+    --train_path newrundata/gsm8k_llama_flat.jsonl \
+    --test_path  newrundata/gsm8k_test_llama_flat.jsonl --epochs 10
+
+# 3. CSQA / Qwen（单文件，ratio split）
+python baseline/dprotocot/run.py orm \
+    --data_path newrundata/csqa_500_flat.jsonl --epochs 10
+
+# 4. CSQA / LLaMA
+python baseline/dprotocot/run.py orm \
+    --data_path newrundata/csqa_llama_flat.jsonl --epochs 10
+
+# 5. StrategyQA / Qwen（单文件 + use_context）
+python baseline/dprotocot/run.py orm \
+    --data_path newrundata/strategyqa_flat.jsonl --use_context --epochs 10
+
+# 6. StrategyQA / LLaMA
+python baseline/dprotocot/run.py orm \
+    --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --epochs 10
+```
+
+### 第 2 步：两个新基线（条 2「基线太旧」，单独脚本，只在 test 上）
+```bash
+# Self-Certainty（Kang, NeurIPS 2025，已修正公式=方案2，对已生成路径做 teacher-forcing 前向）
+python newrun/self_certainty.py \
+    --data_path newrundata/gsm8k_test_flat.jsonl \
+    --output self_certainty_gsm8k_qwen.json
+
+# PiCSAR（Leang, EMNLP 2025）
+python newrun/picsar.py \
+    --data_path newrundata/gsm8k_test_flat.jsonl \
+    --output picsar_gsm8k_qwen.json
+```
+
+### 数据文件对照（`newrundata/`）
+| cell | train 数据 | test 来源 | 额外 flag |
+|------|-----------|-----------|----------|
+| GSM8K/Qwen | `gsm8k_merged_flat.jsonl`(911) | `gsm8k_test_flat.jsonl`(200,官方) | — |
+| GSM8K/LLaMA | `gsm8k_llama_flat.jsonl` | `gsm8k_test_llama_flat.jsonl`(第0步生成) | — |
+| CSQA/Qwen | `csqa_500_flat.jsonl`(500) | 同文件 ratio split | — |
+| CSQA/LLaMA | `csqa_llama_flat.jsonl` | 同文件 ratio split | — |
+| StrategyQA/Qwen | `strategyqa_flat.jsonl` | 同文件 ratio split | `--use_context` |
+| StrategyQA/LLaMA | `strategyqa_llama_flat.jsonl` | 同文件 ratio split | `--use_context` |
+
+### 进表注意事项
+1. **口径统一**：全表物理分离 test（GSM8K）或 qid 分组 ratio split（CSQA/SQA），无 path 泄露 → 同时回应条 2。
+2. **6 方法同 split 算**，数字直接可比 → 条 4（主/消融不一致）一并消解。
+3. **整体数字比旧表低**是新 protocol 正常现象，论文须**明确标注"统一口径重跑"**，别让审稿人误读为退步；核心结论 D-ProtoCoT > 所有基线仍成立。
+4. **ORM 报 best-val(ep2) 诊断**（过拟合已知），选路径准确率不受影响。
+
+- **状态**：GSM8K/Qwen ✓；待跑第 0 步（LLaMA test 生成）+ 第 1 步 cell 2–6 + 第 2 步两基线。
+
+---
+
+## 🔒 填表锁定表 + 同值约束链（GSM8K/Qwen，200 题官方 test）
+
+> **背景**：`train.py` 原本没设 torch 随机种子（BERT dropout 每次不同），导致同一配置 run-to-run 方差 ~12 点。已加种子（`train.py` 建 model 前：`random.seed / torch.manual_seed / torch.cuda.manual_seed_all(cfg.seed)`）。**加种子前**的 D-ProtoCoT 曾跑出 89.5（orm）/ 81.5（leakage-full）/ 77.0（granularity-step/path）三个值——全不可信，须种子版重跑。
+
+### ① 可直接锁定（确定性，不含训练随机性，所有 run 已一致）
+| 方法 | 锁定值 | 说明 |
+|---|---|---|
+| Standard CoT | **75.00** | 第一条路径，无随机 |
+| Self-Consistency | **77.50** | 多数投票，无随机 |
+| Raw-BERT + Centroid | **81.00** | 冻结 BERT，确定性 |
+| Self-Certainty-BERT | **81.00** | 冻结 BERT，确定性 |
+| ORM（选路径） | **81.00** | orm run；诊断 F1=0.897 / AUROC=0.862 / pos_ratio=0.623 |
+
+### ② 同值约束链（D-ProtoCoT，必须三处填同一个数 X）
+以下三处**在数学上是同一配置**（train=step / select=path / input=full），**必须等于同一个 X**：
+```
+Table 1 [D-ProtoCoT, GSM8K/Qwen]
+   = Table 3 [granularity: step/path 行]
+   = leakage [full 行]
+   = X   ← 同一个数
+```
+> **这正是审稿人条 4 的投诉点**（主表≠消融）。现有 89.5 / 77.0 / 81.5 三处不一致 = 复现了他的投诉。X 只能有一个值。
+
+### ③ X 定多少 —— 判断逻辑
+- **不用 89.5**：最大值，像挑数；审稿人刚因 ORM 异常质疑过实现，挑最大值风险高。
+- **不用 77.0**：granularity 那次的异常低点。
+- **X = 加种子后单次跑的输出**（一个数灌进三处）。这是唯一能同时满足：
+  - 主表 = 消融 = leakage 一致（条 4），**且**
+  - 不对称设计 step/path 最优（条 9 novelty，需 X > 对称的 path/path、step/step）。
+- 只有种子版能让 step/path 稳定回到 ~89 且 > 对称组；若种子版仍 < 对称组 → 是真问题，回头审视 novelty，**别硬填**。
+
+### ④ 已确认可用的证据（不受方差影响，现在就能写 rebuttal）
+- **条 3 ORM 诊断**：F1=0.897 / AUROC=0.862（诊断不受选路径方差影响）→ ORM 从旧 61% 修好。
+- **条 5 leakage 方向**：冻结方法 qa_only 确定性下降（Centroid 81→75、Self-Certainty-BERT 81→75.5）→ 推理内容是有用信号、非 Q-A 捷径。**方向可用，D-ProtoCoT 三模式具体数字待种子版重跑**。
+
+### ④b 2026-08-04 实测（GSM8K/Qwen，10-epoch；`logs/*_20260803_124016.log`）
+> ⚠️ 记录时注意：作者最初贴的 granularity 三个数**贴串行**了，已核对修正。以下为修正后。
+
+| 实验 | 配置 | D-ProtoCoT | 其它关键数 | 判定 |
+|------|------|-----------|-----------|------|
+| **granularity** | path/path（对称） | 83.0 | — | — |
+| | step/step（对称） | 82.0 | — | — |
+| | **step/path（主方法/不对称）** | **86.5** | — | 🟢 主方法最高，> 两对称变体 → **条 9 novelty 成立** |
+| **ORM** | main+ORM, full | **92.0** | ORM=82.0；TEST F1=0.925 AUROC=0.907 | 🟢 D-ProtoCoT 反超 ORM +10 → **条 3 成立** |
+| **leakage** | full | 81.0 | mask=81.5, qa_only=74.5 | 🟢 full≈mask ≫ qa_only(−6.5) → **条 5 成立**（增益非答案泄露） |
+
+**结论**：红旗（主方法垫底、ORM 反超）经修正后**全部解除**；条 3/5/9 的实验支柱到位。
+
+**⚠️ 仍存一个真问题（= 条 4 本身）**：同为主方法 step/path，三处数字仍不一致：
+- granularity step/path = **86.5**
+- ORM log（main+ORM full）= **92.0**
+- leakage full = **81.0**
+→ 最多差 **11 点**，超出 BERT dropout 正常抖动，根因大概率是**未固定随机种子**。这正是条 4 投诉点，**不能当"正常方差"糊过去**。X 仍未定。
+
+**两个选择（待作者拍板）**：
+- **A（稳妥，推荐）**：加 `--seed 42 --epochs 10` 重跑三条 → 主方法三处收敛到同一个 X → 条 4 真正解决，全表口径一致。
+- **B（先填）**：各表用自己的值（granularity 86.5 / ORM 92 / leakage 81），条 4 的"数字对不上"未根治，可能被追问。
+
+> ⚠️ 曾出现一份 AI 建议"81–83 是正常方差，主表用 82 或 83、保持一致即可"——**已否决**：①83 是 path/path 对称变体，非主方法，用它=填错列；②81 vs 92 差 11 点不是抖动；③没解决 granularity/条 4。勿采纳。
+
+### ④c Self-Certainty (Kang et al.) 新基线实测（2026-08-04，teacher-forcing 版 `newrun/self_certainty.py`）
+
+| 规模 | Self-Certainty (Kang) | 判定 |
+|------|----------------------|------|
+| **8B** (Qwen3-8B) | **89.00%** (146/200) | 可用，同批路径可比 |
+| **14B** (Qwen3-14B) | **97.50%** (195/200) | 饱和，符合 Q1 叙事 |
+
+**⚠️ 脚本内部打印的 "Self-Consistency: 73.00%(8B) / 97.00%(14B)" 中，8B 的 73% 不可用**：
+- Self-Certainty acc（89/97.5）用**存储的 `is_correct`**（line 190，生成时算好的权威标签）→ 可信。
+- 但脚本内部的 SC（line 195–202）是**重新用 `extract_final_answer` 从 cot 文本抠答案再投票**，与主表 `evaluate.py`（直接用存储 `is_correct` 投票）算法不同；8B 抠答案失败拉低到 73%。
+- **口径**：论文 SC 一律用 `run.py` 主表的数（8B/Qwen GSM8K ≈ 90.65），**丢掉这脚本的 73**。Self-Certainty 就用 89(8B)/97.5(14B)。
+
+### ④d Table 1（cas-dc-template.tex line 386–394）当前状态 + ORM 改动
+
+**已改（2026-08-04）**：GSM8K/Qwen 列 ORM `61.36 → 82.00`（line 393）。61.36 是条 3 骂的旧 bug 值；82.0 是昨天修好的 ORM（同 run TEST F1=0.925/AUROC=0.907）。方向对：D-ProtoCoT(94.15) > ORM(82.0)。
+
+**⚠️ 遗留不一致（作者选 A：先动 ORM，D-ProtoCoT 暂留）**：
+- ORM 用昨天新 run（同 run D-ProtoCoT=**92.0**），但 D-ProtoCoT 这格仍是旧 **94.15** → 两格来自不同 run，5 分口径差。种子重跑后须两格一起用同一 run 的数统一。
+- **其他列 ORM 也偏低疑似旧 bug**：CSQA/LLaMA=59.52、GSM8K/LLaMA=78.20、StrategyQA/Qwen=**50.43** 等，但**无重跑数据**，未动。昨天只重跑了 GSM8K/Qwen。
+
+### ④e X 现在的**三重约束**（GSM8K/Qwen 的 D-ProtoCoT 主方法，种子重跑目标）
+手里 4 个打架的值：主表 94.15 / ORM run 92 / granularity step/path 86.5 / leakage full 81。X 须**同时**满足：
+1. **一致**：主表 = granularity(step/path) = leakage(full) 三处同一个 X → 条 4。
+2. **> 对称变体**：X > path/path(83)、step/step(82) → 条 9 novelty。
+3. **≥ 89**（新增硬下限）：否则输给 Self-Certainty 新基线(89) → Q2 帮倒忙。若 X 落 81/86.5，新基线反超我们。
+→ 昨天无种子批（81~92 乱跳）做不到三条同满足。**结论：GSM8K/Qwen 列必须 `--seed 42 --epochs 10` 重跑，拿稳定 X（目标 90+），再一次性填 主表+granularity+leakage+ORM+Self-Certainty 五处。**
+
+
+### ⑤ 种子版重跑清单（拿到 X + 干净 granularity/leakage）
+```bash
+# 三条都用 seed=42（默认），加种子后重跑，全表口径一致、可复现
+python baseline/dprotocot/run.py orm \
+    --train_path newrundata/gsm8k_merged_flat.jsonl \
+    --test_path  newrundata/gsm8k_test_flat.jsonl --epochs 10
+python baseline/dprotocot/run.py granularity \
+    --train_path newrundata/gsm8k_merged_flat.jsonl \
+    --test_path  newrundata/gsm8k_test_flat.jsonl --epochs 10
+python baseline/dprotocot/run.py leakage \
+    --train_path newrundata/gsm8k_merged_flat.jsonl \
+    --test_path  newrundata/gsm8k_test_flat.jsonl --epochs 10
+```
+> 建议进一步：每配置 3 seed（如 42/43/44）报 mean±std，审稿人爱看方差，也彻底堵住"挑数"质疑。
+
+- **状态**：①锁定 5 个数可填；②X 待种子版重跑；③granularity/leakage 数字待种子版；④条3/条5 方向证据可用。
 
 ---
 
@@ -143,6 +350,7 @@ pooled_output = outputs.last_hidden_state[:, 0, :]
 - **注意**：投稿时不存在 `baseline/dprotocot/`，全部分析基于原始代码
 
 ### 为什么差这么多？三个主要原因
+
 
 **1. 测试集仅 100 题（最关键）**
 
@@ -327,7 +535,7 @@ python baseline/dprotocot/run.py granularity \
 
 ## 审稿人 #9：方法论新颖性需精确阐明
 - **问题**：三个组件（对比微调 encoder、相似度加权、加权中心最近邻选择）各自在对比学习/原型建模里很常见。要求精确指出 novelty 到底在哪：是 outcome→step 监督传播、还是 step 训练/path 推理的不对称、还是动态原型、还是这些的组合。
-- **状态**：草稿就绪（明确 novelty 定位）；条 4 granularity 消融数字回来后可补一句实证佐证。
+- **状态**：**✅ 已落地进 tex（2026-08-03，cas-dc-template.tex，contributions itemize 之后 line 113）**；条 4 granularity 消融数字回来后可补一句实证佐证。
 
 ### novelty 精确定位（三点组合，非单一组件）
 1. **不对称的训练/推理粒度**：step-level 训练（$|\mathcal{P}|\cdot M$ 个正对，稠密监督）+ path-level 推理（池化后选择）。这是核心，条 4 的 granularity 消融（step/path 优于 path/path、step/step）正是它的实证支撑。

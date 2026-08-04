@@ -24,12 +24,14 @@ Usage (server, GPU):
   python newrun/ccot_prompting.py --dataset gsm8k \
       --data_path newrundata/gsm8k_test_flat.jsonl \
       --model_path /home2/zzl/model/Qwen3-8B \
+      --max_new_tokens 2048 \
       --output newrun/ccot_gsm8k_qwen.jsonl
 
   # StrategyQA, LLaMA-3.1-8B  (context available -> used in the prompt)
   python newrun/ccot_prompting.py --dataset strategyqa \
       --data_path newrundata/strategyqa_flat.jsonl \
       --model_path /home2/zzl/model/Llama-3.1-8B-Instruct \
+      --max_new_tokens 2048 \
       --output newrun/ccot_sqa_llama.jsonl
 
   # CommonsenseQA, Qwen3-8B  (needs official choices)
@@ -37,6 +39,7 @@ Usage (server, GPU):
       --data_path newrundata/csqa_500_flat.jsonl \
       --csqa_choices /home2/zzl/C-CoT/database/commonsenseQA/train-00000-of-00001.parquet \
       --model_path /home2/zzl/model/Qwen3-8B \
+      --max_new_tokens 2048 \
       --output newrun/ccot_csqa_qwen.jsonl
 """
 
@@ -151,6 +154,13 @@ def build_prompt(dataset, demos, item):
     return header + "".join(demos) + query
 
 
+def strip_think(text: str) -> str:
+    """Remove any <think>...</think> block (closed or truncated), as a safety net."""
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)
+    text = re.sub(r"<think>.*$", "", text, flags=re.DOTALL)
+    return text.strip()
+
+
 def extract_answer(dataset, text):
     if dataset == "strategyqa":
         m = re.search(r"Answer[:\s]*\**\s*(yes|no)", text, re.IGNORECASE)
@@ -193,7 +203,7 @@ def main():
     ap.add_argument("--csqa_choices", help="official CSQA file (parquet/jsonl) with options; required for csqa")
     ap.add_argument("--num_shots", type=int, default=4)
     ap.add_argument("--max_test", type=int, default=0, help="0 = all questions")
-    ap.add_argument("--max_new_tokens", type=int, default=512)
+    ap.add_argument("--max_new_tokens", type=int, default=2048)
     ap.add_argument("--temperature", type=float, default=0.7)
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--output", required=True)
@@ -234,18 +244,27 @@ def main():
     def generate(prompt):
         if has_chat:
             msg = [{"role": "user", "content": prompt}]
-            text = tok.apply_chat_template(msg, tokenize=False, add_generation_prompt=True)
+            try:
+                text = tok.apply_chat_template(
+                    msg, tokenize=False, add_generation_prompt=True,
+                    enable_thinking=False)
+            except TypeError:
+                # older transformers without enable_thinking
+                text = tok.apply_chat_template(
+                    msg, tokenize=False, add_generation_prompt=True)
+                text = text + " /no_think"
         else:
-            text = prompt
+            text = prompt + " /no_think"
         enc = tok(text, return_tensors="pt").to(model.device)
         out = model.generate(**enc, max_new_tokens=args.max_new_tokens,
                              do_sample=True, temperature=args.temperature, top_p=0.9)
         gen = out[0][enc["input_ids"].shape[1]:]
-        return tok.decode(gen, skip_special_tokens=True)
+        raw = tok.decode(gen, skip_special_tokens=True)
+        return strip_think(raw)
 
     results, correct = [], 0
     for i, t in enumerate(tests, 1):
-        prompt = build_prompt(args.dataset, demos, t)
+        prompt = build_prompt(dataset=args.dataset, demos=demos, item=t)
         out = generate(prompt)
         pred = extract_answer(args.dataset, out)
         ok = is_correct(args.dataset, pred, t["gold"])

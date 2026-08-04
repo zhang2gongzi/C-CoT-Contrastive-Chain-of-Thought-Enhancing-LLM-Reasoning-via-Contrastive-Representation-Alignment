@@ -1,0 +1,61 @@
+nohup: ignoring input
+[data] newrundata/csqa_500_flat.jsonl: 5000 lines, 0 skipped, 500 questions, 5000 paths total
+[data] split -> train=400 val=50 test=50 questions (TEST SET SIZE = 50 questions)
+[data] trainable questions (have both pos & neg paths): 233/400
+[data] trainable questions (have both pos & neg paths): 33/50
+Traceback (most recent call last):
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 142, in <module>
+    main()
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 134, in main
+    {
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 69, in cmd_orm
+    enc = train_encoder(cfg, train_t, val_t)
+  File "/home2/zzl/C-CoT/baseline/dprotocot/train.py", line 46, in train_encoder
+    (loss / cfg.batch_size).backward()
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/autograd/__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/autograd/graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 90.00 MiB. GPU 0 has a total capacity of 23.69 GiB of which 79.25 MiB is free. Process 2244261 has 5.07 GiB memory in use. Process 2244401 has 5.96 GiB memory in use. Including non-PyTorch memory, this process has 5.25 GiB memory in use. Process 2244525 has 4.67 GiB memory in use. Process 2245553 has 1.23 GiB memory in use. Process 2245866 has 1.42 GiB memory in use. Of the allocated memory 4.76 GiB is allocated by PyTorch, and 181.90 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[data] newrundata/csqa_500_flat.jsonl: 5000 lines, 0 skipped, 500 questions, 5000 paths total
+[data] split -> train=400 val=50 test=50 questions (TEST SET SIZE = 50 questions)
+[data] trainable questions (have both pos & neg paths): 233/400
+[data] trainable questions (have both pos & neg paths): 33/50
+Traceback (most recent call last):
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 142, in <module>
+    main()
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 134, in main
+    {
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 93, in cmd_granularity
+    enc = train_encoder(c, train_t, val_t)
+  File "/home2/zzl/C-CoT/baseline/dprotocot/train.py", line 46, in train_encoder
+    (loss / cfg.batch_size).backward()
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/autograd/__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/autograd/graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 23.69 GiB of which 14.19 MiB is free. Process 2244261 has 5.98 GiB memory in use. Process 2244401 has 6.05 GiB memory in use. Process 2244525 has 5.28 GiB memory in use. Process 2245553 has 1.23 GiB memory in use. Including non-PyTorch memory, this process has 5.12 GiB memory in use. Of the allocated memory 4.65 GiB is allocated by PyTorch, and 156.49 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[data] newrundata/csqa_500_flat.jsonl: 5000 lines, 0 skipped, 500 questions, 5000 paths total
+[data] split -> train=400 val=50 test=50 questions (TEST SET SIZE = 50 questions)
+[data] trainable questions (have both pos & neg paths): 233/400
+[data] trainable questions (have both pos & neg paths): 33/50
+Traceback (most recent call last):
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 142, in <module>
+    main()
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 134, in main
+    {
+  File "/home2/zzl/C-CoT/baseline/dprotocot/run.py", line 83, in cmd_leakage
+    enc = train_encoder(c, train_t, val_t)
+  File "/home2/zzl/C-CoT/baseline/dprotocot/train.py", line 46, in train_encoder
+    (loss / cfg.batch_size).backward()
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/_tensor.py", line 648, in backward
+    torch.autograd.backward(
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/autograd/__init__.py", line 353, in backward
+    _engine_run_backward(
+  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/torch/autograd/graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 23.69 GiB of which 10.19 MiB is free. Process 2244261 has 5.98 GiB memory in use. Process 2244401 has 6.05 GiB memory in use. Process 2244525 has 5.81 GiB memory in use. Process 2245553 has 1.23 GiB memory in use. Including non-PyTorch memory, this process has 4.59 GiB memory in use. Of the allocated memory 4.14 GiB is allocated by PyTorch, and 147.52 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

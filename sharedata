@@ -149,3 +149,89 @@ nohup python newrun/self_certainty.py \
   sleep 30 && nvidia-smi && ls -la logs/*_${TS}.log
   2. 瞄一眼头部没报错(有 [data] split -> 就对):
   tail -n 5 logs/qwen_gsm8k_${TS}.log
+
+
+
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   TS=$(date +%Y%m%d_%H%M%S)                                                                                                                 RUN="python baseline/dprotocot/run.py"                    
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$ 
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   # ===== Qwen3-8B（补 seed 重跑）=====
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   # GSM8K：独立 train/test
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   nohup bash -c "
+>   $RUN orm         --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+>   $RUN granularity --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+>   $RUN leakage     --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+>   " > logs/qwen_gsm8k_${TS}.log 2>&1 &
+[1] 2244258
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$ 
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   # CSQA：单文件比例切分
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   nohup bash -c "
+>   $RUN orm         --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+>   $RUN granularity --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+>   $RUN leakage     --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+>   " > logs/qwen_csqa_${TS}.log 2>&1 &
+[2] 2244326
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$ 
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   # StrategyQA：单文件 + context
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   nohup bash -c "
+>   $RUN orm         --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+>   $RUN granularity --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+>   $RUN leakage     --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+>   " > logs/qwen_strategyqa_${TS}.log 2>&1 &
+[3] 2244398
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$ 
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   # ===== LLaMA-3.1-8B（全跑，单文件比例切分）=====
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   nohup bash -c "
+>   $RUN orm         --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+>   $RUN granularity --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+>   $RUN leakage     --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+>   " > logs/llama_gsm8k_${TS}.log 2>&1 &
+[4] 2244522
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$ 
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   nohup bash -c "
+>   $RUN orm         --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+>   $RUN granularity --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+>   $RUN leakage     --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+>   " > logs/llama_csqa_${TS}.log 2>&1 &
+[5] 2244568
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$ 
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   nohup bash -c "
+>   $RUN orm         --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+>   $RUN granularity --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+>   $RUN leakage     --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+>   " > logs/llama_strategyqa_${TS}.log 2>&1 &
+[6] 2244661
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$ 
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   echo "launched 6 jobs; TS=${TS}; logs in logs/"
+launched 6 jobs; TS=20260804_143144; logs in logs/
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$   jobs
+[1]   Running                 nohup bash -c "
+  $RUN orm         --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  $RUN granularity --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  $RUN leakage     --train_path newrundata/gsm8k_merged_flat.jsonl --test_path newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  " > logs/qwen_gsm8k_${TS}.log 2>&1 &
+[2]   Running                 nohup bash -c "
+  $RUN orm         --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  " > logs/qwen_csqa_${TS}.log 2>&1 &
+[3]   Running                 nohup bash -c "
+  $RUN orm         --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  " > logs/qwen_strategyqa_${TS}.log 2>&1 &
+[4]   Running                 nohup bash -c "
+  $RUN orm         --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  " > logs/llama_gsm8k_${TS}.log 2>&1 &
+[5]-  Running                 nohup bash -c "
+  $RUN orm         --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  " > logs/llama_csqa_${TS}.log 2>&1 &
+[6]+  Running                 nohup bash -c "
+  $RUN orm         --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  $RUN granularity --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  $RUN leakage     --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  " > logs/llama_strategyqa_${TS}.log 2>&1 &
+(storygen-env) (base) zzl@ubuntu:~/C-CoT$ 

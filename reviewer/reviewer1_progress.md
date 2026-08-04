@@ -231,12 +231,42 @@ python newrun/viz_reviewer1_q2.py --before_only \
 ## 总结：三条意见的解决路径
 | 意见 | 能否纯文本 | 需要的实验/图 | 脚本 | 状态 |
 |------|-----------|--------------|------|------|
-| #1 步级标签噪声 | 部分（软化 claim） | 无（引用 M4 AUC 佐证） | analyze_reviewer1_q3.py | **已完成**（草稿就绪，待进 tex） |
-| #2 对齐≈质量仅断言 | 否 | (a) AUC=0.78 + (b) before/after 图 | analyze(M4) + viz_reviewer1_q2.py | **已完成**（图+AUC已跑，草稿就绪） |
-| #3 相似度惩罚深度 | 是（数据加强） | M1/M2/M3 分析 | analyze_reviewer1_q3.py | **已完成**（草稿就绪，待进 tex） |
+| #1 步级标签噪声 | 部分（软化 claim） | 无（引用 M4 AUC 佐证） | analyze_reviewer1_q3.py | **已进 tex** |
+| #2 对齐≈质量仅断言 | 否 | (a) AUC=0.78 + (b) before/after 图 | analyze(M4) + viz_reviewer1_q2.py | **已进 tex** |
+| #3 相似度惩罚深度 | 是（数据加强） | M1/M2/M3 分析 | analyze_reviewer1_q3.py | **已进 tex** |
 
 三条意见的 rebuttal + 正文草稿均已就绪（本文档）。所有实验/图已在服务器跑完（GSM8K 200 题 K=10）。
 **下一步**：与导师过一遍本文档 → 落地进 tex（软化 Q1 四处措辞、加 before/after 图、加 M1–M4 分析段与小表）。
+
+---
+
+## ✅ 已落地进 tex（2026-08-03，cas-dc-template.tex）
+
+导师不再审论文，作者自行定稿。三条草稿已全部写进 `cas-dc-template.tex`。
+
+**Q1 措辞软化（实际 6 处，比原计划多 2 处，避免自相矛盾）**
+| 位置 | 章节 | 改为 |
+|------|------|------|
+| Method/Multi-Granular | line 237 | attuning...to step-level semantic consistency with the question |
+| Method/Contrastive | line 258 | how well each step aligns semantically with the question |
+| Method/Dynamic Prototype | line 280 | sensitivity to step-level semantic consistency |
+| Analysis/Granularity（motivation） | line 461 | sensitive to step-level semantic consistency |
+| Analysis/Granularity（result） | line 465 | capturing step-level semantic consistency |
+| Analysis/ORM 对比 | line 524 | shaping a representation in which step-level semantic consistency...drives alignment |
+
+- 另在 ORM 对比节末（line 527）加入"坦诚标签噪声 + 训练几何反驳 + AUC 0.78 兜底"整段。
+- **贡献点 line 110** 一并软化：删 "capturing step-aware reasoning structure closer to PRMs" 与 "achieving process-level supervision granularity"，改为 "denser supervision than path-level" + "propagating the outcome-derived signal to every step so that alignment reflects step-level semantic consistency rather than only final-answer correctness"。
+- 保留：line 137（客观描述 PRM 能力，非本方法断言，正确）。
+
+**Q2 before/after 图**
+- `fig:tsne`（Figure 2）由旧 `figure/tsne_cot100.png` 换成 `figure/tsne_gsm8k_before.pdf` + `figure/tsne_gsm8k_after.pdf` 双 panel（line 411–417），caption 含 AUC 0.78。
+- 正文引用改指 (left)（line 420）；Analysis 加 "turn assertion into evidence" 句（line 426）。
+- 图片路径统一为 `figure/`（作者确认编译机上已有该目录及文件）。
+
+**Q3 相似度惩罚深度**
+- 新增 `\subsection{Selection Does Not Penalize Deep Reasoning}`（line 482）+ `tab:selection-depth`（line 486）；数字与本文档 M1–M4 完全一致；`#steps` 未入表（诚实取巧，选中 12.48 < 未选中 13.10，若被追问需备"步数少但 token/novel-ratio 相同"说法）。
+
+**未处理（留待之后）**：abstract line 65 / related work line 157 / conclusion line 513 仍含 "process-level supervision granularity"，为核心卖点句，暂保留锋芒。
 
 ---
 

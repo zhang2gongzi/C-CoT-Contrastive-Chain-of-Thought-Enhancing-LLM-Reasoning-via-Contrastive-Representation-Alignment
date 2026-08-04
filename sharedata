@@ -235,3 +235,66 @@ launched 6 jobs; TS=20260804_143144; logs in logs/
   $RUN leakage     --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
   " > logs/llama_strategyqa_${TS}.log 2>&1 &
 (storygen-env) (base) zzl@ubuntu:~/C-CoT$ 
+
+
+ nohup bash -c '
+  python baseline/dprotocot/run.py orm         --train_path newrundata/gsm8k_merged_flat.jsonl --test_path
+  newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py granularity --train_path newrundata/gsm8k_merged_flat.jsonl --test_path
+  newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py leakage     --train_path newrundata/gsm8k_merged_flat.jsonl --test_path
+  newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  ' > logs/qwen_gsm8k.log 2>&1 &
+
+
+
+111111111111111111
+
+cd /home2/zzl/C-CoT
+  mkdir -p logs
+  RUN="python baseline/dprotocot/run.py"
+
+  ---① Qwen / GSM8K(最重要,含要盯的 X)
+  nohup bash -c '
+  python baseline/dprotocot/run.py orm         --train_path newrundata/gsm8k_merged_flat.jsonl --test_path
+  newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py granularity --train_path newrundata/gsm8k_merged_flat.jsonl --test_path
+  newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py leakage     --train_path newrundata/gsm8k_merged_flat.jsonl --test_path
+  newrundata/gsm8k_test_flat.jsonl --seed 42 --epochs 10
+  ' > logs/qwen_gsm8k.log 2>&1 &
+
+  ---② Qwen / CSQA
+  nohup bash -c '
+  python baseline/dprotocot/run.py orm         --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py granularity --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py leakage     --data_path newrundata/csqa_500_flat.jsonl --seed 42 --epochs 10
+  ' > logs/qwen_csqa.log 2>&1 &
+
+  ---③ Qwen / StrategyQA(加 --use_context)
+  nohup bash -c '
+  python baseline/dprotocot/run.py orm         --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  python baseline/dprotocot/run.py granularity --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  python baseline/dprotocot/run.py leakage     --data_path newrundata/strategyqa_flat.jsonl --use_context --seed 42 --epochs 10
+  ' > logs/qwen_strategyqa.log 2>&1 &
+
+  ---④ LLaMA / GSM8K
+  nohup bash -c '
+  python baseline/dprotocot/run.py orm         --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py granularity --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py leakage     --data_path newrundata/gsm8k_llama_flat.jsonl --seed 42 --epochs 10
+  ' > logs/llama_gsm8k.log 2>&1 &
+
+  ---⑤ LLaMA / CSQA
+  nohup bash -c '
+  python baseline/dprotocot/run.py orm         --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py granularity --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  python baseline/dprotocot/run.py leakage     --data_path newrundata/csqa_llama_flat.jsonl --seed 42 --epochs 10
+  ' > logs/llama_csqa.log 2>&1 &
+
+  ---⑥ LLaMA / StrategyQA(加 --use_context)
+  nohup bash -c '
+  python baseline/dprotocot/run.py orm         --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  python baseline/dprotocot/run.py granularity --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  python baseline/dprotocot/run.py leakage     --data_path newrundata/strategyqa_llama_flat.jsonl --use_context --seed 42 --epochs 10
+  ' > logs/llama_strategyqa.log 2>&1 &

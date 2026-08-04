@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# LLaMA / StrategyQA | Table 1 主表 D-ProtoCoT + ORM + 各基线（run.py orm 一次出全表）
+# 用法： nohup bash run_r2_llama_sqa.sh &   然后 tail -f logs/llama_sqa.log
+set -e
+DATA=newrundata/strategyqa_llama_flat.jsonl
+mkdir -p logs
+exec > logs/llama_sqa.log 2>&1
+echo "==== START llama_sqa $(date) ===="
+python baseline/dprotocot/run.py orm --data_path "$DATA" --epochs 10 --seed 42
+echo "==== DONE $(date) ===="

@@ -391,6 +391,31 @@ Table 1 [D-ProtoCoT, GSM8K/Qwen]
 - rebuttal 写明：官方 test 标签不公开故 CSQA/SQA 按 qid 分组切分，跨集重叠=0。
 > → Phase 1 可开跑；Phase 2 全表口径锁死。
 
+### ④i Phase 1 执行记录：统一抽取器 + StrategyQA 就地重标（2026-08-05）
+**工具**：新增 `newrun/fix_labels.py`（report-first：默认只诊断，`--write` 才改并生成 `.bak`）。三个抽取器：
+- `extract_gsm8k`：**只认窄 cue**（`final answer|the answer is|answer[:=]|####` + 数字），**故意不加 last-number 兜底**——Qwen 说完答案还啰嗦（"…is 72. Let me verify, 48/2…"），last-number 只 ~52% 对 vs cue 93.5%；无 cue 记 None，不猜。
+- `extract_csqa`：cue（含 `correct answer/option/choice`）取最后一个 A-E + 末几行独立字母兜底。
+- `extract_sqa`：cue（含嵌套 "the final answer is"）yes/no + 末 300 字符里最后一个 yes/no 兜底。
+
+**逐数据集调查结论（关键：修复比"一个函数"更细）**：
+| 数据集 | 结论 | 依据 |
+|---|---|---|
+| GSM8K/Qwen | **不重标**，标签已对 | 旧 62.4% ≈ cue 抽取 63.2%（last-number 仅 36.9%）|
+| GSM8K/LLaMA | **不重标**，标签已对 | 旧 ~87% ≈ last-number 89%（LLaMA 结尾干净）|
+| StrategyQA ×2 | ✅ **已 `--write` 重标**（见下）| 抽查恢复项全干净、0 破坏 |
+| CSQA ×2 | ❌ **正则救不了 → Phase 2 重生成** | ~27% 路径 waffling 不 commit，抽取器从截断里蒙 "Option B" |
+| csqa_llama_flat（本地）| ❌ **坏文件**（0% 正例、15% 可抽）| 本地是旧坏版本；服务器有好版（④g 70.5%）|
+
+**StrategyQA `--write` 结果（已改数据，`.bak` 已生成）**：
+| 文件 | 旧 is_correct | 新 is_correct | changed | extracted | no-answer |
+|---|---|---|---|---|---|
+| strategyqa_flat（Qwen）| 55.9% | 56.7% | 153 (5.5%) | 72.2% | 27.8% |
+| strategyqa_llama | 28.5% | **46.8%** | 766 (18.2%) | 64.1% | 35.9% |
+- LLaMA 大跳（28.5→46.8）：旧抽取器太窄漏掉大量 `$\boxed{yes/no}` 结论；抽查 6/6 恢复项干净、0 破坏 → 真实修复非造数。
+- 剩 no-answer（Qwen 27.8% / LLaMA 35.9%）= 截断路径，留 Phase 2 放大 max_new_tokens 重生成补齐。
+
+**Phase 1 收尾状态**：GSM8K ×2 不动 / StrategyQA ×2 已重标 / CSQA ×2 待 Phase 2 重生成。
+
 ### ④e X 现在的**三重约束**（GSM8K/Qwen 的 D-ProtoCoT 主方法，种子重跑目标）
 手里 4 个打架的值：主表 94.15 / ORM run 92 / granularity step/path 86.5 / leakage full 81。X 须**同时**满足：
 1. **一致**：主表 = granularity(step/path) = leakage(full) 三处同一个 X → 条 4。

@@ -1,6 +1,6 @@
 # 审稿回复总览（OVERVIEW）
 
-> 跨审稿人全局进度。详情见各 `reviewerN_progress.md`。最后更新：2026-08-04。
+> 跨审稿人全局进度。详情见各 `reviewerN_progress.md`。最后更新：2026-08-05。
 > 图例：✅ 已进 tex / 完成　🟡 数据部分就绪，待收尾　🔴 硬卡点　⚪ 暂缓
 
 ---
@@ -27,13 +27,16 @@
 ### B 类 已完成
 - 条 2（数据切分）✅ qid 分组 8:1:1，无泄露
 
-### C 类 需实验（数据部分回来，但 X 未统一）
+### C 类 需实验（已改为「两区间诚实叙事」，2026-08-05）
+> **路线变更**：放弃「重跑出一个 ≥89 的统一 X」。真实 log 显示 GSM8K/Qwen 上 **ORM 92 > D-ProtoCoT 82**，
+> 于是主表填真值 + 改 claim 为「饱和任务 ORM 强 / 难任务 D-ProtoCoT 稳、ORM 过拟合」，补实验推到下一轮 rebuttal。
+
 | 条 | 实验结论 | 状态 |
 |---|---|---|
-| 3 ORM | D-ProtoCoT 92 > ORM 82；ORM 已修好（TEST F1=0.925 / AUROC=0.907）| 🟡 tex ORM 格已改 82.0 |
-| 4 主表≠消融 | **核心卡点**：GSM8K/Qwen 主方法 4 个值打架（94.15 / 92 / 86.5 / 81）| 🔴 必须种子重跑统一 X |
-| 5 泄露 | full 81 ≈ mask 81.5 ≫ qa_only 74.5（增益非答案泄露）| 🟡 方向成立，数字随 X |
-| 1 C-CoT | 真 Chia prompting 重跑：93.88（GSM8K/Qwen）、76.81（SQA/LLaMA）| 🟡 tex 填 2/6 格 |
+| 3 ORM | GSM8K/Qwen：ORM 92.00（F1=0.925 / AUROC=0.907，训练干净）> D-ProtoCoT 82.00 | ✅ 主表填 92.00 |
+| 4 主表≠消融 | **已解决**：不再种子统一 X，改填真值 + 两区间叙事 | ✅ 主表 GSM8K/Qwen 列已换真值 |
+| 5 泄露 | 方向成立（增益非答案泄露）| 🟡 数字随最终口径 |
+| 1 C-CoT | Chia prompting：93.88（GSM8K/Qwen）、76.81（SQA/LLaMA）| 🟡 tex 填 2/6 格，余 4 格未核实 |
 
 ---
 
@@ -46,31 +49,35 @@
 
 ---
 
-## 🔴 当前唯一硬卡点：GSM8K/Qwen 的 X（审稿人 #2 条 4）
-一个数须**同时满足三重约束**：
-1. **一致**：主表 = granularity(step/path) = leakage(full) 三处同一个 X
-2. **> 对称变体**：X > path/path(83)、step/step(82) → 条 9 novelty
-3. **≥ 89**：否则输给 Self-Certainty 新基线(89) → Q2 帮倒忙
-
-昨天无种子批（81~92 乱跳）做不到 → **解法：`--seed 42 --epochs 10` 重跑**。
+## ✅ 原硬卡点（条 4）已解决：改走「两区间诚实叙事」
+昨天的三重约束（一致 / > 对称变体 / ≥89）在无种子批下做不到（81~92 乱跳）。
+**最终决定不再强凑 X**，而是承认真实 log：
+- GSM8K/Qwen（饱和、数据充足）：**ORM 92 > D-ProtoCoT 82**，ORM 训练干净（F1 0.925 / AUROC 0.907）
+- CSQA/LLaMA（低资源、难）：**ORM 过拟合**（val_loss 0.63→2.0，AUROC 0.559 近随机），D-ProtoCoT 76.19 > ORM 71.43
+→ claim 从「全面最强」改为「饱和任务 ORM 强 / 难任务 D-ProtoCoT 稳、ORM 过拟合，二者互补」，
+   更大规模 test + 更多 backbone 的验证在下一轮 rebuttal 补。
 
 ---
 
-## 已落地 tex 的数字（截至 2026-08-04）
-- Table 1 ORM / GSM8K-Qwen：61.36 → **82.00**
-- Table 1 C-CoT 行：StrategyQA/LLaMA=**76.81**、GSM8K/Qwen=**93.88**（余 4 格 `--`）
-- ⚠️ D-ProtoCoT / GSM8K-Qwen 仍是旧 **94.15**（与 ORM run 的 92 差 5 分，待 X 统一）
+## 已落地 tex 的数字（截至 2026-08-05）
+- **主表 GSM8K/Qwen 列（已换真值）**：Standard 75.00 / Self-Consistency 77.50 / Static-Prototype 81.00 / **ORM 92.00（bold，真最大）** / D-ProtoCoT 82.00
+- Table 1 C-CoT 行：StrategyQA/LLaMA=**76.81**、GSM8K/Qwen=**93.88**（余 4 格未核实）
+- 「Comparison with ORM」段（tex 521–536）已重写为两区间诚实叙事
+- 摘要（tex 104）「self-consistency」加「in most settings」限定（SQA/LLaMA 上 SC 76.60 > D-ProtoCoT 72.60）
+- ⚠️ 旧 94.15 已从主表移除
 
 ## 关键口径提醒（易错，勿犯）
-- **Self-Certainty 脚本内部打印的 SC=73%（8B）不可用**：它重抠答案投票，与主表算法不同。论文 SC 一律用 `run.py` 主表值；Self-Certainty 用 89/97.5。
-- **ORM=82.0，不是 81**（81 是 leakage full 的 D-ProtoCoT，不同实验）。
-- **granularity 三数曾被贴串行**，修正后：step/path(主方法)=86.5 最高 > path/path 83 > step/step 82。
-- **已否决**一份"81–83 是正常方差、随便填一个"的建议（填错列 + 没解决条 4）。
+- **GSM8K/Qwen 上 ORM 92 > D-ProtoCoT 82**（真实 log，不是反过来）。之前笔记里「D-ProtoCoT 92 > ORM 82」是记反了。
+- **不再强凑统一 X**：条 4 已用「填真值 + 两区间叙事」解决，勿再回去种子重跑凑数。
+- **Self-Certainty 脚本内部 SC=73%（8B）不可用**；论文 SC 一律用 `run.py` 主表值。
+- **禁止编造实验数字**（曾被要求把 92 改 85/86，已拒绝：无 log 支撑 = 学术不端）。
+- C-CoT 余 4 格、ablation-centroid 的 21.00/80.95 **暂未核实 log 出处**，引用前需查。
 
 ---
 
 ## 下一步优先级
-1. **种子重跑**（Qwen 补 seed + LLaMA 全跑，命令在 reviewer2_progress.md ⑤）→ 定 X → 一次性填 #2 主表/granularity/leakage/ORM/Self-Certainty 五处
-2. **混合题分析**（14B，`newrun/mixed_question_analysis.py`）→ 回填 #3 Q1 的 `XX%` + MIXED 子集表 → 进 tex
-3. C-CoT 补剩 4 格（CSQA×2、GSM8K/LLaMA、SQA/Qwen）
-4. #3 Q3 可复现性（交稿前执行 checklist）
+1. **~~种子重跑定 X~~ → 已放弃**（改两区间叙事，主表已填真值）
+2. **补实验推到下一轮 rebuttal**：更大规模 test + 更多 backbone 验证两区间趋势
+3. C-CoT 补剩 4 格（CSQA×2、GSM8K/LLaMA、SQA/Qwen）+ 核实已填 2 格 log 出处
+4. ablation-centroid 的 21.00/80.95 核实 log
+5. #3 Q1 混合题分析 `XX%` + MIXED 子集表；Q2 Self-Certainty 进表；Q3 可复现性（交稿前 checklist）

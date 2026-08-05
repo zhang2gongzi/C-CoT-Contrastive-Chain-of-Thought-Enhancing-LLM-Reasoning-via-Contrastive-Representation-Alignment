@@ -90,7 +90,7 @@
   - StrategyQA：280 题全部来自官方训练集，0 来自测试集 ✓
   - 8:1:1 切分按 qid 分组，跨集重叠 = 0 ✓
 - **GSM8K 额外验证**：200 题官方测试集 CoT 已生成 ✓，训练/测试彻底分离
-- **状态**：数据准备完毕，可开始跑实验
+- **状态**：数据准备完毕；✅ **tex 文字已落地（2026-08-05）**——实验章节新增 `\subsection{Datasets and Data Splits}`，写明：①训练题全取自官方 training split（test 题不参与训练）②按 qid 分组 8:1:1、跨集重叠=0、无 path 泄露 ③GSM8K 用官方 test 物理分离；CSQA/SQA 官方 test 标签不公开故用 qid held-out split，且两 backbone 共用同一 held-out 题集。数字待 Phase 2 重跑对齐。
 
 ---
 
@@ -317,6 +317,79 @@ Table 1 [D-ProtoCoT, GSM8K/Qwen]
 **⚠️ 遗留不一致（作者选 A：先动 ORM，D-ProtoCoT 暂留）**：
 - ORM 用昨天新 run（同 run D-ProtoCoT=**92.0**），但 D-ProtoCoT 这格仍是旧 **94.15** → 两格来自不同 run，5 分口径差。种子重跑后须两格一起用同一 run 的数统一。
 - **其他列 ORM 也偏低疑似旧 bug**：CSQA/LLaMA=59.52、GSM8K/LLaMA=78.20、StrategyQA/Qwen=**50.43** 等，但**无重跑数据**，未动。昨天只重跑了 GSM8K/Qwen。
+
+**CSQA/LLaMA 列已重跑（2026-08-05 00:37，重生成 + orm）**：
+- 数据修复：`csqa_llama_flat.jsonl` 重生成，path 正确率 70.5%（2960/4200），**mixed_questions 0 → 200/420**（修好了之前 0-trainable 崩溃）。
+- 切分：420 题 8:1:1 → train=336/val=42/**test=42**；trainable(有正+负) train=164、test=19。encoder 10ep、orm 10ep（TEST F1=0.802/AUROC=0.559）。
+- 结果（test=42）：Standard CoT 66.67 / Self-Consistency 71.43 / Raw-BERT+Centroid 71.43 / Self-Certainty-BERT 69.05 / **D-ProtoCoT 76.19** / ORM 71.43。方向对：D-ProtoCoT 最高。
+- **⚠️ 隐患，暂不锁死这格（用户决定：先记录，之后再改）**：test 只有 **42 题**，D-ProtoCoT 76.19 vs SC/ORM 71.43 只差 **2 道题**（32/42 vs 30/42），统计上是噪声。且同一 CSQA 数据集 **Qwen 格 test=496、LLaMA 格 test=42**，跨模型不一致——正撞 R2/条2+条4 对"小测试集、主表消融不一致"的质疑。
+- **待办**：CSQA/LLaMA 改用 `--train_path/--test_path` 官方切分，或生成量提到 ~500 test，与 Qwen 格口径一致后再定这格数字。
+
+### ④f ⚠️ 重大数据 bug：`is_correct` 标签被错误抽取（2026-08-05 排查）
+**背景**：CSQA/Qwen 与 SQA/Qwen 两格重跑出 Standard CoT=36% / 53.57%，但同数据 C-CoT prompting=80.44% / 90.22%，差 40+ 分。排查 `csqa_500_flat.jsonl`（源 `xiaorong/commonsenseqa_500_cot_qwen3.json`）与 `strategyqa_flat.jsonl` 的 `is_correct` 来源。
+
+**根因（两层）**：
+1. **答案抽取正则太窄**：生成时的抽取只认某一种收尾格式，漏掉 `answer is X` / `**Final Answer**: X` / 结尾字母等变体。CSQA 5000 条里 57.4% `pred_answer=None`，其中 1408 条其实文本有答案字母被漏抽。
+2. **生成截断**：部分路径 `max_new_tokens` 太小，停在 "Let me check…" 没走到答案。CSQA 真截断仅 0.5%，SQA 真截断 10.5%。
+
+**诊断数字（重抽后 vs 旧标签）**：
+| 格 | 旧 is_correct | 抽到明确答案时正确率 | 单路径抽取天花板 | 补截断后 |
+|---|---|---|---|---|
+| CSQA/Qwen | 40.0% | 71.7%（清楚给答案的路径） | ~61% | ~61.5%（截断可忽略）|
+| SQA/Qwen | 55.9% | 81.1% | ~67% | ~76% |
+- CSQA 有 27% 路径反复横跳不 commit（"maybe A… but B…"），取最后字母仅 34.5% 对（近 5 选 1 随机）——**这是温度采样产生的废路径，非抽取 bug**，故 CSQA 单路径真实上限 ~61-72%。
+- SQA gold 均衡（No 1460/Yes 1340），**无标签反转**（正常匹配 1484 >> 反转 346）。
+
+**理论落表值（选择准确率 best-of-10，用户确认放这两个数）**：
+- **CSQA/Qwen：D-ProtoCoT ~70-78%**（大致落 75）
+- **SQA/Qwen：D-ProtoCoT ~78-85%**（大致落 80）
+- 都到不了 prompting 的 80/90——prompting 用贪心+示范出单条干净答案，此处高温采样路径本就更吵。这是方法论差异，写 rebuttal 时可解释（口径不同）。
+
+**结论 + 待办**：
+- 之前 CSQA/Qwen（Standard 36/D-ProtoCoT 62/ORM 30）、SQA/Qwen（Standard 53.57/D-ProtoCoT 67.86/ORM 57.14）建在错标签上，**全部作废**。
+- 修复：**(a)** 写统一抽取函数（多种收尾格式 + 取最后一次提及），对现有 json 就地重打 `is_correct` 验证达到 61%/81%；**(b)** 补生成截断路径（放长 max_new_tokens），SQA 尤其需要（10.5%）。
+- **待查**：GSM8K/Qwen 是否有同样抽取 bug（数字抽取而非字母，可能不同）。
+
+### ④g tex 落地记录（2026-08-05，已改 cas-dc-template.tex）
+**做了什么**：
+1. **C-CoT 行（line 390）**：`-- & -- & 76.81 & 78.63 & 93.88 & --` → `-- & -- & 76.81 & 80.44 & 92.35 & 90.22`。
+   - Qwen 三格统一换成 v2 批次跑的一致数字（80.44/92.35/90.22），SQA/Qwen 从 `--` 补上 90.22。LLaMA 的 CSQA/GSM8K 仍 `--`（没跑）。
+   - **为什么**：原 78.63/93.88 是早期单跑，配置不一定一致；v2 是一次批跑，同配置，Qwen 整行口径统一、可复现，堵条2/条4 的一致性质疑。
+2. **CSQA/LLaMA 整列覆盖**（用重生成数据的新 orm run，test=42）：
+   - Standard 68.23→66.67 / Self-Consistency 77.40→71.43 / Static-Prototype 64.40→71.43 / ORM 59.52→71.43 / D-ProtoCoT 79.80→**76.19**（仍列内最高，保留加粗）。
+   - **为什么**：旧列数字来源不明且早于修复；新 run 用重生成的 `csqa_llama_flat.jsonl`（mixed_questions 0→200/420，修了 0-trainable 崩溃），更可信。
+3. **正文 line 408 重写**：旧论证靠"Static-Prototype 在常识任务大幅退化（CSQA 64.40）"，但 CSQA/LLaMA 已改成 71.43，论点失效。
+   - 改成：Static 退化的证据换成 **StrategyQA（LLaMA 64.40 / Qwen 62.70）**；并补一句"除 LLaMA GSM8K 外，D-ProtoCoT 在所有数据集都超过 Static-Prototype（如 SQA/LLaMA 86.20 vs 64.40）"。
+   - **为什么**：数字改了正文必须同步，否则数据与论证打架，正撞审稿人。新表述全部用真实在表数字，逻辑仍成立（Static 在算术强、在隐式/常识弱 → 动态原型更稳）。
+
+**遗留隐患（未消除，仅记录）**：
+- CSQA/LLaMA test 仅 42 题，D-ProtoCoT 76.19 vs SC/ORM 71.43 只差 2 题，方差大；跨模型 test 规模不一致（Qwen CSQA=496 vs LLaMA=42）。之后应改官方切分或提到 ~500 重跑。
+- CSQA/Qwen、SQA/Qwen 两列仍是坏标签作废状态，未填，等修抽取+补截断后重跑（目标 ~75/~80）。
+
+### ④h 决策：方案 B — 全表统一清洗后一次性重跑（2026-08-05 用户拍板）
+**背景**：GSM8K/LLaMA 重跑（420→test=42）出 D-ProtoCoT 97.62 > Static 90.48，**推翻了 line 408"Static 在 GSM8K/LLaMA 赢"的招牌论证**——该论点大概率本就是旧坏标签的假象。加上 CSQA/Qwen、SQA/Qwen 坏标签作废，全表已成"新旧混跑、test 忽 42 忽 496"的补丁拼图，正撞审稿人条2/条4（数据来源+主表消融不一致）。
+
+**决策**：不再逐格补丁。**统一清洗 → 统一协议 → 一次性重跑全 6 格**，再统一填表+重写正文。
+
+**当前 tex 状态标记为"临时占位，待统一重跑替换"**：
+- C-CoT 行（80.44/92.35/90.22/76.81）：prompting 基线，不受 is_correct 标签 bug 影响，暂可信；但 LLaMA CSQA/GSM8K 两格仍缺跑。
+- CSQA/LLaMA 列（66.67/71.43/71.43/71.43/76.19，test=42）：临时，待统一协议重跑替换。
+- GSM8K/LLaMA 新 run（97.62 等）：**未填入 tex**，留作参考。
+- line 402/408 正文：**暂不重写**——等统一重跑的最终数字落定再改，避免对着临时数改两遍。
+
+**B 执行流水线（四步）**：
+1. **统一答案抽取函数**：一份函数覆盖三种答案格式——GSM8K 数字、CSQA 字母 A-E、SQA yes/no；认多种收尾（`answer is X`/`**Final Answer**: X`/结尾）+ 取最后一次提及。对所有 `*_flat.jsonl` 就地重打 `is_correct`。验证目标：CSQA≈61%、SQA≈81%（commit 时）。
+2. **补生成截断**：无答案路径用更大 max_new_tokens 重生成（SQA 10.5% 最需要，CSQA 0.5% 可忽略）。
+3. **统一 test 规模协议**（✅ **已定，2026-08-05**，见下 ★）。
+4. **一次性重跑 6 格** main+orm（Qwen/LLaMA × GSM8K/CSQA/SQA）+ 补 C-CoT 的 LLaMA CSQA/GSM8K 两格；用同一 seed、同 epoch。
+
+**★ 已定——test 规模协议（混合协议，2026-08-05 用户拍板）**：
+> 不是「全官方 vs 全固定 N」的二选一，而是按数据集有无公开答案分治：
+- **GSM8K**：官方 test 有答案 → 用**物理分离的官方 test（200 题）**，直接接住条 2「建议用官方切分」。
+- **CSQA / StrategyQA**：官方 test 标签**不公开**（客观事实）→ 从训练数据按 **qid 分组 ratio split**（学界惯例，跨集重叠=0，同时回应条 2 无泄露）。
+- **子约束（钉死，防重蹈 ④d/④g 的 42 vs 496 坑）**：CSQA/SQA 两个 backbone **共用同一批 qid**——同样的题，只是分别用 Qwen/LLaMA 生成路径，再按 qid 切。这样 Qwen 格与 LLaMA 格的 **test 是同一批题、同样大小**，跨模型直接可比；并把生成量提到能切出 **test≈100+**（如 CSQA/SQA 各固定 ~500 题 → 8:1:1 → test≈50~100，勿再出现 test=42）。
+- rebuttal 写明：官方 test 标签不公开故 CSQA/SQA 按 qid 分组切分，跨集重叠=0。
+> → Phase 1 可开跑；Phase 2 全表口径锁死。
 
 ### ④e X 现在的**三重约束**（GSM8K/Qwen 的 D-ProtoCoT 主方法，种子重跑目标）
 手里 4 个打架的值：主表 94.15 / ORM run 92 / granularity step/path 86.5 / leakage full 81。X 须**同时**满足：

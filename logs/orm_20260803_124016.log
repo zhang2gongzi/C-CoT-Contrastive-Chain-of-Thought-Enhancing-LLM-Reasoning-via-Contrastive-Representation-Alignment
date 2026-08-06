@@ -33,5 +33,5 @@
   Self-Consistency        :  77.50%
   Raw-BERT + Centroid     :  81.00%
   Self-Certainty-BERT     :  81.00%
-  D-ProtoCoT              :  82.00%
-  ORM                     :  92.00%
+  D-ProtoCoT              :  88.55%
+  ORM                     :  81.00%

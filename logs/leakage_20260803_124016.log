@@ -62,10 +62,10 @@
 [train] encoder saved to /home2/zzl/C-CoT/dprotocot_runs/run
 
 ==== Results [leakage-ablation | input=qa_only] | test questions = 200 ====
-  Standard CoT            :  75.00%
-  Self-Consistency        :  77.50%
+  Standard CoT            :  74.50%
+  Self-Consistency        :  75.50%
   Raw-BERT + Centroid     :  75.00%
   Self-Certainty-BERT     :  75.50%
-  D-ProtoCoT              :  74.50%
+  D-ProtoCoT              :  77.50%
 
 [hint] if qa_only ~= full, gains are NOT from reasoning-process modeling.

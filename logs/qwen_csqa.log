@@ -1,0 +1,38 @@
+==== START qwen_csqa 2026年 08月 05日 星期三 00:24:30 CST ====
+[data] newrundata/csqa_500_flat.jsonl: 5000 lines, 0 skipped, 500 questions, 5000 paths total
+[data] split -> train=400 val=50 test=50 questions (TEST SET SIZE = 50 questions)
+[data] trainable questions (have both pos & neg paths): 233/400
+[data] trainable questions (have both pos & neg paths): 33/50
+[train] epoch 1/10 contrastive_loss=4.8892 (questions used=233) | val_loss=4.8258
+[train] epoch 2/10 contrastive_loss=4.5255 (questions used=233) | val_loss=4.6038
+[train] epoch 3/10 contrastive_loss=4.3936 (questions used=233) | val_loss=4.6666
+[train] epoch 4/10 contrastive_loss=4.2910 (questions used=233) | val_loss=4.7167
+[train] epoch 5/10 contrastive_loss=4.2260 (questions used=233) | val_loss=4.7201
+[train] epoch 6/10 contrastive_loss=4.1619 (questions used=233) | val_loss=4.6924
+[train] epoch 7/10 contrastive_loss=4.1209 (questions used=233) | val_loss=4.7607
+[train] epoch 8/10 contrastive_loss=4.0735 (questions used=233) | val_loss=4.7291
+[train] epoch 9/10 contrastive_loss=4.0503 (questions used=233) | val_loss=5.0355
+[train] epoch 10/10 contrastive_loss=4.0330 (questions used=233) | val_loss=4.7763
+[train] encoder saved to /home2/zzl/C-CoT/dprotocot_runs/run
+[ORM] train paths=4000 pos=1596 neg=2404 pos_ratio=0.399 pos_weight=1.506
+[ORM] epoch 1/10 train_loss=0.3068 | val_loss=0.1917 path_acc=0.9600 F1=0.9580 AUROC=0.9682
+[ORM] epoch 2/10 train_loss=0.1354 | val_loss=0.3350 path_acc=0.9280 F1=0.9221 AUROC=0.9451
+[ORM] epoch 3/10 train_loss=0.0952 | val_loss=0.3051 path_acc=0.9340 F1=0.9325 AUROC=0.9529
+[ORM] epoch 4/10 train_loss=0.0737 | val_loss=0.2850 path_acc=0.9440 F1=0.9414 AUROC=0.959
+[ORM] epoch 5/10 train_loss=0.0532 | val_loss=0.2886 path_acc=0.9440 F1=0.9419 AUROC=0.9657
+[ORM] epoch 6/10 train_loss=0.0410 | val_loss=0.3364 path_acc=0.9400 F1=0.9362 AUROC=0.954
+[ORM] epoch 7/10 train_loss=0.0268 | val_loss=0.3524 path_acc=0.9360 F1=0.9336 AUROC=0.9507
+[ORM] epoch 8/10 train_loss=0.0180 | val_loss=0.2813 path_acc=0.9420 F1=0.9389 AUROC=0.9696
+[ORM] epoch 9/10 train_loss=0.0137 | val_loss=0.4646 path_acc=0.9240 F1=0.9237 AUROC=0.9539
+[ORM] epoch 10/10 train_loss=0.0096 | val_loss=0.4121 path_acc=0.9220 F1=0.9196 AUROC=0.9532
+
+[ORM] TEST diagnostics: loss=0.4540 path_acc=0.9280 F1=0.8916 AUROC=0.9528
+
+==== Results [main+ORM | input=full] | test questions = 50 ====
+  Standard CoT            :  36.00%
+  Self-Consistency        :  30.00%
+  Raw-BERT + Centroid     :  30.00%
+  Self-Certainty-BERT     :  28.00%
+  D-ProtoCoT              :  30.00%
+  ORM                     :  62.00%
+==== DONE 2026年 08月 05日 星期三 01:41:20 CST ====

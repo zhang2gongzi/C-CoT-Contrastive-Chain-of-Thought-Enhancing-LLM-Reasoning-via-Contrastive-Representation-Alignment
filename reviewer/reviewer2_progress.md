@@ -75,9 +75,10 @@
 | **GSM8K / Qwen3-8B** | **93.88%** (184/196) | 90.40 / 90.65 / 94.15 | ✅ > Standard/SC，< D-ProtoCoT |
 | **StrategyQA / LLaMA-3.1-8B** | **76.81%** (212/276) | 68.60 / 62.60 / 86.20 | ✅ > Standard/SC，< D-ProtoCoT |
 
-- **已填 tex**（cas-dc-template.tex Table 1，C-CoT 行）：StrategyQA/LLaMA=76.81、GSM8K/Qwen=93.88；其余 4 格仍 `--`（CSQA×2、GSM8K/LLaMA、StrategyQA/Qwen 未跑）。
+- **已填 tex**（cas-dc-template.tex Table 1，C-CoT 行，真实现状 2026-08-06）：L-CSQA=70.50、L-SQA=76.81、Q-CSQA=**78.63**（390/496，实跑替换旧 80.44）、Q-GSM8K=**92.35**、Q-SQA=90.22（5 格）；余 2 格仍 `--`（L-GSM8K 未跑、14B/GSM8K 未跑）。
+  - ⚠️ **口径不一致待核**：本笔记上表记 C-CoT GSM8K/Qwen=**93.88**，但 tex 现填 **92.35**（④g 改）。引用前需查 log 确认到底哪个是最终 Chia 跑值。
 - **口径**：C-CoT 是生成式 prompting 基线，caption 已声明"not directly comparable to selection-based methods"，作为生成式对照填入，非同口径竞争。叙事成立（真 Chia 补上，D-ProtoCoT 仍更高）。
-- **待补 4 格命令**（模型：Qwen `/home2/zzl/model/Qwen3-8B`，LLaMA `/home2/zzl/model/Meta-Llama-3.1-8B-Instruct`）：CSQA 需 `--csqa_choices`；GSM8K/LLaMA、StrategyQA/Qwen 各一条。
+- **待补 2 格命令**（模型：Qwen `/home2/zzl/model/Qwen3-8B`，LLaMA `/home2/zzl/model/Meta-Llama-3.1-8B-Instruct`）：GSM8K/LLaMA 一条；14B/GSM8K 可选。
 
 ---
 

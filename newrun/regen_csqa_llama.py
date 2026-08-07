@@ -74,11 +74,14 @@ def extract_letter(text, m):
     """Recover the option letter: prefer the explicit 'Final Answer: X' line."""
     letters = set(m["letters"])
     for line in reversed([l for l in text.splitlines() if l.strip()]):
-        mm = re.search(r"final answer\s*[:\-]?\s*\(?([a-e])\)?", line, re.IGNORECASE)
+        mm = re.search(r"final answer\s*[:\-]?\s*\**\(?([a-e])\)?", line, re.IGNORECASE)
         if mm and mm.group(1).upper() in letters:
             return mm.group(1).upper()
-    # fallback: any late "answer is X"
-    mm = re.search(r"answer\s*(?:is|:)\s*\(?([a-e])\)?", text[-200:], re.IGNORECASE)
+    # fallback: \boxed{X} (Qwen loves this), then "answer is X"
+    mm = re.search(r"\\boxed\{\s*\(?([a-e])\)?", text[-300:], re.IGNORECASE)
+    if mm and mm.group(1).upper() in letters:
+        return mm.group(1).upper()
+    mm = re.search(r"answer\s*(?:is|:)\s*\**\(?([a-e])\)?", text[-300:], re.IGNORECASE)
     if mm and mm.group(1).upper() in letters:
         return mm.group(1).upper()
     # last resort: match a choice's exact text
@@ -123,9 +126,16 @@ def main():
     perq = 0
     mixed = 0
     for qi, (q, m) in enumerate(questions):
-        prompt = tok.apply_chat_template(
-            build_messages(q, m), tokenize=False, add_generation_prompt=True
-        )
+        try:
+            prompt = tok.apply_chat_template(
+                build_messages(q, m), tokenize=False,
+                add_generation_prompt=True, enable_thinking=False,
+            )
+        except TypeError:
+            # LLaMA (and older tokenizers) don't accept enable_thinking
+            prompt = tok.apply_chat_template(
+                build_messages(q, m), tokenize=False, add_generation_prompt=True
+            )
         inputs = tok(prompt, return_tensors="pt").to(model.device)
         with torch.no_grad():
             outs = model.generate(

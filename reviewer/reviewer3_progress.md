@@ -228,9 +228,21 @@ python newrun/self_certainty.py --model_path /root/autodl-tmp/Qwen3-8B \
     --data_path newrundata/gsm8k_test_flat.jsonl --num_paths 10
 ```
 
-**Self-Certainty (Kang) 预期输出**：终端 `Self-Certainty: XX.XX%` + `Self-Consistency: XX.XX%`，并写出 `self_certainty_results.json`（逐题明细）。用于回应"基线太旧"，加进对比表。
+- **状态**：Self-Certainty-BERT 随时可跑；✅ **Self-Certainty(Kang) 8B GSM8K 已跑（2026-08-06）= 77.00%（154/200）**；LLM 基线等 vLLM 部署
 
-- **状态**：Self-Certainty-BERT 随时可跑；Self-Certainty(Kang) 待 AutoDL 跑；LLM 基线等 vLLM 部署
+### ✅ Self-Certainty (Kang) 8B GSM8K 实测（2026-08-06，Qwen3-8B，200 题 ×10）
+```
+Self-Certainty (Kang et al.): 154/200 = 77.00%
+```
+- **可信性核对**：`self_certainty_results.json` 逐题 `best_certainty` 是真 logprob 量级（33~45，KL-from-uniform），非 0/1 → 脚本确实加载 LLM 算了 logprob，**无串数**。
+- **对比口径（已进 tex Experiments，`\paragraph{Comparison with a recent logprob-based selector.}` + 小表 `tab:q2-selectors`，Inference Cost 前）**：
+  - Q2 小表（GSM8K/Qwen3-8B，无 dash）：SC 77.50 / Self-Certainty(Kang) **77.00** / Self-Certainty-BERT 81.00 / **D-ProtoCoT 82.00**。
+  - Self-Certainty(Kang) **77.00** ≈ SC 77.5，**低于 D-ProtoCoT 82.00（+5.0）** → 可正面写 "outperform"。
+  - ⚠️ **表内数据同源性待核（B 方案，2026-08-06 暂留）**：SC 77.50 / D-ProtoCoT 82.00 来自主表 run.py main（同源可比）；Kang 77.00 来自 self_certainty.py（独立脚本，天然独立，OK）；**Self-Certainty-BERT 81.00 来自诊断跑（mixed_question_analysis），非主表那次**。主表 run.py main 同时会算 Self-Certainty-BERT，但那次的值没单独存 log。**交稿前须翻主表那次 log 抄出 Self-Certainty-BERT 真值核对/替换 81.00**（A 方案）。
+  - ⚠️ **别混两个 Self-Certainty**：Kang(logprob)=77.00（D-ProtoCoT +5，可写超过）；Self-Certainty-**BERT**(embedding,烤进 evaluate_all)=81.00（与 D-ProtoCoT 打平，**不写**超过）。Q2 对比一律用 Kang 版 77.00。
+  - SC 一律主表 77.5，不用脚本内部打印的 SC。
+
+**Self-Certainty (Kang) 预期输出**：终端 `Self-Certainty: XX.XX%` + `Self-Consistency: XX.XX%`，并写出 `self_certainty_results.json`（逐题明细）。用于回应"基线太旧"，加进对比表。
 
 ### 决定：Self-Certainty 用哪个模型
 - **8B（Qwen3-8B）= 必跑**：论文主表 Table 1 是 8B，新基线要和 D-ProtoCoT-8B 同表正面比，才真正回应"补新基线证明优越"。
@@ -265,6 +277,8 @@ python newrun/self_certainty.py --model_path /root/autodl-tmp/Qwen3-8B \
 ## 问题 3：可复现性
 - **问题**：应公开相关代码和数据以确保可复现性
 - **状态**：待处理（**决定：等要交 rebuttal / 正式公开时再动，先不改**）
+
+> 📌 **2026-08-09 补记（GPU 硬件口径已诚实化）**：tex line 382 原「All experiments...single RTX 4090」有两处不实——① 实机是 **RTX 3090**（nvidia-smi 确认），② 14B 是在 **AutoDL RTX 5090（bf16）** 上跑的，非本机。已改为「All 8B experiments...single RTX 3090 GPU, while the Qwen3-14B experiment is run on an RTX 5090 GPU」。交 rebuttal / 公开时可在 README 复现说明里同步这个硬件分工。
 
 ### 公开前 checklist（交 rebuttal 时执行）
 1. **仓库改名** → `D-ProtoCoT`（现名 `C-CoT-...` 与论文方法名 D-ProtoCoT 不一致）

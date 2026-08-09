@@ -2,6 +2,38 @@
 
 ---
 
+## ⚡ 最新状态横幅（2026-08-09，读本文件先看这里）
+
+> 本文件下方保留大量**历史计划**，其中「种子凑统一 X ≥ 89」整套路线**已作废**，勿再执行。以 OVERVIEW.md 为准。
+
+**路线定调**：放弃「重跑凑一个 ≥89 的统一 X」→ 改「**主表填真值 + 两区间诚实叙事**」（饱和任务 ORM 强 / 难任务 D-ProtoCoT 稳、ORM 过拟合，二者互补）。补实验推下一轮 rebuttal。
+
+**已作废章节（下方，勿再照做）**：
+- 「🔒 填表锁定表 + 同值约束链」（种子凑 X）
+- ④e「X 的三重约束」、⑤「种子版重跑清单（拿 X）」
+→ 这些都是为凑统一 X 服务的，路线已变。granularity 条4 已用「换 GSM8K 真值 + step 训练是主因」闭环，不再需要三处填同一个 X。
+
+**主表 6 列当前真值（截至 2026-08-09，均已进 tex）**：
+| 列 | Standard / SC / Static / ORM / **D-ProtoCoT** | 备注 |
+|---|---|---|
+| L-CSQA (test=42) | 66.67 / 71.43 / 71.43 / 71.43 / **76.19** | 弱切分，待升级 |
+| **L-GSM8K (官方 test=200，2026-08-09 换)** | 71.50 / 71.50 / 68.50 / 68.50 / **80.00** | **Static 87.00 神话已破**；+8.50 over SC；ORM AUROC 0.53 近随机 |
+| L-SQA (test=42) | 45.24 / 61.90 / 52.38 / 54.76 / **66.67** | 重标后真值 |
+| Q-CSQA (test=50，2026-08-09 换) | 62.00 / 62.00 / 62.00 / 68.00 / **70.00** | 10-epoch 真值（整除全过 /50，35/50）；+8.00 over SC；弃 3-epoch 版 D=80.00（欠训）；val_loss 升→增益来自选择机制 |
+| Q-GSM8K | 75.00 / 77.50 / 81.00 / **92.00** / 82.00 | **饱和：ORM 92 最高**（真值，非笔误）|
+| Q-SQA (test=28) | 60.71 / 67.86 / 64.29 / 60.71 / **71.43** | D-ProtoCoT 赢 |
+| 14B/GSM8K | Standard 93.50 / SC 97.00 / **D-ProtoCoT 97.50** | 饱和 +0.5，headline |
+
+C-CoT 行（生成式，独立口径）：L-CSQA 70.50 / L-GSM8K 78.84 / L-SQA 76.81 / Q-CSQA 78.63 / Q-GSM8K 92.35 / Q-SQA 90.22 / 14B `--`。
+
+**Q-CSQA 收尾 ✅ 完成（2026-08-09）**：
+- ✅ CSQA/Qwen3-8B 重生成 `csqa_500_flat_regen.jsonl`（5000 paths / 72.3% / mixed 237/500 / unknown 186）。
+- ✅ `run.py orm --epochs 10` 已跑，整除核验全过（/50），Q-CSQA 列已换（见上表）。**用 10-epoch 版 D=70.00，弃 3-epoch 版 D=80.00**（3-epoch 与其余列 10-epoch 口径不符会再触发 R2 条4「protocol 不一致」）。
+- ✅ **tex line 412「Diminishing Returns」段已重写**：改为 Qwen3-8B 三任务 D-ProtoCoT 全赢（Q-CSQA +8.00 / Q-GSM8K +4.50 / Q-SQA +3.57，后者=1 题写作 parity），真正 diminishing return 落到 14B 饱和 +0.5。
+- 🟡 **「in most settings」限定词（line 67/104/406）暂不动**：现 6 列+14B 全 D≥SC，可升级 consistently，但 Q-SQA/14B 偏薄，待导师定 claim 强度。
+
+---
+
 ## 审稿人 #1：C-CoT 基线描述错误
 - **问题**：论文把 Chia et al. (2023) 错误描述为"基于置信度选择路径"。但 Chia et al. 实际是**对比 CoT prompting**（生成时提供正/负示范帮模型避错），不是候选路径选择方法。审稿人要求：说清 C-CoT 指代的确切算法、给实现细节和代码来源、改正引用。
 
@@ -75,7 +107,8 @@
 | **GSM8K / Qwen3-8B** | **93.88%** (184/196) | 90.40 / 90.65 / 94.15 | ✅ > Standard/SC，< D-ProtoCoT |
 | **StrategyQA / LLaMA-3.1-8B** | **76.81%** (212/276) | 68.60 / 62.60 / 86.20 | ✅ > Standard/SC，< D-ProtoCoT |
 
-- **已填 tex**（cas-dc-template.tex Table 1，C-CoT 行，真实现状 2026-08-06）：L-CSQA=70.50、L-SQA=76.81、Q-CSQA=**78.63**（390/496，实跑替换旧 80.44）、Q-GSM8K=**92.35**、Q-SQA=90.22（5 格）；余 2 格仍 `--`（L-GSM8K 未跑、14B/GSM8K 未跑）。
+- **已填 tex**（cas-dc-template.tex Table 1，C-CoT 行，真实现状 2026-08-07）：L-CSQA=70.50、L-GSM8K=**78.84**（328/416，实跑已核，2026-08-07）、L-SQA=76.81、Q-CSQA=**78.63**（390/496，实跑替换旧 80.44）、Q-GSM8K=**92.35**、Q-SQA=90.22（6 格）；余 1 格仍 `--`（14B/GSM8K 未跑）。
+  - ✅ **L-GSM8K 78.84 已核**：跑时终端 `running acc = 85.82%`（宽松/显示计数），但落盘 `ccot_gsm8k_llama.jsonl` 的 `is_correct` 计数 = 328/416 = 78.84%，以落盘为准（与 StrategyQA 坏标签同类的口径差，最终值可信）。
   - ⚠️ **口径不一致待核**：本笔记上表记 C-CoT GSM8K/Qwen=**93.88**，但 tex 现填 **92.35**（④g 改）。引用前需查 log 确认到底哪个是最终 Chia 跑值。
 - **口径**：C-CoT 是生成式 prompting 基线，caption 已声明"not directly comparable to selection-based methods"，作为生成式对照填入，非同口径竞争。叙事成立（真 Chia 补上，D-ProtoCoT 仍更高）。
 - **待补 2 格命令**（模型：Qwen `/home2/zzl/model/Qwen3-8B`，LLaMA `/home2/zzl/model/Meta-Llama-3.1-8B-Instruct`）：GSM8K/LLaMA 一条；14B/GSM8K 可选。
@@ -240,6 +273,8 @@ python newrun/picsar.py \
 ---
 
 ## 🔒 填表锁定表 + 同值约束链（GSM8K/Qwen，200 题官方 test）
+
+> ⛔ **本节已作废（2026-08-09）**：整套「种子凑统一 X ≥ 89」路线放弃，改两区间诚实叙事（见顶部横幅）。以下仅存档，勿再执行。GSM8K/Qwen 主表现填真值 ORM 92 / D-ProtoCoT 82（饱和任务 ORM 强），granularity 已用 GSM8K 真值单独闭环，不再要求三处填同一个 X。
 
 > **背景**：`train.py` 原本没设 torch 随机种子（BERT dropout 每次不同），导致同一配置 run-to-run 方差 ~12 点。已加种子（`train.py` 建 model 前：`random.seed / torch.manual_seed / torch.cuda.manual_seed_all(cfg.seed)`）。**加种子前**的 D-ProtoCoT 曾跑出 89.5（orm）/ 81.5（leakage-full）/ 77.0（granularity-step/path）三个值——全不可信，须种子版重跑。
 
@@ -417,7 +452,29 @@ Table 1 [D-ProtoCoT, GSM8K/Qwen]
 
 **Phase 1 收尾状态**：GSM8K ×2 不动 / StrategyQA ×2 已重标 / CSQA ×2 待 Phase 2 重生成。
 
+### ④j L-SQA 整列重跑（消化重标 StrategyQA，2026-08-07）✅ 已进主表
+重标 `strategyqa_llama_flat.jsonl`（28.5%→46.8%）后，`run.py orm --use_context --epochs 10 --seed 42` 重跑整列（test n=42）：
+
+| 方法 | 旧值（坏标签，已弃） | 新真值（重标） |
+|---|---|---|
+| Standard CoT | 68.60 | **45.24** |
+| Self-Consistency | 62.60 | **61.90** |
+| Static-Prototype | 64.40 | **52.38** |
+| ORM (BERT-base) | 65.71 | **54.76** |
+| **D-ProtoCoT** | **86.20** | **66.67**（仍这列最高，+4.77 over SC）|
+
+- **主结论仍成立**：D-ProtoCoT 66.67 > SC 61.90 > ORM 54.76 > Static-Prototype 52.38 > Standard 45.24。
+- **旧 86.20/+23.6 系坏标签产物，已从 tex 全部清除**（主表列 + 摘要旗舰 + §Backbone + §Static + centroid 引用五处）。摘要旗舰改挂 GSM8K/LLaMA +17.8。
+- **per-path 46.8% 低于 50% 随机**（binary yes/no）→ 单路径不可信（Standard 45.24），投票/选择逐级救回（61.90→66.67）；正文 §Backbone 已加此机制解释。
+- ⚠️ **训练未收敛**：contrastive val_loss 4.62→4.77 升、ORM val_loss 0.58→1.58 过拟合 → D-ProtoCoT 优势可能来自选择/池化机制而非对比训练（老问题，心里有数）。
+- ⚠️ **n=42 统计力弱**（+4.77≈2题），作者定：tex **不写 n=42**、不强调幅度。
+- log 里 Self-Certainty-BERT=50.00 不进主表（主表无此行）。
+- StrategyQA/Qwen 列**未重跑**（标签只动 0.8%）。
+
+**Phase 1 收尾状态（更新）**：GSM8K ×2 不动 / StrategyQA-LLaMA 已重标+已重跑进表 / StrategyQA-Qwen 重标但免重跑 / CSQA ×2 待 Phase 2 重生成。
+
 ### ④e X 现在的**三重约束**（GSM8K/Qwen 的 D-ProtoCoT 主方法，种子重跑目标）
+> ⛔ **已作废（2026-08-09）**：三重约束（一致 / > 对称变体 / ≥89）在无种子批下做不到，已放弃凑 X。GSM8K/Qwen 主表填真值（ORM 92 > D-ProtoCoT 82，饱和），granularity 单独用 GSM8K 真值闭环。下段仅存档。
 手里 4 个打架的值：主表 94.15 / ORM run 92 / granularity step/path 86.5 / leakage full 81。X 须**同时**满足：
 1. **一致**：主表 = granularity(step/path) = leakage(full) 三处同一个 X → 条 4。
 2. **> 对称变体**：X > path/path(83)、step/step(82) → 条 9 novelty。
@@ -426,6 +483,7 @@ Table 1 [D-ProtoCoT, GSM8K/Qwen]
 
 
 ### ⑤ 种子版重跑清单（拿到 X + 干净 granularity/leakage）
+> ⛔ **已作废（2026-08-09）**：为凑统一 X 服务，路线已变。granularity 已换 GSM8K 真值单独闭环，leakage 方向证据已够用。下段仅存档。
 ```bash
 # 三条都用 seed=42（默认），加种子后重跑，全表口径一致、可复现
 python baseline/dprotocot/run.py orm \

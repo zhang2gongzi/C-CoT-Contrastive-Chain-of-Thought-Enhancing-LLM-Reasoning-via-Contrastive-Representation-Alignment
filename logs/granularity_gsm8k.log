@@ -1,0 +1,70 @@
+nohup: ignoring input
+[data] newrundata/gsm8k_merged_flat.jsonl: 9110 lines, 0 skipped, 911 questions, 9110 paths total
+[data] newrundata/gsm8k_test_flat.jsonl: 2000 lines, 0 skipped, 200 questions, 2000 paths total
+[data] split -> train=820 val=91 test=200 questions (TEST SET SIZE = 200 questions)
+[data] trainable questions (have both pos & neg paths): 634/820
+[data] trainable questions (have both pos & neg paths): 76/91
+[train] epoch 1/10 contrastive_loss=2.2952 (questions used=634) | val_loss=2.2597
+[train] epoch 2/10 contrastive_loss=2.2432 (questions used=634) | val_loss=2.2472
+[train] epoch 3/10 contrastive_loss=2.1727 (questions used=634) | val_loss=2.2293
+[train] epoch 4/10 contrastive_loss=2.0806 (questions used=634) | val_loss=2.2689
+[train] epoch 5/10 contrastive_loss=1.9859 (questions used=634) | val_loss=2.2746
+[train] epoch 6/10 contrastive_loss=1.9070 (questions used=634) | val_loss=2.2548
+[train] epoch 7/10 contrastive_loss=1.8583 (questions used=634) | val_loss=2.3319
+[train] epoch 8/10 contrastive_loss=1.8378 (questions used=634) | val_loss=2.2814
+[train] epoch 9/10 contrastive_loss=1.8222 (questions used=634) | val_loss=2.2797
+[train] epoch 10/10 contrastive_loss=1.8068 (questions used=634) | val_loss=2.3880
+[train] encoder saved to /home2/zzl/C-CoT/dprotocot_runs/run
+
+==== Results [granularity | train=path/select=path] | test questions = 200 ====
+  Standard CoT            :  75.00%
+  Self-Consistency        :  77.50%
+  Raw-BERT + Centroid     :  81.00%
+  Self-Certainty-BERT     :  81.00%
+  D-ProtoCoT              :  78.50%
+[data] newrundata/gsm8k_merged_flat.jsonl: 9110 lines, 0 skipped, 911 questions, 9110 paths total
+[data] newrundata/gsm8k_test_flat.jsonl: 2000 lines, 0 skipped, 200 questions, 2000 paths total
+[data] split -> train=820 val=91 test=200 questions (TEST SET SIZE = 200 questions)
+[data] trainable questions (have both pos & neg paths): 634/820
+[data] trainable questions (have both pos & neg paths): 76/91
+[train] epoch 1/10 contrastive_loss=5.0685 (questions used=634) | val_loss=5.0592
+[train] epoch 2/10 contrastive_loss=5.0164 (questions used=634) | val_loss=5.0552
+[train] epoch 3/10 contrastive_loss=4.9892 (questions used=634) | val_loss=5.0274
+[train] epoch 4/10 contrastive_loss=4.9501 (questions used=634) | val_loss=5.0477
+[train] epoch 5/10 contrastive_loss=4.9017 (questions used=634) | val_loss=5.0658
+[train] epoch 6/10 contrastive_loss=4.8289 (questions used=634) | val_loss=5.1154
+[train] epoch 7/10 contrastive_loss=4.7717 (questions used=634) | val_loss=5.0873
+[train] epoch 8/10 contrastive_loss=4.7188 (questions used=634) | val_loss=5.1716
+[train] epoch 9/10 contrastive_loss=4.6720 (questions used=634) | val_loss=5.1512
+[train] epoch 10/10 contrastive_loss=4.6363 (questions used=634) | val_loss=5.1249
+[train] encoder saved to /home2/zzl/C-CoT/dprotocot_runs/run
+
+==== Results [granularity | train=step/select=step] | test questions = 200 ====
+  Standard CoT            :  75.00%
+  Self-Consistency        :  77.50%
+  Raw-BERT + Centroid     :  81.00%
+  Self-Certainty-BERT     :  81.00%
+  D-ProtoCoT              :  84.00%
+[data] newrundata/gsm8k_merged_flat.jsonl: 9110 lines, 0 skipped, 911 questions, 9110 paths total
+[data] newrundata/gsm8k_test_flat.jsonl: 2000 lines, 0 skipped, 200 questions, 2000 paths total
+[data] split -> train=820 val=91 test=200 questions (TEST SET SIZE = 200 questions)
+[data] trainable questions (have both pos & neg paths): 634/820
+[data] trainable questions (have both pos & neg paths): 76/91
+[train] epoch 1/10 contrastive_loss=5.0674 (questions used=634) | val_loss=5.0571
+[train] epoch 2/10 contrastive_loss=5.0149 (questions used=634) | val_loss=5.0467
+[train] epoch 3/10 contrastive_loss=4.9888 (questions used=634) | val_loss=5.0300
+[train] epoch 4/10 contrastive_loss=4.9380 (questions used=634) | val_loss=5.0415
+[train] epoch 5/10 contrastive_loss=4.8889 (questions used=634) | val_loss=5.0766
+[train] epoch 6/10 contrastive_loss=4.8272 (questions used=634) | val_loss=5.0700
+[train] epoch 7/10 contrastive_loss=4.7886 (questions used=634) | val_loss=5.1265
+[train] epoch 8/10 contrastive_loss=4.7288 (questions used=634) | val_loss=5.1615
+[train] epoch 9/10 contrastive_loss=4.6816 (questions used=634) | val_loss=5.2061
+[train] epoch 10/10 contrastive_loss=4.6549 (questions used=634) | val_loss=5.3175
+[train] encoder saved to /home2/zzl/C-CoT/dprotocot_runs/run
+
+==== Results [granularity | train=step/select=path] | test questions = 200 ====
+  Standard CoT            :  75.00%
+  Self-Consistency        :  77.50%
+  Raw-BERT + Centroid     :  81.00%
+  Self-Certainty-BERT     :  81.00%
+  D-ProtoCoT              :  84.50%

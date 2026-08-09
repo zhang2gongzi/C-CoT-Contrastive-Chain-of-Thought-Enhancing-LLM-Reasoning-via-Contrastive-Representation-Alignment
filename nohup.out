@@ -10,3 +10,11 @@ Traceback (most recent call last):
   File "/home2/zzl/C-CoT/baseline/dprotocot/data.py", line 89, in _read_flat_jsonl
     with open(path, "r", encoding="utf-8") as f:
 FileNotFoundError: [Errno 2] No such file or directory: '/home2/zzl/C-CoT/data/strategyqa_flat_labeled.jsonl'
+usage: token_stats.py [-h] [--bert_model BERT_MODEL] [--files [FILES ...]]
+token_stats.py: error: unrecognized arguments:  
+usage: token_stats.py [-h] [--bert_model BERT_MODEL] [--files [FILES ...]]
+token_stats.py: error: unrecognized arguments:  
+usage: generate_cot_14b.py [-h] [--model_path MODEL_PATH] [--load_in_4bit]
+                           --input INPUT --output OUTPUT
+                           [--max_questions MAX_QUESTIONS]
+generate_cot_14b.py: error: the following arguments are required: --input, --output

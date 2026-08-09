@@ -1,0 +1,37 @@
+nohup: ignoring input
+[data] newrundata/strategyqa_flat.jsonl: 2800 lines, 0 skipped, 280 questions, 2800 paths total
+[data] split -> train=224 val=28 test=28 questions (TEST SET SIZE = 28 questions)
+[data] trainable questions (have both pos & neg paths): 127/224
+[data] trainable questions (have both pos & neg paths): 16/28
+[train] epoch 1/10 contrastive_loss=4.6096 (questions used=127) | val_loss=4.3588
+[train] epoch 2/10 contrastive_loss=4.3490 (questions used=127) | val_loss=4.3426
+[train] epoch 3/10 contrastive_loss=4.3330 (questions used=127) | val_loss=4.3530
+[train] epoch 4/10 contrastive_loss=4.3189 (questions used=127) | val_loss=4.3827
+[train] epoch 5/10 contrastive_loss=4.2788 (questions used=127) | val_loss=4.4641
+[train] epoch 6/10 contrastive_loss=4.1868 (questions used=127) | val_loss=4.5371
+[train] epoch 7/10 contrastive_loss=4.0761 (questions used=127) | val_loss=4.5327
+[train] epoch 8/10 contrastive_loss=3.9830 (questions used=127) | val_loss=4.6248
+[train] epoch 9/10 contrastive_loss=3.9046 (questions used=127) | val_loss=4.5966
+[train] epoch 10/10 contrastive_loss=3.8485 (questions used=127) | val_loss=4.6000
+[train] encoder saved to /home2/zzl/C-CoT/dprotocot_runs/run
+[ORM] train paths=2240 pos=1271 neg=969 pos_ratio=0.567 pos_weight=0.762
+[ORM] epoch 1/10 train_loss=0.4777 | val_loss=0.7230 path_acc=0.5750 F1=0.6020 AUROC=0.6633
+[ORM] epoch 2/10 train_loss=0.3294 | val_loss=0.7267 path_acc=0.6321 F1=0.7431 AUROC=0.679
+[ORM] epoch 3/10 train_loss=0.3033 | val_loss=0.6545 path_acc=0.6250 F1=0.6957 AUROC=0.6806
+[ORM] epoch 4/10 train_loss=0.2794 | val_loss=0.6258 path_acc=0.6429 F1=0.6951 AUROC=0.7127
+[ORM] epoch 5/10 train_loss=0.2423 | val_loss=0.6787 path_acc=0.6571 F1=0.7091 AUROC=0.7254
+[ORM] epoch 6/10 train_loss=0.1841 | val_loss=1.0575 path_acc=0.6393 F1=0.6008 AUROC=0.7124
+[ORM] epoch 7/10 train_loss=0.1303 | val_loss=1.1512 path_acc=0.6143 F1=0.5574 AUROC=0.7075
+[ORM] epoch 8/10 train_loss=0.0652 | val_loss=1.3966 path_acc=0.5964 F1=0.5768 AUROC=0.6901
+[ORM] epoch 9/10 train_loss=0.0364 | val_loss=1.4551 path_acc=0.6143 F1=0.6197 AUROC=0.689
+[ORM] epoch 10/10 train_loss=0.0205 | val_loss=1.6194 path_acc=0.6214 F1=0.6159 AUROC=0.7
+
+[ORM] TEST diagnostics: loss=1.0273 path_acc=0.7500 F1=0.7464 AUROC=0.8359
+
+==== Results [main+ORM | input=full] | test questions = 28 ====
+  Standard CoT            :  53.57%
+  Self-Consistency        :  46.43%
+  Raw-BERT + Centroid     :  64.29%
+  Self-Certainty-BERT     :  64.29%
+  D-ProtoCoT              :  53.57%
+  ORM                     :  50.00%

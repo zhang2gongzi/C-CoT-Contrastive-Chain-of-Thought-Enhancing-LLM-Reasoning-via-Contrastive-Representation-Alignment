@@ -1,0 +1,30 @@
+nohup: ignoring input
+[regen] questions=500 | k=10 | model=/home2/zzl/model/Meta-Llama-3.1-8B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:05,  1.82s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.79s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:05<00:01,  1.76s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.22s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.43s/it]
+  [20/500] running acc=66.0% mixed=9/20 unknown=1
+  [40/500] running acc=68.8% mixed=17/40 unknown=3
+  [60/500] running acc=71.3% mixed=25/60 unknown=6
+  [80/500] running acc=73.6% mixed=34/80 unknown=8
+  [100/500] running acc=73.7% mixed=44/100 unknown=8
+  [120/500] running acc=73.4% mixed=54/120 unknown=9
+  [140/500] running acc=73.5% mixed=61/140 unknown=11
+  [160/500] running acc=72.2% mixed=70/160 unknown=15
+  [180/500] running acc=73.5% mixed=78/180 unknown=15
+  [200/500] running acc=73.0% mixed=89/200 unknown=16
+  [220/500] running acc=73.8% mixed=98/220 unknown=17
+  [240/500] running acc=73.7% mixed=107/240 unknown=18
+  [260/500] running acc=74.2% mixed=121/260 unknown=19
+  [280/500] running acc=74.0% mixed=135/280 unknown=22
+  [300/500] running acc=74.6% mixed=145/300 unknown=26
+  [320/500] running acc=75.2% mixed=153/320 unknown=28
+  [340/500] running acc=75.5% mixed=159/340 unknown=30
+  [360/500] running acc=75.3% mixed=171/360 unknown=33
+  [380/500] running acc=74.8% mixed=182/380 unknown=33
+  [400/500] running acc=74.5% mixed=193/400 unknown=40
+  [420/500] running acc=74.5% mixed=202/420 unknown=47
+  [440/500] running acc=74.7% mixed=209/440 unknown=49
+  [460/500] running acc=73.9% mixed=222/460 unknown=53
+  [480/500] running acc=73.8% mixed=233/480 unknown=53
+  [500/500] running acc=73.2% mixed=242/500 unknown=56
+[regen] DONE paths=5000 correct=3658 (73.2%) unknown=56 mixed_questions=242/500
+[regen] wrote -> newrundata/csqa_llama_flat_regen.jsonl

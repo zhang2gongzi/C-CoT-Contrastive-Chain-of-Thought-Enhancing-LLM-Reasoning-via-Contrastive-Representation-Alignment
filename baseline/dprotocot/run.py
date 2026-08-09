@@ -68,7 +68,10 @@ def cmd_orm(cfg):
     val_t = trainable_questions(val_g)
     enc = train_encoder(cfg, train_t, val_t)
     orm_model = train_orm(cfg, train_g, val_g)          # ORM uses ALL paths, not only mixed ones
-    diag = eval_orm_diagnostics(orm_model, cfg, test_g)
+    val_diag = eval_orm_diagnostics(orm_model, cfg, val_g)
+    best_thr = val_diag.get("threshold", 0.5)
+    print(f"[ORM] val-optimal threshold = {best_thr:.4f}")
+    diag = eval_orm_diagnostics(orm_model, cfg, test_g, threshold=best_thr)
     print(f"\n[ORM] TEST diagnostics: loss={diag['loss']:.4f} "
           f"path_acc={diag['acc']:.4f} F1={diag['f1']:.4f} AUROC={diag['auroc']}")
     res = evaluate_all(cfg, test_g, enc, orm_model=orm_model)

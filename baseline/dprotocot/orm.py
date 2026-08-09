@@ -24,7 +24,7 @@ from encoder import MultiGranularEncoder
 from data import question_text, path_text
 
 try:
-    from sklearn.metrics import f1_score, roc_auc_score
+    from sklearn.metrics import f1_score, roc_auc_score, precision_recall_curve
     _HAS_SK = True
 except Exception:
     _HAS_SK = False
@@ -55,6 +55,19 @@ def _flatten(groups, cfg):
         for p in g["paths"]:
             items.append((q, path_text(p["cot"], g, cfg), int(p["is_correct"])))
     return items
+
+
+def _find_best_threshold(ys, probs):
+    """Find threshold that maximizes F1 on the given set."""
+    if not _HAS_SK or len(set(ys)) < 2:
+        return 0.5
+    precisions, recalls, thresholds = precision_recall_curve(ys, probs)
+    f1s = 2 * precisions * recalls / (precisions + recalls + 1e-8)
+    best_idx = int(f1s.argmax())
+    # precision_recall_curve returns len(thresholds) = len(precisions) - 1
+    if best_idx >= len(thresholds):
+        return 0.5
+    return float(thresholds[best_idx])
 
 
 def train_orm(cfg: Config, train_groups, val_groups):
@@ -96,13 +109,15 @@ def train_orm(cfg: Config, train_groups, val_groups):
 
 
 @torch.no_grad()
-def eval_orm_diagnostics(model, cfg, groups):
-    """Path-level classification diagnostics (loss/acc/F1/AUROC)."""
+def eval_orm_diagnostics(model, cfg, groups, threshold=None):
+    """Path-level classification diagnostics (loss/acc/F1/AUROC).
+    If threshold is None, searches for the F1-optimal threshold on this set.
+    Pass a pre-computed threshold (e.g. from val) for unbiased test evaluation."""
     device = model.device
     model.eval()
     items = _flatten(groups, cfg)
     if not items:
-        return {"loss": 0.0, "acc": 0.0, "f1": 0.0, "auroc": "n/a"}
+        return {"loss": 0.0, "acc": 0.0, "f1": 0.0, "auroc": "n/a", "threshold": 0.5}
     ys, probs, losses = [], [], []
     bce = nn.BCEWithLogitsLoss()
     for q, p, y in items:
@@ -110,7 +125,8 @@ def eval_orm_diagnostics(model, cfg, groups):
         losses.append(bce(logit.unsqueeze(0), torch.tensor([float(y)], device=device)).item())
         probs.append(torch.sigmoid(logit).item())
         ys.append(y)
-    preds = [1 if pr >= 0.5 else 0 for pr in probs]
+    thr = threshold if threshold is not None else _find_best_threshold(ys, probs)
+    preds = [1 if pr >= thr else 0 for pr in probs]
     acc = sum(int(a == b) for a, b in zip(preds, ys)) / len(ys)
     if _HAS_SK:
         f1 = f1_score(ys, preds, zero_division=0)
@@ -122,7 +138,7 @@ def eval_orm_diagnostics(model, cfg, groups):
         prec = tp / max(1, tp + fp); rec = tp / max(1, tp + fn)
         f1 = 2 * prec * rec / max(1e-9, prec + rec)
         auroc = "n/a(no sklearn)"
-    return {"loss": sum(losses) / len(losses), "acc": acc, "f1": f1, "auroc": auroc}
+    return {"loss": sum(losses) / len(losses), "acc": acc, "f1": f1, "auroc": auroc, "threshold": thr}
 
 
 @torch.no_grad()

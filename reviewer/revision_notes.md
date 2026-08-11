@@ -37,7 +37,6 @@ The Authors
    - Reviewer 3's Comment 2 — Baselines are outdated (2021, 2023)
    - Reviewer 3's Comment 3 — Reproducibility
 5. Summary of Revisions and Reiteration of Contribution
-6. 修订对照汇总 / Summary of Manuscript Changes (Before/After)
 
 ---
 

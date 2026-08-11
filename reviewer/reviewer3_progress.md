@@ -276,7 +276,11 @@ Self-Certainty (Kang et al.): 154/200 = 77.00%
 
 ## 问题 3：可复现性
 - **问题**：应公开相关代码和数据以确保可复现性
-- **状态**：待处理（**决定：等要交 rebuttal / 正式公开时再动，先不改**）
+- **状态**：🟡 **论文声明已加（2026-08-09）**；仓库整理待做（用户「马上整，放占位链接」）
+
+> ✅ **2026-08-09：Reproducibility 声明已进 tex**（line 383，紧接 GPU 句后）：`\paragraph{Reproducibility.}` 承诺公开 code + 生成的 reasoning-path 数据 + 复现每张表的脚本，占位链接 `https://github.com/USERNAME/D-ProtoCoT`（单盲已署名，可用真链接）。措辞用 **"will be made publicly available"**（仓库未整好、链接暂打不开，诚实用将来时；传好后改成 "are available"）。声明同时强调已有的描述级复现资源：dataset-details 表 + token-length 表 + Hierarchical Encoding 附录 + 超参（line 380）。
+>
+> **⚠️ 用户待办（交稿前必做，否则占位链接是空的）**：① 把 `USERNAME` 换成真实 GitHub 用户名；② 仓库改名 `D-ProtoCoT`；③ 清硬编码路径 `/home2/zzl`、`/root/autodl-tmp`（config.py 的 bert_model 默认仍是 /home2/...）；④ 写 README（安装/数据/各 run.py 子命令/复现 Table 1 命令）；⑤ 决定 `newrundata/*.jsonl`（被 .gitignore）随仓库公开还是给下载链接。仓库真能打开后，把 tex 的 "will be made publicly available" 改成 "are available"。
 
 > 📌 **2026-08-09 补记（GPU 硬件口径已诚实化）**：tex line 382 原「All experiments...single RTX 4090」有两处不实——① 实机是 **RTX 3090**（nvidia-smi 确认），② 14B 是在 **AutoDL RTX 5090（bf16）** 上跑的，非本机。已改为「All 8B experiments...single RTX 3090 GPU, while the Qwen3-14B experiment is run on an RTX 5090 GPU」。交 rebuttal / 公开时可在 README 复现说明里同步这个硬件分工。
 

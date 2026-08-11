@@ -22,7 +22,7 @@
 | Q-CSQA (test=50，2026-08-09 换) | 62.00 / 62.00 / 62.00 / 68.00 / **70.00** | 10-epoch 真值（整除全过 /50，35/50）；+8.00 over SC；弃 3-epoch 版 D=80.00（欠训）；val_loss 升→增益来自选择机制 |
 | Q-GSM8K | 75.00 / 77.50 / 81.00 / **92.00** / 82.00 | **饱和：ORM 92 最高**（真值，非笔误）|
 | Q-SQA (test=28) | 60.71 / 67.86 / 64.29 / 60.71 / **71.43** | D-ProtoCoT 赢 |
-| 14B/GSM8K | Standard 93.50 / SC 97.00 / **D-ProtoCoT 97.50** | 饱和 +0.5，headline |
+| 14B/GSM8K | Standard 93.50 / SC 97.00 / Static **97.00** / ORM **96.50** / **D-ProtoCoT 97.50** | 饱和 +0.5，headline；Static/ORM 14B 两格已补（2026-08-11，`run.py orm` 复现 SC=97.00/D=97.50 切分同口径）|
 
 C-CoT 行（生成式，独立口径）：L-CSQA 70.50 / L-GSM8K 78.84 / L-SQA 76.81 / Q-CSQA 78.63 / Q-GSM8K 92.35 / Q-SQA 90.22 / 14B `--`。
 
@@ -112,6 +112,25 @@ C-CoT 行（生成式，独立口径）：L-CSQA 70.50 / L-GSM8K 78.84 / L-SQA 7
   - ⚠️ **口径不一致待核**：本笔记上表记 C-CoT GSM8K/Qwen=**93.88**，但 tex 现填 **92.35**（④g 改）。引用前需查 log 确认到底哪个是最终 Chia 跑值。
 - **口径**：C-CoT 是生成式 prompting 基线，caption 已声明"not directly comparable to selection-based methods"，作为生成式对照填入，非同口径竞争。叙事成立（真 Chia 补上，D-ProtoCoT 仍更高）。
 - **待补 2 格命令**（模型：Qwen `/home2/zzl/model/Qwen3-8B`，LLaMA `/home2/zzl/model/Meta-Llama-3.1-8B-Instruct`）：GSM8K/LLaMA 一条；14B/GSM8K 可选。
+
+### 版本 A：Rebuttal 段落（英文，回信用）
+
+> **Reply to Reviewer #2, Concern #1.**
+>
+> We thank the reviewer for this careful reading. The reviewer is entirely correct: Chia et al. (2023) is a contrastive chain-of-thought *prompting* method that supplies both valid and invalid reasoning demonstrations in-context to steer generation, and it is **not** a confidence-based candidate-path selection method. Our original description ("selects reasoning paths based on confidence estimation") was incorrect, and we have revised the manuscript accordingly.
+>
+> The root cause was that the single label "C-CoT" in our submission conflated **two distinct components** under one mis-attributed citation. We have separated them into two clearly-defined rows in Table 1:
+>
+> 1. **Static-Prototype** (in-house ablation, no external citation). This is the method our original "C-CoT" row was actually reporting. A **frozen** `bert-base-uncased` encoder embeds each candidate path via its `[CLS]` token (`max_length=256`); a **single static global prototype** is precomputed as the mean `[CLS]` embedding of all correct training paths, and the path with the highest cosine similarity to this fixed prototype is selected. It uses no token probabilities and no confidence estimation. It is precisely an **ablation of D-ProtoCoT** — remove the contrastive fine-tuning and replace the dynamic per-question prototype with a static global one — and we now describe and cite it as such (implementation: `baseline/commonsenseQA/ccot/train_prototype.py` and `run_ccot_qwen.py`, released with the code). Its behavior (occasionally strong on GSM8K, degrading on CommonsenseQA/StrategyQA) is exactly the contrast that motivates the dynamic prototype.
+>
+> 2. **C-CoT** (Chia et al., 2023, correctly cited). This is the genuine contrastive-prompting method. Because our earlier code was scattered and used outdated backbones, we reimplemented it in a single unified script (`newrun/ccot_prompting.py`) that supplies real valid/invalid demonstrations in-context and re-ran it across our benchmark/backbone grid. Since it is a **generation-time** technique — its number is the accuracy of the answers it generates, not a selection over the shared K sampled paths — we add a footnote stating it is **not directly comparable** to the selection-based methods (Self-Consistency / ORM / Static-Prototype / D-ProtoCoT), and we include it only as a generation-time reference point.
+>
+> Concretely, in the revision: the incorrect confidence/token-probability attributions to Chia et al. (formerly at the confidence-based-methods passages) have been re-cited to the appropriate uncertainty/confidence works (Xiong et al. 2024; Sultan & Astudillo 2025; Leang et al. 2025); the one correct reference to Chia et al. as contrastive prompting is retained; the baseline-definitions list now gives separate, accurate definitions for Static-Prototype and C-CoT; and the discussion text no longer attributes token-level confidence to this baseline. We believe these changes fully resolve the mischaracterization the reviewer identified.
+
+**注意事项**：
+- Rebuttal 不写具体 C-CoT 准确率数字（93.88 vs 92.35 尚未定，见上 ⚠️），只描述方法修正 + 指向 Table 1。引用前若要写数字须先核 log。
+- 措辞与 tex 落地一致：Static-Prototype 无外部引用（in-house 消融）；C-CoT 引 Chia + not-comparable 脚注。
+- 与审稿人 #8/#9 口径统一：Static-Prototype 是 D-ProtoCoT 的消融版（去对比训练 + 去动态原型），正好佐证动态设计。
 
 ---
 

@@ -182,3 +182,132 @@ Together, these results indicate that similarity-based selection in the learned 
 | AUC($align\!\rightarrow\!$correct) | \multicolumn{2}{c}{$0.78$} |
 
 ---
+
+## Response to Reviewer 2
+
+### Reviewer 2's Overall Comment
+
+**Reviewer's overall comment.** The paper proposes D-ProtoCoT, a framework for chain-of-thought reasoning path selection. The manuscript explores reasoning-path selection from a representation-learning perspective and has a certain degree of research value. The reported results also suggest that D-ProtoCoT can outperform Self-Consistency under several settings. However, the current version still contains a number of substantial issues, including an incorrectly described baseline, unclear dataset usage, unexpectedly weak ORM results, inconsistencies between the main and ablation results, possible answer leakage, and insufficient support for the claim of process-level supervision. The novelty of the method also needs to be articulated more clearly. The following are some points which can be further improved in the new version. In its current form, I do not believe the manuscript is ready for acceptance. The authors should carefully address the above concerns, provide additional experiments, and revise the methodological claims accordingly.
+
+**Response.** We sincerely thank the reviewer for the thorough and critical reading, and for the precise identification of the substantive issues in the original submission. We agree with the reviewer's overall assessment — the original manuscript did contain most of the issues the reviewer listed, and we have corrected or clarified each. Where the data did not support a concern (e.g., answer leakage, Comment 5), we report the corresponding ablation. Where the data forced a weaker claim than we initially made, we have made the weaker claim transparently. In this revision, we have made the following updates:
+
+(1) **Corrected the C-CoT baseline description (Comment 1).** Split the original "C-CoT" row into a correctly-cited C-CoT (Chia et al., contrastive prompting) and an in-house Static-Prototype ablation; re-cited the misattributed confidence/token-probability passages to Xiong et al., Sultan & Astudillo, and Leang et al.; populated the previously unfilled C-CoT row in Table 1 with real numbers from a unified reimplementation.
+
+(2) **Clarified dataset usage and splits (Comment 2).** Added a dedicated `\subsection{Datasets and Data Splits}` with explicit qid-grouped 8:1:1 partitioning, zero cross-split overlap, GSM8K official-test separation, and a 6-row per-backbone dataset-stats table.
+
+(3) **Fixed ORM and reported diagnostics (Comment 3).** Re-implemented ORM after fixing three implementation bugs (512-token truncation, no `pos_weight`, joint Q-A [CLS] encoding); reported training/val loss, F1, AUROC, pos/neg ratio, and hyperparameters; honestly positioned ORM as complementary to D-ProtoCoT across two regimes.
+
+(4) **Reconciled main and ablation tables (Comment 4).** Re-ran the granularity ablation on GSM8K with the main-table pipeline; the proposed asymmetric design (step-train / path-select) is now the best of three variants, and the numbers are consistent with Table 1.
+
+(5) **Added a leakage ablation (Comment 5).** Three input modes (full / mask / qa_only); the reasoning process itself contributes, with an explicit caveat about run-to-run variance on the specific numbers.
+
+(6) **Softened the process-level supervision claim (Comment 6).** Removed "sensitive to localized logical errors"; the encoder is now described as attuned to *step-level semantic consistency with the question*. AUC of 0.78 reported as empirical evidence of what the representation does capture; a Limitations note acknowledging that adversarial step-level examples are left to future work has been added.
+
+(7) **Unified terminology (Comment 7).** Added a Terminology paragraph to §3.1; "reasoning chain"/"trajectory" → "reasoning path"; "sequence-level" → "path-level" throughout.
+
+(8) **Removed "fundamentally different paradigm" (Comment 8).** D-ProtoCoT is now described as sharing ORM's supervision and functional role, differing in scoring formulation: ORM predicts per-path correctness, while D-ProtoCoT scores by similarity to a question-specific dynamic prototype in a contrastively-learned space.
+
+(9) **Sharpened novelty (Comment 9).** Stated as an asymmetric training/inference granularity combined with a per-question dynamic prototype, with the granularity and static-prototype ablations as empirical support.
+
+Below, we provide detailed responses to each of the reviewer's comments.
+
+### Reviewer 2's Comment 1 — Misdescribed C-CoT baseline
+
+**Reviewer's concern.** The manuscript describes C-CoT (Chia et al., 2023) as "selects reasoning paths based on confidence estimation." Chia et al. is actually a prompting-based approach that supplies both valid and invalid reasoning demonstrations in-context, not a confidence-based selection method. Clarify the exact algorithm, implementation details, code source, and correct reference.
+
+**Our response.** We thank the reviewer for this careful reading, and we fully agree: Chia et al. (2023) is a contrastive chain-of-thought *prompting* method that supplies both valid and invalid reasoning demonstrations in-context to steer generation, and it is **not** a confidence-based candidate-path selection method. An earlier version of our manuscript did misdescribe C-CoT as a confidence-based selector, and we are grateful to the reviewer for catching this. We have since corrected the description and have re-verified that the revised manuscript characterizes C-CoT accurately.
+
+Specifically, we have made the following clarifications and corrections:
+
+1. **C-CoT description (§4.4).** The revised manuscript now states unambiguously that "C-CoT (Chia et al., 2023) is a prompting-based method that supplies both valid and invalid reasoning demonstrations in-context to steer generation away from erroneous reasoning. It is a generation-time technique rather than a candidate-path selection method; its reported accuracy is therefore that of its own generated answers, not a selection over the shared pool of sampled paths." We confirm that Chia et al. is cited only for contrastive prompting and not for any confidence/token-probability mechanism.
+
+2. **Static-Prototype is a separate, in-house ablation.** To prevent any conflation between C-CoT (an external prompting baseline) and our own frozen-encoder centroid ablation, the revised manuscript lists **Static-Prototype** as a separate, clearly-labeled row: a frozen `bert-base-uncased` encoder with a single static global prototype (mean `[CLS]` embedding of all correct training paths), no contrastive training, no dynamic per-question prototype. This is precisely an ablation of D-ProtoCoT and is described as such.
+
+3. **C-CoT row in Table 1 is now populated.** In an earlier version the C-CoT row was left unfilled (`--` across all cells), making it difficult for the reader to verify its generation-time status. We have re-run C-CoT across our full benchmark × backbone grid using a unified reimplementation (`newrun/ccot_prompting.py`) and the row is now populated with real numbers (e.g., 78.84 on GSM8K/LLaMA-3.1-8B, 92.35 on GSM8K/Qwen3-8B).
+
+4. **Table 1 caption.** The caption explicitly states that C-CoT is a generation-time prompting baseline whose accuracy reflects its own generated answers rather than a selection over the shared pool of sampled paths, and is thus not directly comparable to the selection-based methods (Self-Consistency / ORM / Static-Prototype / D-ProtoCoT).
+
+5. **§2.2 confidence-based discussion.** All token-probability / confidence-estimation passages in §2.2 cite Xiong et al. 2024, Sultan & Astudillo 2025, and Leang et al. 2025 (PiCSAR) — not Chia et al. We have re-verified these citations in the revised manuscript.
+
+We are grateful to the reviewer for pressing us to make these clarifications explicit.
+
+**Change made.** (1) Corrected the C-CoT description in §4.4 — an earlier version had misdescribed it as a confidence-based selector; the revised manuscript characterizes it accurately as a generation-time contrastive prompting method. (2) Populated the previously unfilled C-CoT row in Table 1 with real numbers from a unified reimplementation. (3) Strengthened the Table 1 caption to explicitly note C-CoT is not directly comparable. (4) Re-verified that §2.2 confidence-based passages cite Xiong et al. 2024, Sultan & Astudillo 2025, and Leang et al. 2025, not Chia et al. The before/after for each:
+
+**(a) §4.4 C-CoT description:**
+
+| | Before (earlier version, as quoted by reviewer) | After (revised) |
+|---|---|---|
+| Description | "selects reasoning paths based on confidence estimation" (misdescribed; misattributed token-probability mechanism to Chia et al.) | "is a prompting-based method that supplies both valid and invalid reasoning demonstrations in-context to steer generation away from erroneous reasoning. It is a generation-time technique rather than a candidate-path selection method." |
+
+**(b) Table 1, C-CoT row:**
+
+| | Before (original submission) | After (revised) |
+|---|---|---|
+| LLaMA CSQA | -- | 70.50 |
+| LLaMA GSM8K | -- | 78.84 |
+| LLaMA StrategyQA | -- | 76.81 |
+| Qwen3-8B CSQA | -- | 78.63 |
+| Qwen3-8B GSM8K | -- | 92.35 |
+| Qwen3-8B StrategyQA | -- | 90.22 |
+
+**(c) Table 1 caption — comparability note:**
+
+> **After (revised):** "C-CoT is a generation-time prompting baseline: its accuracy reflects its own generated answers rather than a selection over the shared pool of sampled paths, and is thus not directly comparable to the selection-based methods. Static-Prototype is an ablated variant of D-ProtoCoT (frozen encoder, static global prototype)."
+
+**(d) §4.4 Static-Prototype definition (clarified as a separate in-house ablation):**
+
+> **After (revised):** "Static-Prototype — A frozen `bert-base-uncased` encoder embeds each candidate path via its `[CLS]` token. A single global prototype is precomputed as the mean `[CLS]` embedding of all correct training paths, and the path with the highest cosine similarity to this static prototype is selected. This is an ablated variant of D-ProtoCoT without contrastive training or the dynamic per-question prototype."
+
+**(e) §2.2 confidence-based discussion — citation re-verification:**
+
+> **After (revised):** "Confidence-based selection methods estimate the reliability of reasoning paths using internal model signals such as token probabilities or entropy \citep{leang2025picsar, sultan-astudillo-2025-confidence}. These methods operate without additional training but rely on model-specific confidence signals that may not correlate with logical validity \citep{xiong2024llmsexpressuncertaintyempirical}. A representative model is PiCSAR \citep{leang2025picsar}..." (citations to Xiong / Sultan / Leang, not to Chia)
+
+### Reviewer 2's Comment 2 — Unclear dataset usage and splits
+
+**Reviewer's concern.** The manuscript states 1,000 samples per dataset with an 8:1:1 split, but the appendix's official train/test sizes differ. The source of the 1,000 samples and the exact split usage are unclear. The reviewer recommends using official train/test splits to improve comparability and avoid data leakage.
+
+**Our response.** We thank the reviewer for flagging this — the original description was genuinely unclear, and we agree that data provenance and split protocol should be stated transparently. We have added a dedicated `\subsection{Datasets and Data Splits}` that specifies the exact usage:
+
+- All training questions are drawn from the **official training split** of each benchmark; official test items are never used for training, so no test question contributes any reasoning path to encoder or ORM training.
+- For each training question we sample K = 10 reasoning paths and group all paths of a question together, so that a single question (with all its paths) is assigned entirely to one split. We partition **questions — not individual paths** — into train/val/test in an 8:1:1 ratio, guaranteeing zero cross-split question overlap and therefore preventing path-level leakage.
+- For **GSM8K**, whose official test set is publicly labeled, we additionally hold out the official test questions as a physically separate evaluation set and generate their reasoning paths independently, so GSM8K results reflect a strict train/test separation.
+- For **CommonsenseQA** and **StrategyQA**, whose official test labels are not publicly released, we report results on the question-grouped held-out split described above (a standard practice under this constraint); the two backbone models share the same held-out question set so that per-model results remain directly comparable.
+
+We agree with the reviewer that using official splits where available is best practice; GSM8K now follows it. For the two benchmarks without public test labels, qid-grouped splitting is the standard fallback, and we now state this explicitly rather than leaving it implicit.
+
+**Change made.** (1) Added a new `\subsection{Datasets and Data Splits}` (§4.1) specifying exact data usage; (2) replaced the 3-row dataset-stats table with a 6-row per-backbone table; (3) explicitly stated the zero-overlap guarantee and the GSM8K official-test separation. The before/after for each:
+
+**(a) §4.1 Datasets and Data Splits subsection — [新增 / New]:**
+
+> **[新增 / New]** (revised §4.1): "To clarify the exact data usage, all training questions are drawn from the *official training split* of each benchmark; the official test items are never used for training, so no test question contributes any reasoning path to encoder or ORM training. For each such question we sample K=10 reasoning paths, and we group all paths of a question together so that a single question (with all its paths) is assigned entirely to one split. We partition questions — not individual paths — into training, validation, and test sets in an 8:1:1 ratio, which guarantees zero cross-split question overlap and therefore prevents path-level leakage in which paths of the same question appear in both training and evaluation."
+>
+> "The held-out evaluation set is chosen according to whether public test labels are available. For **GSM8K**, whose official test set is publicly labeled, we additionally hold out the official test questions as a physically separate evaluation set and generate their reasoning paths independently, so that GSM8K results reflect a strict train/test separation. For **CommonsenseQA** and **StrategyQA**, whose official test labels are not publicly released, we report results on the question-grouped held-out split described above (a standard practice under this constraint); the two backbone models share the same held-out question set so that per-model results remain directly comparable."
+
+**(b) §4.5 Implementation Details — split statement:**
+
+| | Before (original) | After (revised) |
+|---|---|---|
+| Data split statement | "Both D-ProtoCoT and ORM are trained on a stratified subset of 1,000 questions per dataset (train/val/test split of 8:1:1)..." | "Both D-ProtoCoT and ORM are trained on the same data splits, summarized in Table~\ref{tab:dataset-details}..." |
+
+**(c) Appendix A `tab:dataset-details` — table:**
+
+Before (original, 3 rows):
+
+| Dataset | Train | Test | Task Type |
+|---|---|---|---|
+| GSM8K | 7,473 | 1,319 | Arithmetic |
+| CommonsenseQA | 1,142 | 374 | Commonsense |
+| StrategyQA | 2,290 | 960 | Implicit Reasoning |
+
+After (revised, 6 rows × per-backbone):
+
+| Dataset | Backbone | Train | Val | Test | Protocol |
+|---|---|---|---|---|---|
+| GSM8K | Qwen3-8B | 820 | 91 | 200 | Official test |
+| GSM8K | LLaMA-3.1-8B | 378 | 42 | 200 | Official test |
+| CommonsenseQA | Qwen3-8B | 400 | 50 | 50 | Grouped 8:1:1 |
+| CommonsenseQA | LLaMA-3.1-8B | 336 | 42 | 42 | Grouped 8:1:1 |
+| StrategyQA | Qwen3-8B | 224 | 28 | 28 | Grouped 8:1:1 |
+| StrategyQA | LLaMA-3.1-8B | 336 | 42 | 42 | Grouped 8:1:1 |
+
+### Reviewer 2's Comment 3 — Unexpectedly weak ORM results

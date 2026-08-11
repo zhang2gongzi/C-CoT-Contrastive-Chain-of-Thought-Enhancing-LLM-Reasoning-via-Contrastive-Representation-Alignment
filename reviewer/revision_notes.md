@@ -123,8 +123,7 @@ We would also like to acknowledge, with thanks, that the reviewer's comment surf
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| Figure 2 source | `figure/tsne_cot100.png` (StrategyQA, single question, ~100 paths) | 
-| ![before](../newrun/tsne_gsm8k_before.png)  ![after](../newrun/tsne_gsm8k_after.png) (GSM8K, 200 questions × K=10) |
+| Figure 2 source | `figure/tsne_cot100.png` (StrategyQA, single question, ~100 paths) | ![before](../newrun/tsne_gsm8k_before.png)  ![after](../newrun/tsne_gsm8k_after.png) (GSM8K, 200 questions × K=10) |
 | Caption | "t-SNE visualization of BERT embeddings from 100 chain-of-thought paths generated for a StrategyQA example. Green points indicate correct reasoning paths, while red points indicate incorrect ones. Strong overlap suggests that surface-level semantic similarity alone is insufficient to distinguish reasoning quality." | "Test-path embeddings on GSM8K (K=10), colored by correctness (green: correct, red: incorrect). **Left:** before contrastive alignment (untrained encoder), correct and incorrect paths are intermixed. **Right:** after D-ProtoCoT alignment, the two classes become clearly separated. The learned alignment predicts path correctness with an **AUC of 0.78**." |
 | Quantitative measure | (none) | AUC = 0.78 on 200 GSM8K questions (K=10), reported in §5.1, §5.4, and §5.6 |
 

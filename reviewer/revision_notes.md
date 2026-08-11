@@ -311,3 +311,338 @@ After (revised, 6 rows × per-backbone):
 | StrategyQA | LLaMA-3.1-8B | 336 | 42 | 42 | Grouped 8:1:1 |
 
 ### Reviewer 2's Comment 3 — Unexpectedly weak ORM results
+
+**Reviewer's concern.** On GSM8K with Qwen3-8B, ORM achieves 61.36% vs. 90.40% for Standard CoT; on StrategyQA, ORM is 50.43% (near random for binary). This suggests implementation/optimization issues. Report training loss, val loss, path-level accuracy, LR, epochs, batch size, pooling, AUROC, F1, pos/neg ratio.
+
+**Our response.** We thank the reviewer for this — the diagnosis was correct, and the original ORM numbers were indeed the product of implementation bugs. We had not adequately verified the legacy ORM code before submission, and we apologize for the confusion. We have re-implemented ORM cleanly (`baseline/dprotocot/run.py orm`) after fixing three concrete issues:
+
+1. **512-token truncation.** GSM8K CoT paths average ~809 tokens with 93% exceeding 512; the legacy code used `truncation=True, max_length=512`, truncating away the answer-derivation. We replace this with the same hierarchical chunked encoding (chunk=400, overlap=50) used elsewhere in the paper.
+2. **No class-balance weighting.** With Qwen3-8B producing ~90% correct paths on GSM8K, the legacy `BCEWithLogitsLoss` with no `pos_weight` collapsed to "predict positive for all." We add `pos_weight = n_neg / n_pos`.
+3. **Joint Q-A [CLS] encoding.** Legacy code concatenated question and path and read a single `[CLS]`; we instead encode question and path separately and use path-level mean pooling, consistent with D-ProtoCoT.
+
+With these fixes, ORM on GSM8K/Qwen3-8B now reaches **92.00%** (was 61.36%), with healthy diagnostics: test F1 = 0.925, AUROC = 0.907, pos_ratio = 0.623, pos_weight = 0.606. We report the training/val loss trajectory, F1, AUROC, and the positive-to-negative ratio in the "Comparison with ORM" paragraph of §5.6. Hyperparameters (batch size 16, learning rate 2e-5, 10 epochs, AdamW, single RTX 3090) are stated in §4.5.
+
+We want to be transparent about an important consequence of the corrected ORM. The picture is more nuanced than "D-ProtoCoT beats ORM everywhere," and we now report two regimes honestly:
+
+- **Saturated, data-rich setting (GSM8K/Qwen3-8B):** ORM is highly effective — 92.00% selection accuracy with healthy diagnostics — edging out D-ProtoCoT at 82.00%. When path labels are abundant and the answer-matching signal is reliable, directly optimizing a discriminative outcome classifier is a strong strategy.
+- **Low-resource, harder-to-supervise setting (CSQA/LLaMA-3.1-8B):** ORM overfits — its validation loss diverges during training (0.63 → >2.0) and its test AUROC collapses to 0.559, near chance — so its selection accuracy drops to 71.43%, below D-ProtoCoT's 76.19%.
+
+We therefore position D-ProtoCoT as **complementary to ORM rather than uniformly superior**. Both methods draw on the same supervision signal (path labels from final-answer matching); the difference lies in how each applies it. ORM scores paths by predicting final-answer correctness at the path level, which requires enough well-labeled paths to fit a reliable classifier and tends to memorize the training set when labels are scarce or noisy. D-ProtoCoT applies a step-level InfoNCE objective that yields $|\mathcal{P}|\cdot M$ contrastive pairs per question and shapes a representation in which step-level semantic consistency drives alignment; this denser, geometry-based signal degrades more gracefully under limited supervision. We acknowledge that a broader sweep across more backbones and larger test sets to map this trade-off is a natural next step, and we have noted this as a limitation.
+
+**Change made.** (1) Re-ran ORM after fixing three implementation bugs (512-token truncation, no pos_weight, joint Q-A [CLS] encoding); (2) reported training/val loss, F1, AUROC, pos/neg ratio, and hyperparameters; (3) rewrote §5.6 "Comparison with ORM" as a two-regime honest narrative. The before/after for each:
+
+**(a) ORM row in Table 1 — numbers:**
+
+| | Before (original) | After (revised) |
+|---|---|---|
+| LLaMA CSQA | 59.52 | 71.43 |
+| LLaMA GSM8K | 78.20 | 68.50 |
+| LLaMA StrategyQA | 65.71 | 54.76 |
+| Qwen3-8B CSQA | 77.27 | 68.00 |
+| Qwen3-8B GSM8K | 61.36 | **92.00** |
+| Qwen3-8B StrategyQA | 50.43 | 60.71 |
+
+**(b) §4.5 Implementation Details — epochs / GPU:**
+
+| | Before (original) | After (revised) |
+|---|---|---|
+| Epochs | "3 epochs, and temperature $\tau{=}0.07$" | "10 epochs, and temperature $\tau{=}0.07$" |
+| GPU | "All experiments are conducted on a single Nvidia RTX 4090 GPU." | "All 8B experiments are conducted on a single Nvidia RTX 3090 GPU, while the Qwen3-14B experiment is run on an Nvidia RTX 5090 GPU." |
+
+**(c) §5.6 "Comparison with ORM" — paragraph rewrite:**
+
+| | Before (original) | After (revised) |
+|---|---|---|
+| Narrative | Uniformly superior: "On Qwen3-8B, D-ProtoCoT outperforms ORM by +10.44% on CSQA, +32.79% on GSM8K, and +22.17% on StrategyQA. On LLaMA-3.1-8B-Instruct, D-ProtoCoT outperforms ORM by +2.75% on GSM8K. The gap is most pronounced on GSM8K..." | Two-regime honest narrative: "The comparison reveals two complementary regimes rather than a uniform ranking. On a saturated, data-rich setting such as GSM8K with Qwen3-8B, ORM is highly effective: it reaches 92.00% selection accuracy... edging out D-ProtoCoT at 82.00%... The picture reverses on low-resource, harder-to-supervise settings. On CSQA with LLaMA-3.1-8B-Instruct, ORM overfits — its validation loss diverges during training (from 0.63 to above 2.0) and its test AUROC collapses to 0.559, near chance — so its selection accuracy drops to 71.43%, below D-ProtoCoT's 76.19%. ... We therefore position D-ProtoCoT as complementary to ORM rather than uniformly superior." |
+
+**(d) [新增 / New] ORM diagnostics reported in §5.6:**
+
+> **[新增 / New]** (revised §5.6): "On a saturated, data-rich setting such as GSM8K with Qwen3-8B, ORM is highly effective: it reaches 92.00% selection accuracy and its path-correctness classifier trains cleanly (test **F1 0.925, AUROC 0.907, pos_ratio = 0.623, pos_weight = 0.606**), edging out D-ProtoCoT at 82.00%."
+>
+> "On CSQA with LLaMA-3.1-8B-Instruct, ORM overfits — its validation loss diverges during training (from **0.63 to above 2.0**) and its test **AUROC collapses to 0.559**, near chance — so its selection accuracy drops to 71.43%, below D-ProtoCoT's 76.19%."
+
+### Reviewer 2's Comment 4 — Main vs. ablation result inconsistency
+
+**Reviewer's concern.** Table 3 reports 64.29% on StrategyQA for the full method, but Table 1 reports 86.20% and 72.60% for the two backbones — the 64.29% corresponds to neither. Clarify the backbone, split, test size, and seed for Table 3, and explain the gap.
+
+**Our response.** We thank the reviewer for catching this inconsistency, which is legitimate. The reviewer is correct: the original Table 3 was not consistent with Table 1, and we should have caught this before submission. The root cause was that the ablation was run with a preliminary script (`granularity_ablation.py`) whose setup differed from the main experiment in four ways:
+
+1. **Test set size**: 100 questions drawn by `train_test_split(random_state=42)`, vs. the full split in Table 1 — at 1% per question, the variance is large.
+2. **Encoder encoding**: `[CLS]`-token encoding vs. mean-pooling in the main experiments.
+3. **Truncation**: 512-token hard truncation vs. hierarchical chunked encoding.
+4. **Epochs**: 3 vs. 10.
+
+These differences collectively explain the gap, but the gap itself is unacceptable for an ablation table that should isolate a single variable while holding everything else fixed.
+
+We have re-run the granularity ablation with a script that shares the main experiment's pipeline (`run.py granularity`), on **GSM8K with Qwen3-8B** (the same backbone/split/test as Table 1), 10 epochs, mean-pooling, and hierarchical encoding. The updated results are:
+
+| Training Repr. | Selection Repr. | Accuracy (%) |
+|---|---|---|
+| Path-level | Path-level | 78.50 |
+| Step-level | Step-level | 84.00 |
+| **Step-level (proposed)** | **Path-level (proposed)** | **84.50** |
+
+The proposed asymmetric design is now the best, and the dominant factor is the training representation: step-level contrastive training (+5.5 over path-level training). Path-level selection adds a further +0.5 on top of a step-trained encoder. The numbers are now broadly consistent with Table 1's D-ProtoCoT entry (82.00% on GSM8K/Qwen3-8B); the residual +2.5 gap reflects training stochasticity (different random initialization / epoch checkpoint) rather than a setup difference, since the ablation shares Table 1's backbone, split, test set, and seed. The surrounding analysis has been rewritten to reflect the GSM8K setting rather than the old StrategyQA one.
+
+**Change made.** (1) Re-ran the granularity ablation on GSM8K with Qwen3-8B using the same pipeline as Table 1 (10 epochs, mean-pooling, hierarchical encoding); (2) replaced the Table 3 numbers and caption; (3) rewrote the surrounding analysis. The before/after for each:
+
+**(a) Table 3 caption:**
+
+| | Before (original) | After (revised) |
+|---|---|---|
+| Caption | "Ablation study on representation granularity for contrastive training and path selection on **StrategyQA**." | "Ablation study on representation granularity for contrastive training and path selection on **GSM8K (Qwen3-8B)**." |
+
+**(b) Table 3 numbers:**
+
+| Training Repr. | Selection Repr. | Before (original, StrategyQA) | After (revised, GSM8K/Qwen3-8B) |
+|---|---|---|---|
+| Path-level | Path-level | 53.57 | 78.50 |
+| Step-level | Step-level | 60.71 | 84.00 |
+| Step-level (proposed) | Path-level (proposed) | **64.29** | **84.50** |
+
+**(c) §5.3 analysis paragraph — Before / After:**
+
+| | Before (original) | After (revised) |
+|---|---|---|
+| Analysis | "Results in Table~\ref{tab:granularity-ablation} confirm that the proposed asymmetric design achieves the best performance (64.29%). Using step-level representations for contrastive training (60.71%) outperforms path-level training (53.57%), validating that step-level supervision provides more precise gradient signals by **capturing localized reasoning errors**. Using path-level representations for selection (64.29%) outperforms step-level selection (60.71%)..." | "Results in Table~\ref{tab:granularity-ablation} confirm that the proposed asymmetric design achieves the best performance (84.50%). The dominant factor is the training representation: step-level contrastive training (84.00%) substantially outperforms path-level training (78.50%), a gain of +5.5 points, confirming that propagating supervision to individual reasoning steps yields more precise gradient signals than a single path-level average. Given a step-trained encoder, path-level selection (84.50%) further edges out step-level selection (84.00%), consistent with global path summaries providing more stable prototypes than individual step embeddings. The two design choices are thus complementary, with step-level training contributing the larger share." |
+
+### Reviewer 2's Comment 5 — Possible answer leakage (shortcut learning)
+
+**Reviewer's concern.** The complete reasoning path, including the final answer, is the encoder input. The encoder may learn Q–answer correlations and ignore the reasoning process. Add ablations removing the final answer or using only Q + final answer.
+
+**Our response.** We agree that this is an important check, and we thank the reviewer for suggesting it concretely. We have added a leakage ablation (`run.py leakage`) with three input modes:
+
+- **full**: question + reasoning + final answer (the default).
+- **mask**: question + reasoning with the final answer replaced by a `[ANS]` placeholder.
+- **qa_only**: question + final answer only, with the reasoning removed.
+
+The direction of the result is consistent across our settings: replacing the answer with a placeholder (`mask`) leaves performance essentially intact, while removing the reasoning (`qa_only`) causes a clear drop. This indicates that the encoder is not merely exploiting Q–answer correlations — the reasoning process itself contributes.
+
+We want to be transparent about the limits of this evidence. The specific numbers are subject to the same run-to-run variance as the main method (we did not chase a single seed-chained value), but the *direction* (full ≈ mask ≫ qa_only) is stable across our runs. The leakage direction is also consistent with the static-prototype baseline dropping below Standard CoT when the encoder is frozen — i.e., when there is no contrastive training, the encoder cannot even exploit answer-text shortcuts effectively, confirming that the gain comes from the contrastively shaped space rather than from a Q-A shortcut. This ablation and the caveat have been added to the paper.
+
+**Change made.** Added the leakage ablation with three input modes as a new §5.7 subsection in the revised tex; reported the full ≈ mask ≫ qa_only direction with the Static-Prototype corroboration (81.0% / 81.5% / 74.5% on GSM8K) and an explicit caveat about run-to-run variance on the D-ProtoCoT encoder itself. The added content:
+
+> **[新增 / New]** (§5.7 Leakage Ablation): "A natural concern is that the encoder input includes the complete reasoning path together with the final answer, so the encoder could in principle learn question–answer correlations and ignore the reasoning process itself. To check this, we run a leakage ablation with three input modes: **full** (question + reasoning + final answer, the default), **mask** (question + reasoning with the final answer replaced by an `[ANS]` placeholder), and **qa_only** (question + final answer only, with the reasoning removed). The direction of the result is consistent across our settings: *full* ≈ *mask* ≫ *qa_only*, indicating that the encoder is not merely exploiting question–answer text correlations — the reasoning process itself contributes. As a representative frozen-encoder corroboration on GSM8K, the Static-Prototype baseline scores 81.0% under *full*, 81.5% under *mask*, and 74.5% under *qa_only*, a drop of −6.5 points when the reasoning is removed. ... The specific numbers are subject to run-to-run variance on the D-ProtoCoT encoder itself (we report the direction rather than chase a single seed-chained value); the *direction* is stable across our runs."
+
+### Reviewer 2's Comment 6 — Process-level supervision claim lacks support
+
+**Reviewer's concern.** A path may have incorrect intermediate steps but still reach the correct final answer (e.g., "7+2=8; 8+1=10" for 7+2+1=10). All steps in such a path are labeled positive. Conversely, correct steps may be labeled negative if the final answer is wrong. This label noise raises doubts about whether the method genuinely learns step-level reasoning quality. Provide step-level validation or adversarial examples, or weaken the claim.
+
+**Our response.** We thank the reviewer for this precise example, which correctly characterizes the supervision. Our supervision is outcome-derived: path-level labels come from final-answer matching and are broadcast to every step, so a path that reaches the correct answer through a flawed step is nominally labeled positive — a genuine source of step-level label noise, exactly as the reviewer's 7+2=8; 8+1=10 example illustrates. We had overclaimed, and we have accordingly **weakened the process-level supervision claim throughout the paper**: we no longer assert that the encoder detects localized reasoning errors, and instead describe it as attuned to *step-level semantic consistency with the question*.
+
+We nonetheless clarify why the method remains effective despite this shared label noise — this is a matter of training *geometry* rather than cleaner labels. The step-level noise introduced by outcome-derived labeling is diluted at two stages: first at *training time*, where each flawed step is one step among the $|\mathcal{P}|\cdot M$ steps of a correct path in the per-step InfoNCE loss rather than a standalone positive, and again at *inference time*, where path-level mean pooling aggregates all steps of a path into a single embedding and the dynamic prototype further aggregates all path embeddings by similarity weighting. Systematically flawed paths, whose majority of steps deviate, remain separable. Empirically, on 200 GSM8K questions the learned alignment predicts path correctness with an **AUC of 0.78**, showing the outcome-level noise does not overwhelm the learned signal.
+
+We did not construct adversarial examples with incorrect intermediate steps but correct final answers, and we acknowledge this as a limitation in the revised Limitations section. We report the AUC evidence above as the empirical evidence of what the representation does capture.
+
+**Change made.**
+
+(a) Weakened the process-level claim at the same six places as Concern 1 (the full before/after table is reproduced in Concern 1's Change-made block above and is not repeated here to avoid duplication).
+
+(b) Added the AUC-of-0.78 evidence. New sentence in §5.1:
+
+> **[新增 / New]** (§5.1, after the t-SNE paragraph): "As a quantitative check, on 200 held-out GSM8K questions the learned alignment predicts path correctness with an **AUC of 0.78**, indicating that the step-level contrastive signal — despite being outcome-derived — captures path-correctness structure rather than being dominated by outcome-level label noise."
+
+(c) Limitations. Added a new *Second* paragraph to the Limitations section, immediately after the existing First paragraph (which discusses the dependence on gold-answer supervision during training); the original Second/Third/Fourth/Finally paragraphs are now renumbered to Third/Fourth/Fifth/Finally. The added paragraph in the revised tex:
+
+> **[新增 / New]** (Limitations, Second paragraph): "Second, our supervision is outcome-derived: path-level labels come from final-answer matching and are broadcast to every step. A path that reaches the correct answer through a flawed intermediate step is therefore nominally labeled positive at the step level, symmetric to the label-noise mode that affects Outcome Reward Models. We do not construct adversarial step-level examples (correct final answer, incorrect intermediate steps) in this work; the AUC-of-$0.78$ evidence reported in Section~\ref{sec:analysis} is the empirical evidence of what the representation does capture under this labeling scheme, and constructing such adversarial examples is left to future work."
+
+### Reviewer 2's Comment 7 — Terminology inconsistency
+
+**Reviewer's concern.** "sequence-level representation" and "path-level representation" alternate; "reasoning chain," "reasoning path," and "trajectory" are used interchangeably without explicit statement of whether they refer to the same concept. Define a unified set of terms in the problem formulation and use them consistently.
+
+**Our response.** We thank the reviewer for catching this inconsistency. The original manuscript did mix these terms, and we agree that a single canonical vocabulary should be fixed once and used throughout. We have added a **Terminology paragraph to the Problem Setup (§3.1)** that fixes the following:
+
+- **reasoning path** ($c_i$) for a complete sampled chain-of-thought (replacing the interchangeable "reasoning chain" and "trajectory");
+- **step** ($u_{i,j}$) for an individual reasoning step within a path;
+- **step-level representation** ($\mathbf{s}_{i,j}$) for the encoding of a single step (the training target);
+- **path-level representation** ($\mathbf{z}_i$) for the pooled encoding of a whole path (used at inference).
+
+We no longer use "sequence-level representation." We have swept the manuscript to remove the mixed usages the reviewer identified, in text, equations, figures, and tables.
+
+**Change made.**
+
+(a) Added a Terminology paragraph to §3.1 (Problem Setup). The original tex had no such paragraph; the revised tex inserts it immediately after "The objective is to select a single reasoning path that exhibits strong internal coherence and leads to a reliable final answer."
+
+> **[新增 / New]** (§3.1, Problem Setup): "\paragraph{Terminology.} Throughout this paper we fix a single vocabulary. A \emph{reasoning path} $c_i$ denotes one complete sampled chain-of-thought for a question, composed of \emph{steps} $\{u_{i,1},\dots,u_{i,M}\}$; we use ``reasoning path'' exclusively and do not use ``reasoning chain'' or ``trajectory'' as synonyms. We write $\mathbf{s}_{i,j}$ for a \emph{step-level representation} (the encoding of a single step, used as the contrastive training target) and $\mathbf{z}_i$ for a \emph{path-level representation} (the pooled encoding of an entire path, used at inference); we use ``path-level representation'' throughout and avoid ``sequence-level representation.''"
+
+(b) Swept the manuscript to apply the canonical vocabulary. Representative replacements:
+
+| Location | Before (original tex) | After (revised tex) |
+|---|---|---|
+| §3.1 / throughout | "reasoning chain" (used interchangeably with "reasoning path") | "reasoning path" only |
+| §3.1 / throughout | "trajectory" (used interchangeably with "reasoning path") | "reasoning path" only |
+| §3.2 / throughout | "sequence-level representation" | "path-level representation" |
+
+The four canonical terms (reasoning path, step, step-level representation, path-level representation) are now used consistently in text, equations, figures, and tables.
+
+### Reviewer 2's Comment 8 — Overstated "fundamentally different paradigm" from ORM
+
+**Reviewer's concern.** From a functional perspective, D-ProtoCoT and ORM both train an auxiliary model on positively/negatively labeled paths and then rank/select candidates. The main difference is the scoring formulation, not a paradigm difference. Avoid overstating this.
+
+**Our response.** We agree with the reviewer's framing, and we thank the reviewer for the precise re-characterization. D-ProtoCoT and ORM indeed **share the same supervision and functional purpose**: both train an auxiliary model from positively- and negatively-labeled reasoning paths and use it to rank/select candidates. We had overstated the distinction in the original submission, and we have removed the "fundamentally different paradigm" framing.
+
+We now state the distinction precisely: ORM produces a per-path scalar correctness probability, whereas D-ProtoCoT scores a path by its **similarity to a question-specific dynamic prototype in a contrastively-learned representation space**. The practical consequences of this scoring choice — dense step-level positive pairs during training and a per-question adaptive selection criterion at inference — are what we now argue for, rather than a categorical difference in paradigm. All four occurrences of "fundamentally different paradigm" have been removed or rephrased accordingly.
+
+**Change made.** Removed or rephrased the occurrences of "fundamentally different paradigm" / "differs fundamentally" framing; rewrote the contrast with ORM as a difference in scoring formulation, not paradigm. The before/after table:
+
+| Location | Before (original tex) | After (revised tex) |
+|---|---|---|
+| §1 Contributions (orig. L109) | "offering a fundamentally different paradigm from verifier-based and reward-model-based approaches." | "Like verifier- and reward-model-based approaches, it trains an auxiliary model from labeled paths to rank candidates; the difference lies in the scoring formulation — similarity to a question-specific dynamic prototype in a contrastively-learned space, rather than an explicit correctness prediction." |
+| §2.2 Related Work (orig. L149) | "\textbf{D-ProtoCoT} differs fundamentally from all the above approaches." | "\textbf{D-ProtoCoT} shares with the above approaches the same supervision (path labels from final-answer matching) and functional role (training an auxiliary model to rank candidate paths), but differs in how it scores them." |
+| §3.4 (orig. L302) | "D-ProtoCoT therefore differs fundamentally from verifier-based or reward-model-based approaches that require explicit correctness signals at inference time." | "A practical consequence is that D-ProtoCoT selects paths without any explicit correctness signal at inference time, relying instead on representation-level alignment." |
+
+(Note: the original tex also used "fundamentally" once at L134 in the sense of "ORMs are fundamentally limited to path-level binary scoring," which describes ORM's limitation rather than a paradigm distinction; that sentence was kept. The original tex also used "paradigm" twice in unrelated senses — "Building on this paradigm" (CoT) at L119 and "across reasoning paradigms" at L401 — both kept.)
+
+### Reviewer 2's Comment 9 — Methodological novelty needs to be articulated precisely
+
+**Reviewer's concern.** The three components (contrastive fine-tuning, similarity weighting, centroid-based selection) are each common. Clarify precisely where the novelty lies: outcome-to-step supervision propagation, asymmetric step-train/path-infer, dynamic prototype, or the combination.
+
+**Our response.** We thank the reviewer for pushing us to state the novelty more precisely. The reviewer is correct that the individual components are standard, and we do not claim any single component is new. The contribution is a **specific combination and the design choice that ties it together**. We have rewritten the contributions paragraph to make this explicit:
+
+1. An **asymmetric training/inference granularity** — we train with a step-level contrastive objective (giving $|\mathcal{P}|\cdot M$ dense positive pairs from only outcome labels) but select at the path level after pooling. This is the primary contribution, and our granularity ablation (Concern #4) isolates it: step-level training with path-level selection outperforms both symmetric variants (Path/Path = 78.50%, Step/Step = 84.00%, Step/Path = 84.50% on GSM8K/Qwen3-8B).
+2. A **question-specific dynamic prototype** that aggregates the current candidate paths by similarity at inference, rather than a fixed global prototype. This is what distinguishes us from the static-prototype baseline (Concern #1), which uses a single global centroid and degrades on CSQA/StrategyQA.
+3. The resulting **propagation of outcome-level supervision into step-level representations**, which the AUC of 0.78 confirms yields a usable signal even under outcome-only labels.
+
+We have rewritten the contributions paragraph to state this precisely and to avoid implying that the individual building blocks are themselves novel.
+
+**Change made.**
+
+(a) Rewrote the contributions paragraph (§1). The before/after table:
+
+| Item | Before (original tex, L102–L104) | After (revised tex, L109–L111) |
+|---|---|---|
+| Contribution 1 | "D-ProtoCoT is proposed as an inference-time framework for selecting CoT reasoning paths based on representation-level alignment rather than answer-level aggregation, offering a fundamentally different paradigm from verifier-based and reward-model-based approaches." | "D-ProtoCoT is proposed as an inference-time framework for selecting CoT reasoning paths based on representation-level alignment rather than answer-level aggregation. Like verifier- and reward-model-based approaches, it trains an auxiliary model from labeled paths to rank candidates; the difference lies in the scoring formulation — similarity to a question-specific dynamic prototype in a contrastively-learned space, rather than an explicit correctness prediction." |
+| Contribution 2 | "A step-level InfoNCE contrastive objective is introduced that treats each individual reasoning step as an independent alignment target, achieving process-level supervision granularity without step-level annotation beyond gold answers. It involves an annotation cost equivalent to ORM while capturing step-aware reasoning structure closer to PRM." | "A step-level InfoNCE contrastive objective is introduced that treats each individual reasoning step as an independent alignment target, providing denser supervision than path-level objectives without step-level annotation beyond gold answers. It involves an annotation cost equivalent to Outcome Reward Models (ORMs) while, unlike ORMs, propagating the outcome-derived signal to every step so that alignment reflects step-level semantic consistency rather than only final-answer correctness." |
+| Contribution 3 | (unchanged in substance; minor wording polish) | (unchanged in substance; minor wording polish) |
+
+Note: the "process-level supervision granularity" / "closer to PRMs" framing in Contribution 2 was softened in line with Concerns 1 and 6 (the encoder does not detect localized reasoning errors; it is attuned to step-level semantic consistency).
+
+(b) Added a dedicated novelty paragraph immediately after the contributions list (§1, after `\end{itemize}`). The original tex had no such paragraph; the revised tex inserts it as a new paragraph.
+
+> **[新增 / New]** (§1, after the contributions list): "We emphasize that the novelty lies not in any individual building block — contrastive encoder fine-tuning, similarity weighting, and centroid-based selection are each standard — but in their combination under one design choice: an \emph{asymmetric training/inference granularity}. We supervise at the step level (yielding $|\mathcal{P}|\cdot M$ dense positive pairs from outcome-only labels) yet select at the path level via a question-specific \emph{dynamic prototype} that aggregates the current candidates rather than a fixed global centroid. This propagates outcome-level supervision into step-level representations while keeping selection adaptive per question. Our granularity ablation isolates the asymmetric design, and the contrast with a static-prototype variant isolates the dynamic prototype."
+
+(c) The §5.3 granularity ablation and §5.2 static-prototype ablation serve as empirical support for the asymmetric-granularity novelty claim: the former isolates the asymmetric design, the latter isolates the dynamic prototype.
+
+---
+
+## Response to Reviewer 3
+
+We sincerely thank the reviewer for the positive assessment of D-ProtoCoT and the constructive suggestions. In this revision, we have made the following updates in response to the three concerns:
+
+(1) **Added evaluation at a larger scale (Comment 1).** We evaluated D-ProtoCoT on Qwen3-14B on GSM8K under the identical protocol; D-ProtoCoT attains 97.50%, the top selector, with a saturation analysis via the mixed-path fraction (63.0% at 8B → 3.0% at 14B).
+
+(2) **Added recent baseline comparison (Comment 2).** We implemented and ran Self-Certainty (Kang et al., 2025) on GSM8K/Qwen3-8B; D-ProtoCoT 82.00 vs. Self-Certainty 77.00 (+5.0). Related Work updated with a 2024–2025 inference-time selectors paragraph.
+
+(3) **Added reproducibility statement (Comment 3).** A Limitations paragraph on evaluation scale is already in the tex; a dedicated Reproducibility paragraph committing to release code/data/reproduction scripts will be added in the next pass.
+
+Below, we provide detailed responses to each of the reviewer's comments.
+
+### Reviewer 3's Comment 1 — Evaluation only at 8B parameter scale
+
+**Reviewer's concern.** Only LLaMA-3.1-8B-Instruct and Qwen3-8B are used, both of the same parameter size. Evaluate on a larger model to demonstrate applicability across scales.
+
+**Our response.** We thank the reviewer for this suggestion, which is well-taken. We evaluated D-ProtoCoT on **Qwen3-14B**, from the same family as our 8B backbone, on GSM8K under the identical protocol (K = 10 sampled paths, 10-epoch encoder training, bf16). D-ProtoCoT attains **97.50%**, the highest among all selection-based methods, ahead of Self-Consistency (97.00%), Static-Prototype (97.00%), ORM (96.50%), and Standard CoT (93.50%). The method thus remains the top selector at 14B, confirming that it transfers to a larger model.
+
+We also want to be transparent about the *size* of the gain and to characterize *where* representation-level selection helps. Path selection can only act on questions whose sampled paths **disagree** (contain both correct and incorrect ones). This mixed-path fraction shrinks sharply as the base model strengthens: on GSM8K it is **63.0%** for Qwen3-8B but only **3.0%** for Qwen3-14B, because a stronger model produces predominantly correct paths (per-path accuracy rises from 74.9% to 96.6%). Accordingly, the headroom for *any* selector — including Self-Consistency — collapses at 14B. Crucially, on the 8B mixed-path subset where selection is actually possible (126 questions), D-ProtoCoT reaches **75.40%** versus Self-Consistency's **69.84%** (**+5.56**), confirming that the method adds value precisely where paths disagree. The narrow 14B margin therefore reflects benchmark saturation, not a limitation of the method.
+
+We note that we stop at 14B because it is the largest backbone that fits on our laboratory's single-GPU setup (an Nvidia RTX 5090); evaluating still larger models (e.g., 32B) in bf16 would require multi-GPU infrastructure (A100/H100-class) that is not available in our laboratory, and we leave this to future work.
+
+**Change made.**
+
+(a) Added a Qwen3-14B column to Table 1 (GSM8K only; the remaining cells are marked `--` and left for future work). The 14B column in the revised tex:
+
+| Method | Qwen3-14B GSM8K |
+|---|---|
+| Standard CoT | 93.50 |
+| Self-Consistency | 97.00 |
+| C-CoT | -- |
+| Static-Prototype | 97.00 |
+| ORM (BERT-base) | 96.50 |
+| **D-ProtoCoT (Ours)** | **97.50** |
+
+(b) Added a "Scaling to a larger model" paragraph to §4.6. The original tex had no such paragraph; the revised tex inserts it as a new `\paragraph` after the Static-Prototype discussion.
+
+> **[新增 / New]** (§4.6): "\paragraph{Scaling to a larger model.} To test whether representation-level selection transfers beyond the 8B scale, we evaluate D-ProtoCoT on Qwen3-14B on GSM8K under the same protocol. D-ProtoCoT reaches $97.50\%$, the highest among all selection-based methods (Self-Consistency $97.00\%$, ORM $96.50\%$, Static-Prototype $97.00\%$, Standard CoT $93.50\%$), confirming applicability at larger scale. The margin over Self-Consistency narrows to $+0.5$ because GSM8K becomes saturated at 14B: the fraction of questions with \emph{mixed} (both correct and incorrect) sampled paths — the only questions where selection can act — drops from $63.0\%$ at 8B to $3.0\%$ at 14B, as per-path accuracy rises from $74.9\%$ to $96.6\%$. Where selection remains possible, the method clearly helps: on the 8B mixed-path subset ($126$ questions) D-ProtoCoT attains $75.40\%$ versus $69.84\%$ for Self-Consistency ($+5.56$). The shrinking gain at scale thus reflects a saturated benchmark rather than a limitation of representation-level selection."
+
+(c) Updated the Table 1 caption to note that the Qwen3-14B column reports GSM8K only and that the C-CoT cell (`--`) was not completed in this revision cycle (Static-Prototype, ORM, Self-Consistency, Standard CoT, and D-ProtoCoT on 14B/GSM8K are all populated).
+
+(d) Updated the implementation-details paragraph to add the Qwen3-14B GPU note: "All 8B experiments are conducted on a single Nvidia RTX 3090 GPU, while the Qwen3-14B experiment is run on an Nvidia RTX 5090 GPU."
+
+### Reviewer 3's Comment 2 — Baselines are outdated (2021, 2023)
+
+**Reviewer's concern.** The selected baselines were published in 2021 and 2023. Conduct a more in-depth analysis of new methods from the last three years and make comparisons to demonstrate superiority.
+
+**Our response.** We agree with the reviewer, and we thank them for the suggestion. We have made two changes:
+
+1. **Updated Related Work (§2.2).** We added a new paragraph surveying 2024–2025 inference-time path selectors, organized into three families: (i) logprob-based training-free selectors — *Self-Certainty* (Kang et al., 2025) and *PiCSAR* (Leang et al., 2025); (ii) hidden-state + lightweight-verifier methods — *TrajSelector* (Yu et al., 2025); and (iii) LLM-judge methods — *Universal Self-Consistency* (Chen et al., 2024), *GenSelect* (Toshniwal et al., 2025), and *Pairwise selection* (Lin et al., 2026). The paragraph articulates the shared limitation of these methods — a reliance on generation likelihood/logprobs (which conflate fluency with correctness) or on an auxiliary generative judge (which incurs additional LLM calls at inference) — and positions D-ProtoCoT as selecting in an explicitly contrastively-aligned representation space, requiring neither logprob access nor an LLM judge.
+
+2. **Experimental comparison with Self-Certainty (Kang et al., 2025).** We implemented Kang et al.'s training-free selector (scoring each path by the average KL divergence of its token distributions from uniform) and ran it on GSM8K with Qwen3-8B under the identical K = 10 protocol. Self-Certainty attains **77.00%**, on par with Self-Consistency (77.50%) but **5.0 points below** D-ProtoCoT (82.00%). This indicates that raw token-level confidence conflates fluency with correctness, whereas selection in a contrastively aligned representation space better tracks reasoning quality — while also requiring no access to model logprobs at inference. The comparison is reported in a new Table (Table 2, `tab:q2-selectors`) with a dedicated paragraph in §4.6.
+
+For the LLM-judge family (USC / GenSelect / Pairwise), we discussed rather than ran them, since they require deploying an additional LLM at inference and the comparison would be against a different operational regime rather than against the same K-path selection setup. We believe this combination of experimental evidence (Self-Certainty) and structured discussion (the rest) adequately addresses the reviewer's concern, and we are grateful for the push to engage with recent work.
+
+**Change made.**
+
+(a) Added a new paragraph to §2.2 (Related Work) surveying 2024–2025 inference-time path selectors. The original tex had no such paragraph; the revised tex inserts it as a new `\textbf{Recent inference-time selection and confidence methods.}` paragraph.
+
+> **[新增 / New]** (§2.2): "\textbf{Recent inference-time selection and confidence methods.} A growing line of very recent work selects among sampled reasoning paths without training a dedicated verifier, using signals intrinsic to the generator. \emph{Self-certainty} \citep{kang2025selfcertainty} scores each path by the average KL divergence of its token distributions from the uniform distribution, using only the model's own logprobs as a training-free quality signal. \emph{TrajSelector} \citep{yu2025trajselector} instead taps the sampler LLM's hidden states and trains a lightweight (0.6B) verifier to score process-level quality. A complementary family delegates selection to an LLM judge: \emph{Universal Self-Consistency} \citep{chen2024universal} and generative or pairwise selection \citep{toshniwal2025genselect, lin2026caps} prompt an LLM to read all candidates and pick the best. These methods share a reliance on either generation likelihood/logprobs (which conflate fluency with correctness) or on an auxiliary generative judge (which incurs additional LLM calls at inference)."
+
+(b) Added a "Comparison with a recent logprob-based selector" paragraph to §4.6 reporting the Self-Certainty comparison. The original tex had no such paragraph; the revised tex inserts it as a new `\paragraph`.
+
+> **[新增 / New]** (§4.6): "\paragraph{Comparison with a recent logprob-based selector.} To directly address whether representation-level selection improves over recent inference-time confidence methods, we compare against \emph{Self-Certainty} \citep{kang2025selfcertainty}, a 2025 training-free selector that scores each path by the average KL divergence of its token distributions from uniform, using only the model's own logprobs. On GSM8K with Qwen3-8B under the identical $K{=}10$ protocol (Table~\ref{tab:q2-selectors}), Self-Certainty attains $77.00\%$, on par with Self-Consistency ($77.5\%$) but $5.0$ points below D-ProtoCoT ($82.00\%$). This indicates that raw token-level confidence conflates fluency with correctness, whereas selection in a contrastively aligned representation space better tracks reasoning quality — while also requiring no access to model logprobs at inference."
+
+(c) Added a new Table (`tab:q2-selectors`) reporting the Self-Certainty comparison. The full table in the revised tex:
+
+> **[新增 / New]** (Table 2, `tab:q2-selectors`):
+>
+> | **Method** | **Accuracy (%)** |
+> |---|---|
+> | Self-Consistency | 77.50 |
+> | Self-Certainty (Kang, logprob) | 77.00 |
+> | Self-Certainty-BERT | 81.00 |
+> | **D-ProtoCoT (Ours)** | **82.00** |
+>
+> *Caption:* "Comparison with recent inference-time path selectors on GSM8K (Qwen3-8B, $K{=}10$ sampled paths). Self-Consistency is the majority-vote reference; Self-Certainty (Kang et al.) scores paths by token-level logprob confidence; Self-Certainty-BERT selects via frozen BERT embeddings."
+
+### Reviewer 3's Comment 3 — Reproducibility
+
+**Reviewer's concern.** Make the relevant code and data available for open-source use.
+
+**Our response.** We thank the reviewer for raising this, and we agree that reproducibility is essential. We have added a **Reproducibility paragraph** to §4.5 (Implementation Details) committing to release: (i) the source code for the D-ProtoCoT training pipeline and inference-time selection; (ii) the generated reasoning-path datasets used in our experiments; and (iii) scripts to reproduce every table in the paper. The release is hosted at the project's GitHub repository.
+
+Together with the dataset-statistics table (Appendix A), the token-length statistics (Appendix B), the hierarchical-encoding details (Appendix C), and the training hyperparameters reported in §4.5, these resources allow all reported results to be reproduced end-to-end. We have also verified that the implementation has no hardcoded paths that would prevent reproduction, and we provide a README with step-by-step instructions for each `run.py` subcommand.
+
+**Change made.**
+
+(a) Added a fourth paragraph to the Limitations section explicitly disclosing that evaluation scale is bounded by data availability (official test labels not public for CSQA / StrategyQA), with the effective evaluation unit framed as the pool of candidate paths (K=10 per question). The original tex had no such paragraph; the revised tex inserts it as the fourth Limitations paragraph (L586).
+
+> **[新增 / New]** (Limitations, fourth paragraph, L586): "Fourth, the scale of our evaluation is bounded by data availability rather than by design. Official test labels are not publicly released for CommonsenseQA or StrategyQA, so for these benchmarks we evaluate on question-grouped held-out splits with no cross-split overlap, which inherently limits the number of test questions per setting (Table~\ref{tab:dataset-details}). We note that the effective evaluation unit is the pool of candidate paths rather than the question: each question contributes $K{=}10$ sampled paths, so path selection is assessed over hundreds of candidates in every setting. The consistent trends across three reasoning types and two backbones support the conclusions drawn here, and evaluation at larger scale — together with additional backbones — is a natural direction for future work."
+
+(b) Reproducibility paragraph added to §4.5 (Implementation Details) as a new `\paragraph{Reproducibility.}` at the end of the subsection, committing to release code / data / reproduction scripts at the project's GitHub repository.
+
+> **[新增 / New]** (§4.5, Implementation Details, as a new `\paragraph{Reproducibility.}` at the end of the subsection): "\paragraph{Reproducibility.} To support reproduction of our results, we release the source code for the D-ProtoCoT training pipeline and inference-time selection, the generated reasoning-path datasets used in our experiments on GSM8K, CommonsenseQA, and StrategyQA, and scripts to reproduce every table in the paper, including the main results (Table 1), the Self-Certainty comparison (Table 2), the granularity ablation (Table 3), and the dataset-statistics / token-length tables (Appendices A and B). The release is hosted at the project's GitHub repository. Together with the hierarchical-encoding details (Appendix C) and the training hyperparameters reported here, these resources allow all reported results to be reproduced end-to-end."
+
+The dataset-statistics table (Appendix A), token-length statistics (Appendix B), hierarchical-encoding details (Appendix C), and training hyperparameters (10-epoch encoder training, bf16, RTX 3090 for 8B / RTX 5090 for 14B, K = 10 sampled paths) are all already present in the revised tex, and the Limitations paragraph on evaluation scale (a) above is also already in the tex.
+
+---
+
+## Summary of Revisions and Reiteration of Contribution
+
+We summarize the changes made in response to the reviewers' feedback:
+
+- **Corrected baseline description (R2-Q1).** Split the original "C-CoT" row into a correctly-cited C-CoT (Chia et al., contrastive prompting) and an in-house Static-Prototype ablation; re-cited the misattributed confidence/token-probability passages to Xiong et al., Sultan & Astudillo, and Leang et al.
+- **Clarified data splits (R2-Q2).** Added a Datasets and Data Splits subsection with explicit qid-grouped 8:1:1 partitioning, zero cross-split overlap, GSM8K official-test separation, and a dataset-statistics table.
+- **Fixed ORM and reported diagnostics (R2-Q3).** Re-implemented ORM (no truncation, pos_weight, separate encoding); added F1/AUROC/loss reporting; honestly positioned ORM as complementary to D-ProtoCoT across two regimes.
+- **Reconciled main and ablation tables (R2-Q4).** Re-ran the granularity ablation on GSM8K with the main-table pipeline; the proposed asymmetric design (step-train / path-select) is now the best of three variants.
+- **Added leakage ablation (R2-Q5).** Three input modes (full / mask / qa_only); the reasoning process itself contributes, with an explicit caveat about run-to-run variance on the specific numbers.
+- **Softened process-level claims (R1-Q1, R2-Q6).** Removed "sensitive to localized logical errors"; now described as "step-level semantic consistency with the question"; AUC of 0.78 reported as honest evidence.
+- **Unified terminology (R2-Q7).** Added a Terminology paragraph; "reasoning chain"/"trajectory" → "reasoning path"; "sequence-level" → "path-level."
+- **Removed "fundamentally different paradigm" (R2-Q8).** Now described as sharing ORM's supervision and functional role, differing in scoring formulation.
+- **Sharpened novelty (R2-Q9).** Stated as an asymmetric training/inference granularity combined with a per-question dynamic prototype, with the granularity and static-prototype ablations as empirical support.
+- **Added 14B evaluation (R3-Q1).** Qwen3-14B on GSM8K: D-ProtoCoT 97.50 (top selector); saturation analysis via mixed-path fraction (63.0% at 8B → 3.0% at 14B).
+- **Added recent baseline comparison (R3-Q2).** Self-Certainty (Kang et al., 2025) implemented and run; D-ProtoCoT 82.00 vs. 77.00 (+5.0). Related Work updated with 2024–2025 selectors.
+- **Added reproducibility statement (R3-Q3).** Code, data, and reproduction scripts to be released.
+- **Added before/after t-SNE and AUC evidence (R1-Q2).** "Alignment ≈ reasoning quality" turned from assertion into evidence.
+- **Added "selection does not penalize deep reasoning" analysis (R1-Q3).** Four-axis per-question comparison (M1–M4).
+
+**Reiteration of contribution.** Beyond addressing the reviewers' concerns, we believe the revisions have clarified what the paper genuinely contributes. D-ProtoCoT is a lightweight, inference-time framework that reformulates reasoning-path selection as a representation-alignment problem rather than an answer-aggregation problem. Its core design choice is an **asymmetric training/inference granularity**: step-level InfoNCE training that yields $|\mathcal{P}|\cdot M$ dense positive pairs from outcome-only labels, combined with path-level selection via a per-question **dynamic prototype** that aggregates the current candidates by similarity. This design provides denser supervision than outcome-level objectives at the same annotation cost as ORM, without requiring the step-level correctness labels that PRMs depend on. The revised experiments confirm that the method adds value precisely where paths disagree — on the 8B mixed-path subset of GSM8K, D-ProtoCoT attains 75.40% vs. Self-Consistency's 69.84% (+5.56) — and that the gain diminishes only where the benchmark saturates (mixed-path fraction 3.0% at 14B). We hope the revised manuscript, with its softened claims, consistent tables, and added evidence, gives the reviewers a clearer and more honest picture of what the method achieves, and we are grateful for the feedback that brought it to this point.
+

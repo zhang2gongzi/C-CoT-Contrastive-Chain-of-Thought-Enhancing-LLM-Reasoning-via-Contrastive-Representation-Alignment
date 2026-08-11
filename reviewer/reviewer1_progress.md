@@ -242,7 +242,6 @@ python newrun/viz_reviewer1_q2.py --before_only \
 
 ## ✅ 已落地进 tex（2026-08-03，cas-dc-template.tex）
 
-导师不再审论文，作者自行定稿。三条草稿已全部写进 `cas-dc-template.tex`。
 
 **Q1 措辞软化（实际 6 处，比原计划多 2 处，避免自相矛盾）**
 | 位置 | 章节 | 改为 |

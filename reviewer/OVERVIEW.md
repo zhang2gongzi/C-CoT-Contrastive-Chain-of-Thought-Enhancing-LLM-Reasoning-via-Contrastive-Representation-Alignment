@@ -53,7 +53,7 @@
 ## 审稿人 #3（3 条）
 | 条 | 问题 | 状态 |
 |---|---|---|
-| Q1 | 只测 8B，要更大模型 | 🟡 14B 五数已跑（D-ProtoCoT 97.5 最高，饱和 +0.5）；rebuttal/正文草稿就绪；**卡混合题分析 `XX%`** |
+| Q1 | 只测 8B，要更大模型 | 🟡 14B 七数已跑（Static 97.00 / ORM 96.50 / D-ProtoCoT 97.5 最高，饱和 +0.5，2026-08-11 补 Static/ORM 两格）；rebuttal/正文草稿就绪；**卡混合题分析 `XX%`** |
 | Q2 | 基线太旧 | 🟡 §2.2 新基线综述已进 tex；✅ Self-Certainty(Kang,logprob) 8B/GSM8K **实测 77.00**（D-ProtoCoT 82 +5.0）已进 tex Experiments；Self-Certainty-BERT 81.00（打平，不写超过）|
 | Q3 | 可复现性 | ⚪ 决定交 rebuttal 时再动（仓库改名、清硬编码路径、README）|
 

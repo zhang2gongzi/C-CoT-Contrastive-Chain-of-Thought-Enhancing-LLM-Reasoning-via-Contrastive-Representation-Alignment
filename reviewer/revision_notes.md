@@ -4,7 +4,7 @@ August 11, 2026
 
 Dear Editor and Reviewers,
 
-We would like to sincerely thank the Editor for providing us with the opportunity to revise our manuscript, and the anonymous reviewers for their careful reading and insightful comments. Based on the comments from the Editor and three reviewers, we have made revisions to our manuscript. In the following attachment, we provide our responses to all the issues raised.
+We would like to sincerely thank the Editor for providing us with the opportunity to revise our manuscript, and the reviewers for their careful reading and insightful comments. Based on the comments from the Editor and three reviewers, we have made revisions to our manuscript. In the following attachment, we provide our responses to all the issues raised.
 
 Thank you again for your time and consideration. We look forward to hearing from you.
 

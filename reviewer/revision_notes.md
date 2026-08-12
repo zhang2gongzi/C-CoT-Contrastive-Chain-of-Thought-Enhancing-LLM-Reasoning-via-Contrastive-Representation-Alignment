@@ -530,7 +530,7 @@ Below, we provide detailed responses to each of the reviewer's comments.
 
 **reviewer's concern.** Only LLaMA-3.1-8B-Instruct and Qwen3-8B are used, both of the same parameter size. Evaluate on a larger model to demonstrate applicability across scales.
 
-**Our response.** We thank the reviewer for this suggestion, which is well-taken. We evaluated D-ProtoCoT on **Qwen3-14B**, from the same family as our 8B backbone, on GSM8K under the identical protocol (K = 10 sampled paths, 10-epoch encoder training, bf16). D-ProtoCoT attains **97.50%**, the highest among all selection-based methods, ahead of Self-Consistency (97.00%), Static-Prototype (97.00%), ORM (96.50%), and Standard CoT (93.50%). The method thus remains the top selector at 14B, confirming that it transfers to a larger model.
+**Our response.** We thank the reviewer for this suggestion, which is well-taken. We evaluated D-ProtoCoT on **Qwen3-14B**, from the same family as our 8B backbone, on GSM8K under the identical protocol (K = 10 sampled paths, 10-epoch encoder training, bf16). D-ProtoCoT attains **97.50%**, the highest among all selection-based methods, ahead of Self-Consistency (97.00%), Static-Prototype (97.00%), ORM (96.50%), C-CoT (95.50%), and Standard CoT (93.50%). The method thus remains the top selector at 14B, confirming that it transfers to a larger model.
 
 We also want to be transparent about the *size* of the gain and to characterize *where* representation-level selection helps. Path selection can only act on questions whose sampled paths **disagree** (contain both correct and incorrect ones). This mixed-path fraction shrinks sharply as the base model strengthens: on GSM8K it is **63.0%** for Qwen3-8B but only **3.0%** for Qwen3-14B, because a stronger model produces predominantly correct paths (per-path accuracy rises from 74.9% to 96.6%). Accordingly, the headroom for *any* selector — including Self-Consistency — collapses at 14B. Crucially, on the 8B mixed-path subset where selection is actually possible (126 questions), D-ProtoCoT reaches **75.40%** versus Self-Consistency's **69.84%** (**+5.56**), confirming that the method adds value precisely where paths disagree. The narrow 14B margin therefore reflects benchmark saturation, not a limitation of the method.
 
@@ -538,22 +538,22 @@ We note that we stop at 14B because it is the largest backbone that fits on our 
 
 **Change made.**
 
-(a) Added a Qwen3-14B column to Table 1 (GSM8K only; the remaining cells are marked `--` and left for future work). The 14B column in the revised tex:
+(a) Added a Qwen3-14B column to Table 1 (GSM8K only; the remaining datasets at 14B are marked `--` and left for future work). The 14B column in the revised tex:
 
 | Method | Qwen3-14B GSM8K |
 |---|---|
 | Standard CoT | 93.50 |
 | Self-Consistency | 97.00 |
-| C-CoT | -- |
+| C-CoT | 95.50 |
 | Static-Prototype | 97.00 |
 | ORM (BERT-base) | 96.50 |
 | **D-ProtoCoT (Ours)** | **97.50** |
 
 (b) Added a "Scaling to a larger model" paragraph to §4.6. The original tex had no such paragraph; the revised tex inserts it as a new `\paragraph` after the Static-Prototype discussion.
 
-> **[New]** (§4.6): "\paragraph{Scaling to a larger model.} To test whether representation-level selection transfers beyond the 8B scale, we evaluate D-ProtoCoT on Qwen3-14B on GSM8K under the same protocol. D-ProtoCoT reaches $97.50\%$, the highest among all selection-based methods (Self-Consistency $97.00\%$, ORM $96.50\%$, Static-Prototype $97.00\%$, Standard CoT $93.50\%$), confirming applicability at larger scale. The margin over Self-Consistency narrows to $+0.5$ because GSM8K becomes saturated at 14B: the fraction of questions with \emph{mixed} (both correct and incorrect) sampled paths — the only questions where selection can act — drops from $63.0\%$ at 8B to $3.0\%$ at 14B, as per-path accuracy rises from $74.9\%$ to $96.6\%$. Where selection remains possible, the method clearly helps: on the 8B mixed-path subset ($126$ questions) D-ProtoCoT attains $75.40\%$ versus $69.84\%$ for Self-Consistency ($+5.56$). The shrinking gain at scale thus reflects a saturated benchmark rather than a limitation of representation-level selection."
+> **[New]** (§4.6): "\paragraph{Scaling to a larger model.} To test whether representation-level selection transfers beyond the 8B scale, we evaluate D-ProtoCoT on Qwen3-14B on GSM8K under the same protocol. D-ProtoCoT reaches $97.50\%$, the highest among all selection-based methods (Self-Consistency $97.00\%$, ORM $96.50\%$, Static-Prototype $97.00\%$, C-CoT $95.50\%$, Standard CoT $93.50\%$), confirming applicability at larger scale. The margin over Self-Consistency narrows to $+0.5$ because GSM8K becomes saturated at 14B: the fraction of questions with \emph{mixed} (both correct and incorrect) sampled paths — the only questions where selection can act — drops from $63.0\%$ at 8B to $3.0\%$ at 14B, as per-path accuracy rises from $74.9\%$ to $96.6\%$. Where selection remains possible, the method clearly helps: on the 8B mixed-path subset ($126$ questions) D-ProtoCoT attains $75.40\%$ versus $69.84\%$ for Self-Consistency ($+5.56$). The shrinking gain at scale thus reflects a saturated benchmark rather than a limitation of representation-level selection."
 
-(c) Updated the Table 1 caption to note that the Qwen3-14B column reports GSM8K only and that the C-CoT cell (`--`) was not completed in this revision cycle (Static-Prototype, ORM, Self-Consistency, Standard CoT, and D-ProtoCoT on 14B/GSM8K are all populated).
+(c) Updated the Table 1 caption to note that the Qwen3-14B column reports GSM8K only (Static-Prototype, ORM, Self-Consistency, C-CoT, Standard CoT, and D-ProtoCoT on 14B/GSM8K are all populated; the 14B columns for CommonsenseQA and StrategyQA are left for future work).
 
 (d) Updated the implementation-details paragraph to add the Qwen3-14B GPU note: "All 8B experiments are conducted on a single Nvidia RTX 3090 GPU, while the Qwen3-14B experiment is run on an Nvidia RTX 5090 GPU."
 

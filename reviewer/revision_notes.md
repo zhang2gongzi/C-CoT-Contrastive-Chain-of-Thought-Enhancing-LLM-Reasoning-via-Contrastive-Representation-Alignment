@@ -123,21 +123,17 @@ We would also like to acknowledge, with thanks, that the reviewer's comment surf
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| Figure 2 source | `figure/tsne_cot100.png` (StrategyQA, single question, ~100 paths) | `figure/tsne_gsm8k_before.pdf` + `figure/tsne_gsm8k_after.pdf` (GSM8K, 200 questions × K=10) |
+| Figure 2 source | `figure/tsne_cot100.png` (StrategyQA, single question, ~100 paths) | `figure/tsne_gsm8k_before.pdf` + `figure/tsne_gsm8k_after.pdf` (GSM8K, 200 questions × K=10) — see the actual figures below |
+| Figure 2 (Left) | — | ![before](../newrun/tsne_gsm8k_before.png) |
+| Figure 2 (Right) | — | ![after](../newrun/tsne_gsm8k_after.png) |
 | Caption | "t-SNE visualization of BERT embeddings from 100 chain-of-thought paths generated for a StrategyQA example. Green points indicate correct reasoning paths, while red points indicate incorrect ones. Strong overlap suggests that surface-level semantic similarity alone is insufficient to distinguish reasoning quality." | "Test-path embeddings on GSM8K (K=10), colored by correctness (green: correct, red: incorrect). **Left:** before contrastive alignment (untrained encoder), correct and incorrect paths are intermixed. **Right:** after D-ProtoCoT alignment, the two classes become clearly separated. The learned alignment predicts path correctness with an **AUC of 0.78**." |
 | Quantitative measure | (none) | AUC = 0.78 on 200 GSM8K questions (K=10), reported in §5.1, §5.4, and §5.6 |
+
+**Figure 2 (revised).** Test-path embeddings on GSM8K (K=10), colored by correctness (green: correct, red: incorrect). **Left:** before contrastive alignment (untrained encoder), correct and incorrect paths are intermixed. **Right:** after D-ProtoCoT alignment, the two classes become clearly separated. The learned alignment predicts path correctness with an AUC of 0.78.
 
 (2) Added the corresponding quantitative sentence to Analysis §5.1 ("Why Naive Centroid Selection Fails"):
 
 > **[New]** (Analysis §5.1): "To verify that alignment reflects reasoning quality rather than being merely asserted, we visualize test-path embeddings before and after contrastive alignment (Fig.~\ref{fig:tsne}): intermixed correct/incorrect paths become linearly separable after training, and the alignment score predicts path correctness with an **AUC of 0.78** on 200 GSM8K questions (K=10)."
-
-The actual Figure 2 (before/after t-SNE pair) included in the revised manuscript:
-
-![Figure 2 (Left): before contrastive alignment](../newrun/tsne_gsm8k_before.png)
-
-![Figure 2 (Right): after D-ProtoCoT alignment](../newrun/tsne_gsm8k_after.png)
-
-**Figure 2 (revised).** Test-path embeddings on GSM8K (K=10), colored by correctness (green: correct, red: incorrect). **Left:** before contrastive alignment (untrained encoder), correct and incorrect paths are intermixed. **Right:** after D-ProtoCoT alignment, the two classes become clearly separated. The learned alignment predicts path correctness with an AUC of 0.78.
 
 ### reviewer 1's comment 3 — Selecting by similarity may punish deep reasoning
 

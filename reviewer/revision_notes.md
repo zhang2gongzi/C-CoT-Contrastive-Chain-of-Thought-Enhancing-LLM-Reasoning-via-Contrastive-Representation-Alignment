@@ -52,11 +52,11 @@ We sincerely thank the editors for the opportunity to revise and for the acknowl
 
 1. **Methodological claims softened to match what the supervision actually supports.** In response to the editors' concern about "unclear supervision validity" and the specific points raised by reviewer 1's comment 1 and reviewer 2's comment 6, we have removed all statements claiming sensitivity to localized step-level errors, and now describe the encoder as attuned to *step-level semantic consistency with the question*. We have also removed the "fundamentally different paradigm" framing (reviewer 2's comment 8) and repositioned the methodological novelty precisely as the combination of "an asymmetric training/inference granularity and a per-question dynamic prototype" (reviewer 2's comment 9), rather than overclaiming the originality of any single component.
 
-2. **Corrected implementation flaws and inconsistency in the existing experiments.** In response to reviewer 2's comment 3, we re-ran the ORM baseline after fixing three implementation bugs (512-token truncation, no class-balance weighting, joint Q-A [CLS] encoding), and now report the training/validation loss, F1, and AUROC. In response to comment 4, we re-ran the granularity ablation on GSM8K with the same pipeline as the main table so that the ablation and the main table are under a consistent protocol, allowing the asymmetric design to be validated under a unified setting.
+2. **Corrected implementation flaws and inconsistency in the existing experiments.** In response to reviewer 2's comment 3, we re-ran the ORM baseline after fixing three implementation bugs (512-token truncation, no class-balance weighting, joint Q-A [CLS] encoding), and now report the training/validation loss, F1, and AUROC. In response to reviewer 2's comment 4, we re-ran the granularity ablation on GSM8K with the same pipeline as the main table so that the ablation and the main table are under a consistent protocol, allowing the asymmetric design to be validated under a unified setting.
 
-3. **Added new experimental evidence and comparisons.** In response to reviewer 3's comment 1, we added a Qwen3-14B experiment on GSM8K. In response to comment 2, we implemented and ran Self-Certainty (Kang et al., 2025) as a recent baseline. In response to reviewer 2's comment 5 and the editors' concern about "possible answer leakage," we added a leakage ablation with three input modes (full / mask / qa_only). In line with reviewer 1's comment 2, we also added before/after t-SNE visualizations of contrastive alignment together with the AUC (0.78) of the alignment score for predicting path correctness, turning "alignment ≈ reasoning quality" from an assertion into evidence.
+3. **Added new experimental evidence and comparisons.** In response to reviewer 3's comment 1, we added a Qwen3-14B experiment on GSM8K. In response to reviewer 3's comment 2, we implemented and ran Self-Certainty (Kang et al., 2025) as a recent baseline. In response to reviewer 2's comment 5 and the editors' concern about "possible answer leakage," we added a leakage ablation with three input modes (full / mask / qa_only). In line with reviewer 1's comment 2, we also added before/after t-SNE visualizations of contrastive alignment together with the AUC (0.78) of the alignment score for predicting path correctness, turning "alignment ≈ reasoning quality" from an assertion into evidence.
 
-4. **Manuscript-level corrections.** In response to reviewer 2's comment 1, the misdescribed "C-CoT" baseline has been split into a correctly-cited C-CoT (Chia et al., contrastive prompting) and an in-house Static-Prototype ablation variant. In response to comment 2, the data splits are now described in a dedicated subsection, with explicit qid-grouped partitioning and zero cross-split overlap. In response to comment 7, the terminology has been unified in the Problem Setup. In response to comment 9, the novelty has been sharpened to a single design choice: an asymmetric training/inference granularity combined with a per-question dynamic prototype. In response to reviewer 3's comment 3, a Limitations paragraph on evaluation scale has been added, together with a dedicated Reproducibility paragraph in §4.5 committing to release code and data at <https://github.com/zhang2gongzi/D-ProtoCoT>. In line with reviewer 2's comment 6, we have also proactively disclosed the step-level label noise in the main text and the Limitations section, rephrasing the overstrong "detecting localized errors" claim as "step-question semantic consistency."
+4. **Manuscript-level corrections.** In response to reviewer 2's comment 1, the misdescribed "C-CoT" baseline has been split into a correctly-cited C-CoT (Chia et al., contrastive prompting) and an in-house Static-Prototype ablation variant. In response to reviewer 2's comment 2, the data splits are now described in a dedicated subsection, with explicit qid-grouped partitioning and zero cross-split overlap. In response to reviewer 2's comment 7, the terminology has been unified in the Problem Setup. In response to reviewer 2's comment 9, the novelty has been sharpened to a single design choice: an asymmetric training/inference granularity combined with a per-question dynamic prototype. In response to reviewer 3's comment 3, a Limitations paragraph on evaluation scale has been added, together with a dedicated Reproducibility paragraph in §4.5 committing to release code and data at <https://github.com/zhang2gongzi/D-ProtoCoT>. In line with reviewer 2's comment 6, we have also proactively disclosed the step-level label noise in the main text and the Limitations section, rephrasing the overstrong "detecting localized errors" claim as "step-question semantic consistency."
 
 5. **Two-regime narrative.** In response to the editors' concerns about "whether similarity-based alignment captures true reasoning quality" and "inconsistencies in experimental results," we explicitly state where our method does not dominate. On the saturated GSM8K/Qwen3-8B setting, the corrected ORM slightly outperforms D-ProtoCoT; we position D-ProtoCoT as complementary to ORM rather than uniformly superior, and characterize the two regimes (saturated vs. low-resource) in which each method is preferable. On Qwen3-14B, GSM8K approaches saturation and the margin over Self-Consistency narrows; we report this transparently and analyze it as benchmark saturation rather than a limitation of the method. In line with reviewer 1's comment 3, we also added a four-axis analysis showing that "selection does not favor shallow paths" (lexical overlap, reasoning depth, semantics-vs-wording correlation, alignment-to-correctness AUC).
 
@@ -94,12 +94,12 @@ This argument is empirically supported: on 200 GSM8K questions (K = 10 paths eac
 
 | # | Location | Before (original) | After (revised) |
 |---|---|---|---|
-| 1 | Method §3.2 (step-level repr. role) | "...making the encoder **sensitive to localized logical errors** that would be obscured by path-level averaging." | "...**attuning the encoder to step-level semantic consistency with the question**, a signal that is diluted under path-level averaging." |
-| 2 | Method §3.3 (representation encoding) | "...making the encoder **sensitive to localized logical errors** that would otherwise be averaged out at the path level." | "...**attuning the encoder to how well each step aligns semantically with the question**, a signal that is diluted under path-level averaging." |
-| 3 | Method §3.4 (dynamic prototype motivation) | "While step-level representations are effective for training-time supervision due to their **sensitivity to localized errors**, they introduce step-to-step variance..." | "While step-level representations are effective for training-time supervision due to their **sensitivity to step-level semantic consistency**, they introduce step-to-step variance..." |
-| 4 | Analysis §5.3 (granularity motivation) | "...making the encoder **sensitive to localized logical errors** that would be obscured by path-level averaging." | "...making the encoder **sensitive to step-level semantic consistency with the question** that would be obscured by path-level averaging." |
-| 5 | Experiments §4.6 (Comparison with ORM, original closing) | "...propagating supervision signals to every step and making the encoder **sensitive to localized logical errors**." | (rewritten as the two-regime narrative; the "sensitive to localized logical errors" claim removed; replaced by "shaping a representation in which step-level semantic consistency drives alignment.") |
-| 6 | Introduction §1 (Contributions, second bullet) | "...achieving **process-level supervision granularity** without step-level annotation beyond gold answers. It involves an annotation cost equivalent to ORMs while **capturing step-aware reasoning structure closer to PRMs**." | "...providing **denser supervision than path-level objectives** without step-level annotation beyond gold answers. It involves an annotation cost equivalent to ORMs while, **unlike ORMs, propagating the outcome-derived signal to every step so that alignment reflects step-level semantic consistency rather than only final-answer correctness**." |
+| 1 | Method §3.2 (step-level repr. role) | "...making the encoder **sensitive to localized logical errors** that would be obscured by path-level averaging." | **"...attuning** the encoder to **step-level semantic consistency with the question, a signal** that **is diluted under** path-level averaging." |
+| 2 | Method §3.3 (representation encoding) | "...making the encoder **sensitive to localized logical errors** that would otherwise be averaged out at the path level." | **"...attuning** the encoder to **how well each step aligns semantically with the question, a signal** that **is diluted under path-level averaging."** |
+| 3 | Method §3.4 (dynamic prototype motivation) | "While step-level representations are effective for training-time supervision due to their **sensitivity to localized errors**, they introduce step-to-step variance..." | "While step-level representations are effective for training-time supervision due to their sensitivity to **step-level semantic consistency,** they introduce step-to-step variance..." |
+| 4 | Analysis §5.3 (granularity motivation) | "...making the encoder **sensitive to localized logical errors** that would be obscured by path-level averaging." | "...making the encoder sensitive to **step-level semantic consistency with the question** that would be obscured by path-level averaging." |
+| 5 | Experiments §4.6 (Comparison with ORM, original closing) | "...propagating supervision signals to every step and making the encoder **sensitive to localized logical errors**." | **(rewritten as** the **two-regime narrative; the "sensitive** to localized logical **errors" claim removed; replaced by "shaping a representation in which step-level semantic consistency drives alignment.")** |
+| 6 | Introduction §1 (Contributions, second bullet) | "...achieving **process-level supervision granularity** without step-level annotation beyond gold answers. It involves an annotation cost equivalent to ORMs while **capturing step-aware reasoning structure closer to PRMs**." | **"...providing denser** supervision **than path-level objectives** without step-level annotation beyond gold answers. It involves an annotation cost equivalent to ORMs **while, unlike ORMs, propagating the outcome-derived signal** to **every step so that alignment reflects step-level semantic consistency rather than only final-answer correctness."** |
 
 (2) Added the AUC-of-0.78 evidence to Analysis §5.6 ("Comparison with ORM") and to the Figure 2 caption, together with an explicit acknowledgment that step labels inherit noise from the path outcome:
 
@@ -123,10 +123,10 @@ We would also like to acknowledge, with thanks, that the reviewer's comment surf
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| Figure 2 source | `figure/tsne_cot100.png` (StrategyQA, single question, ~100 paths) | `figure/tsne_gsm8k_before.pdf` + `figure/tsne_gsm8k_after.pdf` (GSM8K, 200 questions × K=10) — see the actual figures below |
-| Figure 2 | ![tsne before](../tsne_cot100.png) | ![tsne before](../newrun/tsne_gsm8k_before.png) ![tsne before](../newrun/tsne_gsm8k_after.png) |
-| Caption | "t-SNE visualization of BERT embeddings from 100 chain-of-thought paths generated for a StrategyQA example. Green points indicate correct reasoning paths, while red points indicate incorrect ones. Strong overlap suggests that surface-level semantic similarity alone is insufficient to distinguish reasoning quality." | "Test-path embeddings on GSM8K (K=10), colored by correctness (green: correct, red: incorrect). **Left:** before contrastive alignment (untrained encoder), correct and incorrect paths are intermixed. **Right:** after D-ProtoCoT alignment, the two classes become clearly separated. The learned alignment predicts path correctness with an **AUC of 0.78**." |
-| Quantitative measure | (none) | AUC = 0.78 on 200 GSM8K questions (K=10), reported in §5.1, §5.4, and §5.6 |
+| Figure 2 source | `figure/tsne_cot100.png` (StrategyQA, single question, ~100 paths) | **`figure/tsne_gsm8k_before.pdf` + `figure/tsne_gsm8k_after.pdf` (GSM8K, 200 questions × K=10) — see the actual figures below** |
+| Figure 2 | ![tsne before](../tsne_cot100.png) | ![tsne **before](../newrun/tsne_gsm8k_before.png) ![tsne before](../newrun/tsne_gsm8k_after.png)** |
+| Caption | "t-SNE visualization of BERT embeddings from 100 chain-of-thought paths generated for a StrategyQA example. Green points indicate correct reasoning paths, while red points indicate incorrect ones. Strong overlap suggests that surface-level semantic similarity alone is insufficient to distinguish reasoning quality." | **"Test-path embeddings on GSM8K (K=10), colored by correctness (green: correct, red: incorrect). Left: before contrastive alignment (untrained encoder), correct and incorrect paths are intermixed. Right: after D-ProtoCoT alignment, the two classes become clearly separated. The learned alignment predicts path correctness with an AUC** of **0.78."** |
+| Quantitative measure | (none) | **AUC = 0.78 on 200 GSM8K questions (K=10), reported in §5.1, §5.4, and §5.6** |
 
 **Figure 2 (revised).** Test-path embeddings on GSM8K (K=10), colored by correctness (green: correct, red: incorrect). **Left:** before contrastive alignment (untrained encoder), correct and incorrect paths are intermixed. **Right:** after D-ProtoCoT alignment, the two classes become clearly separated. The learned alignment predicts path correctness with an AUC of 0.78.
 
@@ -221,18 +221,18 @@ We are grateful to the reviewer for pressing us to make these clarifications exp
 
 | | Before (earlier version, as quoted by reviewer) | After (revised) |
 |---|---|---|
-| Description | "selects reasoning paths based on confidence estimation" (misdescribed; misattributed token-probability mechanism to Chia et al.) | "is a prompting-based method that supplies both valid and invalid reasoning demonstrations in-context to steer generation away from erroneous reasoning. It is a generation-time technique rather than a candidate-path selection method." |
+| Description | "selects reasoning paths based on confidence estimation" (misdescribed; misattributed token-probability mechanism to Chia et al.) | **"is a prompting-based method that supplies both valid and invalid** reasoning **demonstrations in-context** to **steer generation away from erroneous reasoning. It is a generation-time technique rather than a candidate-path selection method."** |
 
 **(b) Table 1, C-CoT row:**
 
 | | Before (original submission) | After (revised) |
 |---|---|---|
-| LLaMA CSQA | -- | 70.50 |
-| LLaMA GSM8K | -- | 78.84 |
-| LLaMA StrategyQA | -- | 76.81 |
-| Qwen3-8B CSQA | -- | 78.63 |
-| Qwen3-8B GSM8K | -- | 92.35 |
-| Qwen3-8B StrategyQA | -- | 90.22 |
+| LLaMA CSQA | -- | **70.50** |
+| LLaMA GSM8K | -- | **78.84** |
+| LLaMA StrategyQA | -- | **76.81** |
+| Qwen3-8B CSQA | -- | **78.63** |
+| Qwen3-8B GSM8K | -- | **92.35** |
+| Qwen3-8B StrategyQA | -- | **90.22** |
 
 **(c) Table 1 caption — comparability note:**
 
@@ -271,7 +271,7 @@ We agree with the reviewer that using official splits where available is best pr
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| Data split statement | "Both D-ProtoCoT and ORM are trained on a stratified subset of 1,000 questions per dataset (train/val/test split of 8:1:1)..." | "Both D-ProtoCoT and ORM are trained on the same data splits, summarized in Table 4..." |
+| Data split statement | "Both D-ProtoCoT and ORM are trained on a stratified subset of 1,000 questions per dataset (train/val/test split of 8:1:1)..." | "Both D-ProtoCoT and ORM are trained on **the same data splits, summarized in Table 4..."** |
 
 **(c) Appendix A `tab:dataset-details` — table:**
 
@@ -319,25 +319,25 @@ We therefore position D-ProtoCoT as **complementary to ORM rather than uniformly
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| LLaMA CSQA | 59.52 | 71.43 |
-| LLaMA GSM8K | 78.20 | 68.50 |
-| LLaMA StrategyQA | 65.71 | 54.76 |
-| Qwen3-8B CSQA | 77.27 | 68.00 |
+| LLaMA CSQA | 59.52 | **71.43** |
+| LLaMA GSM8K | 78.20 | **68.50** |
+| LLaMA StrategyQA | 65.71 | **54.76** |
+| Qwen3-8B CSQA | 77.27 | **68.00** |
 | Qwen3-8B GSM8K | 61.36 | **92.00** |
-| Qwen3-8B StrategyQA | 50.43 | 60.71 |
+| Qwen3-8B StrategyQA | 50.43 | **60.71** |
 
 **(b) §4.5 Implementation Details — epochs / GPU:**
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| Epochs | "3 epochs, and temperature $\tau{=}0.07$" | "10 epochs, and temperature $\tau{=}0.07$" |
-| GPU | "All experiments are conducted on a single Nvidia RTX 4090 GPU." | "All 8B experiments are conducted on a single Nvidia RTX 3090 GPU, while the Qwen3-14B experiment is run on an Nvidia RTX 5090 GPU." |
+| Epochs | "3 epochs, and temperature $\tau{=}0.07$" | **"10** epochs, and temperature $\tau{=}0.07$" |
+| GPU | "All experiments are conducted on a single Nvidia RTX 4090 GPU." | "All **8B** experiments are conducted on a single Nvidia RTX **3090 GPU, while the Qwen3-14B experiment is run on an Nvidia RTX 5090** GPU." |
 
 **(c) §5.6 "Comparison with ORM" — paragraph rewrite:**
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| Narrative | Uniformly superior: "On Qwen3-8B, D-ProtoCoT outperforms ORM by +10.44% on CSQA, +32.79% on GSM8K, and +22.17% on StrategyQA. On LLaMA-3.1-8B-Instruct, D-ProtoCoT outperforms ORM by +2.75% on GSM8K. The gap is most pronounced on GSM8K..." | Two-regime narrative: "The comparison reveals two complementary regimes rather than a uniform ranking. On a saturated, data-rich setting such as GSM8K with Qwen3-8B, ORM is highly effective: it reaches 92.00% selection accuracy... edging out D-ProtoCoT at 82.00%... The picture reverses on low-resource, harder-to-supervise settings. On CSQA with LLaMA-3.1-8B-Instruct, ORM overfits — its validation loss diverges during training (from 0.63 to above 2.0) and its test AUROC collapses to 0.559, near chance — so its selection accuracy drops to 71.43%, below D-ProtoCoT's 76.19%. ... We therefore position D-ProtoCoT as complementary to ORM rather than uniformly superior." |
+| Narrative | Uniformly superior: "On Qwen3-8B, D-ProtoCoT outperforms ORM by +10.44% on CSQA, +32.79% on GSM8K, and +22.17% on StrategyQA. On LLaMA-3.1-8B-Instruct, D-ProtoCoT outperforms ORM by +2.75% on GSM8K. The gap is most pronounced on GSM8K..." | **Two-regime narrative: "The comparison reveals two complementary regimes rather than a uniform ranking. On a saturated, data-rich setting such as GSM8K with** Qwen3-8B, **ORM is highly effective: it reaches 92.00% selection accuracy... edging out** D-ProtoCoT **at 82.00%... The picture reverses on low-resource, harder-to-supervise settings. On CSQA with LLaMA-3.1-8B-Instruct,** ORM **overfits — its validation loss diverges during training (from 0.63 to above 2.0)** and **its test AUROC collapses to 0.559, near chance — so its selection accuracy drops to 71.43%, below D-ProtoCoT's 76.19%. ... We therefore position** D-ProtoCoT **as complementary to** ORM **rather than uniformly superior."** |
 
 **(d) [New] ORM diagnostics reported in §5.6:**
 
@@ -374,21 +374,21 @@ The proposed asymmetric design is now the best, and the dominant factor is the t
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| Caption | "Ablation study on representation granularity for contrastive training and path selection on **StrategyQA**." | "Ablation study on representation granularity for contrastive training and path selection on **GSM8K (Qwen3-8B)**." |
+| Caption | "Ablation study on representation granularity for contrastive training and path selection on **StrategyQA**." | "Ablation study on representation granularity for contrastive training and path selection on **GSM8K (Qwen3-8B)."** |
 
 **(b) Table 3 numbers:**
 
 | Training Repr. | Selection Repr. | Before (original, StrategyQA) | After (revised, GSM8K/Qwen3-8B) |
 |---|---|---|---|
-| Path-level | Path-level | 53.57 | 78.50 |
-| Step-level | Step-level | 60.71 | 84.00 |
+| Path-level | Path-level | 53.57 | **78.50** |
+| Step-level | Step-level | 60.71 | **84.00** |
 | Step-level (proposed) | Path-level (proposed) | **64.29** | **84.50** |
 
 **(c) §5.3 analysis paragraph — Before / After:**
 
 | | Before (original) | After (revised) |
 |---|---|---|
-| Analysis | "Results in Table 3 confirm that the proposed asymmetric design achieves the best performance (64.29%). Using step-level representations for contrastive training (60.71%) outperforms path-level training (53.57%), validating that step-level supervision provides more precise gradient signals by **capturing localized reasoning errors**. Using path-level representations for selection (64.29%) outperforms step-level selection (60.71%)..." | "Results in Table 3 confirm that the proposed asymmetric design achieves the best performance (84.50%). The dominant factor is the training representation: step-level contrastive training (84.00%) substantially outperforms path-level training (78.50%), a gain of +5.5 points, confirming that propagating supervision to individual reasoning steps yields more precise gradient signals than a single path-level average. Given a step-trained encoder, path-level selection (84.50%) further edges out step-level selection (84.00%), consistent with global path summaries providing more stable prototypes than individual step embeddings. The two design choices are thus complementary, with step-level training contributing the larger share." |
+| Analysis | "Results in Table 3 confirm that the proposed asymmetric design achieves the best performance (64.29%). Using step-level representations for contrastive training (60.71%) outperforms path-level training (53.57%), validating that step-level supervision provides more precise gradient signals by **capturing localized reasoning errors**. Using path-level representations for selection (64.29%) outperforms step-level selection (60.71%)..." | "Results in Table 3 confirm that the proposed asymmetric design achieves the best performance **(84.50%). The dominant factor is the training representation:** step-level contrastive training **(84.00%) substantially** outperforms path-level training **(78.50%), a gain of +5.5 points, confirming** that **propagating** supervision **to individual reasoning steps yields** more precise gradient signals **than a single** path-level **average. Given a step-trained encoder, path-level** selection **(84.50%) further edges out** step-level selection **(84.00%), consistent with global path summaries providing more stable prototypes than individual step embeddings. The two design choices are thus complementary, with step-level training contributing the larger share."** |
 
 ### reviewer 2's comment 5 — Possible answer leakage (shortcut learning)
 
@@ -453,9 +453,9 @@ We no longer use "sequence-level representation." We have swept the manuscript t
 
 | Location | Before (original tex) | After (revised tex) |
 |---|---|---|
-| §3.1 / throughout | "reasoning chain" (used interchangeably with "reasoning path") | "reasoning path" only |
-| §3.1 / throughout | "trajectory" (used interchangeably with "reasoning path") | "reasoning path" only |
-| §3.2 / throughout | "sequence-level representation" | "path-level representation" |
+| §3.1 / throughout | "reasoning chain" (used interchangeably with "reasoning path") | "reasoning **path" only** |
+| §3.1 / throughout | "trajectory" (used interchangeably with "reasoning path") | "reasoning **path" only** |
+| §3.2 / throughout | "sequence-level representation" | **"path-level** representation" |
 
 The four canonical terms (reasoning path, step, step-level representation, path-level representation) are now used consistently in text, equations, figures, and tables.
 
@@ -471,9 +471,9 @@ We now state the distinction precisely: ORM produces a per-path scalar correctne
 
 | Location | Before (original tex) | After (revised tex) |
 |---|---|---|
-| §1 Contributions | "offering a fundamentally different paradigm from verifier-based and reward-model-based approaches." | "Like verifier- and reward-model-based approaches, it trains an auxiliary model from labeled paths to rank candidates; the difference lies in the scoring formulation — similarity to a question-specific dynamic prototype in a contrastively-learned space, rather than an explicit correctness prediction." |
-| §2.2 Related Work | "**D-ProtoCoT** differs fundamentally from all the above approaches." | "**D-ProtoCoT** shares with the above approaches the same supervision (path labels from final-answer matching) and functional role (training an auxiliary model to rank candidate paths), but differs in how it scores them." |
-| §3.4 | "D-ProtoCoT therefore differs fundamentally from verifier-based or reward-model-based approaches that require explicit correctness signals at inference time." | "A practical consequence is that D-ProtoCoT selects paths without any explicit correctness signal at inference time, relying instead on representation-level alignment." |
+| §1 Contributions | "offering a fundamentally different paradigm from verifier-based and reward-model-based approaches." | **"Like verifier-** and reward-model-based **approaches, it trains an auxiliary model from labeled paths to rank candidates; the difference lies in the scoring formulation — similarity to a question-specific dynamic prototype in a contrastively-learned space, rather than an explicit correctness prediction."** |
+| §2.2 Related Work | "**D-ProtoCoT** differs fundamentally from all the above approaches." | "D-ProtoCoT **shares with** the above **approaches the same supervision (path labels from final-answer matching) and functional role (training an auxiliary model to rank candidate paths), but differs in how it scores them."** |
+| §3.4 | "D-ProtoCoT therefore differs fundamentally from verifier-based or reward-model-based approaches that require explicit correctness signals at inference time." | **"A practical consequence is** that **D-ProtoCoT selects paths without any** explicit correctness **signal** at inference **time, relying instead on representation-level alignment."** |
 
 (Note: the original tex also used "fundamentally" once in the ORM-limitation discussion, in the sense of "ORMs are fundamentally limited to path-level binary scoring," which describes ORM's limitation rather than a paradigm distinction; that sentence was kept. The original tex also used "paradigm" twice in unrelated senses — "Building on this paradigm" (referring to the CoT framework) and "across reasoning paradigms" (referring to reasoning types) — both kept.)
 
@@ -495,8 +495,8 @@ We have rewritten the contributions paragraph to state this precisely and to avo
 
 | Item | Before (original tex) | After (revised tex) |
 |---|---|---|
-| Contribution 1 | "D-ProtoCoT is proposed as an inference-time framework for selecting CoT reasoning paths based on representation-level alignment rather than answer-level aggregation, offering a fundamentally different paradigm from verifier-based and reward-model-based approaches." | "D-ProtoCoT is proposed as an inference-time framework for selecting CoT reasoning paths based on representation-level alignment rather than answer-level aggregation. Like verifier- and reward-model-based approaches, it trains an auxiliary model from labeled paths to rank candidates; the difference lies in the scoring formulation — similarity to a question-specific dynamic prototype in a contrastively-learned space, rather than an explicit correctness prediction." |
-| Contribution 2 | "A step-level InfoNCE contrastive objective is introduced that treats each individual reasoning step as an independent alignment target, achieving process-level supervision granularity without step-level annotation beyond gold answers. It involves an annotation cost equivalent to ORM while capturing step-aware reasoning structure closer to PRM." | "A step-level InfoNCE contrastive objective is introduced that treats each individual reasoning step as an independent alignment target, providing denser supervision than path-level objectives without step-level annotation beyond gold answers. It involves an annotation cost equivalent to Outcome Reward Models (ORMs) while, unlike ORMs, propagating the outcome-derived signal to every step so that alignment reflects step-level semantic consistency rather than only final-answer correctness." |
+| Contribution 1 | "D-ProtoCoT is proposed as an inference-time framework for selecting CoT reasoning paths based on representation-level alignment rather than answer-level aggregation, offering a fundamentally different paradigm from verifier-based and reward-model-based approaches." | "D-ProtoCoT is proposed as an inference-time framework for selecting CoT reasoning paths based on representation-level alignment rather than answer-level **aggregation. Like verifier-** and reward-model-based **approaches, it trains an auxiliary model from labeled paths to rank candidates; the difference lies in the scoring formulation — similarity to a question-specific dynamic prototype in a contrastively-learned space, rather than an explicit correctness prediction."** |
+| Contribution 2 | "A step-level InfoNCE contrastive objective is introduced that treats each individual reasoning step as an independent alignment target, achieving process-level supervision granularity without step-level annotation beyond gold answers. It involves an annotation cost equivalent to ORM while capturing step-aware reasoning structure closer to PRM." | "A step-level InfoNCE contrastive objective is introduced that treats each individual reasoning step as an independent alignment target, **providing denser** supervision **than path-level objectives** without step-level annotation beyond gold answers. It involves an annotation cost equivalent to **Outcome Reward Models (ORMs) while, unlike ORMs, propagating the outcome-derived signal** to **every step so that alignment reflects step-level semantic consistency rather than only final-answer correctness."** |
 | Contribution 3 | (unchanged in substance; minor wording polish) | (unchanged in substance; minor wording polish) |
 
 Note: the "process-level supervision granularity" / "closer to PRMs" framing in Contribution 2 was softened in line with Concerns 1 and 6 (the encoder does not detect localized reasoning errors; it is attuned to step-level semantic consistency).

@@ -15,8 +15,7 @@ The Authors
 
 ## Contents
 
-1. Response to editors
-   - editors' comments
+1. Response to the editors
 2. Response to reviewer 1
    - reviewer 1's overall comment
    - reviewer 1's comment 1 — Step-level label noise

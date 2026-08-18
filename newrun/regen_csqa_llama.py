@@ -15,7 +15,7 @@ Output schema matches the other *_flat.jsonl files exactly.
 Run on the server / AutoDL (needs GPU + LLaMA-3.1-8B):
 
   python newrun/regen_csqa_llama.py \
-      --model_path /home2/zzl/model/Meta-Llama-3.1-8B-Instruct \
+      --model_path ${MODEL_DIR}/Meta-Llama-3.1-8B-Instruct \
       --parquet database/commonsenseQA/train-00000-of-00001.parquet \
       --ref_flat newrundata/csqa_llama_flat.jsonl \
       --out newrundata/csqa_llama_flat.jsonl \
@@ -95,7 +95,7 @@ def extract_letter(text, m):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model_path", default="/home2/zzl/model/Meta-Llama-3.1-8B-Instruct")
+    ap.add_argument("--model_path", default="${MODEL_DIR}/Meta-Llama-3.1-8B-Instruct")
     ap.add_argument("--parquet", default="database/commonsenseQA/train-00000-of-00001.parquet")
     ap.add_argument("--ref_flat", default="newrundata/csqa_llama_flat.jsonl")
     ap.add_argument("--out", default="newrundata/csqa_llama_flat.jsonl")

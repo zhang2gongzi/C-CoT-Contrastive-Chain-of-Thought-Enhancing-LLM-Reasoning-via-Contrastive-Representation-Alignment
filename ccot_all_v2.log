@@ -1,79 +1,0 @@
-nohup: ignoring input
-[2026年 08月 01日 星期六 10:06:05 CST] ===== GSM8K (Qwen3-8B, MT=2048) =====
-[ccot] gsm8k: 4 demos, 196 test questions
-[ccot] loading model /home2/zzl/model/Qwen3-8B ...
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:01<00:05,  1.40s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:02<00:04,  1.39s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:04<00:02,  1.38s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:05<00:01,  1.37s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.03s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.19s/it]
-  [20/196] running acc = 90.00%
-  [40/196] running acc = 92.50%
-  [60/196] running acc = 93.33%
-  [80/196] running acc = 93.75%
-  [100/196] running acc = 93.00%
-  [120/196] running acc = 92.50%
-  [140/196] running acc = 92.86%
-  [160/196] running acc = 93.75%
-  [180/196] running acc = 92.78%
-  [196/196] running acc = 92.35%
-
-==== C-CoT (Chia prompting) | gsm8k | model=Qwen3-8B ====
-  test questions = 196
-  accuracy       = 92.35%  (181/196)
-[ccot] saved -> newrun/ccot_gsm8k_qwen.jsonl
-[2026年 08月 01日 星期六 12:08:52 CST] ===== StrategyQA (Qwen3-8B, MT=2048) =====
-[ccot] strategyqa: 4 demos, 276 test questions
-[ccot] loading model /home2/zzl/model/Qwen3-8B ...
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:01<00:05,  1.38s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:02<00:04,  1.38s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:04<00:02,  1.37s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:05<00:01,  1.29s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.02it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.14s/it]
-  [20/276] running acc = 100.00%
-  [40/276] running acc = 95.00%
-  [60/276] running acc = 93.33%
-  [80/276] running acc = 93.75%
-  [100/276] running acc = 94.00%
-  [120/276] running acc = 93.33%
-  [140/276] running acc = 92.86%
-  [160/276] running acc = 90.62%
-  [180/276] running acc = 90.56%
-  [200/276] running acc = 90.00%
-  [220/276] running acc = 89.55%
-  [240/276] running acc = 89.58%
-  [260/276] running acc = 90.00%
-  [276/276] running acc = 90.22%
-
-==== C-CoT (Chia prompting) | strategyqa | model=Qwen3-8B ====
-  test questions = 276
-  accuracy       = 90.22%  (249/276)
-[ccot] saved -> newrun/ccot_sqa_qwen.jsonl
-[2026年 08月 01日 星期六 14:20:56 CST] ===== CSQA (Qwen3-8B, MT=2048) =====
-[data] csqa: matched choices for 500/500 questions
-[ccot] csqa: 4 demos, 496 test questions
-[ccot] loading model /home2/zzl/model/Qwen3-8B ...
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:01<00:05,  1.39s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:02<00:04,  1.39s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:04<00:02,  1.38s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:05<00:01,  1.30s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.01it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:05<00:00,  1.15s/it]
-  [20/496] running acc = 90.00%
-  [40/496] running acc = 70.00%
-  [60/496] running acc = 71.67%
-  [80/496] running acc = 75.00%
-  [100/496] running acc = 75.00%
-  [120/496] running acc = 76.67%
-  [140/496] running acc = 79.29%
-  [160/496] running acc = 80.62%
-  [180/496] running acc = 80.56%
-  [200/496] running acc = 79.50%
-  [220/496] running acc = 80.00%
-  [240/496] running acc = 79.58%
-  [260/496] running acc = 80.00%
-  [280/496] running acc = 80.71%
-  [300/496] running acc = 80.33%
-  [320/496] running acc = 80.94%
-  [340/496] running acc = 81.18%
-  [360/496] running acc = 80.83%
-  [380/496] running acc = 80.79%
-  [400/496] running acc = 80.50%
-  [420/496] running acc = 80.95%
-  [440/496] running acc = 81.36%
-  [460/496] running acc = 80.87%
-  [480/496] running acc = 80.62%
-  [496/496] running acc = 80.44%
-
-==== C-CoT (Chia prompting) | csqa | model=Qwen3-8B ====
-  test questions = 496
-  accuracy       = 80.44%  (399/496)
-[ccot] saved -> newrun/ccot_csqa_qwen.jsonl
-[2026年 08月 01日 星期六 20:52:08 CST] ===== ALL DONE (v2) =====

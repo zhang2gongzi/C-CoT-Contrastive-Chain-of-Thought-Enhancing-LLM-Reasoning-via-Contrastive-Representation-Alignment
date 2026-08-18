@@ -38,7 +38,7 @@ python baseline/dprotocot/run.py main \
     --train_path gsm8k_train_14b_flat.jsonl --test_path gsm8k_test_14b_flat.jsonl --epochs 10
 ```
 
-> ⚠️ **AutoDL 注意**：`run.py` 的 BERT 默认路径是 `/home2/zzl/model/bert-base-uncased`（原服务器），AutoDL 上不存在。第 3 步**必须**先下 `bert-base-uncased`（步骤 0b）并显式传 `--bert_model`，否则训 encoder 会报路径错误。`generate_cot_14b.py` / `self_certainty.py` 已有 `--model_path`，不受影响。
+> ⚠️ **AutoDL 注意**：`run.py` 的 BERT 默认路径是 `${MODEL_DIR}/bert-base-uncased`（原服务器），AutoDL 上不存在。第 3 步**必须**先下 `bert-base-uncased`（步骤 0b）并显式传 `--bert_model`，否则训 encoder 会报路径错误。`generate_cot_14b.py` / `self_certainty.py` 已有 `--model_path`，不受影响。
 
 ### 模型下载（AutoDL，二选一）
 国内直连 HF 慢/失败，用镜像或魔搭。路径存 `/root/autodl-tmp/`（数据盘，别放系统盘 `/root/`）；建议 tmux/screen 里下。
@@ -128,7 +128,7 @@ nohup python newrun/mixed_question_analysis.py \
 **待办**：跑 `mixed_question_analysis.py`（14B，必跑；8B，可选）→ 拿混合题比例 + MIXED 子集表 → 写进论文 Q1 分析段。
 
 ### ✅ mixed_question_analysis.py 14B 实跑结果（2026-08-06，服务器 /home2/zzl，10 epoch）
-命令实际用的是服务器路径（非 AutoDL）：`--bert_model /home2/zzl/model/bert-base-uncased`、`--train_path .../gsm8k_train_14b_flat.jsonl`、`--test_path .../gsm8k_test_14b_flat.jsonl`。split: train=738 / val=82 / test=200。
+命令实际用的是服务器路径（非 AutoDL）：`--bert_model ${MODEL_DIR}/bert-base-uncased`、`--train_path .../gsm8k_train_14b_flat.jsonl`、`--test_path .../gsm8k_test_14b_flat.jsonl`。split: train=738 / val=82 / test=200。
 
 **① 饱和统计（数据事实，可直接用）——采纳为 Q1 饱和证据**：
 | 指标 | 期望 | 实测 | 判定 |
@@ -289,7 +289,7 @@ Self-Certainty (Kang et al.): 154/200 = 77.00%
    - GitHub 网页 Settings 改名（GitHub 自动重定向旧 URL，不影响现有 push）
    - 本地更新：`git remote set-url origin <新URL>` → `git remote -v` 确认
    - 本地文件夹名可选改（会让当前工作目录路径失效，等实验做完再改）
-2. **清硬编码路径**：代码里 `/home2/zzl/model/...`、`/root/autodl-tmp/...` 会暴露身份，公开前换成 CLI 参数默认值占位符（如 `bert-base-uncased`、`Qwen/Qwen3-8B` 的 HF id）
+2. **清硬编码路径**：代码里 `${MODEL_DIR}/...`、`/root/autodl-tmp/...` 会暴露身份，公开前换成 CLI 参数默认值占位符（如 `bert-base-uncased`、`Qwen/Qwen3-8B` 的 HF id）
    - 已改好 `--model_path` 的：`generate_cot_14b.py`、`self_certainty.py`
    - config.py 的 `bert_model` 默认仍是 `/home2/zzl/...`，需改占位
 3. **匿名性**：若双盲阶段公开，用匿名镜像（`anonymous.4open.science`），勿用带真名/username 的 GitHub

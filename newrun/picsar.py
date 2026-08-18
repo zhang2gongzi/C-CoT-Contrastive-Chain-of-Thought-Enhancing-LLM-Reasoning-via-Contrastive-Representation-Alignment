@@ -27,7 +27,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 
-DEFAULT_MODEL_PATH = "/home2/zzl/model/Qwen3-8B"
+DEFAULT_MODEL_PATH = "${MODEL_DIR}/Qwen3-8B"
 MAX_NEW_TOKENS = 512
 TEMPERATURE = 0.7
 TOP_P = 0.9

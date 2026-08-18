@@ -111,7 +111,7 @@ C-CoT 行（生成式，独立口径）：L-CSQA 70.50 / L-GSM8K 78.84 / L-SQA 7
   - ✅ **L-GSM8K 78.84 已核**：跑时终端 `running acc = 85.82%`（宽松/显示计数），但落盘 `ccot_gsm8k_llama.jsonl` 的 `is_correct` 计数 = 328/416 = 78.84%，以落盘为准（与 StrategyQA 坏标签同类的口径差，最终值可信）。
   - ⚠️ **口径不一致待核**：本笔记上表记 C-CoT GSM8K/Qwen=**93.88**，但 tex 现填 **92.35**（④g 改）。引用前需查 log 确认到底哪个是最终 Chia 跑值。
 - **口径**：C-CoT 是生成式 prompting 基线，caption 已声明"not directly comparable to selection-based methods"，作为生成式对照填入，非同口径竞争。叙事成立（真 Chia 补上，D-ProtoCoT 仍更高）。
-- **待补 2 格命令**（模型：Qwen `/home2/zzl/model/Qwen3-8B`，LLaMA `/home2/zzl/model/Meta-Llama-3.1-8B-Instruct`）：GSM8K/LLaMA 一条；14B/GSM8K 可选。
+- **待补 2 格命令**（模型：Qwen `${MODEL_DIR}/Qwen3-8B`，LLaMA `${MODEL_DIR}/Meta-Llama-3.1-8B-Instruct`）：GSM8K/LLaMA 一条；14B/GSM8K 可选。
 
 ### 版本 A：Rebuttal 段落（英文，回信用）
 
@@ -226,7 +226,7 @@ pooled_output = outputs.last_hidden_state[:, 0, :]
 Qwen 已用官方 test；LLaMA 也要对**同 200 题**生成，保持 GSM8K 整行口径一致。生成脚本通用（`--model_path`/`--input`/`--output`，输出格式已匹配 loader）。
 ```bash
 python baseline/14B/generate_cot_14b.py \
-    --model_path /home2/zzl/model/Meta-Llama-3.1-8B-Instruct \
+    --model_path ${MODEL_DIR}/Meta-Llama-3.1-8B-Instruct \
     --input newrundata/gsm8k_test_flat.jsonl \
     --output newrundata/gsm8k_test_llama_flat.jsonl
 ```
@@ -755,7 +755,7 @@ python baseline/dprotocot/run.py granularity \
 
 ## 待跑实验清单（本机服务器，`/home2/zzl/...` 默认路径）
 
-> 本机跑：`run.py` 的 `--bert_model` 默认 `/home2/zzl/model/bert-base-uncased` 就是对的，**不用传**。数据全在 `newrundata/`。GSM8K 有独立 test（`--train_path`+`--test_path`）；StrategyQA/CSQA 单文件走比例切分。
+> 本机跑：`run.py` 的 `--bert_model` 默认 `${MODEL_DIR}/bert-base-uncased` 就是对的，**不用传**。数据全在 `newrundata/`。GSM8K 有独立 test（`--train_path`+`--test_path`）；StrategyQA/CSQA 单文件走比例切分。
 
 | 条 | 实验 | 脚本 | 回应 |
 |----|------|------|------|
@@ -784,7 +784,7 @@ python baseline/dprotocot/run.py leakage \
 # 条 1 C-CoT 重跑（真 Chia 对比 prompting，非路径选择）
 python newrun/ccot_prompting.py --dataset gsm8k \
     --data_path newrundata/gsm8k_test_flat.jsonl \
-    --model_path /home2/zzl/model/Qwen3-8B \
+    --model_path ${MODEL_DIR}/Qwen3-8B \
     --output ccot_gsm8k_qwen.json
 ```
 

@@ -93,7 +93,7 @@ python newrun/viz_reviewer1_q2.py \
 
 # before（同数据同投影，未训练 encoder）
 python newrun/viz_reviewer1_q2.py --before_only \
-    --bert_model /home2/zzl/model/bert-base-uncased \
+    --bert_model ${MODEL_DIR}/bert-base-uncased \
     --train_path newrundata/gsm8k_merged_flat.jsonl \
     --test_path  newrundata/gsm8k_test_flat.jsonl \
     --out_png newrun/tsne_gsm8k_before.png \

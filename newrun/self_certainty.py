@@ -27,7 +27,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 
-DEFAULT_MODEL_PATH = "/home2/zzl/model/Qwen3-8B"
+DEFAULT_MODEL_PATH = "${MODEL_DIR}/Qwen3-8B"
 
 COT_PROMPT = """You are a math reasoning assistant. Solve the following math problem step by step.
 

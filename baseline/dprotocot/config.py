@@ -17,18 +17,19 @@ Lines sharing raw_example.id belong to the same question (its K sampled paths).
 """
 
 from dataclasses import dataclass, field
+import os
 from typing import Optional
 
 
 @dataclass
 class Config:
-    # ---- paths (Linux server defaults; override via CLI) ----
-    bert_model: str = "/home2/zzl/model/bert-base-uncased"
+    # ---- paths (overridable via CLI; see run.py) ----
+    bert_model: str = "${MODEL_DIR}/bert-base-uncased"
     # A single flat jsonl that will be split by question, OR a train/test pair.
-    data_path: str = "/home2/zzl/C-CoT/data/strategyqa_flat_labeled.jsonl"
+    data_path: str = "${PROJECT_ROOT}/data/strategyqa_flat_labeled.jsonl"
     train_path: Optional[str] = None   # if set, use official split (train_path + test_path)
     test_path: Optional[str] = None
-    output_dir: str = "/home2/zzl/C-CoT/dprotocot_runs/run"
+    output_dir: str = "${PROJECT_ROOT}/dprotocot_runs/run"
 
     # ---- reasoning-path field names (adjust here if your jsonl differs) ----
     f_raw: str = "raw_example"

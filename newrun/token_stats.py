@@ -8,7 +8,7 @@ reported max length and >512 fraction reflect the true distribution that
 motivates the hierarchical encoding strategy (Section 3.2).
 
 Usage (run on Linux GPU server, where the BERT tokenizer is available):
-    python newrun/token_stats.py --bert_model /home2/zzl/model/bert-base-uncased
+    python newrun/token_stats.py --bert_model ${MODEL_DIR}/bert-base-uncased
     # or point at any local dir containing vocab.txt, e.g. dprotocot_runs/run
 """
 
@@ -19,7 +19,7 @@ import os
 from transformers import BertTokenizerFast
 
 
-DEFAULT_BERT_MODEL = "/home2/zzl/model/bert-base-uncased"
+DEFAULT_BERT_MODEL = "${MODEL_DIR}/bert-base-uncased"
 
 # name -> flat jsonl path (relative to repo root)
 FILES = {

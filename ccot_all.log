@@ -1,95 +1,0 @@
-nohup: ignoring input
-[2026年 08月 01日 星期六 01:56:09 CST] ===== GSM8K (Qwen3-8B) =====
-[ccot] gsm8k: 4 demos, 196 test questions
-[ccot] loading model /home2/zzl/model/Qwen3-8B ...
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:24<01:38, 24.64s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:47<01:10, 23.60s/it]Loading checkpoint shards:  60%|██████    | 3/5 [01:10<00:46, 23.18s/it]Loading checkpoint shards:  80%|████████  | 4/5 [01:28<00:21, 21.36s/it]Loading checkpoint shards: 100%|██████████| 5/5 [01:36<00:00, 16.37s/it]Loading checkpoint shards: 100%|██████████| 5/5 [01:36<00:00, 19.26s/it]
-  [20/196] running acc = 40.00%
-  [40/196] running acc = 52.50%
-  [60/196] running acc = 48.33%
-  [80/196] running acc = 48.75%
-  [100/196] running acc = 50.00%
-  [120/196] running acc = 46.67%
-  [140/196] running acc = 46.43%
-  [160/196] running acc = 46.25%
-  [180/196] running acc = 46.11%
-  [196/196] running acc = 44.39%
-
-==== C-CoT (Chia prompting) | gsm8k | model=Qwen3-8B ====
-  test questions = 196
-  accuracy       = 44.39%  (87/196)
-[ccot] saved -> newrun/ccot_gsm8k_qwen.jsonl
-[2026年 08月 01日 星期六 03:33:00 CST] GSM8K done.
-[2026年 08月 01日 星期六 03:33:00 CST] ===== StrategyQA (LLaMA-3.1-8B) =====
-[ccot] strategyqa: 4 demos, 276 test questions
-[ccot] loading model /home2/zzl/model/Llama-3.1-8B-Instruct ...
-Traceback (most recent call last):
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/transformers/utils/hub.py", line 470, in cached_files
-    hf_hub_download(
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
-    validate_repo_id(arg_value)
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
-    raise HFValidationError(
-huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/home2/zzl/model/Llama-3.1-8B-Instruct'. Use `repo_type` argument if needed.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home2/zzl/C-CoT/newrun/ccot_prompting.py", line 273, in <module>
-    main()
-  File "/home2/zzl/C-CoT/newrun/ccot_prompting.py", line 226, in main
-    tok = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/transformers/models/auto/tokenization_auto.py", line 950, in from_pretrained
-    tokenizer_config = get_tokenizer_config(pretrained_model_name_or_path, **kwargs)
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/transformers/models/auto/tokenization_auto.py", line 782, in get_tokenizer_config
-    resolved_config_file = cached_file(
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/transformers/utils/hub.py", line 312, in cached_file
-    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/transformers/utils/hub.py", line 522, in cached_files
-    resolved_files = [
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/transformers/utils/hub.py", line 523, in <listcomp>
-    _get_cache_file_to_return(path_or_repo_id, filename, cache_dir, revision) for filename in full_filenames
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/transformers/utils/hub.py", line 140, in _get_cache_file_to_return
-    resolved_file = try_to_load_from_cache(path_or_repo_id, full_filename, cache_dir=cache_dir, revision=revision)
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
-    validate_repo_id(arg_value)
-  File "/home2/zzl/storygen-env/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
-    raise HFValidationError(
-huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/home2/zzl/model/Llama-3.1-8B-Instruct'. Use `repo_type` argument if needed.
-[2026年 08月 01日 星期六 03:33:04 CST] StrategyQA done.
-[2026年 08月 01日 星期六 03:33:04 CST] ===== CSQA (Qwen3-8B) =====
-[data] csqa: matched choices for 500/500 questions
-[ccot] csqa: 4 demos, 496 test questions
-[ccot] loading model /home2/zzl/model/Qwen3-8B ...
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:12<00:49, 12.49s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:14<00:18,  6.06s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:15<00:07,  4.00s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:16<00:02,  2.94s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  2.06s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  3.48s/it]
-  [20/496] running acc = 40.00%
-  [40/496] running acc = 42.50%
-  [60/496] running acc = 46.67%
-  [80/496] running acc = 47.50%
-  [100/496] running acc = 46.00%
-  [120/496] running acc = 45.83%
-  [140/496] running acc = 49.29%
-  [160/496] running acc = 47.50%
-  [180/496] running acc = 48.89%
-  [200/496] running acc = 48.50%
-  [220/496] running acc = 49.09%
-  [240/496] running acc = 50.83%
-  [260/496] running acc = 50.38%
-  [280/496] running acc = 52.14%
-  [300/496] running acc = 51.67%
-  [320/496] running acc = 51.56%
-  [340/496] running acc = 52.35%
-  [360/496] running acc = 51.94%
-  [380/496] running acc = 51.32%
-  [400/496] running acc = 51.75%
-  [420/496] running acc = 51.43%
-  [440/496] running acc = 51.36%
-  [460/496] running acc = 50.43%
-  [480/496] running acc = 50.42%
-  [496/496] running acc = 49.60%
-
-==== C-CoT (Chia prompting) | csqa | model=Qwen3-8B ====
-  test questions = 496
-  accuracy       = 49.60%  (246/496)
-[ccot] saved -> newrun/ccot_csqa_qwen.jsonl
-[2026年 08月 01日 星期六 06:42:47 CST] CSQA done.
-[2026年 08月 01日 星期六 06:42:47 CST] ===== ALL THREE DONE =====

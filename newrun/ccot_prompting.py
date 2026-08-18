@@ -23,22 +23,22 @@ Usage (server, GPU):
   # GSM8K, Qwen3-8B
   python newrun/ccot_prompting.py --dataset gsm8k \
       --data_path newrundata/gsm8k_test_flat.jsonl \
-      --model_path /home2/zzl/model/Qwen3-8B \
+      --model_path ${MODEL_DIR}/Qwen3-8B \
       --max_new_tokens 2048 \
       --output newrun/ccot_gsm8k_qwen.jsonl
 
   # StrategyQA, LLaMA-3.1-8B  (context available -> used in the prompt)
   python newrun/ccot_prompting.py --dataset strategyqa \
       --data_path newrundata/strategyqa_flat.jsonl \
-      --model_path /home2/zzl/model/Llama-3.1-8B-Instruct \
+      --model_path ${MODEL_DIR}/Llama-3.1-8B-Instruct \
       --max_new_tokens 2048 \
       --output newrun/ccot_sqa_llama.jsonl
 
   # CommonsenseQA, Qwen3-8B  (needs official choices)
   python newrun/ccot_prompting.py --dataset csqa \
       --data_path newrundata/csqa_500_flat.jsonl \
-      --csqa_choices /home2/zzl/C-CoT/database/commonsenseQA/train-00000-of-00001.parquet \
-      --model_path /home2/zzl/model/Qwen3-8B \
+      --csqa_choices ${PROJECT_ROOT}/database/commonsenseQA/train-00000-of-00001.parquet \
+      --model_path ${MODEL_DIR}/Qwen3-8B \
       --max_new_tokens 2048 \
       --output newrun/ccot_csqa_qwen.jsonl
 """

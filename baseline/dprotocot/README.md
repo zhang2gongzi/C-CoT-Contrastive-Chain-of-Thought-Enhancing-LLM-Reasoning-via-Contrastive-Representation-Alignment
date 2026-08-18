@@ -33,7 +33,7 @@ dprotocot/
 
 | 参数 | 默认值 | 说明 |
 |------|--------|------|
-| `bert_model` | `/home2/zzl/model/bert-base-uncased` | 预训练 BERT 路径 |
+| `bert_model` | `${MODEL_DIR}/bert-base-uncased` | 预训练 BERT 路径 |
 | `data_path` | — | 单文件 jsonl，自动按比例切分 |
 | `train_path / test_path` | None | 官方训练/测试集文件（二选一） |
 | `split_ratio` | (0.8, 0.1, 0.1) | train/val/test 比例 |

@@ -33,7 +33,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # ===== Defaults (overridable via CLI) =====
-DEFAULT_MODEL_PATH = "/home2/zzl/model/Qwen3-14B"
+DEFAULT_MODEL_PATH = "${MODEL_DIR}/Qwen3-14B"
 NUM_PATHS = 10
 MAX_NEW_TOKENS = 512
 TEMPERATURE = 0.7
